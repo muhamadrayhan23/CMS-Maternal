@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Product extends Model
+{
+    use SoftDeletes;
+
+    protected $primaryKey = 'id_product';
+
+    protected $fillable = [
+        'product_name',
+        'price',
+        'link',
+        'created_by',
+        'updated_by',
+        'deleted_by',
+    ];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function deleter()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    public function details()
+    {
+    return $this->hasMany(ProductDetail::class, 'product_id', 'id_product');
+    }
+
+    
+}
