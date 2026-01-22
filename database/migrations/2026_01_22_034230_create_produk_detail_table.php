@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_product')
-            ->references('id_product')
-            ->on('product')
-            ->cascadeOnDelete(); 
+                ->references('id_product')
+                ->on('product')
+                ->cascadeOnDelete();
         });
     }
 
