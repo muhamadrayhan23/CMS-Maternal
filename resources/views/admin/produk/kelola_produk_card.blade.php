@@ -17,12 +17,6 @@
         <a href="{{ route('produk.create') }}" class="btn btn-danger">
             + Add New Product
         </a>
-        {{-- <a href="{{ route('produk.restore') }}" class="btn btn-danger">
-            Restore
-        </a> --}}
-        {{-- <a href="{{ route('produk.history') }}" class="btn btn-danger">
-            History
-        </a> --}}
     </div>
 
     <div class="row mb-3">

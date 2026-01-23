@@ -11,7 +11,10 @@ class ProdukDetail extends Model
 
     protected $fillable = [
         'id_product',
+        'image_name',
         'image_product',
+        'atribute_name',
+        'atribute_value',
         'desc',
     ];
 

@@ -16,7 +16,6 @@
             @yield('content')
         </div>
 
-        @include('admin.produk.layout.footer')
     </div>
 </body>
 

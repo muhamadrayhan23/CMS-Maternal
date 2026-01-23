@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('product', function (Blueprint $table) {
             $table->increments('id_product');
             $table->string('product_name', (100));
-            $table->decimal('price', 15,2);
+            $table->decimal('price', 15, 2);
             $table->string('link');
             $table->boolean('is_active')->default(true);
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->text('desc');
             $table->softDeletes();
             $table->timestamps();
         });

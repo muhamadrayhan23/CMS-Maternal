@@ -28,11 +28,31 @@
 
             <div class="card-body">
 
+
+                <div class="card-footer text-end">
+                    <label>ADD NEW PRODUCT</label>
+                    <button type="submit" class="btn btn-danger">
+                        {{ isset($produk) ? 'Update Product' : 'Save Product' }}
+                    </button>
+                </div>
+
                 <div class="row">
+                    <h5 class="fw-bold mb-3">Products Overview</h5>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Product Name</label>
+                        <label class="form-label">Name</label>
                         <input type="text" name="product_name" class="form-control"
                             value="{{ old('product_name', $produk->product_name ?? '') }}" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Description</label>
+                        <input type="text" name="desc" value="{{ old('desc', $produk->desc ?? '') }}">
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Link</label>
+                        <input type="text" name="link" class="form-control"
+                            value="{{ old('link', $produk->link ?? '') }}">
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -41,30 +61,11 @@
                             value="{{ old('price', $produk->price ?? '') }}" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Status Stok</label>
-                        <select name="is_active" class="form-control">
-                            <option value="1"
-                                {{ old('is_active', $produk->is_active ?? 1) == 1 ? 'selected' : '' }}>
-                                Stok Ada
-                            </option>
-                            <option value="0"
-                                {{ old('is_active', $produk->is_active ?? 1) == 0 ? 'selected' : '' }}>
-                                Sold Out
-                            </option>
-                        </select>
-                    </div>
-
-
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Product Link</label>
-                        <input type="text" name="link" class="form-control"
-                            value="{{ old('link', $produk->link ?? '') }}">
-                    </div>
                 </div>
 
-                <hr>
-                <h5 class="fw-bold mb-3">Product Details</h5>
+                <br>
+
+                <h5 class="fw-bold mb-3">Product Attributes</h5>
 
                 <div id="detail-wrapper">
 
@@ -74,41 +75,41 @@
 
                     @foreach ($details as $detail)
                         <div class="detail-row">
+                            <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}">
+
+                            <div class="field">
+                                <label>Name</label>
+                                <input type="text" name="image_name[]" value="{{ $detail->image_name ?? '' }}">
+                            </div>
+
                             <div class="field">
                                 <label>Image</label>
                                 <input type="file" name="image_product[]">
-                                @if (!empty(optional($detail)->image_product))
-                                    <img src="{{ asset('storage/' . $detail->image_product) }}" width="80"
-                                        class="img-thumbnail">
-                                @else
-                                    -
+                                @if (!empty($detail?->image_product))
+                                    <img src="{{ asset('storage/' . $detail->image_product) }}" width="80">
                                 @endif
                             </div>
 
                             <div class="field">
-                                <label>Description</label>
-                                <input type="text" name="desc[]" value="{{ $detail->desc ?? '' }}">
+                                <label>Attribute Name</label>
+                                <input type="text" name="atribute_name[]"
+                                    value="{{ $detail->atribute_name ?? '' }}">
                             </div>
 
-                            <button type="button" class="btn-remove" onclick="removeRow(this)">✖</button>
+                            <div class="field">
+                                <label>Attribute Value</label>
+                                <input type="text" name="atribut_value[]"
+                                    value="{{ $detail->atribut_value ?? '' }}">
+                            </div>
+
+                            <button type="button" onclick="removeRow(this)">✖</button>
                         </div>
                     @endforeach
 
                 </div>
 
-                <button type="button" class="btn-add" onclick="addRow()">➕ Tambah Foto</button>
+                <button type="button" class="btn-add" onclick="addRow()">➕ Add More Attribute</button>
 
-                <small class="text-muted d-block mt-2">
-                    * Kosongkan jika tidak ingin diubah / ditambahkan
-                </small>
-
-            </div>
-
-            <div class="card-footer text-end">
-                <a href="{{ route('produk.index') }}" class="btn btn-secondary">Back</a>
-                <button type="submit" class="btn btn-danger">
-                    {{ isset($produk) ? 'Update Product' : 'Save Product' }}
-                </button>
             </div>
         </form>
     </div>
@@ -121,24 +122,27 @@
         row.className = 'detail-row';
 
         row.innerHTML = `
+        <input type="hidden" name="detail_id[]">
+
+        <div class="field">
+            <label>Attribute</label>
+            <input type="text" name="atribute_name[]">
+        </div>
+
+        <div class="field">
+            <label>Value</label>
+            <input type="text" name="atribut_value[]">
+        </div>
+
         <div class="field">
             <label>Image</label>
             <input type="file" name="image_product[]">
         </div>
 
-        <div class="field">
-            <label>Description</label>
-            <input type="text" name="desc[]">
-        </div>
-
-        <button type="button" class="btn-remove" onclick="removeRow(this)">✖</button>
+        <button type="button" onclick="removeRow(this)">✖</button>
     `;
 
         wrapper.appendChild(row);
-    }
-
-    function removeRow(btn) {
-        btn.parentElement.remove();
     }
 </script>
 

@@ -18,8 +18,8 @@ Route::get('/produk/kelola_produk', [ProdukController::class, 'index'])
 
 Route::resource('produk', ProdukController::class);
 
-Route::get('/produk-history', [ProdukController::class, 'history'])
-    ->name('produk.history');
+// Route::get('/produk-history', [ProdukController::class, 'history'])
+//     ->name('produk.history');
 
 Route::get('/produk-restore', [ProdukController::class, 'restore'])
     ->name('produk.restore');

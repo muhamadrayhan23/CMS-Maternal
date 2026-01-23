@@ -20,6 +20,7 @@ class Product extends Model
         'created_by',
         'updated_by',
         'deleted_by',
+        'desc',
     ];
 
     public function creator()

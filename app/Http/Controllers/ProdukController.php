@@ -11,7 +11,7 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        $produk = Product::with('details')->latest()->get();
+        $produk = Product::with('details')->latest()->paginate(10);
         return view('admin.produk.kelola_produk', compact('produk'));
     }
 
@@ -25,28 +25,34 @@ class ProdukController extends Controller
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $request->price,
-            'is_active' => $request->is_active,
+            'is_active'    => $request->is_active,
             'link'         => $request->link,
+            'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
 
-        if ($request->desc) {
-            foreach ($request->desc as $i => $desc) {
+        if ($request->atribut_value) {
+            foreach ($request->atribut_value as $i => $value) {
 
-                if (!$desc && empty($request->file('image_product')[$i])) {
+                if (!$value && empty($request->file('image_product')[$i])) {
                     continue;
                 }
 
                 $imagePath = null;
-                if ($request->file('image_product')[$i] ?? false) {
-                    $imagePath = $request->file('image_product')[$i]
-                        ->store('produk', 'public');
+                $image_name = null;
+
+                if (!empty($request->file('image_product')[$i])) {
+                    $file = $request->file('image_product')[$i];
+                    $image_name = $file->getClientOriginalName();
+                    $imagePath = $file->store('produk', 'public');
                 }
 
                 ProdukDetail::create([
-                    'id_product'    => $product->id_product,
-                    'desc'          => $desc,
-                    'image_product' => $imagePath,
+                    'id_product'     => $product->id_product,
+                    'atribute_name'  => $request->atribute_name[$i] ?? null,
+                    'atribute_value' => $value,
+                    'image_name'     => $image_name,
+                    'image_product'  => $imagePath,
                 ]);
             }
         }
@@ -55,6 +61,7 @@ class ProdukController extends Controller
             ->route('produk.index')
             ->with('success', 'Produk berhasil ditambahkan');
     }
+
 
     public function edit($id)
     {
@@ -69,39 +76,43 @@ class ProdukController extends Controller
 
         $produk->update([
             'product_name' => $request->product_name,
-            'price'        => $request->price,
+            'price' => $request->price,
             'is_active' => $request->is_active,
-            'link'         => $request->link,
+            'link' => $request->link,
+            'desc' => $request->desc,
             'updated_by'   => auth()->id(),
         ]);
 
-        ProdukDetail::where('id_product', $id)->delete();
+        foreach ($request->atribut_value as $i => $value) {
 
-        if ($request->desc) {
-            foreach ($request->desc as $i => $desc) {
+            $detailId = $request->detail_id[$i] ?? null;
+            $imageFile = $request->file('image_product')[$i] ?? null;
 
-                if (!$desc && empty($request->file('image_product')[$i])) {
-                    continue;
-                }
+            if (!$value && !$imageFile) {
+                continue;
+            }
 
-                $imagePath = null;
-                if ($request->file('image_product')[$i] ?? false) {
-                    $imagePath = $request->file('image_product')[$i]
-                        ->store('produk', 'public');
-                }
+            $data = [
+                'image_name' => $request->image_name[$i] ?? null,
+                'atribute_name' => $request->atribute_name[$i] ?? null,
+                'atribute_value' => $value,
+            ];
 
-                ProdukDetail::create([
-                    'id_product'    => $produk->id_product,
-                    'desc'          => $desc,
-                    'image_product' => $imagePath,
-                ]);
+            if ($imageFile) {
+                $data['image_product'] = $imageFile->store('produk', 'public');
+            }
+
+            if ($detailId) {
+                ProdukDetail::find($detailId)?->update($data);
+            } else {
+                ProdukDetail::create(array_merge($data, [
+                    'id_product' => $produk->id_product
+                ]));
             }
         }
-
-        return redirect()
-            ->route('produk.index')
-            ->with('success', 'Produk berhasil diperbarui');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
     }
+
 
     public function destroy($id)
     {
@@ -118,15 +129,15 @@ class ProdukController extends Controller
             ->with('success', 'Produk berhasil dihapus');
     }
 
-    public function history()
-    {
-        $produk = Product::withTrashed()
-            ->with(['creator', 'updater', 'deleter'])
-            ->latest()
-            ->get();
+    // public function history()
+    // {
+    //     $produk = Product::withTrashed()
+    //         ->with(['creator', 'updater', 'deleter'])
+    //         ->latest()
+    //         ->get();
 
-        return view('admin.produk.history_produk', compact('produk'));
-    }
+    //     return view('admin.produk.history_produk', compact('produk'));
+    // }
 
     public function restore()
     {
