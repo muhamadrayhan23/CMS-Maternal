@@ -48,10 +48,6 @@
                 <td>{{ $produk->updater->name ?? '-' }}</td>
             </tr>
             <tr>
-                <th>Deleted By</th>
-                <td>{{ $produk->deleter->name ?? '-' }}</td>
-            </tr>
-            <tr>
                 <th>Created At</th>
                 <td>{{ $produk->created_at }}</td>
             </tr>
