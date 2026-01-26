@@ -35,4 +35,12 @@ class UserController extends Controller
     public function dashboard(){
         return view('admin.dashboard_admin');
     }
+
+    public function logout(Request $request){
+        Authh::logout();
+        $request->session()->invalidate;
+        $request->session()->regenerateToken();
+
+        return redirect('login');
+        }
 }

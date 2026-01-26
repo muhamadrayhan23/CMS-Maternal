@@ -15,7 +15,7 @@
     {{-- @include('partials.sidebar') --}}
 
     {{-- //sidebar  --}}
-    <div class="flex min-h-screen w-65 bg-[#ffff]">
+    <div class="flex min-h-screen w-65 bg-[#ffff] flex-col ">
    <ul class="list-none p-10 m-4 gap-30 pt-20"> 
     <li class="mb-2">
         <a href="{{ route ('dashboardadmin')}}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg" >
@@ -68,7 +68,15 @@
     </a>
     </li>
    </ul>
+</div>
+
+<div class="p-6 space-y-4 ">
+    <div class="border rounded-xl p-4">
+        <div class="flex items-center justify-between mb-2">
+            <h3>Quick </h3>
+        </div>
     </div>
+</div>
 
     <main class="main-content">
         @yield('content')
