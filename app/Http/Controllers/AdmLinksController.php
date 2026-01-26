@@ -15,7 +15,7 @@ class AdmLinksController extends Controller
      */
     public function index(): View
     {
-        return view('adm-links.index', [
+        return view('admin.link.index', [
             'links' => Link::latest()->paginate(10)
         ]);
     }
@@ -25,7 +25,7 @@ class AdmLinksController extends Controller
      */
     public function create(): View
     {
-        return view('adm-links.create');
+        return view('admin.link.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class AdmLinksController extends Controller
     {
         Link::create($request->validated());
 
-        return redirect()->route('adm-links.index')
+        return redirect()->route('admin.link.index')
             ->withSuccess('New links is added successfully.');
     }
 
@@ -44,7 +44,7 @@ class AdmLinksController extends Controller
      */
     public function show(Link $link): View
     {
-        return view('adm-links.show', compact('link'));
+        return view('admin.link.show', compact('link'));
     }
 
     /**
@@ -52,7 +52,7 @@ class AdmLinksController extends Controller
      */
     public function edit(Link $link): View
     {
-        return view('adm-links.edit', compact('link'));
+        return view('admin.link.edit', compact('link'));
     }
 
     /**
@@ -73,7 +73,7 @@ class AdmLinksController extends Controller
     {
         $link->delete();
 
-        return redirect()->route('adm-links.index')
+        return redirect()->route('admin.link.index')
             ->withSuccess('Link is deleted successfully.');
     }
 }
