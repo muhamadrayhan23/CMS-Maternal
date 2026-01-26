@@ -2,10 +2,10 @@
 <html lang="id">
 
 <head>
-    @include('admin.produk.layout.header')
+    {{-- @include('admin.produk.layout.header') --}}
 </head>
-
-<body class="hold-transition sidebar-mini">
+@include('layout.sidebarAdmin')
+{{-- <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <a href="{{ 'produk/kelola_produk' }}">Kelola Produk</a>
 
@@ -16,7 +16,7 @@
             @yield('content')
         </div>
 
-    </div>
+    </div> --}}
 </body>
 
 </html>

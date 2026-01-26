@@ -23,13 +23,16 @@ class UserController extends Controller
            if(Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            return redirect ('/banner'); // ganti nanti ke dashboard
+            return redirect ()->route('dashboardadmin');
             // ->with ('success', 'Anda berhasil login'); 
         }
         return back()->withErrors([
         'email' => 'Email atau password salah!'
          ])->onlyInput('email');
 
+    }
 
+    public function dashboard(){
+        return view('admin.dashboard_admin');
     }
 }
