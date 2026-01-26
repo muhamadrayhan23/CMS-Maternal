@@ -1,60 +1,48 @@
-@extends('layouts.app')
-
-@section('content')
-
 <div class="row justify-content-center mt-3">
     <div class="col-md-8">
 
-        @session('success')
-        <div class="alert alert-success" role="alert">
-            {{ $value }}
-        </div>
-        @endsession
-
         <div class="card">
-            <div class="card-header">
-                <div class="float-start">
-                    Edit Product
-                </div>
-                <div class="float-end">
-                    <a href="{{ route('adm-links.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
-                </div>
-            </div>
+            <div class="card-header">Edit Link</div>
+
             <div class="card-body">
-                <form action="{{ route('adm-links.update', $link) }}" method="post">
+
+                <form action="{{ route ('adm-links.update', $link->id_link)}}" method="POST">
                     @csrf
-                    @method("PUT")
+                    @method('PUT')
 
-                    <div class="mb-3 row">
-                        <label for="link_name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control @error('link_name') is-invalid @enderror"
-                                id="link_name" name="link_name" value="{{ $link->link_name }}">
-                            @error('link_name')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Link Name</label>
+                        <input
+                            type="text"
+                            name="link_name"
+                            class="form-control @error('link_name') is-invalid @enderror"
+                            value="{{ old('link_name', $link->link_name) }}">
+                        @error('link_name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    <div class="mb-3 row">
-                        <label for="link_address" class="col-md-4 col-form-label text-md-end text-start">Address</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control @error('link_address') is-invalid @enderror"
-                                id="link_address" name="link_address" value="{{ $link->link_address }}">
-                            @error('link_address')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Link Address</label>
+                        <input
+                            type="text"
+                            name="link_address"
+                            class="form-control @error('link_address') is-invalid @enderror"
+                            value="{{ old('link_address', $link->link_address) }}">
+                        @error('link_address')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    <div class="mb-3 row">
-                        <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update">
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ route('adm-links.index') }}" class="btn btn-secondary">Back</a>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
+
                 </form>
 
             </div>
         </div>
+
     </div>
 </div>
-
-@endsection
