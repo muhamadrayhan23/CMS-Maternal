@@ -7,14 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Link extends Model
 {
-    use SoftDeletes;
-
+    protected $table = 'link';
     protected $primaryKey = 'id_link';
 
     protected $fillable = [
-        'sequence',
         'link_name',
-        'link_addres',
+        'link_address',
         'created_by',
         'updated_by',
         'deleted_by',

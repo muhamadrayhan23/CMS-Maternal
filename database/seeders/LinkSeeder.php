@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Link;
+
 
 class LinkSeeder extends Seeder
 {
@@ -13,9 +15,8 @@ class LinkSeeder extends Seeder
     public function run(): void
     {
         Link::create([
-        'sequence' => '1',
         'link_name' => 'Linkedin',
-        'link_addres' => 'https://linkedin',
+        'link_address' => 'https://linkedin',
         ]);
     }
 }
