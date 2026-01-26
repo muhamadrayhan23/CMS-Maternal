@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\ProdukDetail;
 
 class Product extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'product';
     protected $primaryKey = 'id_product';
 
     protected $fillable = [
@@ -17,6 +20,7 @@ class Product extends Model
         'created_by',
         'updated_by',
         'deleted_by',
+        'desc',
     ];
 
     public function creator()
@@ -36,8 +40,6 @@ class Product extends Model
 
     public function details()
     {
-    return $this->hasMany(ProductDetail::class, 'product_id', 'id_product');
+        return $this->hasMany(ProdukDetail::class, 'id_product', 'id_product');
     }
-
-    
 }
