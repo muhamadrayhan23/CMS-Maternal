@@ -1,11 +1,10 @@
-
 <div class="row justify-content-center mt-3">
     <div class="col-md-12">
 
         @session('success')
-            <div class="alert alert-success" role="alert">
-                {{ $value }}
-            </div>
+        <div class="alert alert-success" role="alert">
+            {{ $value }}
+        </div>
         @endsession
 
         <div class="card">
@@ -14,11 +13,11 @@
                 <a href="{{ route('adm-links.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New link</a>
                 <table class="table table-striped table-bordered">
                     <thead>
-                      <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Action</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @forelse ($links as $link)
@@ -30,27 +29,27 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <a href="{{ route('adm-links.show', $link->id_link) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Show</a>
-                                    <a href="{{ route('adm-links.edit', $link->id_link) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>   
+                                    <a href="{{ route('adm-links.edit', $link->id_link) }}" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+
 
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this link?');"><i class="bi bi-trash"></i> Delete</button>
                                 </form>
                             </td>
                         </tr>
                         @empty
-                            <td colspan="6">
-                                <span class="text-danger">
-                                    <strong>No Link Found!</strong>
-                                </span>
-                            </td>
+                        <td colspan="6">
+                            <span class="text-danger">
+                                <strong>No Link Found!</strong>
+                            </span>
+                        </td>
                         @endforelse
                     </tbody>
-                  </table>
+                </table>
 
-                  {{ $links->links() }}
 
             </div>
         </div>
-    </div>    
+    </div>
 </div>
-    
