@@ -6,17 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProdukDetail extends Model
 {
+    protected $table = 'produk_detail';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-    'image_product',
-    'desc', 
+        'id_product',
+        'image_name',
+        'image_product',
+        'atribute_name',
+        'atribute_value',
+        'desc',
     ];
 
 
     public function product()
     {
-    return $this->belongsTo(Product::class, 'product_id', 'id_product');
+        return $this->belongsTo(Product::class, 'id_product', 'id_product');
     }
-
 }
