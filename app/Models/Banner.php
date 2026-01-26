@@ -9,6 +9,8 @@ class Banner extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'Banner';
+
     protected $primaryKey = 'id_banner';
 
     protected $fillable = [
