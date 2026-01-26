@@ -17,10 +17,15 @@ class Product extends Model
         'product_name',
         'price',
         'link',
+        'is_active',
         'created_by',
         'updated_by',
         'deleted_by',
         'desc',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 
     public function creator()

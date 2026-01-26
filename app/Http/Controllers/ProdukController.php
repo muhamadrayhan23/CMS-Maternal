@@ -9,10 +9,39 @@ use App\Models\ProdukDetail;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produk = Product::with('details')->latest()->paginate(10);
+        $query = Product::with('details')->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('product_name', 'like', "%{$search}%")
+                    ->orWhere('desc', 'like', "%{$search}%");
+            });
+        }
+
+        $produk = $query->paginate(10);
+
         return view('admin.produk.kelola_produk', compact('produk'));
+    }
+
+    public function kelola_card(Request $request)
+    {
+        $query = Product::with('details')->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('product_name', 'like', "%{$search}%")
+                    ->orWhere('desc', 'like', "%{$search}%");
+            });
+        }
+
+        $produk = $query->paginate(10);
+        return view('admin.produk.kelola_produk_card', compact('produk'));
     }
 
     public function create()
@@ -25,11 +54,12 @@ class ProdukController extends Controller
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $request->price,
-            'is_active'    => $request->is_active,
+            'is_active' => $request->is_active,
             'link'         => $request->link,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
+        $product['is_active'] = $request->boolean('is_active');
 
         if ($request->atribut_value) {
             foreach ($request->atribut_value as $i => $value) {
@@ -129,21 +159,16 @@ class ProdukController extends Controller
             ->with('success', 'Produk berhasil dihapus');
     }
 
-    // public function history()
-    // {
-    //     $produk = Product::withTrashed()
-    //         ->with(['creator', 'updater', 'deleter'])
-    //         ->latest()
-    //         ->get();
-
-    //     return view('admin.produk.history_produk', compact('produk'));
-    // }
-
     public function restore()
     {
-        $produk = Product::onlyTrashed()->get();
-
+        $produk = Product::onlyTrashed()->latest()->get();
         return view('admin.produk.restore', compact('produk'));
+    }
+
+    public function showDetailTrash($id)
+    {
+        $produk = Product::onlyTrashed()->findOrFail($id);
+        return view('admin.produk.detail_trash', compact('produk'));
     }
 
     public function restoreProcess($id)
@@ -170,5 +195,17 @@ class ProdukController extends Controller
             ->findOrFail($id);
 
         return view('admin.produk.detail_produk', compact('produk'));
+    }
+
+    public function toggle($id)
+    {
+        $produk = Product::findOrFail($id);
+
+        $produk->update([
+            'is_active' => !$produk->is_active,
+            'updated_by' => auth()->id()
+        ]);
+
+        return back()->with('success', 'Status produk diperbarui');
     }
 }
