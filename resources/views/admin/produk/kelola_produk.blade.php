@@ -20,12 +20,12 @@
         <a href="{{ route('produk.restore') }}" class="btn btn-danger">
             Trash
         </a>
-        {{-- <a href="{{ route('produk.index') }}" class="btn btn-danger">
+        <a href="{{ route('produk.index') }}" class="btn btn-danger">
             List View
         </a>
         <a href="{{ route('produk.kelola_card') }}" class="btn btn-danger">
             Grid View
-        </a> --}}
+        </a>
     </div>
 
     <div class="row mb-3">
@@ -76,8 +76,6 @@
                 <tbody>
                     @foreach ($produk as $p)
                         <tr>
-                            {{-- <td>{{ $p->is_active }}</td> --}}
-
                             <td class="text-center">
                                 <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
                                     @csrf
@@ -88,26 +86,6 @@
                                     </button>
                                 </form>
                             </td>
-
-                            {{-- <td class="text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-light border" data-bs-toggle="dropdown">
-                                        {{ $p->is_active ? 'Published' : 'Unpublished' }}
-                                    </button>
-
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
-                                                @csrf
-                                                @method('PATCH')
-                                                <button class="dropdown-item">
-                                                    {{ $p->is_active ? 'Unpublish' : 'Publish' }}
-                                                </button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td> --}}
 
                             <td>{{ $p->product_name }}</td>
                             <td>{{ $p->desc }}</td>
@@ -127,73 +105,47 @@
                                     -
                                 @endif
                             </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light border" type="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        &#8942;
+                                    </button>
 
-                            {{-- <div class="dropdown position-absolute top-0 end-0 m-2">
-                                <button class="btn btn-sm btn-light border" data-bs-toggle="dropdown">
-                                    &#8942;
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        @if ($p->link)
+                                            <li>
+                                                <a class="dropdown-item" href="{{ $p->link }}" target="_blank">
+                                                    View Link
+                                                </a>
+                                            </li>
+                                        @endif
 
-                                    <li>
-                                        <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button class="dropdown-item">
-                                                {{ $p->is_active ? 'Unpublish' : 'Publish' }}
-                                            </button>
-                                        </form>
-                                    </li>
-
-                                    @if ($p->link)
                                         <li>
-                                            <a class="dropdown-item" href="{{ $p->link }}" target="_blank">
-                                                View Link
+                                            <a class="dropdown-item" href="{{ route('produk.edit', $p->id_product) }}">
+                                                Edit
                                             </a>
                                         </li>
-                                    @endif
 
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('produk.edit', $p->id_product) }}">
-                                            Edit
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <form action="{{ route('produk.destroy', $p->id_product) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button onclick="return confirm('Hapus produk?')"
+                                                    class="dropdown-item text-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </li>
 
-                                    <li>
-                                        <form action="{{ route('produk.destroy', $p->id_product) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="dropdown-item text-danger"
-                                                onclick="return confirm('Hapus produk?')">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div> --}}
-
-                            <td class="text-center">
-                                <a href="{{ route('produk.show', $p->id_product) }}"
-                                    class="btn btn-sm btn-outline-secondary">
-                                    <i class="fas fa-eye"></i>
-                                    Detail
-                                </a>
-
-                                <a href="{{ route('produk.edit', $p->id_product) }}"
-                                    class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-edit"></i>
-                                    Edit
-                                </a>
-
-                                <form action="{{ route('produk.destroy', $p->id_product) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button onclick="return confirm('Hapus produk?')"
-                                        class="btn btn-sm btn-outline-danger">
-                                        <i class="fas fa-trash"></i>
-                                        Delete
-                                    </button>
-                                </form>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('produk.show', $p->id_product) }}">
+                                                Detail
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

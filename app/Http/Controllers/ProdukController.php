@@ -54,7 +54,7 @@ class ProdukController extends Controller
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $request->price,
-            'is_active' => $request->is_active,
+            'is_active' => $request->is_active ?? 0,
             'link'         => $request->link,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
@@ -107,7 +107,7 @@ class ProdukController extends Controller
         $produk->update([
             'product_name' => $request->product_name,
             'price' => $request->price,
-            'is_active' => $request->is_active,
+            'is_active' => $request->is_active ?? 0,
             'link' => $request->link,
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),

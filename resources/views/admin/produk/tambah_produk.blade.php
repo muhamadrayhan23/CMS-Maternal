@@ -76,11 +76,6 @@
                         <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}">
 
                         <div class="field">
-                            <label>Name</label>
-                            <input type="text" name="image_name[]" value="{{ $detail->image_name ?? '' }}">
-                        </div>
-
-                        <div class="field">
                             <label>Image</label>
                             <input type="file" name="image_product[]">
                             @if (!empty($detail?->image_product))
@@ -117,11 +112,6 @@
         wrapper.insertAdjacentHTML('beforeend', `
             <div class="detail-row" style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
                 <input type="hidden" name="detail_id[]" value="">
-
-                <div class="field">
-                    <label>Name</label>
-                    <input type="text" name="image_name[]">
-                </div>
 
                 <div class="field">
                     <label>Image</label>
