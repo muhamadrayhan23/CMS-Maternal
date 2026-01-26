@@ -6,11 +6,7 @@
         <h3 class="card-title fw-bold">Product Detail</h3>
 
         <div>
-            <a href="{{ route('produk.edit', $produk->id_product) }}" class="btn btn-sm btn-primary">
-                <i class="fas fa-edit"></i> Edit
-            </a>
-
-            <a href="{{ route('produk.index') }}" class="btn btn-sm btn-secondary">
+            <a href="{{ route('produk.restore') }}" class="btn btn-sm btn-secondary">
                 Back
             </a>
         </div>
@@ -48,12 +44,20 @@
                 <td>{{ $produk->updater->name ?? '-' }}</td>
             </tr>
             <tr>
+                <th>Deleted By</th>
+                <td>{{ $produk->deleter->name ?? '-' }}</td>
+            </tr>
+            <tr>
                 <th>Created At</th>
                 <td>{{ $produk->created_at }}</td>
             </tr>
             <tr>
                 <th>Updated At</th>
                 <td>{{ $produk->updated_at }}</td>
+            </tr>
+            <tr>
+                <th>Deleted At</th>
+                <td>{{ $produk->deleted_at }}</td>
             </tr>
         </table>
 

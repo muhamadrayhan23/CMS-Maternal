@@ -36,115 +36,108 @@
                     </button>
                 </div>
 
-                <div class="row">
-                    <h5 class="fw-bold mb-3">Products Overview</h5>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" name="product_name" class="form-control"
-                            value="{{ old('product_name', $produk->product_name ?? '') }}" required>
-                    </div>
-
-                    <div class="field">
-                        <label>Description</label>
-                        <input type="text" name="desc" value="{{ old('desc', $produk->desc ?? '') }}">
-                    </div>
-
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Link</label>
-                        <input type="text" name="link" class="form-control"
-                            value="{{ old('link', $produk->link ?? '') }}">
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control"
-                            value="{{ old('price', $produk->price ?? '') }}" required>
-                    </div>
-
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="product_name" class="form-control"
+                        value="{{ old('product_name', $produk->product_name ?? '') }}" required>
                 </div>
 
-                <br>
-
-                <h5 class="fw-bold mb-3">Product Attributes</h5>
-
-                <div id="detail-wrapper">
-
-                    @php
-                        $details = $produk->details ?? collect([null]);
-                    @endphp
-
-                    @foreach ($details as $detail)
-                        <div class="detail-row">
-                            <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}">
-
-                            <div class="field">
-                                <label>Name</label>
-                                <input type="text" name="image_name[]" value="{{ $detail->image_name ?? '' }}">
-                            </div>
-
-                            <div class="field">
-                                <label>Image</label>
-                                <input type="file" name="image_product[]">
-                                @if (!empty($detail?->image_product))
-                                    <img src="{{ asset('storage/' . $detail->image_product) }}" width="80">
-                                @endif
-                            </div>
-
-                            <div class="field">
-                                <label>Attribute Name</label>
-                                <input type="text" name="atribute_name[]"
-                                    value="{{ $detail->atribute_name ?? '' }}">
-                            </div>
-
-                            <div class="field">
-                                <label>Attribute Value</label>
-                                <input type="text" name="atribut_value[]"
-                                    value="{{ $detail->atribut_value ?? '' }}">
-                            </div>
-
-                            <button type="button" onclick="removeRow(this)">✖</button>
-                        </div>
-                    @endforeach
-
+                <div class="field">
+                    <label>Description</label>
+                    <input type="text" name="desc" value="{{ old('desc', $produk->desc ?? '') }}">
                 </div>
 
-                <button type="button" class="btn-add" onclick="addRow()">➕ Add More Attribute</button>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Link</label>
+                    <input type="text" name="link" class="form-control"
+                        value="{{ old('link', $produk->link ?? '') }}">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="number" name="price" class="form-control"
+                        value="{{ old('price', $produk->price ?? '') }}" required>
+                </div>
 
             </div>
-        </form>
+
+            <br>
+
+            <h5 class="fw-bold mb-3">Product Attributes</h5>
+
+            <div id="detail-wrapper">
+
+                @php
+                    $details = $produk->details ?? collect([null]);
+                @endphp
+
+                @foreach ($details as $detail)
+                    <div class="detail-row">
+                        <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}">
+
+                        <div class="field">
+                            <label>Image</label>
+                            <input type="file" name="image_product[]">
+                            @if (!empty($detail?->image_product))
+                                <img src="{{ asset('storage/' . $detail->image_product) }}" width="80">
+                            @endif
+                        </div>
+
+                        <div class="field">
+                            <label>Attribute Name</label>
+                            <input type="text" name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}">
+                        </div>
+
+                        <div class="field">
+                            <label>Attribute Value</label>
+                            <input type="text" name="atribut_value[]" value="{{ $detail->atribut_value ?? '' }}">
+                        </div>
+
+                        <button type="button" onclick="removeRow(this)">✖</button>
+                    </div>
+                @endforeach
+
+            </div>
+
+            <button type="button" class="btn-add" onclick="addRow()">➕ Add More Attribute</button>
+
+    </div>
+    </form>
     </div>
 </body>
 <script>
     function addRow() {
         const wrapper = document.getElementById('detail-wrapper');
 
-        const row = document.createElement('div');
-        row.className = 'detail-row';
+        wrapper.insertAdjacentHTML('beforeend', `
+            <div class="detail-row" style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+                <input type="hidden" name="detail_id[]" value="">
 
-        row.innerHTML = `
-        <input type="hidden" name="detail_id[]">
+                <div class="field">
+                    <label>Image</label>
+                    <input type="file" name="image_product[]">
+                </div>
 
-        <div class="field">
-            <label>Attribute</label>
-            <input type="text" name="atribute_name[]">
-        </div>
+                <div class="field">
+                    <label>Attribute Name</label>
+                    <input type="text" name="atribute_name[]">
+                </div>
 
-        <div class="field">
-            <label>Value</label>
-            <input type="text" name="atribut_value[]">
-        </div>
+                <div class="field">
+                    <label>Attribute Value</label>
+                    <input type="text" name="atribut_value[]">
+                </div>
 
-        <div class="field">
-            <label>Image</label>
-            <input type="file" name="image_product[]">
-        </div>
+                <button type="button" onclick="removeRow(this)">✖</button>
+            </div>
+        `);
+    }
 
-        <button type="button" onclick="removeRow(this)">✖</button>
-    `;
-
-        wrapper.appendChild(row);
+    function removeRow(button) {
+        button.closest('.detail-row').remove();
     }
 </script>
+
 
 </html>
 
