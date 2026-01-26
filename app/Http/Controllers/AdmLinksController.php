@@ -3,77 +3,101 @@
 namespace App\Http\Controllers;
 
 use App\Models\Link;
-use App\Http\Requests\StoreLinkRequest;
-use App\Http\Requests\UpdateLinkRequest;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class AdmLinksController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        return view('adm-links.index', [
-            'links' => Link::latest()->paginate(10)
-        ]);
+        $links = Link::all();
+        return view('adm-links.index', compact('links'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
         return view('adm-links.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreLinkRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        Link::create($request->validated());
+        $data = $request->validate([
+            'link_name' => 'required|string|max:100|unique:link,link_name,NULL,id_link,deleted_at,NULL',
+            'link_address' => 'required|string|max:255',
+        ]);
+
+        $data['is_active'] = $request->boolean('is_active');
+
+        Link::create($data);
 
         return redirect()->route('adm-links.index')
-            ->withSuccess('New links is added successfully.');
+            ->with('success', 'Link berhasil ditambahkan');
     }
+
+
+    public function toggle(Link $link)
+    {
+        $link->update([
+            'is_active' => ! $link->is_active
+        ]);
+
+        return back();
+    }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(Link $link): View
+    public function show(string $id)
     {
-        return view('adm-links.show', compact('link'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Link $link): View
+    public function edit(string $id)
     {
+        $link = Link::findOrfail($id);
         return view('adm-links.edit', compact('link'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLinkRequest $request, Link $link): RedirectResponse
+    public function update(Request $request, string $id)
     {
-        $link->update($request->validated());
+        $link = Link::where('id_link', $id)->firstOrFail();
 
-        return redirect()->back()
-            ->withSuccess('Link is updated successfully.');
+        $request->validate([
+            'link_name' => 'required|string|max:100|unique:link,link_name,' . $id . ',id_link,deleted_at,NULL',
+            'link_address' => 'required|string|max:255',
+        ]);
+
+        $link->update([
+            'link_name' => $request->link_name,
+            'link_address' => $request->link_address,
+        ]);
+
+        return redirect()->route('adm-links.index')
+            ->with('success', 'Link berhasil diupdate');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Link $link): RedirectResponse
+    public function destroy(string $id)
     {
+        $link = Link::findOrfail($id);
         $link->delete();
 
         return redirect()->route('adm-links.index')
-            ->withSuccess('Link is deleted successfully.');
+            ->with('success', 'Link berhasil dihapus');
     }
 }
