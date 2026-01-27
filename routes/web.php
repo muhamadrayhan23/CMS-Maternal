@@ -7,7 +7,7 @@ use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 
-    Route::get('/', [UserController::class, 'login'])->name('login');
+    Route::get('/login', [UserController::class, 'login'])->name('login');
     Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 
 Route::middleware(['auth'])->group(function () {
@@ -25,11 +25,15 @@ Route::middleware(['auth'])->group(function () {
 
 
     //manajemen produk
-    Route::get('/produk/kelola_produk', [ProdukController::class, 'index'])->name('produk.kelola');
-    // Route::get('/produk-history', [ProdukController::class, 'history'])->name('produk.history');
+    Route::resource('produk', ProdukController::class);
+    Route::get('/produk-kelola_produk_card', [ProdukController::class, 'kelola_card'])->name('produk.kelola_card');
     Route::get('/produk-restore', [ProdukController::class, 'restore'])->name('produk.restore');
     Route::post('/produk-restore/{id}', [ProdukController::class, 'restoreProcess'])->name('produk.restore.process');
+    Route::get('/produk-detail_trash/{id}', [ProdukController::class, 'showDetailTrash'])->name('produk.detail_trash');
+    Route::post('/produk-detail_trash/{id}', [ProdukController::class, 'restore'])->name('produk.detail_trash');
     Route::delete('/produk-force-delete/{id}', [ProdukController::class, 'forceDelete'])->name('produk.force.delete');
+    Route::patch('/produk/{id}/toggle', [ProdukController::class, 'toggle'])->name('produk.toggle');
+
 
     //manajemen link 
     Route::get('/link', [AdmLinksController::class, 'index'])->name('Lhome');
@@ -38,6 +42,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/edit/link/{id}', [AdmLinksController::class, 'edit']);
     Route::put('/edit/link/{id}', [AdmLinksController::class, 'update'])->name('editLink');
     Route::delete('/delete/link/{id}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
+
+
+
+    //Logout 
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
 

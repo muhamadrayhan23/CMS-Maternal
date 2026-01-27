@@ -14,7 +14,7 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="fw-bold">MANAGE PRODUCTS</h3>
-        <a href="{{ route('produk.create') }}" class="btn btn-danger">
+        <a href="{{ route('produk.store') }}" class="btn btn-danger">
             + Add New Product
         </a>
         {{-- <a href="{{ route('produk.restore') }}" class="btn btn-danger">
