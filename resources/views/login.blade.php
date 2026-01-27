@@ -11,11 +11,14 @@
     <div class="form-container">
     <form action="{{ route ('loginForm')}}" method="POST">
         @csrf
-            @if(session('success'))
-            <div class="alert alert-success">
-            {{ session('success') }}
-            </div>
-        @endif
+            @if (session('alerts'))
+                @foreach (session('alerts') as $type => $message)
+                <div class="alert alert-{{ $type }}">
+                {{ $message }}
+                </div>
+                @endforeach
+            @endif
+
         <label for="email">Email </label>
         <input type="email" name="email" id="email" required>
 

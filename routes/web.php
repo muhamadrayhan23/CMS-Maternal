@@ -7,8 +7,11 @@ use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::get('/', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
+// Route::get('/login', [UserController::class, 'login'])->name('login');
+// Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 
 Route::middleware(['auth'])->group(function () {
     //dashboard admin 
@@ -41,4 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/edit/link/{id}', [AdmLinksController::class, 'edit']);
     Route::put('/edit/link/{id}', [AdmLinksController::class, 'update'])->name('editLink');
     Route::delete('/delete/link/{id}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
+
+    //Logout 
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });

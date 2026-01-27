@@ -15,9 +15,14 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! auth()->check()) {
-            abort(403);
-        }
+        return redirect()
+        ->route('login')
+        ->with('alerts', [
+        'warning' => 'Silakan login dulu',
+        'info' => 'Session kamu sudah habis',
+        ]);
+
+
         return $next($request);
     }
 }
