@@ -1,3 +1,5 @@
+@php use Illuminate\Support\Str; @endphp
+
 <div class="row justify-content-center mt-3">
     <div class="col-md-12">
 
@@ -14,6 +16,7 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th scope="col">Img</th>
                             <th scope="col">Name</th>
                             <th scope="col">Address</th>
                             <th scope="col">Action</th>
@@ -22,8 +25,14 @@
                     <tbody>
                         @forelse ($links as $link)
                         <tr>
+                            <td><img src="{{ asset($link->link_logo) }}" alt="{{ $link->link_name }}" width="50"></td>
                             <td>{{ $link->link_name }}</td>
-                            <td>{{ $link->link_address }}</td>
+                            <td>
+                                <a href="{{ $link->link_address }}" target="_blank">
+                                    {{ Str::limit($link->link_address, 40) }}
+                                </a>
+                            </td>
+
                             <td>
                                 <form action="{{ route('adm-links.destroy', $link) }}" method="post">
                                     @csrf

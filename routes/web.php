@@ -13,10 +13,15 @@ Route::get('/', function () {
 
 // Route::middleware(['auth', 'admin'])->group(function () {
 //     // route admin
-    
+
 // });
 
-Route::resource('/adm-links', AdmLinksController::class);
+Route::get('adm-links', [AdmLinksController::class, 'index'])->name('adm-links.index');
+Route::get('adm-links/create', [AdmLinksController::class, 'create'])->name('adm-links.create');
+Route::post('adm-links', [AdmLinksController::class, 'store'])->name('adm-links.store');
+Route::get('adm-links/{link}/edit', [AdmLinksController::class, 'edit'])->name('adm-links.edit');
+Route::put('adm-links/{link}', [AdmLinksController::class, 'update'])->name('adm-links.update');
+Route::delete('adm-links/{link}', [AdmLinksController::class, 'destroy'])->name('adm-links.destroy');
 
 Route::get('/admin/dashboard_admin', function () {
     return view('admin.dashboard_admin');

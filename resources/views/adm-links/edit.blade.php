@@ -6,7 +6,7 @@
 
             <div class="card-body">
 
-                <form action="{{ route ('adm-links.update', $link->id_link)}}" method="POST">
+                <form action="{{ route ('adm-links.update', $link->id_link)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -18,6 +18,18 @@
                             class="form-control @error('link_name') is-invalid @enderror"
                             value="{{ old('link_name', $link->link_name) }}">
                         @error('link_name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Link Logo</label>
+                        <input
+                            type="file"
+                            name="link_logo"
+                            class="form-control @error('link_logo') is-invalid @enderror"
+                            value="{{ old('link_logo', $link->link_logo) }}">
+                        @error('link_logo')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
