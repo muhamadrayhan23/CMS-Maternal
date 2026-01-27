@@ -1,35 +1,35 @@
-<div class="flex w-full h-[75px] items-center gap-[225px] px-[87px] py-0">
+<nav class="flex w-full h-18.75 items-center gap-56.25 px-21.75 py-0">
     <img
-        class="relative w-[230px] h-[19px] aspect-[4.57] object-cover"
+        class="relative w-57.5 h-4.75 aspect-[4.57] object-cover"
         alt="Weblogo"
         src="{{ asset('img/logo/logowhite.png') }}" />
 
-    <div class="relative w-[784px] h-[26px] mr-[-13.00px]">
-        <div class="absolute top-0 left-0 w-[784px] h-[26px] flex">
-            <div class="w-[784px] h-[26px] inline-flex relative items-center gap-[68px]">
-                <div class="flex-[0_0_auto] inline-flex relative items-center gap-[68px]">
-                    <div class="relative w-fit mt-[-1px] text-white text-base tracking-normal leading-normal font-[Space_Grotesk] font-[300] text-[15px]">
+    <div class="relative w-196 h-6.5 mr-3.25">
+        <div class="absolute top-0 left-0 w-196 h-6.5 flex">
+            <div class="w-196 h-6.5 inline-flex relative items-center gap-17">
+                <div class="flex-[0_0_auto] inline-flex relative items-center gap-17">
+                    <div class="relative w-fit mt-px text-base tracking-normal leading-normal font-[Space_Grotesk] font-light text-[15px]">
                         Home
                     </div>
 
-                    <div class="relative w-fit mt-[-1.00px] font-sans text-white text-base tracking-[0] leading-[normal] font-[Space_Grotesk] font-[300] text-[15px]">
+                    <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         Products
                     </div>
 
-                    <div class="relative w-fit mt-[-1.00px] font-sans text-white text-base tracking-[0] leading-[normal] font-[Space_Grotesk] font-[300] text-[15px]">
+                    <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal]  font-light text-[15px]">
                         About Us
                     </div>
 
-                    <div class="relative w-fit mt-[-1.00px] font-sans text-white text-base tracking-[0] leading-[normal] font-[Space_Grotesk] font-[300] text-[15px]">
+                    <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         Contact Us
                     </div>
 
-                    <div class="relative w-fit mt-[-1.00px] font-sans text-white text-base tracking-[0] leading-[normal] font-[Space_Grotesk] font-[300] text-[15px]">
+                    <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         Links
                     </div>
                 </div>
 
-                <div class="font-normal text-white text-base font-[Space_Grotesk]">
+                <div class="font-normal text-base font-[Space_Grotesk]">
                     <a href="{{ route('login') }}"
                         class="flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer hover:text-gray-100 transition w-full">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +52,6 @@
             </div>
         </div>
 
-        <div class="absolute top-px left-[686px] w-6 h-6 bg-[url('{{ asset('icons/lucide-icon.svg') }}')] bg-[100%_100%]"></div>
+        <div class="absolute top-px left-171.5 w-6 h-6 bg-[url('{{ asset('icons/lucide-icon.svg') }}')] bg-[100%_100%]"></div>
     </div>
-</div>
+</nav>
