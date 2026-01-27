@@ -5,7 +5,7 @@
 <head>
     {{-- @include('admin.produk.layout.header') --}}
 </head>
-@include('partials.sidebarAdmin')
+@extends('layout.admin')
 {{-- <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <a href="{{ 'produk/kelola_produk' }}">Kelola Produk</a>

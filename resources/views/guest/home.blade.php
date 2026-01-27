@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alttt Craftedgoods</title>
 </head>
-@include('partials.navbarGuest')
-<body>
+@extends('layout.guest')
+<body class="font-sans">
 </body>
 </html>
