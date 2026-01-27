@@ -12,14 +12,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans relative">
+<body class="flex flex-col font-sans h-full">
 
-    <div class="absolute top-0 left-0 w-full z-50">
+    <!-- Navbar Sticky -->
+    <div class="sticky top-0 z-50">
         @include('partials.navbarGuest')
     </div>
 
-    @yield('content')
+    <!-- Konten Halaman -->
+    <main class="flex-1">
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    @include('partials.footer')
 
 </body>
-
 </html>

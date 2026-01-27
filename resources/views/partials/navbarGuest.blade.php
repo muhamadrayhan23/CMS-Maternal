@@ -1,4 +1,4 @@
-<div class="flex w-[1440px] h-[75px] items-center gap-[225px] px-[87px] py-0 relative">
+<div class="flex w-full h-[75px] items-center gap-[225px] px-[87px] py-0">
     <img
         class="relative w-[230px] h-[19px] aspect-[4.57] object-cover"
         alt="Weblogo"
