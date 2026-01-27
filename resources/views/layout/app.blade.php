@@ -10,7 +10,9 @@
 
 <div class="flex">
     {{-- SIDEBAR --}}
-    @include('layout.sidebarAdmin')
+    @include('partials.sidebarAdmin')
+
+    @include('partials.navbar-guest')
 
     {{-- CONTENT --}}
     <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">

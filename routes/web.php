@@ -4,8 +4,10 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdmLinksController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\Guest\HomeController;
 use Illuminate\Support\Facades\Route;
 
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/login', [UserController::class, 'login'])->name('login');
     Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
