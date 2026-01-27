@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+@include('layout.sidebarAdmin')
 
 <body>
     <div class="d-flex justify-content-between align-items-center mb-3">
