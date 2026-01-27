@@ -65,29 +65,18 @@
             <table class="table table-bordered align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th>Status</th>
                         <th>Product Name</th>
                         <th>Description</th>
                         <th>Harga</th>
                         <th>Link</th>
                         <th>Image</th>
+                        <th>Status</th>
                         <th width="120">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($produk as $p)
                         <tr>
-                            <td class="text-center">
-                                <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-
-                                    <button class="btn btn-sm {{ $p->is_active ? 'btn-success' : 'btn-secondary' }}">
-                                        {{ $p->is_active ? 'Published' : 'Unpublished' }}
-                                    </button>
-                                </form>
-                            </td>
-
                             <td>{{ $p->product_name }}</td>
                             <td>{{ $p->desc }}</td>
                             <td>Rp {{ number_format($p->price, 0, ',', '.') }}</td>
@@ -105,6 +94,16 @@
                                 @else
                                     -
                                 @endif
+                            </td>
+                            <td class="text-center">
+                                <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+
+                                    <button class="btn btn-sm {{ $p->is_active ? 'btn-success' : 'btn-secondary' }}">
+                                        {{ $p->is_active ? 'Published' : 'Unpublished' }}
+                                    </button>
+                                </form>
                             </td>
                             <td>
                                 <div class="dropdown">
