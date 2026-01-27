@@ -15,9 +15,6 @@
 <body>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="fw-bold">MANAGE PRODUCTS</h3>
-        <a href="{{ route('produk.create') }}" class="btn btn-danger">
-            + Add New Product
-        </a>
         <a href="{{ route('produk.restore') }}" class="btn btn-danger">
             Trash
         </a>
@@ -26,6 +23,9 @@
         </a>
         <a href="{{ route('produk.kelola_card') }}" class="btn btn-danger">
             Grid View
+        </a>
+        <a href="{{ route('produk.create') }}" class="btn btn-danger">
+            + Add New Product
         </a>
     </div>
 
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-3">
                     <button class="btn btn-dark w-100">
-                        Search
+                        Search Products
                     </button>
                     <a href="{{ route('produk.index') }}" class="btn btn-danger">
                         Reset
@@ -49,9 +49,9 @@
 
         <div class="col-md-3">
             <select class="form-control">
-                <option>Sort</option>
-                <option value="name">Tersedia</option>
-                <option value="price">Soldout</option>
+                <option>Sort By Status</option>
+                <option value="name">Published</option>
+                <option value="price">Unpublished</option>
             </select>
         </div>
     </div>

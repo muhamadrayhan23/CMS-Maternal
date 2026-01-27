@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
@@ -114,7 +115,7 @@ class ProdukController extends Controller
 
         foreach ($request->atribut_value as $i => $value) {
 
-            $detailId = $request->detail_id[$i] ?? null;
+            $detailId  = $request->detail_id[$i] ?? null;
             $imageFile = $request->file('image_product')[$i] ?? null;
 
             if (!$value && !$imageFile) {
@@ -122,12 +123,12 @@ class ProdukController extends Controller
             }
 
             $data = [
-                'image_name' => $request->image_name[$i] ?? null,
-                'atribute_name' => $request->atribute_name[$i] ?? null,
+                'atribute_name'  => $request->atribute_name[$i] ?? null,
                 'atribute_value' => $value,
             ];
 
             if ($imageFile) {
+                $data['image_name'] = $imageFile->getClientOriginalName();
                 $data['image_product'] = $imageFile->store('produk', 'public');
             }
 
@@ -135,10 +136,11 @@ class ProdukController extends Controller
                 ProdukDetail::find($detailId)?->update($data);
             } else {
                 ProdukDetail::create(array_merge($data, [
-                    'id_product' => $produk->id_product
+                    'id_product' => $produk->id_product,
                 ]));
             }
         }
+
         return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
     }
 
@@ -147,10 +149,8 @@ class ProdukController extends Controller
     {
         $produk = Product::findOrFail($id);
 
-        $produk->update([
-            'deleted_by' => auth()->id(),
-        ]);
-
+        $produk->deleted_by = auth()->id();
+        $produk->save();
         $produk->delete();
 
         return redirect()
@@ -158,9 +158,20 @@ class ProdukController extends Controller
             ->with('success', 'Produk berhasil dihapus');
     }
 
-    public function restore()
+    public function restore(Request $request)
     {
-        $produk = Product::onlyTrashed()->latest()->get();
+        $search = $request->search;
+        $query = Product::onlyTrashed();
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('product_name', 'like', "%{$search}%")
+                    ->orWhere('desc', 'like', "%{$search}%");
+            });
+        }
+
+        $produk = $query->paginate(10);
+
         return view('admin.produk.restore', compact('produk'));
     }
 

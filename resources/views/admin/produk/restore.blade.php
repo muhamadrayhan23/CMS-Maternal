@@ -10,14 +10,51 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+@include('layout.sidebarAdmin')
 
 <body>
     <div class="container-fluid">
         <h3 class="fw-bold mb-3">Recycle Bin Produk</h3>
 
-        <a href="{{ route('produk.index') }}" class="btn btn-danger">
-            Back
+        <a href="{{ route('produk.restore') }}" class="btn btn-danger">
+            Trash
         </a>
+        <a href="{{ route('produk.index') }}" class="btn btn-danger">
+            List View
+        </a>
+        <a href="{{ route('produk.kelola_card') }}" class="btn btn-danger">
+            Grid View
+        </a>
+        <a href="{{ route('produk.create') }}" class="btn btn-danger">
+            + Add New Product
+        </a>
+
+        <div class="row mb-3">
+            <form method="GET" action="{{ route('produk.index') }}">
+                <div class="row mb-3">
+                    <div class="col-md-9">
+                        <input type="text" name="search" class="form-control" placeholder="Search Products"
+                            value="{{ request('search') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-dark w-100">
+                            Search Products
+                        </button>
+                        <a href="{{ route('produk.restore') }}" class="btn btn-danger">
+                            Reset
+                        </a>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-md-3">
+                <select class="form-control">
+                    <option>Sort By Status</option>
+                    <option value="name">Published</option>
+                    <option value="price">Unpublished</option>
+                </select>
+            </div>
+        </div>
 
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -27,6 +64,7 @@
             <thead class="table-light">
                 <tr>
                     <th>Deleted At</th>
+                    <th>Deleted By</th>
                     <th>Product Name</th>
                     <th>Description</th>
                     <th>Harga</th>
@@ -39,7 +77,7 @@
                 @foreach ($produk as $p)
                     <tr>
                         <td>{{ $p->deleted_at }}</td>
-                        <td>{{ $p->is_active }}</td>
+                        <td>{{ $p->deleter?->name ?? '-' }}</td>
                         <td>{{ $p->product_name }}</td>
                         <td>{{ $p->desc }}</td>
                         <td>Rp {{ number_format($p->price, 0, ',', '.') }}</td>
