@@ -9,6 +9,11 @@
   --font-sans: 'Space Grotesk', ui-sans-serif, system-ui;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /* ul{
     list-style: none;
 } */

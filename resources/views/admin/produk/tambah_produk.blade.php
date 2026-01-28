@@ -10,34 +10,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+@include('layout.sidebarAdmin')
 
 <body>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title fw-bold">
-                {{ isset($produk) ? 'Edit Product' : 'Add New Product' }}
-            </h3>
+    <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
+        <div class="p-10">
+            @yield('content')
         </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title fw-bold">
+                    {{ isset($produk) ? 'Edit Product' : 'Add New Product' }}
+                </h3>
+            </div>
 
-        <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
-            method="POST" enctype="multipart/form-data">
-            @csrf
-            @if (isset($produk))
-                @method('PUT')
-            @endif
+            <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
+                method="POST" enctype="multipart/form-data">
+                @csrf
+                @if (isset($produk))
+                    @method('PUT')
+                @endif
 
-            <div class="card-body">
+                <div class="card-body">
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-danger">
+                            {{ isset($produk) ? 'Update Product' : 'Save Product' }}
+                        </button>
+                    </div>
 
-
-                <div class="card-footer text-end">
-                    <label>ADD NEW PRODUCT</label>
-                    <button type="submit" class="btn btn-danger">
-                        {{ isset($produk) ? 'Update Product' : 'Save Product' }}
-                    </button>
-                </div>
-
-                <div class="row">
-                    <h5 class="fw-bold mb-3">Products Overview</h5>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Name</label>
                         <input type="text" name="product_name" class="form-control"
@@ -60,27 +60,18 @@
                         <input type="number" name="price" class="form-control"
                             value="{{ old('price', $produk->price ?? '') }}" required>
                     </div>
-
                 </div>
 
                 <br>
 
                 <h5 class="fw-bold mb-3">Product Attributes</h5>
-
                 <div id="detail-wrapper">
-
                     @php
                         $details = $produk->details ?? collect([null]);
                     @endphp
-
                     @foreach ($details as $detail)
                         <div class="detail-row">
                             <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}">
-
-                            <div class="field">
-                                <label>Name</label>
-                                <input type="text" name="image_name[]" value="{{ $detail->image_name ?? '' }}">
-                            </div>
 
                             <div class="field">
                                 <label>Image</label>
@@ -92,8 +83,7 @@
 
                             <div class="field">
                                 <label>Attribute Name</label>
-                                <input type="text" name="atribute_name[]"
-                                    value="{{ $detail->atribute_name ?? '' }}">
+                                <input type="text" name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}">
                             </div>
 
                             <div class="field">
@@ -101,50 +91,49 @@
                                 <input type="text" name="atribut_value[]"
                                     value="{{ $detail->atribut_value ?? '' }}">
                             </div>
-
                             <button type="button" onclick="removeRow(this)">✖</button>
                         </div>
                     @endforeach
-
                 </div>
-
                 <button type="button" class="btn-add" onclick="addRow()">➕ Add More Attribute</button>
-
-            </div>
+        </div>
         </form>
-    </div>
+        </div>
+    </main>
 </body>
 <script>
     function addRow() {
         const wrapper = document.getElementById('detail-wrapper');
 
-        const row = document.createElement('div');
-        row.className = 'detail-row';
+        wrapper.insertAdjacentHTML('beforeend', `
+            <div class="detail-row" style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+                <input type="hidden" name="detail_id[]" value="">
 
-        row.innerHTML = `
-        <input type="hidden" name="detail_id[]">
+                <div class="field">
+                    <label>Image</label>
+                    <input type="file" name="image_product[]">
+                </div>
 
-        <div class="field">
-            <label>Attribute</label>
-            <input type="text" name="atribute_name[]">
-        </div>
+                <div class="field">
+                    <label>Attribute Name</label>
+                    <input type="text" name="atribute_name[]">
+                </div>
 
-        <div class="field">
-            <label>Value</label>
-            <input type="text" name="atribut_value[]">
-        </div>
+                <div class="field">
+                    <label>Attribute Value</label>
+                    <input type="text" name="atribut_value[]">
+                </div>
 
-        <div class="field">
-            <label>Image</label>
-            <input type="file" name="image_product[]">
-        </div>
+                <button type="button" onclick="removeRow(this)">✖</button>
+            </div>
+        `);
+    }
 
-        <button type="button" onclick="removeRow(this)">✖</button>
-    `;
-
-        wrapper.appendChild(row);
+    function removeRow(button) {
+        button.closest('.detail-row').remove();
     }
 </script>
+
 
 </html>
 
