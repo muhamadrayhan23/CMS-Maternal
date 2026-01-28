@@ -7,7 +7,7 @@
     <div class="relative w-196 h-6.5 mr-3.25">
         <div class="absolute top-0 left-0 w-196 h-6.5 flex">
             <div class="w-196 h-6.5 inline-flex relative items-center gap-17">
-                <div class="flex-[0_0_auto] inline-flex relative items-center gap-17">
+                <div class="flex-[0_0_auto] inline-flex relative items-center gap-17 text-white">
                     <div class="relative w-fit mt-px text-base tracking-normal leading-normal font-[Space_Grotesk] font-light text-[15px]">
                         Home
                     </div>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                <div class="font-normal text-base font-[Space_Grotesk]">
+                <div class="font-normal text-base font-sans text-white">
                     <a href="{{ route('login') }}"
                         class="flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer hover:text-gray-100 transition w-full">
                         <svg xmlns="http://www.w3.org/2000/svg"

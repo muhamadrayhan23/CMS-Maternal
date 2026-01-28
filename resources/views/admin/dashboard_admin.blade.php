@@ -1,21 +1,12 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
 @extends('layout.admin')
+
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <a href="{{ 'produk/kelola_produk' }}">Kelola Produk</a>
 
 <body class="bg-gray-100 font-sans">
     <div class="flex min-h-screen">
-        @include('layout.sidebarAdmin')
 
         <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
             <div class="p-10">
