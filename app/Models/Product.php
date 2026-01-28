@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\ProdukDetail;
+use App\Models\User;
 
 class Product extends Model
 {
@@ -17,10 +18,15 @@ class Product extends Model
         'product_name',
         'price',
         'link',
+        'is_active',
         'created_by',
         'updated_by',
         'deleted_by',
         'desc',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
     ];
 
     public function creator()
