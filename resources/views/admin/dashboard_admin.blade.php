@@ -6,95 +6,103 @@
     <title>Admin Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+@include('layout.sidebarAdmin')
 
-<body>
-    <div class="app">
-
-        {{-- SIDEBAR --}}
+{{-- <body class="bg-gray-100 font-sans">
+    <div class="flex min-h-screen">
         @include('layout.sidebarAdmin')
 
-        {{-- MAIN --}}
-        <main class="content">
+        <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
+            <div class="p-10">
+                @yield('content')
+            </div>
 
-            {{-- STATISTIC --}}
-            <section class="statistic">
-                <h3>Statistic Overview</h3>
-                <p>Your store at a glance</p>
+            <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-8">
+                <h3 class="text-2xl font-semibold">Statistic Overview</h3>
+                <p class="text-gray-300 mb-6">Your store at a glance</p>
 
-                <div class="stats">
-                    <div class="card">
-                        <h4>Total Products</h4>
-                        <span class="number">{{ $totalProducts }}</span>
-                        <small class="badge">Published : {{ $publishedProducts }}</small>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white text-gray-800 rounded-xl p-5">
+                        <h4 class="text-sm font-medium">Total Products</h4>
+                        <div class="text-4xl font-bold mt-2">{{ $totalProducts }}</div>
+                        <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                            Published : {{ $publishedProducts }}
+                        </span>
                     </div>
 
-                    <div class="card">
-                        <h4>Total Links</h4>
-                        <span class="number">{{ $totalLinks }}</span>
+                    <div class="bg-white text-gray-800 rounded-xl p-5">
+                        <h4 class="text-sm font-medium">Total Links</h4>
+                        <div class="text-4xl font-bold mt-2">{{ $totalLinks }}</div>
                     </div>
 
-                    <div class="card">
-                        <h4>Total Banners</h4>
-                        <span class="number">{{ $totalBanners }}</span>
-                        <small class="badge">Published : {{ $publishedBanners }}</small>
+                    <div class="bg-white text-gray-800 rounded-xl p-5">
+                        <h4 class="text-sm font-medium">Total Banners</h4>
+                        <div class="text-4xl font-bold mt-2">{{ $totalBanners }}</div>
+                        <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                            Published : {{ $publishedBanners }}
+                        </span>
                     </div>
 
-                    <div class="card">
-                        <h4>Users</h4>
-                        <span class="number">{{ $totalUsers }}</span>
-                        {{-- <small class="badge">Active : {{ $activeUsers }}</small> --}}
+                    <div class="bg-white text-gray-800 rounded-xl p-5">
+                        <h4 class="text-sm font-medium">Users</h4>
+                        <div class="text-4xl font-bold mt-2">{{ $totalUsers }}</div>
                     </div>
                 </div>
             </section>
 
-            {{-- GRID CONTENT --}}
-            <section class="grid">
-
-                {{-- Latest Products --}}
-                <div class="box">
-                    <h4>Latest Products</h4>
-                    <ul>
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl p-6">
+                    <h4 class="font-semibold text-lg mb-4">Latest Products</h4>
+                    <ul class="space-y-4">
                         @foreach ($latestProducts as $p)
-                            <li>
-                                {{ $p->product_name }}
-                                <span>Rp {{ number_format($p->price, 0, ',', '.') }}</span>
+                            <li class="flex justify-between items-center border p-3 rounded-xl">
+                                <div>
+                                    <p class="font-medium">{{ $p->product_name }}</p>
+                                    <span class="text-sm text-gray-500">
+                                        Rp {{ number_format($p->price, 0, ',', '.') }}
+                                    </span>
+                                </div>
                             </li>
                         @endforeach
                     </ul>
                 </div>
 
-                {{-- Banners --}}
-                <div class="box">
-                    <h4>Manage Banners</h4>
-                    <div class="banners">
+                <div class="bg-white rounded-2xl p-6">
+                    <h4 class="font-semibold text-lg mb-4">Manage Banners</h4>
+                    <div class="grid grid-cols-2 gap-4">
                         @foreach ($latestBanners as $banner)
-                            <div class="banner">
-                                <img src="{{ asset('storage/' . $banner->image) }}" alt="">
-                            </div>
+                            <img src="{{ asset('storage/' . $banner->image) }}"
+                                class="rounded-xl object-cover h-40 w-full">
                         @endforeach
                     </div>
                 </div>
 
-                {{-- Links --}}
-                <div class="box">
-                    <h4>See Links</h4>
-                    @foreach ($links as $link)
-                        <p>{{ $link->title }} : {{ $link->url }}</p>
-                    @endforeach
+                <div class="bg-white rounded-2xl p-6">
+                    <h4 class="font-semibold text-lg mb-4">See Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        @foreach ($links as $link)
+                            <li class="border-b pb-2">
+                                {{ $link->title }} :
+                                <span class="text-blue-600">{{ $link->url }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
 
-                {{-- Users --}}
-                <div class="box">
-                    <h4>Users</h4>
-                    @foreach ($users as $user)
-                        <p>{{ $user->email }}</p>
-                    @endforeach
+                <div class="bg-white rounded-2xl p-6">
+                    <h4 class="font-semibold text-lg mb-4">Users</h4>
+                    <ul class="space-y-3 text-sm">
+                        @foreach ($users as $user)
+                            <li class="border p-3 rounded-xl">
+                                {{ $user->email }}
+                                <span class="block text-xs text-gray-500">Admin</span>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
-
             </section>
-
         </main>
     </div>
-</body>
+</body> --}}
 
 </html>
