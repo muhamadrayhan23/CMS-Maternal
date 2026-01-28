@@ -22,6 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/banner/edit{id}', [BannerController::class, 'edit'])->name('editB');
     Route::put('/banner/update/{id}', [BannerController::class, 'update'])->name('updateBanner');
     Route::delete('/banner/delete/{id}', [BannerController::class, 'destroy'])->name('dBanner');
+    Route::get('/banner/trash', [BannerController::class, 'restore'])->name('Btrash');
+    Route::post('/banner/trash/{id}', [BannerController::class, 'restoreProses'])->name('Btrash.proses');
+    Route::delete('/banner/force-delete{id}', [BannerController::class, 'forceDelete'])->name('Btrash.permanent');
 
 
     //manajemen produk

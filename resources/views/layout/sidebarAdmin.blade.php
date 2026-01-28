@@ -65,9 +65,9 @@
         </li>
     </ul>
 
-    {{-- 3. BAGIAN BAWAH (Quick Access & Logout) --}}
+    {{-- (Quick Access & Logout) --}}
     <div class="p-6 space-y-4">
-        {{-- Quick Access Card --}}
+        {{-- Quick Access --}}
         <div class="border border-[#D9DEE3] rounded-xl p-3 bg-gray-50">
             <div class="flex items-center justify-between mb-2">
                 <h3 class="font-semibold text-sm">Quick access</h3>
@@ -95,4 +95,4 @@
             </form>
         </div>
     </div>
-</div> {{-- AKHIR DARI SIDEBAR --}}
+</div> 
