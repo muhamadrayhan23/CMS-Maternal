@@ -9,9 +9,10 @@ class BannerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $banner = Banner::all();
+      
+        $banner = Banner::latest()->paginate(6);
         return view ('admin.banner.Banner', compact ('banner'));
     }
 
@@ -23,28 +24,34 @@ class BannerController extends Controller
         return view('admin.banner.Bcreate');
     }
 
-    public function store(Request $request)
+ public function store(Request $request)
 {
-    $data = $request->validate([
-        'banner_name' => 'required|string|max:100',
-        'banner_image' => 'required|image|mimes:jpg,jpeg,png',
-        'created_by' => auth()->id(),
+    // dd($request->all());
+
+    // request ini menerima banyak input 'banners' samakan dengan name di blade agar data terkirim JANGAN TYPO
+
+    $request->validate([
+        'banners' => 'required|array', 
+        'banners.*.name' => 'required|string',
+        'banners.*.image' => 'required|image',
     ]);
 
-    $data['is_active'] = $request->boolean('is_active');
 
-    $file = $request->file('banner_image');
+    // looping ini meng insert data ke database 
+    foreach ($request->banners as $item) {
+        $file = $item['image'];
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('img'), $filename);
 
-    $filename = time() . '_' . $file->getClientOriginalName();
+        Banner::create([
+            'banner_name'  => $item['name'],
+            'banner_image' => 'img/' . $filename,
+            'created_by'   => auth()->id(),
+            'is_active'    => true, 
+        ]);
+    }
 
-    $file->move(public_path('img'), $filename);
-
-    $data['banner_image'] = 'img/' . $filename;
-
-    Banner::create($data);
-
-    return redirect()->route('Bhome')
-        ->with('success', 'Banner berhasil ditambahkan');
+    return redirect()->route('Bhome')->with('success', 'Banner berhasil ditambahkan');
 }
 
 
@@ -108,8 +115,44 @@ public function toggle(Banner $banner)
     public function destroy(string $id)
     {
         $banner = Banner::findOrfail($id);
+
+        $banner->deleted_by = auth->id();
+        $banner->save();
         $banner->delete();
 
-        return redirect()->route('Bhome');
+        return redirect()
+        ->route('Bhome');
+    }
+
+    public function restore(Request $request){
+        $query = Banner::onlyTrashed();
+
+        $banner = $query->paginate(6);
+
+        return view ('admin.banner.btrash', compact ('banner'));
+    }
+
+    public function restoreProses($id){
+        Banner::withTrashed()->findOrFail($id)->restore();
+
+        return redirect()->route('/Btrash');
+
+    }
+
+    public function forceDelete($id){
+        Banner::withTrashed()->findOrFail($id)->forceDelete();
+
+        return view ('admin.banner.btrash');
+    }
+
+    public function tooggle($id){
+        $banner = Banner::findOrFail($id);
+
+        $banner->update([
+            'is_active' => !$banner->is_active,
+            'updated_by' => auth()->id()
+        ]);
+
+        return back()->with('success', 'Status produk diperbarui');
     }
 }
