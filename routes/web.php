@@ -40,13 +40,21 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/produk-force-delete/{id}', [ProdukController::class, 'forceDelete'])->name('produk.force.delete');
     Route::patch('/produk/{id}/toggle', [ProdukController::class, 'toggle'])->name('produk.toggle');
 
-    //manajemen link
-    Route::get('/link', [AdmLinksController::class, 'index'])->name('Lhome');
-    Route::get('/addlink', [AdmLinksController::class, 'create']);
-    Route::post('/addlink', [AdmLinksController::class, 'store'])->name('addLink');
-    Route::post('/edit/link/{id}', [AdmLinksController::class, 'edit']);
-    Route::put('/edit/link/{id}', [AdmLinksController::class, 'update'])->name('editLink');
-    Route::delete('/delete/link/{id}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
+    //manajemen link 
+    Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
+    Route::get('/link/create', [AdmLinksController::class, 'create'])->name('createLink');
+    Route::post('/link', [AdmLinksController::class, 'store'])->name('storeLink');
+    Route::get('/link/{link}/edit', [AdmLinksController::class, 'edit'])->name('editLink');
+    Route::put('/link/{link}', [AdmLinksController::class, 'update'])->name('updateLink');
+    Route::delete('/link/{link}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
+
+    //manajemen user 
+    Route::get('/user', [UserController::class, 'index'])->name('homeUser');
+    Route::get('/user/create', [UserController::class, 'create'])->name('createUser');
+    Route::post('/user', [UserController::class, 'store'])->name('storeUser');
+    Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('editUser');
+    Route::put('/user/{user}', [UserController::class, 'update'])->name('updateUser');
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('deleteUser');  
 
     //Logout
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
@@ -55,8 +63,5 @@ Route::middleware(['auth'])->group(function () {
 
 //About
     Route::view('/about', 'guest.about');
-
-
-
 
 

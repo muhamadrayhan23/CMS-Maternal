@@ -11,6 +11,7 @@ class Link extends Model
     protected $primaryKey = 'id_link';
 
     protected $fillable = [
+        'link_logo',
         'link_name',
         'link_address',
         'created_by',
