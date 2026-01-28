@@ -9,10 +9,39 @@ use App\Models\ProdukDetail;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produk = Product::with('details')->latest()->paginate(10);
+        $query = Product::with('details')->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('product_name', 'like', "%{$search}%")
+                    ->orWhere('desc', 'like', "%{$search}%");
+            });
+        }
+
+        $produk = $query->paginate(10);
+
         return view('admin.produk.kelola_produk', compact('produk'));
+    }
+
+    public function kelola_card(Request $request)
+    {
+        $query = Product::with('details')->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('product_name', 'like', "%{$search}%")
+                    ->orWhere('desc', 'like', "%{$search}%");
+            });
+        }
+
+        $produk = $query->paginate(10);
+        return view('admin.produk.kelola_produk_card', compact('produk'));
     }
 
     public function create()
@@ -25,11 +54,12 @@ class ProdukController extends Controller
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $request->price,
-            'is_active'    => $request->is_active,
+            'is_active' => $request->is_active ?? 0,
             'link'         => $request->link,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
+        $product['is_active'] = $request->boolean('is_active');
 
         if ($request->atribut_value) {
             foreach ($request->atribut_value as $i => $value) {
@@ -77,7 +107,7 @@ class ProdukController extends Controller
         $produk->update([
             'product_name' => $request->product_name,
             'price' => $request->price,
-            'is_active' => $request->is_active,
+            'is_active' => $request->is_active ?? 0,
             'link' => $request->link,
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),
@@ -85,7 +115,7 @@ class ProdukController extends Controller
 
         foreach ($request->atribut_value as $i => $value) {
 
-            $detailId = $request->detail_id[$i] ?? null;
+            $detailId  = $request->detail_id[$i] ?? null;
             $imageFile = $request->file('image_product')[$i] ?? null;
 
             if (!$value && !$imageFile) {
@@ -93,12 +123,12 @@ class ProdukController extends Controller
             }
 
             $data = [
-                'image_name' => $request->image_name[$i] ?? null,
-                'atribute_name' => $request->atribute_name[$i] ?? null,
+                'atribute_name'  => $request->atribute_name[$i] ?? null,
                 'atribute_value' => $value,
             ];
 
             if ($imageFile) {
+                $data['image_name'] = $imageFile->getClientOriginalName();
                 $data['image_product'] = $imageFile->store('produk', 'public');
             }
 
@@ -106,10 +136,11 @@ class ProdukController extends Controller
                 ProdukDetail::find($detailId)?->update($data);
             } else {
                 ProdukDetail::create(array_merge($data, [
-                    'id_product' => $produk->id_product
+                    'id_product' => $produk->id_product,
                 ]));
             }
         }
+
         return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
     }
 
@@ -118,10 +149,8 @@ class ProdukController extends Controller
     {
         $produk = Product::findOrFail($id);
 
-        $produk->update([
-            'deleted_by' => auth()->id(),
-        ]);
-
+        $produk->deleted_by = auth()->id();
+        $produk->save();
         $produk->delete();
 
         return redirect()
@@ -129,21 +158,27 @@ class ProdukController extends Controller
             ->with('success', 'Produk berhasil dihapus');
     }
 
-    // public function history()
-    // {
-    //     $produk = Product::withTrashed()
-    //         ->with(['creator', 'updater', 'deleter'])
-    //         ->latest()
-    //         ->get();
-
-    //     return view('admin.produk.history_produk', compact('produk'));
-    // }
-
-    public function restore()
+    public function restore(Request $request)
     {
-        $produk = Product::onlyTrashed()->get();
+        $search = $request->search;
+        $query = Product::onlyTrashed();
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('product_name', 'like', "%{$search}%")
+                    ->orWhere('desc', 'like', "%{$search}%");
+            });
+        }
+
+        $produk = $query->paginate(10);
 
         return view('admin.produk.restore', compact('produk'));
+    }
+
+    public function showDetailTrash($id)
+    {
+        $produk = Product::onlyTrashed()->findOrFail($id);
+        return view('admin.produk.detail_trash', compact('produk'));
     }
 
     public function restoreProcess($id)
@@ -170,5 +205,17 @@ class ProdukController extends Controller
             ->findOrFail($id);
 
         return view('admin.produk.detail_produk', compact('produk'));
+    }
+
+    public function toggle($id)
+    {
+        $produk = Product::findOrFail($id);
+
+        $produk->update([
+            'is_active' => !$produk->is_active,
+            'updated_by' => auth()->id()
+        ]);
+
+        return back()->with('success', 'Status produk diperbarui');
     }
 }

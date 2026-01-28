@@ -10,56 +10,141 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+@include('layout.sidebarAdmin')
 
 <body>
-    <div class="container-fluid">
-        <h3 class="fw-bold mb-3">Recycle Bin Produk</h3>
+    <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
+        <div class="p-10">
+            @yield('content')
+        </div>
+        <div class="container-fluid">
+            <h3 class="fw-bold mb-3">Recycle Bin Produk</h3>
 
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+            <a href="{{ route('produk.restore') }}" class="btn btn-danger">
+                Trash
+            </a>
+            <a href="{{ route('produk.index') }}" class="btn btn-danger">
+                List View
+            </a>
+            <a href="{{ route('produk.kelola_card') }}" class="btn btn-danger">
+                Grid View
+            </a>
+            <a href="{{ route('produk.create') }}" class="btn btn-danger">
+                + Add New Product
+            </a>
 
-        <table class="table table-bordered align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>Nama Produk</th>
-                    <th>Harga</th>
-                    <th>Dihapus Oleh</th>
-                    <th>Dihapus Pada</th>
-                    <th width="180">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($produk as $p)
+            <div class="row mb-3">
+                <form method="GET" action="{{ route('produk.index') }}">
+                    <div class="row mb-3">
+                        <div class="col-md-9">
+                            <input type="text" name="search" class="form-control" placeholder="Search Products"
+                                value="{{ request('search') }}">
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-dark w-100">
+                                Search Products
+                            </button>
+                            <a href="{{ route('produk.restore') }}" class="btn btn-danger">
+                                Reset
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="col-md-3">
+                    <select class="form-control">
+                        <option>Sort By Status</option>
+                        <option value="name">Published</option>
+                        <option value="price">Unpublished</option>
+                    </select>
+                </div>
+            </div>
+
+            @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
                     <tr>
-                        <td>{{ $p->product_name }}</td>
-                        <td>Rp {{ number_format($p->price, 0, ',', '.') }}</td>
-                        <td>{{ optional($p->deleter)->name ?? '-' }}</td>
-                        <td>{{ $p->deleted_at }}</td>
-                        <td>
-                            <form action="{{ route('produk.restore.process', $p->id_product) }}" method="POST"
-                                class="d-inline">
-                                @csrf
-                                <button class="btn btn-sm btn-success" onclick="return confirm('Pulihkan produk ini?')">
-                                    Restore
-                                </button>
-                            </form>
-
-                            <form action="{{ route('produk.force.delete', $p->id_product) }}" method="POST"
-                                class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Hapus PERMANEN? Data tidak bisa dikembalikan!')">
-                                    Delete Permanen
-                                </button>
-                            </form>
-                        </td>
+                        <th>Deleted At</th>
+                        <th>Deleted By</th>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Harga</th>
+                        <th>Link</th>
+                        <th>Image</th>
+                        <th width="120">Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach ($produk as $p)
+                        <tr>
+                            <td>{{ $p->deleted_at }}</td>
+                            <td>{{ $p->deleter?->name ?? '-' }}</td>
+                            <td>{{ $p->product_name }}</td>
+                            <td>{{ $p->desc }}</td>
+                            <td>Rp {{ number_format($p->price, 0, ',', '.') }}</td>
+                            <td>
+                                @if ($p->link)
+                                    <a href="{{ $p->link }}" target="_blank">Link</a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td>
+                                @if (optional($p->details->first())->image_product)
+                                    <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
+                                        width="40" alt="Product Image">
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td>
+                                <div class="dropdown position-absolute top-0 end-0 m-2">
+                                    <button class="btn btn-sm btn-light border" data-bs-toggle="dropdown">
+                                        &#8942;
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+
+                                        <li>
+                                            <form action="{{ route('produk.restore.process', $p->id_product) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                <button class="btn btn-sm btn-success"
+                                                    onclick="return confirm('Pulihkan produk ini?')">
+                                                    Restore
+                                                </button>
+                                            </form>
+                                        </li>
+
+                                        <li>
+                                            <form action="{{ route('produk.force.delete', $p->id_product) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Hapus PERMANEN? Data tidak bisa dikembalikan!')">
+                                                    Delete Permanen
+                                                </button>
+                                            </form>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{ route('produk.detail_trash', $p->id_product) }}"
+                                                class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-eye"></i>
+                                                Detail
+                                            </a>
+                                        </li>
+                                    </ul>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 
 </html>
