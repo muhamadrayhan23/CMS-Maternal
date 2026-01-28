@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Route;
     Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 
 Route::middleware(['auth'])->group(function () {
-    //dashboard admin 
+    //dashboard admin
     Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('dashboardadmin');
 
-    //manajemen banner 
+    //manajemen banner
     Route::get('/banner', [BannerController::class, 'index'])->name('Bhome');
-    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB'); // ntar satuin ya ama yang lain 
+    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB'); // ntar satuin ya ama yang lain
     Route::post('/addBanner', [BannerController::class, 'store'])->name('addBanner');
     Route::patch('/banner/{banner}/toggle', [BannerController::class, 'toggle'])->name('banner.toggle');
     Route::get('/banner/edit{id}', [BannerController::class, 'edit'])->name('editB');
@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/produk/{id}/toggle', [ProdukController::class, 'toggle'])->name('produk.toggle');
 
 
-    //manajemen link 
+    //manajemen link
     Route::get('/link', [AdmLinksController::class, 'index'])->name('Lhome');
     Route::get('/addlink', [AdmLinksController::class, 'create']);
     Route::post('/addlink', [AdmLinksController::class, 'store'])->name('addLink');
@@ -45,9 +45,13 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-    //Logout 
+    //Logout
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
 });
+
+//About
+    Route::view('/about', 'guest.about');
 
 
 
