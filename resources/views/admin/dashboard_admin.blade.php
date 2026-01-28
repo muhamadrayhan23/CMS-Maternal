@@ -7,16 +7,13 @@
     <title>Admin Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<<<<<<< HEAD
+
 @extends('layout.admin')
-{{-- <body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <a href="{{ 'produk/kelola_produk' }}">Kelola Produk</a>
-=======
 
->>>>>>> 1ceba9d12f88053a235036b48e01500f626a7369
-
-{{-- <body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans">
     <div class="flex min-h-screen">
         @include('layout.sidebarAdmin')
 
@@ -25,7 +22,7 @@
                 @yield('content')
             </div>
 
-            <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-8">
+            <section class="bg-linear-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-8">
                 <h3 class="text-2xl font-semibold">Statistic Overview</h3>
                 <p class="text-gray-300 mb-6">Your store at a glance</p>
 
@@ -111,6 +108,6 @@
             </section>
         </main>
     </div>
-</body> --}}
+</body>
 
 </html>
