@@ -4,9 +4,11 @@
         <div class="card">
             <div class="card-header">Edit Link</div>
 
+            <a href="{{ route('homeLink') }}" class="btn btn-secondary">Back</a>
+
             <div class="card-body">
 
-                <form action="{{ route ('adm-links.update', $link->id_link)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route ('updateLink', $link->id_link)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -24,15 +26,17 @@
 
                     <div class="mb-3">
                         <label class="form-label">Link Logo</label>
-                        <input
-                            type="file"
-                            name="link_logo"
-                            class="form-control @error('link_logo') is-invalid @enderror"
-                            value="{{ old('link_logo', $link->link_logo) }}">
+                        @if ($link->link_logo)
+                        <div class="mb-2">
+                            <img src="{{ asset($link->link_logo) }}" width="120" class="rounded border">
+                        </div>
+                        @endif
+                        <input type="file" name="link_logo" class="form-control @error('link_logo') is-invalid @enderror">
                         @error('link_logo')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
 
                     <div class="mb-3">
                         <label class="form-label">Link Address</label>
@@ -47,7 +51,6 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{ route('adm-links.index') }}" class="btn btn-secondary">Back</a>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
 

@@ -16,13 +16,6 @@ Route::get('/', function () {
 
 // });
 
-Route::get('adm-links', [AdmLinksController::class, 'index'])->name('adm-links.index');
-Route::get('adm-links/create', [AdmLinksController::class, 'create'])->name('adm-links.create');
-Route::post('adm-links', [AdmLinksController::class, 'store'])->name('adm-links.store');
-Route::get('adm-links/{link}/edit', [AdmLinksController::class, 'edit'])->name('adm-links.edit');
-Route::put('adm-links/{link}', [AdmLinksController::class, 'update'])->name('adm-links.update');
-Route::delete('adm-links/{link}', [AdmLinksController::class, 'destroy'])->name('adm-links.destroy');
-
 Route::get('/admin/dashboard_admin', function () {
     return view('admin.dashboard_admin');
 })->name('admin.dashboard');
@@ -70,3 +63,19 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/banner', [BannerController::class, 'index'])->name('Bhome');
 //     Route::get('/addBanner', [BannerController::class, 'create'])->name('addB'); // ntar satuin ya ama yang lain 
 //     Route::post('/addBanner', [BannerController::class, 'store'])->name('addBanner');
+
+//manajemen link 
+Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
+Route::get('/link/create', [AdmLinksController::class, 'create'])->name('createLink');
+Route::post('/link', [AdmLinksController::class, 'store'])->name('storeLink');
+Route::get('/link/{link}/edit', [AdmLinksController::class, 'edit'])->name('editLink');
+Route::put('/link/{link}', [AdmLinksController::class, 'update'])->name('updateLink');
+Route::delete('/link/{link}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
+
+//manajemen user 
+Route::get('/user', [UserController::class, 'index'])->name('homeUser');
+Route::get('/user/create', [UserController::class, 'create'])->name('createUser');
+Route::post('/user', [UserController::class, 'store'])->name('storeUser');
+Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('editUser');
+Route::put('/user/{user}', [UserController::class, 'update'])->name('updateUser');
+Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('deleteUser');

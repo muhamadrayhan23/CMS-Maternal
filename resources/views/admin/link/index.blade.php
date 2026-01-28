@@ -12,7 +12,14 @@
         <div class="card">
             <div class="card-header">Link List</div>
             <div class="card-body">
-                <a href="{{ route('adm-links.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New link</a>
+                <a href="#">Trash</a>
+
+                <a href="{{ route('createLink') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New link</a>
+
+                <form action="{{ route('homeLink') }}" method="GET" class="d-flex mb-3">
+                    <input type="text" id="search" name="search" placeholder="Search links..." class="form-control mb-3">
+                </form>
+
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -34,11 +41,11 @@
                             </td>
 
                             <td>
-                                <form action="{{ route('adm-links.destroy', $link) }}" method="post">
+                                <form action="{{ route('deleteLink', $link) }}" method="post">
                                     @csrf
                                     @method('DELETE')
 
-                                    <a href="{{ route('adm-links.edit', $link->id_link) }}" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('editLink', $link->id_link) }}" class="btn btn-primary btn-sm">
                                         <i class="bi bi-pencil-square"></i> Edit
                                     </a>
 
@@ -62,3 +69,4 @@
         </div>
     </div>
 </div>
+
