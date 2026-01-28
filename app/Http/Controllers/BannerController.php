@@ -116,7 +116,8 @@ public function toggle(Banner $banner)
     {
         $banner = Banner::findOrfail($id);
 
-        $banner->deleted_by = auth->id();
+        $banner->deleted_by = auth()->id();
+        
         $banner->save();
         $banner->delete();
 

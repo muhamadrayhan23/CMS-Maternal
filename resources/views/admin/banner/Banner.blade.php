@@ -1,9 +1,9 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@extends('layout.app')
+@extends('layout.admin')
 
 @section('content')
+{{-- NAV MANAGE --}}
 <div class="space-y-4">
-    {{-- NAV MANAGE --}}
     <div class="flex items-center justify-between">
         <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
             Manage Banners
@@ -59,15 +59,15 @@
 <div class="mt-5 min-h-screen">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($banner as $b)
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                {{-- Image Section --}}
+            <div class="bg-white rounded-2xl border border-gray-300 overflow-visible">
+                {{-- image & status --}}
                 <div class="relative h-48 bg-gray-200">
-                    <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover" alt="Banner">
+                    <img src="{{ asset($b->banner_image) }}" class="w-full rounded-lg h-full object-cover" alt="Banner">
                     <div class="absolute top-3 left-3">
                         @if($b->is_active)
-                            <span class="px-3 py-1 text-[10px] font-bold uppercase text-green-700 bg-green-100/90 rounded-full">Published</span>
+                            <span class="px-3 py-1 text-[10px] font-sm-bold uppercase text-green-700 bg-green-100/90 rounded-full">Published</span>
                         @else
-                            <span class="px-3 py-1 text-[10px] font-bold uppercase text-red-700 bg-red-100/90 rounded-full">Unpublished</span>
+                            <span class="px-3 py-1 text-[10px] font-sm-bold uppercase text-red-700 bg-red-100/90 rounded-full">Unpublished</span>
                         @endif
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                                 </svg>
                             </button>
 
-                            
+                            {{-- TOOLTIP --}}
                             <div class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
                                 
                                 <form method="POST" action="{{ route('banner.toggle', $b->id_banner) }}">
@@ -91,10 +91,11 @@
                                     @method('PATCH')
                                     <button class="flex items-center gap-3 w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all text-left">
                                         @if($b->is_active)
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
                                             Unpublish
                                         @else
-                                            <span class="text-green-600"> Publish Now</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-icon lucide-circle-check"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                            Publish
                                         @endif
                                     </button>
                                 </form>
@@ -108,15 +109,29 @@
                                 <form method="POST" action="{{ route('dBanner', $b->id_banner) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button onclick="return confirm('Yakin mau hapus?')" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all border-t border-gray-50 text-left">
-                                        Delete
+
+                                        <button type="submit" onclick="return confirm('Yakin mau hapus?') class="flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600
+                                        hover:bg-red-50 transition-all text-lef >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-trash-2">
+                                        <path d="M10 11v6"/>
+                                        <path d="M14 11v6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                                        <path d="M3 6h18"/>
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                        </svg>
+
+                                        <span>Delete</span>
                                     </button>
                                 </form>
+
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-50">
+                    <div class="flex justify-between items-center mt-4 pt-4 border-t border-[#919191]">
                         <div class="text-xs text-gray-500">
                             By <span class="font-semibold text-gray-700">{{ $b->user->name ?? 'Admin' }}</span>
                         </div>
@@ -128,16 +143,13 @@
             </div>
         @endforeach
     </div>
-    
-    {{-- Pagination Links --}}
-    <div class="mt-8">
-        {{ $banner->links() }}
-    </div>
+  
 </div>
 
+    {{-- TOOLTIP BIAR BISA DI TUTUP BUKA --}}
 <script>
     function toggleMenu(btn){
-        const menu = btn.parentElement.queryselector('.action-menu')
+        const menu = btn.parentElement.querySelector('.action-menu')
 
         document.querySelectorAll('.action-menu').forEach(m => {
         if (m !== menu) m.classList.add('hidden')
@@ -145,5 +157,12 @@
 
     menu.classList.toggle('hidden');
     }
+
+    document.addEventListener('click', function (e) {
+    if (!e.target.closest('.relative')) {
+        document.querySelectorAll('.action-menu')
+            .forEach(m => m.classList.add('hidden'));
+    }
+});
 </script>
 @endsection

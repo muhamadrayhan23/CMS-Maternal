@@ -1,9 +1,8 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@extends('layout.app')
-
+@extends('layout.admin')
 
 @section('content')
-<div class="h-screen  " id="wrapp"> 
+<div class="h-screen" id="wrapp"> 
     <form action="{{ route ('addBanner') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="flex items-center justify-between mb-6">
@@ -48,7 +47,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="AddRow()" class="w-full mt-8 py-3 text-sm font-semibold text-white bg-[#9CA3AF] rounded-xl hover:bg-gray-900 transition-colors shadow-sm">
+            <button type="button" onclick="AddRow()" class="w-full mt-8 py-3 text-sm font-semibold text-white bg-[#8B8B8B] rounded-lg hover:bg-[#373737] transition-colors shadow-sm">
                 Add More Banner
             </button>
         </div>
@@ -61,11 +60,11 @@
     function AddRow() {
         const container = document.getElementById('banner-container');
         
-        // Buat div baru untuk baris banner
+        
         const newRow = document.createElement('div');
         newRow.className = "banner-row mt-6 space-y-6 border border-gray-100 rounded-xl p-6 bg-white relative";
         
-        // Isi HTML baris baru (pake template literal agar rapi)
+        
         newRow.innerHTML = `
             <button type="button" onclick="this.parentElement.remove()" class="absolute -top-3 -right-3 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>

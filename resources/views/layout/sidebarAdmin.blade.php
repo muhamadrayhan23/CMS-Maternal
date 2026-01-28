@@ -1,7 +1,7 @@
 {{-- Sidebar Container Utama --}}
 <div class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
     
-    {{-- 1. BAGIAN LOGO --}}
+    {{--  BAGIAN LOGO --}}
     <div class="flex items-center justify-center h-16">
         <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
     </div>

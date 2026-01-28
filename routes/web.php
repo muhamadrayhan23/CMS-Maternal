@@ -11,7 +11,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 Route::get('/login', [UserController::class, 'login'])->name('login');
-// Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
+
 
 Route::middleware(['auth'])->group(function () {
     //dashboard admin
@@ -19,10 +19,10 @@ Route::middleware(['auth'])->group(function () {
 
     //manajemen banner
     Route::get('/banner', [BannerController::class, 'index'])->name('Bhome');
-    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB'); // ntar satuin ya ama yang lain
+    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB'); 
     Route::post('/addBanner', [BannerController::class, 'store'])->name('addBanner');
     Route::patch('/banner/{banner}/toggle', [BannerController::class, 'toggle'])->name('banner.toggle');
-    Route::get('/banner/edit{id}', [BannerController::class, 'edit'])->name('editB');
+    Route::get('/banner/edit/{id}', [BannerController::class, 'edit'])->name('editB');
     Route::put('/banner/update/{id}', [BannerController::class, 'update'])->name('updateBanner');
     Route::delete('/banner/delete/{id}', [BannerController::class, 'destroy'])->name('dBanner');
     Route::get('/banner/trash', [BannerController::class, 'restore'])->name('Btrash');
