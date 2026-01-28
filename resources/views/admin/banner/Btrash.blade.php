@@ -1,5 +1,5 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@extends('layout.app')
+@extends('layout.admin')
 
 
 @section('content')

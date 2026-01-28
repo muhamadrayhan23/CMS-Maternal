@@ -57,7 +57,7 @@
                 alt="Group">
 
             <p class="absolute top-98.75 left-77.5 font-sans text-white text-xl leading-normal tracking-[0]">
-                All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | PT Bandung Semesta Teknologi
+                All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
             </p>
 
             <p class="absolute top-29 left-282 font-sans text-white text-2xl leading-normal tracking-[0]">

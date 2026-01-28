@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="AddRow()" class="w-full mt-8 py-3 text-sm font-semibold text-white bg-[#9CA3AF] rounded-xl hover:bg-gray-900 transition-colors shadow-sm">
+            <button type="button" onclick="AddRow()" class="w-full mt-8 py-3 text-sm font-semibold text-white bg-[#9CA3AF] rounded-lg hover:bg-[#373737] transition-colors shadow-sm">
                 Add More Banner
             </button>
         </div>
