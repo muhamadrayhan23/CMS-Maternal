@@ -13,7 +13,7 @@
     <div class="wrapper">
         <a href="{{ 'produk/kelola_produk' }}">Kelola Produk</a>
 =======
-@include('layout.sidebarAdmin')
+
 >>>>>>> 1ceba9d12f88053a235036b48e01500f626a7369
 
 {{-- <body class="bg-gray-100 font-sans">

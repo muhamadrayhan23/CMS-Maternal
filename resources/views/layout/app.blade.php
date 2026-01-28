@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,8 +12,6 @@
     {{-- SIDEBAR --}}
     @include('partials.sidebarAdmin')
 
-    @include('partials.navbar-guest')
-
     {{-- CONTENT --}}
     <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
         <div class="p-10">
@@ -23,4 +21,4 @@
 </div>
 
 </body>
-</html>
+</html> -->

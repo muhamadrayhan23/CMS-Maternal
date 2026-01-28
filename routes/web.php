@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
-// Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/login', [UserController::class, 'login'])->name('login');
 // Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 
 Route::middleware(['auth'])->group(function () {
