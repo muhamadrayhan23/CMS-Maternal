@@ -4,11 +4,14 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdmLinksController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\Guest\HomeController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/login', [UserController::class, 'login'])->name('login');
-    Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
+Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
+Route::get('/login', [UserController::class, 'login'])->name('login');
+// Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 
 Route::middleware(['auth'])->group(function () {
     //dashboard admin
@@ -34,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/produk-force-delete/{id}', [ProdukController::class, 'forceDelete'])->name('produk.force.delete');
     Route::patch('/produk/{id}/toggle', [ProdukController::class, 'toggle'])->name('produk.toggle');
 
-
     //manajemen link
     Route::get('/link', [AdmLinksController::class, 'index'])->name('Lhome');
     Route::get('/addlink', [AdmLinksController::class, 'create']);
@@ -42,8 +44,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/edit/link/{id}', [AdmLinksController::class, 'edit']);
     Route::put('/edit/link/{id}', [AdmLinksController::class, 'update'])->name('editLink');
     Route::delete('/delete/link/{id}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
-
-
 
     //Logout
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
