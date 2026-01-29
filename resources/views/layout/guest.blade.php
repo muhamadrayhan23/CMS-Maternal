@@ -13,7 +13,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="flex flex-col font-sans h-full">
+<body class="flex flex-col font-sans min-h-screen overflow-x-hidden">
+
 
     <div class="sticky top-0 z-50">
         @include('partials.navbarGuest')
@@ -37,6 +38,9 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
+
 </body>
+
 
 </html>

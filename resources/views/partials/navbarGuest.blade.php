@@ -16,9 +16,9 @@
                         Products
                     </div>
 
-                    <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal]  font-light text-[15px]">
+                    <a href="{{ route('about') }}" class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px] hover:text-gray-300 transition">
                         About Us
-                    </div>
+                    </a>
 
                     <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         Contact Us
