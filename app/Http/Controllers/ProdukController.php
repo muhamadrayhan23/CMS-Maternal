@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\ProdukDetail;
+use App\Models\LinkProduk;
 
 class ProdukController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with('details')->latest();
+        $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -22,14 +23,18 @@ class ProdukController extends Controller
             });
         }
 
-        $produk = $query->paginate(10);
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
+        }
+
+        $produk = $query->paginate(5)->withQueryString();;
 
         return view('admin.produk.kelola_produk', compact('produk'));
     }
 
     public function kelola_card(Request $request)
     {
-        $query = Product::with('details')->latest();
+        $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -83,6 +88,31 @@ class ProdukController extends Controller
                     'atribute_value' => $value,
                     'image_name'     => $image_name,
                     'image_product'  => $imagePath,
+                ]);
+            }
+        }
+
+        if ($request->link_address) {
+            foreach ($request->link_address as $i => $address) {
+
+                if (!$address && empty($request->file('link_image')[$i])) {
+                    continue;
+                }
+
+                $linkImagePath = null;
+                $link_name = null;
+
+                if (!empty($request->file('link_image')[$i])) {
+                    $link_name = $file->getClientOriginalName();
+                    $linkImagePath = $request->file('link_image')[$i]
+                        ->store('link_produk', 'public');
+                }
+
+                LinkProduk::create([
+                    'id_product'   => $product->id_product,
+                    'link_name'    => $request->link_name[$i] ?? 'Link',
+                    'link_address' => $address,
+                    'link_image'   => $linkImagePath,
                 ]);
             }
         }

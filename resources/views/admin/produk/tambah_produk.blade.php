@@ -49,12 +49,6 @@
                         <input type="text" name="desc" value="{{ old('desc', $produk->desc ?? '') }}">
                     </div>
 
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Link</label>
-                        <input type="text" name="link" class="form-control"
-                            value="{{ old('link', $produk->link ?? '') }}">
-                    </div>
-
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Price</label>
                         <input type="number" name="price" class="form-control"
@@ -63,6 +57,46 @@
                 </div>
 
                 <br>
+
+                <h5 class="fw-bold mb-3">Product Links</h5>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-bold">Product Links</label>
+
+                    <div id="links">
+                        @if (isset($produk) && $produk->links->count())
+                            @foreach ($produk->links as $link)
+                                <div class="link-row mb-2">
+                                    <input type="text" name="link_name[]" class="form-control mb-1"
+                                        value="{{ $link->link_name }}" placeholder="Link Name">
+
+                                    <input type="url" name="link_address[]" class="form-control mb-1"
+                                        value="{{ $link->link_address }}" placeholder="Link Address">
+
+                                    <input type="file" name="link_image[]">
+
+                                    @if ($link->link_image)
+                                        <img src="{{ asset('storage/' . $link->link_image) }}" width="80">
+                                    @endif
+
+                                    <button type="button" onclick="removeLink(this)">✖</button>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="link-row mb-2">
+                                <input type="text" name="link_name[]" class="form-control mb-1"
+                                    placeholder="Link Name">
+                                <input type="url" name="link_address[]" class="form-control mb-1"
+                                    placeholder="Link Address">
+                                <input type="file" name="link_image[]">
+                            </div>
+                        @endif
+                    </div>
+
+                    <button type="button" class="btn btn-sm btn-secondary mt-2" onclick="addLink()">
+                        ➕ Add More Link
+                    </button>
+                </div>
+
 
                 <h5 class="fw-bold mb-3">Product Attributes</h5>
                 <div id="detail-wrapper">
@@ -83,7 +117,8 @@
 
                             <div class="field">
                                 <label>Attribute Name</label>
-                                <input type="text" name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}">
+                                <input type="text" name="atribute_name[]"
+                                    value="{{ $detail->atribute_name ?? '' }}">
                             </div>
 
                             <div class="field">
@@ -131,6 +166,22 @@
 
     function removeRow(button) {
         button.closest('.detail-row').remove();
+    }
+
+    function addLink() {
+        const link = document.getElementById('Links');
+
+        link.insertAdjacentHTML('beforeend', `
+            <div class="col-md-12 mb-3" id="Links">
+                <label class="form-label">Link</label>
+                <input type="text" name="link" class="form-control"
+                    value="{{ old('link', $produk->link ?? '') }}">
+            </div>
+        `);
+    }
+
+    function removeLink(button) {
+        button.closest('.linK').remove();
     }
 </script>
 
