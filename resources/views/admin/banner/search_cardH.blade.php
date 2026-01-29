@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @forelse($banner as $b)
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-400 overflow-visible">
+        <div class="bg-white rounded-2xl border border-gray-400 overflow-visible">
             <div class="relative h-48 rounded-t-2xl overflow-hidden">
                 <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover" alt="Banner">
                 <div class="absolute top-3 left-3">

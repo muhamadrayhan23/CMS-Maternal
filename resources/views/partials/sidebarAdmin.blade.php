@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Dashboard')</title>
@@ -10,7 +9,7 @@
 </head>
 
 <body class="bg-[#f4f4f4]">
-    {{-- Sidebar Container Utama --}}
+    {{-- Sidebar Container Atas --}}
     <div
         class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
 
@@ -19,7 +18,7 @@
             <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
         </div>
 
-        {{-- lIST --}}
+        {{-- Fitur --}}
         <ul class="list-none px-6 m-4 space-y-1 flex-1 overflow-y-auto">
             {{-- Dashboard --}}
             <li class="mb-2">
@@ -44,7 +43,7 @@
                 </a>
             </li>
 
-            {{-- Products --}}
+            {{-- Product --}}
             <li class="mb-2">
                 <a href="{{ route('produk.index') }}"
                     class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
@@ -60,7 +59,7 @@
                 </a>
             </li>
 
-            {{-- Banners --}}
+            {{-- Banner --}}
             <li class="mb-2">
                 <a href="{{ route('Bhome') }}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -75,7 +74,7 @@
                 </a>
             </li>
 
-            {{-- Links --}}
+            {{-- Link --}}
             <li class="mb-2">
                 <a href="{{ route('Lhome') }}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -89,7 +88,7 @@
                 </a>
             </li>
 
-            {{-- Users --}}
+            {{-- User --}}
             <li class="mb-2">
                 <a href="#" class="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
@@ -105,7 +104,7 @@
             </li>
         </ul>
 
-        {{-- 3. BAGIAN BAWAH (Quick Access & Logout) --}}
+        {{-- bagian bawah kecilin yah kata sipa --}}
         <div class="p-6 space-y-4">
             {{-- Quick Access Card --}}
             <div class="border border-[#D9DEE3] rounded-xl p-3 bg-gray-50">
@@ -120,18 +119,18 @@
                 </div>
                 <p class="text-xs text-gray-500 mb-3">View the live version of the website.</p>
                 <a href="#" target="_blank"
-                    class="block text-center bg-gray-700 text-white py-1 rounded-lg hover:bg-gray-900 transition-colors">
-                    Click Here
+                    class="block text-center bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-900 transition-colors">
+                Visit Landing page
                 </a>
             </div>
 
             {{-- User & Logout --}}
-            <div class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between">
-                <p class="font-semibold text-xs px-3 truncate max-w-[140px]">{{ auth()->user()->email }}</p>
-                <form action="{{ route('logout') }}" method="POST" class="flex items-center">
+            <div class="border border-[#D9DEE3] rounded-lg p-1 flex items-center justify-between ">
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center w-full">
                     @csrf
-                    <button type="submit" class="text-gray-500 hover:text-red-600 transition-colors p-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    <button type="submit" class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group">
+                        <p class="font-semibold text-sm px-2 py-2 truncate ">{{ auth()->user()->email }}</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round">
                             <path d="m16 17 5-5-5-5" />

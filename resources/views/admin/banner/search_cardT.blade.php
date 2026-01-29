@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @forelse($banner as $b)
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-400 overflow-visible">
+        <div class="bg-white rounded-2xl  border border-gray-400 overflow-visible">
             <div class="relative h-48 rounded-t-2xl overflow-hidden">
                 <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover" alt="Banner">
             </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="flex justify-between items-center mt-6 text-gray-600">
                     <div class="text-xs">By <span class="font-semibold text-gray-700">{{ $b->user->name ?? 'Admin' }}</span></div>
-                    <div class="text-xs">Created At {{ $b->created_at->format('Y-m-d') }}</div>
+                    <div class="text-xs">Deleted At {{ $b->deleted_at->format('Y-m-d') }}</div>
                 </div>
             </div>
         </div>
