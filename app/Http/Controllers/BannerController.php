@@ -9,11 +9,25 @@ class BannerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+   public function index(Request $request)
     {
-      
-        $banner = Banner::latest()->paginate(6);
-        return view ('admin.banner.Banner', compact ('banner'));
+        $status = $request->input('status');
+        $search = $request->input('search');
+
+        $banner = Banner::when($search, function ($query, $search) {
+            return $query->where('banner_name', 'like', "%{$search}%");
+        }) ->when($status !== null && $status !== '', function ($query) use ($status) {
+            // Filter kolom is_active di database
+            return $query->where('is_active', $status);
+        })
+        ->latest()
+        ->paginate(6) 
+        ->withQueryString(); 
+
+        if ($request->ajax()) {
+        return view('admin.banner.search_cardH', compact('banner'))->render();
+        }
+        return view('admin.banner.Banner', compact('banner'));
     }
 
     /**
@@ -24,8 +38,8 @@ class BannerController extends Controller
         return view('admin.banner.Bcreate');
     }
 
- public function store(Request $request)
-{
+    public function store(Request $request)
+    {
     // dd($request->all());
 
     // request ini menerima banyak input 'banners' samakan dengan name di blade agar data terkirim JANGAN TYPO
@@ -125,25 +139,34 @@ public function toggle(Banner $banner)
         ->route('Bhome');
     }
 
-    public function restore(Request $request){
-        $query = Banner::onlyTrashed();
+    public function restore(Request $request)
+    {
+        $search = $request->input('search');
 
-        $banner = $query->paginate(6);
+        $banner = Banner::onlyTrashed()
+        ->when($search, function ($query, $search) {
+            return $query->where('banner_name', 'like', "%{$search}%");
+        })
+        ->latest()
+        ->paginate(6) 
+        ->withQueryString(); 
 
+        if ($request->ajax()) {
+        return view('admin.banner.search_cardT', compact('banner'))->render();
+        }
         return view ('admin.banner.btrash', compact ('banner'));
     }
 
     public function restoreProses($id){
         Banner::withTrashed()->findOrFail($id)->restore();
 
-        return redirect()->route('/Btrash');
-
+        return redirect()->route('Btrash');
     }
 
     public function forceDelete($id){
         Banner::withTrashed()->findOrFail($id)->forceDelete();
 
-        return view ('admin.banner.btrash');
+        return redirect()->route('Btrash')->with('succes', 'berhasil di hapus');
     }
 
     public function tooggle($id){

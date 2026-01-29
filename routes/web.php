@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/banner/update/{id}', [BannerController::class, 'update'])->name('updateBanner');
     Route::delete('/banner/delete/{id}', [BannerController::class, 'destroy'])->name('dBanner');
     Route::get('/banner/trash', [BannerController::class, 'restore'])->name('Btrash');
-    Route::post('/banner/trash/{id}', [BannerController::class, 'restoreProses'])->name('Btrash.proses');
+    Route::post('/banner/trash/{id}', [BannerController::class, 'restoreProses'])->name('Btrash.restore');
     Route::delete('/banner/force-delete{id}', [BannerController::class, 'forceDelete'])->name('Btrash.permanent');
 
 
