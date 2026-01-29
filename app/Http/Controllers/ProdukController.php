@@ -60,7 +60,6 @@ class ProdukController extends Controller
             'product_name' => $request->product_name,
             'price'        => $request->price,
             'is_active' => $request->is_active ?? 0,
-            'link'         => $request->link,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
@@ -95,16 +94,11 @@ class ProdukController extends Controller
         if ($request->link_address) {
             foreach ($request->link_address as $i => $address) {
 
-                if (!$address && empty($request->file('link_image')[$i])) {
-                    continue;
-                }
+                if (!$address) continue;
 
-                $linkImagePath = null;
-                $link_name = null;
-
+                $imagePath = null;
                 if (!empty($request->file('link_image')[$i])) {
-                    $link_name = $file->getClientOriginalName();
-                    $linkImagePath = $request->file('link_image')[$i]
+                    $imagePath = $request->file('link_image')[$i]
                         ->store('link_produk', 'public');
                 }
 
@@ -112,10 +106,11 @@ class ProdukController extends Controller
                     'id_product'   => $product->id_product,
                     'link_name'    => $request->link_name[$i] ?? 'Link',
                     'link_address' => $address,
-                    'link_image'   => $linkImagePath,
+                    'link_image'   => $imagePath,
                 ]);
             }
         }
+
 
         return redirect()
             ->route('produk.index')
@@ -125,8 +120,7 @@ class ProdukController extends Controller
 
     public function edit($id)
     {
-        $produk = Product::with('details')->findOrFail($id);
-
+        $produk = Product::with(['details', 'links'])->latest();
         return view('admin.produk.tambah_produk', compact('produk'));
     }
 
@@ -138,7 +132,6 @@ class ProdukController extends Controller
             'product_name' => $request->product_name,
             'price' => $request->price,
             'is_active' => $request->is_active ?? 0,
-            'link' => $request->link,
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),
         ]);
@@ -171,6 +164,33 @@ class ProdukController extends Controller
             }
         }
 
+        foreach ($request->link_address as $i => $link) {
+
+            $linkId  = $request->link_id[$i] ?? null;
+            $imageFile = $request->file('link_image')[$i] ?? null;
+
+            if (!$link && !$imageFile) {
+                continue;
+            }
+
+            $data = [
+                'link_name'  => $request->link_name[$i] ?? null,
+                'link_address' => $link,
+            ];
+
+            if ($imageFile) {
+                $data['link_image'] = $imageFile->getClientOriginalName();
+                $data['link_image'] = $imageFile->store('link_produk', 'public');
+            }
+
+            if ($linkId) {
+                LinkProduk::find($linkId)?->update($data);
+            } else {
+                LinkProduk::create(array_merge($data, [
+                    'id_product' => $produk->id_product,
+                ]));
+            }
+        }
         return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
     }
 
@@ -231,7 +251,7 @@ class ProdukController extends Controller
 
     public function show($id)
     {
-        $produk = Product::with('details', 'creator', 'updater', 'deleter')
+        $produk = Product::with(['details', 'links', 'creator', 'updater', 'deleter'])
             ->findOrFail($id);
 
         return view('admin.produk.detail_produk', compact('produk'));

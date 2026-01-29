@@ -1,4 +1,5 @@
-<title>Manage Products</title>
+@section('title', 'Manage Products')
+
 @vite('resources/css/app.css')
 
 <div class="bg-gray-100">
@@ -125,7 +126,7 @@
                         <th class="p-4">Link</th>
                         <th class="p-4">Image</th>
                         <th class="p-4 text-center">Status</th>
-                        <th class="p-4">Action</th>
+                        <th class="p-4 justify-center">Action</th>
                     </tr>
                 </thead>
 
@@ -139,16 +140,31 @@
                                 </p>
                             </td>
                             <td class="p-4">Rp {{ number_format($p->price, 0, ',', '.') }}</td>
-                            <td class="p-4">
-                                {{-- @if (optional($p->links->first())->image_product)
-                                    <a href="{{ $links->link_address }}" target="_blank">
-                                        {{ $link->link_name }}
-                                    </a>
-                                @else
-                                    -
-                                @endif --}}
+                            <td class="relative">
+                                <div class="dropdown">
+                                    <button
+                                        class="px-3 py-1 border rounded hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 dropdown-toggle"
+                                        onclick="toggleMenu(this)">
+                                        View Link Produk
+                                    </button>
+                                    <ul
+                                        class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto overflow-x-hidden">
+                                        @forelse ($p->links as $link)
+                                            <li>
+                                                <a href="{{ $link->link_address }}" target="_blank"
+                                                    class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
+                                                    <img src="{{ asset('storage/' . $link->link_image) }}"
+                                                        alt="{{ $link->link_name }}"
+                                                        class="w-6 h-6 object-cover rounded">
+                                                    <span class="text-gray-700">{{ $link->link_name }}</span>
+                                                </a>
+                                            </li>
+                                        @empty
+                                            <li class="px-3 py-2 text-gray-400">Tidak ada link</li>
+                                        @endforelse
+                                    </ul>
+                                </div>
                             </td>
-
                             <td class="p-4">
                                 @if (optional($p->details->first())->image_product)
                                     <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
@@ -169,40 +185,37 @@
                                     </button>
                                 </form>
                             </td>
-                            <td>
-                                <div class="dropdown position-absolute top-0 end-0 m-2">
-                                    <button class="btn btn-sm btn-light border" data-bs-toggle="dropdown">
-                                        &#8942;
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        @if ($p->link)
-                                            <li>
-                                                <a class="dropdown-item" href="{{ $p->link }}" target="_blank">
-                                                    View Link
-                                                </a>
-                                            </li>
-                                        @endif
 
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ route('produk.edit', $p->id_product) }}">
-                                                Edit
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <form action="{{ route('produk.destroy', $p->id_product) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="dropdown-item text-danger"
-                                                    onclick="return confirm('Hapus produk?')">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <td class="relative overflow-visible">
+                                <button onclick="toggleMenu(this)"
+                                    class="w-8 h-8 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-gray-300">
+                                    &#8942; </button>
+                                <ul
+                                    class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto overflow-x-hidden">
+                                    <li>
+                                        <a href="{{ route('produk.edit', $p->id_product) }}"
+                                            class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                                            Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <form action="{{ route('produk.destroy', $p->id_product) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded"
+                                                onclick="return confirm('Hapus produk?')">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('produk.show', $p->id_product) }}"
+                                            class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                                            Detail
+                                        </a>
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
                     @endforeach
@@ -223,4 +236,19 @@
             document.getElementById('filterForm').submit();
         }, 500);
     }
+
+    function toggleMenu(btn) {
+        const menu = btn.parentElement.querySelector('.action-menu');
+        document.querySelectorAll('.action-menu').forEach(m => {
+            if (m !== menu) m.classList.add('hidden');
+        });
+        menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.relative')) {
+            document.querySelectorAll('.action-menu')
+                .forEach(m => m.classList.add('hidden'));
+        }
+    });
 </script>
