@@ -1,74 +1,58 @@
-<div class="w-full h-125 z-1 bg-black font-sans">
-    <div class="w-full h-116.75 relative">
-        <div class="absolute top-0 left-0 w-full h-116.75">
-
-            <div class="absolute top-17.75 left-25.75 w-55.25 h-60.25 flex flex-col">
-                <div class="w-30.5 h-6.5 font-sans text-white text-xl leading-normal tracking-[0]">
-                    Let us know!
-                </div>
-
-                <p class="w-34.25 h-13 mt-7 font-normal text-white text-xl leading-normal tracking-[0] font-[Space_Grotesk-Medium]">
-                    <span class="font-sans">Call :<br></span>
-                    <span class="font-sans">+62 87789765</span>
-                </p>
-
-                <div class="w-48.25 h-13 mt-4 font-sans text-white text-xl leading-normal tracking-[0]">
-                    Location :<br>
-                    Jl. Nataendah No.55
-                </div>
-
-                <p class="w-53.25 h-13 mt-3.75 font-normal text-white text-xl leading-normal tracking-[0] font-[Space_Grotesk-Medium]">
-                    <span class="font-sans">Email :<br></span>
-                    <span class="font-sans">alttt.@craftedgoods_</span>
-                </p>
+<div class="w-full bg-[#1A1A1A] font-sans py-16 px-10 relative text-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+        
+        <div class="flex flex-col gap-6">
+            <h3 class="text-xl font-bold">Let us know!</h3>
+            <div class="text-lg leading-relaxed">
+                <p class="mb-4">Call :<br>+62 87789765</p>
+                <p class="mb-4">Location :<br>Jl. Nataendah No.55</p>
+                <p>Email :<br>alttt.@craftedgoods_</p>
             </div>
-
-            <div class="absolute top-17.75 left-106.25 w-30 h-59.75 flex flex-col">
-                <div class="w-13.5 h-6.5 font-sans text-white text-xl leading-normal tracking-[0]">
-                    Menu
-                </div>
-
-                <div class="w-13.75 h-6.5 mt-5.5 font-sans text-white text-xl leading-normal tracking-[0]">
-                    Home
-                </div>
-
-                <div class="w-22 h-6.5 mt-4 font-sans text-white text-xl leading-normal tracking-[0]">
-                    Products
-                </div>
-
-                <div class="w-22.25 h-6.5 mt-3.75 font-sans text-white text-xl leading-normal tracking-[0]">
-                    About Us
-                </div>
-
-                <div class="w-27 h-6.5 mt-3.75 font-sans text-white text-xl leading-normal tracking-[0]">
-                    Contact Us
-                </div>
-
-                <div class="w-6.5 h-6.5 mt-3.75 font-sans text-white text-xl leading-normal tracking-[0]">
-                    Links
-                </div>
-            </div>
-
-            <span class="absolute bottom-20 bg-white h-[0.5px] w-full mb-5"></span>
-
-            <img
-                class="absolute w-78.75 h-12.25 top-65.5 left-261.75"
-                src="{{ asset('img/logo/logowhite.png') }}"
-                alt="Group">
-
-            <p class="absolute top-98.75 left-77.5 font-sans text-white text-xl leading-normal tracking-[0]">
-                All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
-            </p>
-
-            <p class="absolute top-29 left-282 font-sans text-white text-2xl leading-normal tracking-[0]">
-                Look Confident, <br>
-                Starting with Your Bag
-            </p>
         </div>
 
-        <img
-            class="absolute top-27.5 left-260 w-19 h-19 object-cover"
-            src="{{ asset('img/logo/Craft_Logo White.png') }}"
-            alt="Craft logo white">
+        <div class="flex flex-col gap-9">
+            <h3 class="text-xl font-bold">Menu</h3>
+            <ul class="flex flex-col gap-6 text-lg">
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="#" class="hover:underline">Products</a></li>
+                <li><a href="#" class="hover:underline">About Us</a></li>
+                <li><a href="#" class="hover:underline">Links</a></li>
+            </ul>
+        </div>
+
+        <div class="flex flex-col items-end justify-between">
+            <div class="flex items-center gap-4 text-left mt-10 mr-0.1">
+                <img src="{{ asset('img/logo/Craft_Logo White.png') }}" class="w-15 h-15 object-contain" alt="Logo">
+                <p class="text-2xl font-medium leading-tight">
+                    Look Confident,<br>Starting with Your Bag
+                </p>
+            </div>
+
+            <div class="flex gap-1">
+                <a href="#" class="rounded-full p-2 hover:scale-110 transition-transform">
+                    <img src="{{ asset('img/logo wa.png') }}" class="w-12 h-12" alt="WA">
+                </a>
+                <a href="https://tk.tokopedia.com/ZSa9yLVvv/" class="rounded-full p-2 hover:scale-110 transition-transform">
+                    <img src="{{ asset('img/logo tokped.png') }}" class="w-12 h-12" alt="Tokped">
+                </a>
+                <a href="https://www.instagram.com/alttt.craftedgoods_?igsh=cnJzbjIwaDMzbDkw" class="rounded-full p-2 hover:scale-110 transition-transform">
+                    <img src="{{ asset('img/logo ig.png') }}" class="w-12 h-12" alt="IG">
+                </a>
+                <a href="https://id.shp.ee/sNCqbJU" class="rounded-full p-2 hover:scale-110 transition-transform">
+                    <img src="{{ asset('img/logo shopee.png') }}" class="w-12 h-12" alt="Shopee">
+                </a>
+                <a href="https://www.tiktok.com/@altttcrafted_?_r=1&_t=ZS-93T0ryF30tN" class="rounded-full p-2 hover:scale-110 transition-transform">
+                    <img src="{{ asset('img/logo tiktok.png') }}" class="w-12 h-12" alt="TikTok">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full h-px bg-white/30 mb-8"></div>
+
+    <div class="text-center">
+        <p class="text-lg opacity-90">
+            All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
+        </p>
     </div>
 </div>
