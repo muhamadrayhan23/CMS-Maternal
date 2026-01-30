@@ -1,4 +1,4 @@
-<nav class="flex w-full h-18.75 items-center gap-56.25 px-21.75 py-0">
+<nav id="main-navbar" class="fixed top-0 z-50 w-full h-18.75 flex items-center gap-56.25 px-21.75 py-0 transition-all duration-300 bg-transparent text-white">
     <img
         class="relative w-57.5 h-4.75 aspect-[4.57] object-cover"
         alt="Weblogo"
@@ -8,21 +8,17 @@
         <div class="absolute top-0 left-0 w-196 h-6.5 flex">
             <div class="w-196 h-6.5 inline-flex relative items-center gap-17">
                 <div class="flex-[0_0_auto] inline-flex relative items-center gap-17">
-                    <div class="relative w-fit mt-px text-base tracking-normal leading-normal font-[Space_Grotesk] font-light text-[15px]">
+                    <a href="{{ route('home') }}" class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         Home
-                    </div>
+                    </a>
 
                     <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         Products
                     </div>
 
-                    <a href="{{ route('about') }}" class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px] hover:text-gray-300 transition">
+                    <a href="{{ route('about') }}" class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         About Us
-                    </a>
-
-                    <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
-                        Contact Us
-                    </div>
+                        </a>
 
                     <div class="relative w-fit mt-px font-sans text-base tracking-[0] leading-[normal] font-light text-[15px]">
                         Links
@@ -54,4 +50,18 @@
 
         <div class="absolute top-px left-171.5 w-6 h-6 bg-[url('{{ asset('icons/lucide-icon.svg') }}')] bg-[100%_100%]"></div>
     </div>
+
+    {{-- <script>
+        window.onscroll = function() {
+            const navbar = document.getElementById('main-navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black', 'shadow-md');
+                navbar.classList.remove('bg-transparent')
+            } else {
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-black', 'shadow-md');
+            }
+
+        };
+    </script> --}}
 </nav>
