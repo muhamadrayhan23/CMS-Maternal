@@ -15,7 +15,6 @@ return new class extends Migration
             $table->increments('id_product');
             $table->string('product_name', (100));
             $table->decimal('price', 15, 2);
-            $table->string('link');
             $table->boolean('is_active')->default(true);
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();

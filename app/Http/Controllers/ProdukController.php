@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\ProdukDetail;
+use App\Models\LinkProduk;
 
 class ProdukController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::with('details')->latest();
+        $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -22,14 +23,18 @@ class ProdukController extends Controller
             });
         }
 
-        $produk = $query->paginate(10);
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
+        }
+
+        $produk = $query->paginate(5)->withQueryString();;
 
         return view('admin.produk.kelola_produk', compact('produk'));
     }
 
     public function kelola_card(Request $request)
     {
-        $query = Product::with('details')->latest();
+        $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -55,11 +60,11 @@ class ProdukController extends Controller
             'product_name' => $request->product_name,
             'price'        => $request->price,
             'is_active' => $request->is_active ?? 0,
-            'link'         => $request->link,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
-        $product['is_active'] = $request->boolean('is_active');
+        $product->is_active = $request->boolean('is_active');
+        $product->save();
 
         if ($request->atribut_value) {
             foreach ($request->atribut_value as $i => $value) {
@@ -87,6 +92,27 @@ class ProdukController extends Controller
             }
         }
 
+        if ($request->link_address) {
+            foreach ($request->link_address as $i => $address) {
+
+                if (!$address) continue;
+
+                $imagePath = null;
+                if (!empty($request->file('link_image')[$i])) {
+                    $imagePath = $request->file('link_image')[$i]
+                        ->store('link_produk', 'public');
+                }
+
+                LinkProduk::create([
+                    'id_product'   => $product->id_product,
+                    'link_name'    => $request->link_name[$i] ?? 'Link',
+                    'link_address' => $address,
+                    'link_image'   => $imagePath,
+                ]);
+            }
+        }
+
+
         return redirect()
             ->route('produk.index')
             ->with('success', 'Produk berhasil ditambahkan');
@@ -95,8 +121,8 @@ class ProdukController extends Controller
 
     public function edit($id)
     {
-        $produk = Product::with('details')->findOrFail($id);
-
+        $produk = Product::with(['details', 'links'])
+            ->findOrFail($id);
         return view('admin.produk.tambah_produk', compact('produk'));
     }
 
@@ -108,10 +134,19 @@ class ProdukController extends Controller
             'product_name' => $request->product_name,
             'price' => $request->price,
             'is_active' => $request->is_active ?? 0,
-            'link' => $request->link,
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),
         ]);
+
+        $existingDetailIds = $produk->details->pluck('id')->toArray();
+        $sentDetailIds = array_filter($request->detail_id ?? []);
+        $deleteDetailIds = array_diff($existingDetailIds, $sentDetailIds);
+        ProdukDetail::whereIn('id', $deleteDetailIds)->delete();
+
+        $existingLinkIds = $produk->links->pluck('id_link_produk')->toArray();
+        $sentLinkIds = array_filter($request->link_id ?? []);
+        $deleteLinkIds = array_diff($existingLinkIds, $sentLinkIds);
+        LinkProduk::whereIn('id_link_produk', $deleteLinkIds)->delete();
 
         foreach ($request->atribut_value as $i => $value) {
 
@@ -141,6 +176,33 @@ class ProdukController extends Controller
             }
         }
 
+        foreach ($request->link_address as $i => $link) {
+
+            $linkId  = $request->link_id[$i] ?? null;
+            $imageFile = $request->file('link_image')[$i] ?? null;
+
+            if (!$link && !$imageFile) {
+                continue;
+            }
+
+            $data = [
+                'link_name'  => $request->link_name[$i] ?? null,
+                'link_address' => $link,
+            ];
+
+            if ($imageFile) {
+                $data['link_image'] = $imageFile->getClientOriginalName();
+                $data['link_image'] = $imageFile->store('link_produk', 'public');
+            }
+
+            if ($linkId) {
+                LinkProduk::find($linkId)?->update($data);
+            } else {
+                LinkProduk::create(array_merge($data, [
+                    'id_product' => $produk->id_product,
+                ]));
+            }
+        }
         return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
     }
 
@@ -201,7 +263,7 @@ class ProdukController extends Controller
 
     public function show($id)
     {
-        $produk = Product::with('details', 'creator', 'updater', 'deleter')
+        $produk = Product::with(['details', 'links', 'creator', 'updater', 'deleter'])
             ->findOrFail($id);
 
         return view('admin.produk.detail_produk', compact('produk'));
