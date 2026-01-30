@@ -4,7 +4,7 @@
         alt="Weblogo"
         src="{{ asset('img/logo/logowhite.png') }}" />
 
-    <div class="w-196 h-6.5 flex items-center gap-17 text-white mr-3.25 font-[Space_Grotesk] text-[15px] font-light">
+    <div class="w-196 h-6.5 flex items-center gap-17 text-white mr-3.25 font-sans text-base font-light">
 
         <a href="{{ route('home') }}">Home</a>
         <a href="{{ route('products') }}">Products</a>

@@ -123,7 +123,7 @@
 
         <p class="m-5 text-justify text-xl">More than just a bag, alttt.craftedgoods is your fashion icon. We present fresh, bold, and youthful designs, specifically designed to set trends, not just follow them. With carefully curated color combinations, our bags are ready to complement your look—from casual to edgy street style. So, are you ready to make your style unforgettable?</p>
 
-        <p class="m-5 text-justify text-xl">More than just a bag, alttt.craftedgoods is your fashion icon. We present fresh, bold, and youthful designs, specifically designed to set trends, not just follow them. With carefully curated color combinations, our bags are ready to complement your look—from casual to edgy street style. So, are you ready to make your style unforgettable?</p>
+        <p class="m-5 text-justify text-xl">Another more than just a bag, alttt.craftedgoods is your fashion icon. We present fresh, bold, and youthful designs, specifically designed to set trends, not just follow them. With carefully curated color combinations, our bags are ready to complement your look—from casual to edgy street style. So, are you ready to make your style unforgettable?</p>
     </div>
 </div>
 @endsection

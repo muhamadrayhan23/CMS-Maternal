@@ -3,7 +3,7 @@
         
         <div class="flex flex-col gap-6">
             <h3 class="text-xl font-bold">Let us know!</h3>
-            <div class="text-lg leading-relaxed">
+            <div class="text-base leading-relaxed">
                 <p class="mb-4">Call :<br>+62 87789765</p>
                 <p class="mb-4">Location :<br>Jl. Nataendah No.55</p>
                 <p>Email :<br>alttt.@craftedgoods_</p>
@@ -12,7 +12,7 @@
 
         <div class="flex flex-col gap-9">
             <h3 class="text-xl font-bold">Menu</h3>
-            <ul class="flex flex-col gap-6 text-lg">
+            <ul class="flex flex-col gap-6 text-base">
                 <li><a href="#" class="hover:underline">Home</a></li>
                 <li><a href="#" class="hover:underline">Products</a></li>
                 <li><a href="#" class="hover:underline">About Us</a></li>
@@ -48,10 +48,10 @@
         </div>
     </div>
 
-    <div class="w-full h-px bg-white/30 mb-8"></div>
+    <div class="w-full h-px bg-white/30 mb-6"></div>
 
-    <div class="text-center">
-        <p class="text-lg opacity-90">
+    <div class="text-center mb-0">
+        <p class="text-sm opacity-90">
             All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
         </p>
     </div>

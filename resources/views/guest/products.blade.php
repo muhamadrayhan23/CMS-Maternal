@@ -1,13 +1,34 @@
 @extends('layout.guest')
 
 @section('content')
-<h1 class="mx-6 font-sans text-2xl tracking-wide whitespace-nowrap">
-    OUR PRODUCTS
-</h1>
 
-<span class="flex-1 h-px bg-gray-300"></span>
+<div class="rounded-xl p-10 py-4">
+    <form action="{{ route('products') }}" method="GET"
+        class="flex flex-col md:flex-row md:items-center gap-3">
+
+        <input type="text"
+            name="search"
+            placeholder="Search Products Here..."
+            value="{{ request('search') }}"
+            class="border px-4 py-2 flex-1 rounded-lg">
+
+        <select name="sort"
+            onchange="this.form.submit()"
+            class="border px-3 py-2 rounded-lg">
+            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>
+                Price: High to low
+            </option>
+            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>
+                Price: Low to high
+            </option>
+        </select>
+
+    </form>
 </div>
+
+
 <div id="product-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 m-10">
+
     @foreach ($products as $product)
     <div class="aspect-square">
 
