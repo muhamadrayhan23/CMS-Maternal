@@ -27,7 +27,7 @@ class ProdukController extends Controller
             $query->where('is_active', $request->status);
         }
 
-        $produk = $query->paginate(5)->withQueryString();;
+        $produk = $query->paginate(10)->withQueryString();;
 
         return view('admin.produk.kelola_produk', compact('produk'));
     }
@@ -43,6 +43,10 @@ class ProdukController extends Controller
                 $q->where('product_name', 'like', "%{$search}%")
                     ->orWhere('desc', 'like', "%{$search}%");
             });
+        }
+
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
         }
 
         $produk = $query->paginate(10);

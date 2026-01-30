@@ -1,5 +1,6 @@
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@extends('layout.app')
 @section('title', isset($produk) ? 'Update Product' : 'Save Product')
-@include('layout.sidebarAdmin')
 
 <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
     <div class="p-10"> @yield('content') </div>
