@@ -34,7 +34,7 @@
 
         @if ($product->details->count())
         <img
-            src="{{ asset($product->details->first()->image_product) }}"
+            src="{{ asset('storage/produk' . $product->details->first()->image_product) }}"
             class="w-full h-full object-cover rounded-lg">
         @else
         <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
