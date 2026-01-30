@@ -2,11 +2,11 @@
 @extends('layout.admin')
 
 @section('content')
-    <div class="space-y-4">
+    <div class="space-y-4 font-sans">
         <div class="flex items-center justify-between">
             <div class="max-w-7xl mx-auto w-full">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-                    <h3 class="text-xl font-bold font-[Space_Grotesk]">MANAGE PRODUCTS</h3>
+                    <h3 class="text-xl font-bold font-sans">MANAGE PRODUCTS</h3>
                     <div class="flex flex-wrap gap-2">
                         <div class="flex flex-wrap gap-2">
                             <a href="{{ route('produk.restore') }}"

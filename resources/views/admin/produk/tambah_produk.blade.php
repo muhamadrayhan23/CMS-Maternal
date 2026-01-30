@@ -1,4 +1,4 @@
-<<<<<<< HEAD @vite(['resources/css/app.css', 'resources/js/app.js']) @extends('layout.app') @section('title', isset($produk) ? 'Update Product' : 'Save Product' )
+@vite(['resources/css/app.css', 'resources/js/app.js']) @extends('layout.app') @section('title', isset($produk) ? 'Update Product' : 'Save Product' )
     <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
     <div class="p-10"> @yield('content') </div>
     <div class="card">
@@ -156,7 +156,6 @@
             btn.closest('.link-row').remove();
         }
     </script>
-    <<<<<<< HEAD=======</html>
+   </html>
 
     @endsection
-    >>>>>>> 7ae7fb551396d7b7782b3fdf10eb57359f0ec690
