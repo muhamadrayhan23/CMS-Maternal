@@ -6,7 +6,7 @@
         @if ($product->details->count())
         <a href="">
             <img
-                src="{{ asset('storage/produk' . $product->details->first()->image_product) }}"
+                src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                 class="w-full h-full object-cover rounded-lg">
         </a>
         @else
