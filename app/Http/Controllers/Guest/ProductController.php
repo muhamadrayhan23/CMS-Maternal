@@ -27,7 +27,11 @@ class ProductController extends Controller
             $query->orderBy('price', 'asc');
         }
 
-        $products = $query->paginate(12);
+        $products = $query->where('is_active', true)->paginate(12);
+
+        if($request->ajax()) {
+            return view('guest.searchProducts', compact('products'));
+        }
 
         return view('guest.products', compact('products'));
     }
