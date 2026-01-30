@@ -62,7 +62,7 @@
   
 
         {{-- {{-- CARD BANNER --} --}}
-    <div id="bannerContainer" class="mt-5">
+        <div id="bannerContainer" class="mt-5">
             @include('admin.banner.search_cardH')
         </div>
     
