@@ -1,6 +1,6 @@
-{{-- @extends('admin.produk.layout.main')
+ @extends('layout.admin')
 
-@section('content') --}}
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-@include('layout.sidebarAdmin')
 
 <body>
     <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
@@ -137,5 +136,4 @@
 
 </html>
 
-
-{{-- @endsection --}}
+@endsection
