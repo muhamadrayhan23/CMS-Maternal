@@ -126,8 +126,9 @@
             </div>
 
             {{-- User & Logout --}}
-            <div class="border border-[#D9DEE3] rounded-lg p-1 flex items-center justify-between ">
-                <form action="{{ route('logout') }}" method="POST" class="flex items-center w-full">
+            <div class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between">
+                <p class="font-semibold text-xs px-3 truncate max-w-35">{{ auth()->user()->email }}</p>
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
                     <button type="submit"
                         class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group">

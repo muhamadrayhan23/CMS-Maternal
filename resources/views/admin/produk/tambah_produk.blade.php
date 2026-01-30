@@ -1,8 +1,5 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
-@extends('layout.app')
-@section('title', isset($produk) ? 'Update Product' : 'Save Product')
-
-<main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
+<<<<<<< HEAD @vite(['resources/css/app.css', 'resources/js/app.js']) @extends('layout.app') @section('title', isset($produk) ? 'Update Product' : 'Save Product' )
+    <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
     <div class="p-10"> @yield('content') </div>
     <div class="card">
         <div class="card-header">
@@ -115,10 +112,10 @@
             </div>
         </form>
     </div>
-</main>
-<script>
-    function addRow() {
-        document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
+    </main>
+    <script>
+        function addRow() {
+            document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
             <div class="detail-row border p-3 mb-3 rounded">
                 <input type="hidden" name="detail_id[]" value="">
                 <div class="mb-2">
@@ -137,14 +134,14 @@
                         onclick="removeRow(this)">✖ Remove</button>
             </div>
         `);
-    }
+        }
 
-    function removeRow(btn) {
-        btn.closest('.detail-row').remove();
-    }
+        function removeRow(btn) {
+            btn.closest('.detail-row').remove();
+        }
 
-    function addLink() {
-        document.getElementById('links').insertAdjacentHTML('beforeend', `
+        function addLink() {
+            document.getElementById('links').insertAdjacentHTML('beforeend', `
             <div class="link-row mb-3 border p-2 rounded">
                 <input type="text" name="link_name[]" class="form-control mb-1" placeholder="Link Name">
                 <input type="url" name="link_address[]" class="form-control mb-1" placeholder="Link Address">
@@ -153,9 +150,13 @@
                         onclick="removeLink(this)">✖ Remove</button>
             </div>
         `);
-    }
+        }
 
-    function removeLink(btn) {
-        btn.closest('.link-row').remove();
-    }
-</script>
+        function removeLink(btn) {
+            btn.closest('.link-row').remove();
+        }
+    </script>
+    <<<<<<< HEAD=======</html>
+
+    @endsection
+    >>>>>>> 7ae7fb551396d7b7782b3fdf10eb57359f0ec690

@@ -1,55 +1,50 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@extends('layout.app')
+<<<<<<< HEAD @extends('layout.app') @section('title', 'Dashboard Admin' ) @section('content') <section
+    class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-8 mb-8">
+    <h3 class="text-2xl font-semibold mb-2">Statistic Overview</h3>
+    <p class="text-gray-300 mb-6">Your store at a glance</p>
 
-@section('title', 'Dashboard Admin')
-
-@section('content')
-
-    <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-8 mb-8">
-        <h3 class="text-2xl font-semibold mb-2">Statistic Overview</h3>
-        <p class="text-gray-300 mb-6">Your store at a glance</p>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
-            <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-                <h4 class="text-xl font-sans mb-2 font-bold">Total Products</h4>
-                <div class="text-4xl font-bold">{{ $totalProducts }}
-                    <span class="inline-block text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                        Published : {{ $publishedProducts }}
-                    </span>
-                </div>
-                <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Currently listed in the catalog</p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
+            <h4 class="text-xl font-sans mb-2 font-bold">Total Products</h4>
+            <div class="text-4xl font-bold">{{ $totalProducts }}
+                <span class="inline-block text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                    Published : {{ $publishedProducts }}
+                </span>
             </div>
-            <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-                <h4 class="text-xl font-sans mb-2 font-bold">Total Links</h4>
-                <div class="text-4xl font-bold">{{ $totalLinks }}</div>
-                <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Links available on the website</p>
-            </div>
-            <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-                <h4 class="text-xl font-sans mb-2 font-bold">Total Banners</h4>
-                <div class="text-4xl font-bold">{{ $totalBanners }}
-                    <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                        Published : {{ $publishedBanners }}
-                    </span>
-                </div>
-                <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Banners stored in the system</p>
-            </div>
-            <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-                <h4 class="text-xl font-sans mb-2"><strong>Users</strong></h4>
-                <div class="text-4xl font-bold">{{ $totalUsers }}
-                    <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                        Active :
-                    </span>
-                </div>
-                <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Users registered in the system</p>
-            </div>
+            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Currently listed in the catalog</p>
         </div>
+        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
+            <h4 class="text-xl font-sans mb-2 font-bold">Total Links</h4>
+            <div class="text-4xl font-bold">{{ $totalLinks }}</div>
+            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Links available on the website</p>
+        </div>
+        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
+            <h4 class="text-xl font-sans mb-2 font-bold">Total Banners</h4>
+            <div class="text-4xl font-bold">{{ $totalBanners }}
+                <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                    Published : {{ $publishedBanners }}
+                </span>
+            </div>
+            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Banners stored in the system</p>
+        </div>
+        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
+            <h4 class="text-xl font-sans mb-2"><strong>Users</strong></h4>
+            <div class="text-4xl font-bold">{{ $totalUsers }}
+                <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
+                    Active :
+                </span>
+            </div>
+            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Users registered in the system</p>
+        </div>
+    </div>
     </section>
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div class="bg-white rounded-2xl p-6 shadow-md">
             <div class="flex items-center gap-3 mb-4">
                 <a href="{{ route('produk.index') }}">
-                    <svg class="w-6 h-6 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 20 20">
+                    <svg class="w-6 h-6 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 20 20">
                         <path fill="currentColor"
                             d="M8 1V0v1Zm4 0V0v1Zm2 4v1h1V5h-1ZM6 5H5v1h1V5Zm2-3h4V0H8v2Zm4 0a1 1 0 0 1 .707.293L14.121.879A3 3 0 0 0 12 0v2Zm.707.293A1 1 0 0 1 13 3h2a3 3 0 0 0-.879-2.121l-1.414 1.414ZM13 3v2h2V3h-2Zm1 1H6v2h8V4ZM7 5V3H5v2h2Zm0-2a1 1 0 0 1 .293-.707L5.879.879A3 3 0 0 0 5 3h2Zm.293-.707A1 1 0 0 1 8 2V0a3 3 0 0 0-2.121.879l1.414 1.414ZM2 6h16V4H2v2Zm16 0h2a2 2 0 0 0-2-2v2Zm0 0v12h2V6h-2Zm0 12v2a2 2 0 0 0 2-2h-2Zm0 0H2v2h16v-2ZM2 18H0a2 2 0 0 0 2 2v-2Zm0 0V6H0v12h2ZM2 6V4a2 2 0 0 0-2 2h2Zm16.293 3.293C16.557 11.029 13.366 12 10 12c-3.366 0-6.557-.97-8.293-2.707L.293 10.707C2.557 12.971 6.366 14 10 14c3.634 0 7.444-1.03 9.707-3.293l-1.414-1.414ZM10 9v2a2 2 0 0 0 2-2h-2Zm0 0H8a2 2 0 0 0 2 2V9Zm0 0V7a2 2 0 0 0-2 2h2Zm0 0h2a2 2 0 0 0-2-2v2Z" />
                     </svg>
