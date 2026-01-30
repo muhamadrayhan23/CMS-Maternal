@@ -40,6 +40,7 @@
                     @if (isset($produk) && $produk->links->count())
                         @foreach ($produk->links as $link)
                             <div class="link-row mb-3 border p-2 rounded">
+                                <input type="hidden" name="link_id[]" value="{{ $link->id_link_produk }}">
                                 <input type="text" name="link_name[]" class="form-control mb-1"
                                     value="{{ $link->link_name }}" placeholder="Link Name">
 

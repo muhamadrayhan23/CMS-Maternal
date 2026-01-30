@@ -63,7 +63,8 @@ class ProdukController extends Controller
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
-        $product['is_active'] = $request->boolean('is_active');
+        $product->is_active = $request->boolean('is_active');
+        $product->save();
 
         if ($request->atribut_value) {
             foreach ($request->atribut_value as $i => $value) {
@@ -136,6 +137,16 @@ class ProdukController extends Controller
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),
         ]);
+
+        $existingDetailIds = $produk->details->pluck('id')->toArray();
+        $sentDetailIds = array_filter($request->detail_id ?? []);
+        $deleteDetailIds = array_diff($existingDetailIds, $sentDetailIds);
+        ProdukDetail::whereIn('id', $deleteDetailIds)->delete();
+
+        $existingLinkIds = $produk->links->pluck('id_link_produk')->toArray();
+        $sentLinkIds = array_filter($request->link_id ?? []);
+        $deleteLinkIds = array_diff($existingLinkIds, $sentLinkIds);
+        LinkProduk::whereIn('id_link_produk', $deleteLinkIds)->delete();
 
         foreach ($request->atribut_value as $i => $value) {
 
