@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Dashboard')</title>
@@ -120,7 +121,7 @@
                 <p class="text-xs text-gray-500 mb-3">View the live version of the website.</p>
                 <a href="#" target="_blank"
                     class="block text-center bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-900 transition-colors">
-                Visit Landing page
+                    Visit Landing page
                 </a>
             </div>
 
@@ -128,7 +129,8 @@
             <div class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between">
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
-                    <button type="submit" class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group">
+                    <button type="submit"
+                        class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group">
                         <p class="font-semibold text-sm px-2 py-2 truncate ">{{ auth()->user()->email }}</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
