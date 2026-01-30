@@ -122,7 +122,7 @@
                     <tr class="text-left text-gray-600 font-bold">
                         <th class="p-4">Product</th>
                         <th class="p-4">Description</th>
-                        <th class="p-4">Harga</th>
+                        <th class="p-4">Price</th>
                         <th class="p-4">Link</th>
                         <th class="p-4">Image</th>
                         <th class="p-4 text-center">Status</th>

@@ -120,7 +120,8 @@ class ProdukController extends Controller
 
     public function edit($id)
     {
-        $produk = Product::with(['details', 'links'])->latest();
+        $produk = Product::with(['details', 'links'])
+            ->findOrFail($id);
         return view('admin.produk.tambah_produk', compact('produk'));
     }
 
