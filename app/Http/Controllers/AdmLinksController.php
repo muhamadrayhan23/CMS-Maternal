@@ -92,4 +92,14 @@ class AdmLinksController extends Controller
         return redirect()->route('homeLink')
             ->with('success', 'Link berhasil dihapus');
     }
+
+    //toggle toggle an
+    public function toggle(Link $link)
+    {
+        $link->update([
+            'is_active' => ! $link->is_active
+        ]);
+
+        return back();
+    }
 }
