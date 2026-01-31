@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::query();
+        $query = Product::with(['details', 'links'])->latest();
 
         if ($request->search) {
             $query->where('product_name', 'like', '%' . $request->search . '%');

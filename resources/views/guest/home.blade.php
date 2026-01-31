@@ -1,5 +1,6 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.guest')
+
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 
 @section('content')
 
@@ -75,8 +76,7 @@
     <div class="aspect-square">
 
         @if ($product->details->count())
-        <img
-                src="{{ asset('storage/produk' . $product->details->first()->image_product) }}"
+        <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                 class="w-full h-full object-cover rounded-lg">
         @else
         <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
