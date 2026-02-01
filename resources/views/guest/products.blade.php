@@ -7,51 +7,31 @@
         class="flex flex-col md:flex-row md:items-center gap-3">
 
         <input type="text"
+            id="liveSearch"
             name="search"
             placeholder="Search Products Here..."
             value="{{ request('search') }}"
             class="border px-4 py-2 flex-1 rounded-lg">
 
         <select name="sort"
-            onchange="this.form.submit()"
-            class="border px-3 py-2 rounded-lg">
+            id="filterStatus"
+            class="border px-3 py-2 rounded-lg"
+            placeholder="Sort by Price">
             <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>
-                Price: High to low
+                High to low
             </option>
             <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>
-                Price: Low to high
+                Low to high
             </option>
         </select>
 
     </form>
 </div>
 
-
-<div id="product-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 m-10">
-
-    @foreach ($products as $product)
-    <div class="aspect-square">
-
-        @if ($product->details->count())
-        <img
-            src="{{ asset($product->details->first()->image_product) }}"
-            class="w-full h-full object-cover rounded-lg">
-        @else
-        <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
-            No Image
-        </div>
-        @endif
-
-        <h3 class="mt-3 font-semibold text-lg text-center">
-            {{ $product->product_name }}
-        </h3>
-
-        <p class="mt-2 font-bold text-center">
-            Rp {{ number_format($product->price) }}
-        </p>
-    </div>
-    @endforeach
+<div id="card-product" class="mt-10">
+    @include('guest.searchProducts')
 </div>
+
 <div class="flex justify-center mt-10 mb-20">
     <a href="#"
         class="flex px-8 py-3 border rounded-full hover:bg-[#1A1A1A] hover:text-white transition gap-2">
@@ -62,4 +42,27 @@
         See More
     </a>
 </div>
+
+<script>
+    const searchInput = document.getElementById('liveSearch');
+    const container = document.getElementById('card-product');
+    const sortSelect = document.getElementById('filterStatus');
+
+    function fetchProducts() {
+        const search = searchInput.value;
+        const sort = sortSelect.value;
+
+        fetch(`{{ route('products') }}?search=${search}&sort=${sort}`, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest'}
+        })
+        .then(response => response.text())
+        .then(data => {
+            container.innerHTML = data;
+        });
+    }
+
+searchInput.addEventListener('input', fetchProducts);
+
+sortSelect.addEventListener('change', fetchProducts);
+</script>
 @endsection

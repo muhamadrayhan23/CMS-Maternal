@@ -29,16 +29,16 @@
                         fill="none">
                         <path
                             d="M7.125 2.375H3.167a.792.792 0 0 0-.792.792v5.541c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792V3.167a.792.792 0 0 0-.792-.792Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
                         <path
                             d="M15.833 2.375h-3.958a.792.792 0 0 0-.792.792v2.375c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792V3.167a.792.792 0 0 0-.792-.792Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
                         <path
                             d="M15.833 9.5h-3.958a.792.792 0 0 0-.792.792v5.541c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792v-5.541a.792.792 0 0 0-.792-.792Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
                         <path
                             d="M7.125 12.667H3.167a.792.792 0 0 0-.792.791v2.375c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792v-2.375a.792.792 0 0 0-.792-.791Z"
-                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <span>Dashboard</span>
                 </a>
@@ -49,7 +49,7 @@
                 <a href="{{ route('produk.index') }}"
                     class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M12 12h.01" />
                         <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
@@ -64,7 +64,7 @@
             <li class="mb-2">
                 <a href="{{ route('Bhome') }}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="m20 13.7-2.1-2.1a2 2 0 0 0-2.8 0L9.7 17" />
                         <path
@@ -79,7 +79,7 @@
             <li class="mb-2">
                 <a href="{{ route('homeLink') }}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M9 17H7A5 5 0 0 1 7 7h2" />
                         <path d="M15 7h2a5 5 0 1 1 0 10h-2" />
@@ -93,7 +93,7 @@
             <li class="mb-2">
                 <a href="#" class="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                         <path d="M16 3.128a4 4 0 0 1 0 7.744" />
@@ -127,7 +127,6 @@
 
             {{-- User & Logout --}}
             <div class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between">
-                <p class="font-semibold text-xs px-3 truncate max-w-35">{{ auth()->user()->email }}</p>
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
                     <button type="submit"

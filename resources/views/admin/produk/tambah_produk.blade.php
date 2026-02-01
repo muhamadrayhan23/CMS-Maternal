@@ -2,7 +2,6 @@
 @extends('layout.admin')
 
 @section('content')
-
     <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
         <div class="p-10">
             <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
@@ -155,3 +154,5 @@
             btn.parentElement.remove()
         }
     </script>
+
+    @endsection
