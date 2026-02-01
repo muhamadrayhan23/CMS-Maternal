@@ -95,21 +95,35 @@
                             class="md:col-span-9 px-4 py-2 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400"
                             oninput="submitFilter()">
 
-                        <div class="md:col-span-3 flex gap-2">
-                            <select name="status"
-                                class="flex-1 px-4 py-2 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400"
-                                onchange="filterForm.submit()">
-                                <option value="">Sort</option>
-                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published</option>
-                                <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpublished
-                                </option>
-                            </select>
+                        <div class="md:col-span-3 flex gap-2 justify-center">
+                            <div class="relative flex-1">
+                                <select name="status"
+                                    class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
+                                    onchange="filterForm.submit()">
+                                    <option value="">Show All</option>
+                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published
+                                    </option>
+                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>
+                                        Unpublished
+                                    </option>
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check">
+                                        <path
+                                            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </div>
+                            </div>
+
                             <a href="{{ route('produk.restore') }}"
-                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100">
-                                Reset
+                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
+                                All Product
                             </a>
                         </div>
-                    </div>
                 </form>
 
                 @if (session('success'))
@@ -128,6 +142,7 @@
                                 <th class="p-4 w-56">Description</th>
                                 <th class="p-4 w-32">Price</th>
                                 <th class="p-4 w-28 text-center">Image</th>
+                                <th class="p-4 w-32 text-center">Status</th>
                                 <th class="p-4 w-20 text-center">Action</th>
                             </tr>
                         </thead>
@@ -164,6 +179,17 @@
                                         @else
                                             -
                                         @endif
+                                    </td>
+
+                                    <td class="p-4 text-center">
+                                        <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button
+                                                class="px-3 py-1 text-xs rounded-full {{ $p->is_active ? 'bg-green-500 text-green-800' : 'bg-red-400 text-red-800' }}">
+                                                {{ $p->is_active ? 'Published' : 'Unpublished' }}
+                                            </button>
+                                        </form>
                                     </td>
 
                                     <td class="p-4 relative overflow-visible text-center">
