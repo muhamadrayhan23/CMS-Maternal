@@ -94,19 +94,32 @@
                             class="md:col-span-9 px-4 py-2 rounded bg-white text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
                             oninput="submitFilter()">
 
-                        <div class="md:col-span-3 flex gap-2">
-                            <select name="status"
-                                class="flex-1 px-4 py-2 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
-                                onchange="filterForm.submit()">
-                                <option value="">Sort</option>
-                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published</option>
-                                <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpublished
-                                </option>
-                            </select>
+                        <div class="md:col-span-3 flex gap-2 justify-center">
+                            <div class="relative flex-1">
+                                <select name="status"
+                                    class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
+                                    onchange="filterForm.submit()">
+                                    <option value="">Show All</option>
+                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published
+                                    </option>
+                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpublished
+                                    </option>
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check">
+                                        <path
+                                            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </div>
+                            </div>
 
                             <a href="{{ route('produk.kelola_card') }}"
                                 class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
-                                Reset
+                                All Product
                             </a>
                         </div>
                     </div>
@@ -138,8 +151,6 @@
                             @endif
 
                             <div class="p-4 flex flex-col flex-1">
-
-                                <!-- HEADER: JUDUL + MENU -->
                                 <div class="flex items-start justify-between gap-3 mb-2">
 
                                     <h4 class="font-bold text-xl line-clamp-1">
@@ -154,6 +165,36 @@
 
                                         <div
                                             class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50">
+
+                                            <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button
+                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                    @if ($p->is_active)
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"height="18"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-circle-minus-icon lucide-circle-minus">
+                                                            <circle cx="12" cy="12" r="10" />
+                                                            <path d="M8 12h8" />
+                                                        </svg>
+                                                        <span>Unpublish</span>
+                                                    @else
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                            height="18" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-circle-plus-icon lucide-circle-plus">
+                                                            <circle cx="12" cy="12" r="10" />
+                                                            <path d="M8 12h8" />
+                                                            <path d="M12 8v8" />
+                                                        </svg>
+                                                        <span>Publish</span>
+                                                    @endif
+                                                </button>
+                                            </form>
 
                                             <button onclick="toggleSubMenu(this)"
                                                 class="block w-full text-left px-3 py-2 hover:bg-gray-100">

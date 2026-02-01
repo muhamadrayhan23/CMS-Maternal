@@ -106,9 +106,10 @@
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                @foreach ($latestBanners as $banner)
-                    <img src="{{ asset('storage/' . $banner->image) }}"
-                        class="rounded-xl object-cover h-40 w-full shadow-sm">
+                @foreach ($latestBanners as $b)
+                    <img src="{{ asset($b->banner_image) }}"
+                        class="w-full h-full object-cover 
+                   {{ $loop->first ? 'border rounded' : '' }}">
                 @endforeach
             </div>
         </div>
