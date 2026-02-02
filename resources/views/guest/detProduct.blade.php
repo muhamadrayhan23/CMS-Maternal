@@ -64,4 +64,35 @@
     </div>
 
 </div>
+
+<div class="flex items-center ml-25 mb-10">
+
+    <h1 class="mx-6 font-sans text-2xl tracking-wide whitespace-nowrap ml-10">
+        WE PRESENT
+    </h1>
+
+    <span class="flex-1 h-px bg-gray-300"></span>
+</div>
+
+<div id="product-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 m-10">
+
+    @foreach ($products as $product)
+    <div class="aspect-square">
+
+        <a href="{{ route('detproduct',  $product->id_product) }}">
+            <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
+                class="w-full h-full object-cover rounded-lg">
+        </a>
+
+        <h3 class="mt-3 font-semibold text-lg text-center">
+            {{ $product->product_name }}
+        </h3>
+
+        <p class="mt-2 font-bold text-center">
+            Rp {{ number_format($product->price) }}
+        </p>
+    </div>
+    @endforeach
+</div>
+
 @endsection

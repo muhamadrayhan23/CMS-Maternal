@@ -123,7 +123,7 @@
     <div class="">
         <div class="flex items-center justify-between">
             <h1 class="ml-5 text-5xl font-bold">THE STORY BEHIND</h1>
-            <a href="#"
+            <a href="{{ route('about') }}"
                 class="flex gap-3 mr-5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
                     <path d="M18 8L22 12L18 16" />

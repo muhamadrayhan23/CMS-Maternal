@@ -1,5 +1,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
+@section('title', 'Product - List View')
 
 @section('content')
     <div class="space-y-4 font-sans">
@@ -83,7 +84,7 @@
                                     <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737"
                                         stroke-width="1.7" stroke="currentColor" stroke-linejoin="round" />
                                 </svg>
-                                <span class="font-[Space_Grotesk]">Add Product</span>
+                                <span class="font-[Space_Grotesk]">Add New Product</span>
                             </a>
                         </div>
                     </div>
@@ -96,6 +97,10 @@
                             oninput="submitFilter()">
 
                         <div class="md:col-span-3 flex gap-2 justify-center">
+                            <a href="{{ route('produk.index') }}"
+                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
+                                All Product
+                            </a>
                             <div class="relative flex-1">
                                 <select name="status"
                                     class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
@@ -118,11 +123,6 @@
                                     </svg>
                                 </div>
                             </div>
-
-                            <a href="{{ route('produk.index') }}"
-                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
-                                All Product
-                            </a>
                         </div>
                     </div>
                 </form>
@@ -136,19 +136,19 @@
                     <table class="w-full text-sm table-fixed">
 
                         <thead>
-                            <tr class="text-left text-gray-600 font-bold font-[Space_Grotesk]">
+                            <tr class="text-center text-gray-600 font-bold font-[Space_Grotesk]">
                                 <th class="p-4 w-40">Product</th>
                                 <th class="p-4 w-48">Description</th>
                                 <th class="p-4 w-32">Price</th>
                                 <th class="p-4 w-44">Link</th>
                                 <th class="p-4 w-24">Image</th>
-                                <th class="p-4 w-32 text-center">Status</th>
-                                <th class="p-4 w-20 text-center">Action</th>
+                                <th class="p-4 w-32">Status</th>
+                                <th class="p-4 w-15">Action</th>
                             </tr>
                         </thead>
 
-                        <tbody class="text-gray-700 font-[Space_Grotesk]">
-                            @foreach ($produk as $p)
+                        <tbody class="text-gray-700 font-[Space_Grotesk] text-center">
+                            @forelse ($produk as $p)
                                 <tr class="hover:bg-gray-50 transition">
 
                                     <td class="p-4 font-medium">{{ $p->product_name }}</td>
@@ -206,14 +206,10 @@
                                     </td>
 
                                     <td class="p-4 text-center">
-                                        <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button
-                                                class="px-3 py-1 text-xs rounded-full {{ $p->is_active ? 'bg-green-500 text-green-800' : 'bg-red-400 text-red-800' }}">
-                                                {{ $p->is_active ? 'Published' : 'Unpublished' }}
-                                            </button>
-                                        </form>
+                                        <span
+                                            class="px-3 py-1 text-xs rounded-full {{ $p->is_active ? 'bg-green-500 text-green-800' : 'bg-red-400 text-red-800' }}">
+                                            {{ $p->is_active ? 'Published' : 'Unpublished' }}
+                                        </span>
                                     </td>
 
                                     <td class="p-4 relative overflow-visible text-center">
@@ -223,7 +219,7 @@
                                         </button>
 
                                         <ul
-                                            class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-xl">
+                                            class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-xl text-left">
                                             <li>
                                                 <form action="{{ route('produk.toggle', $p->id_product) }}"
                                                     method="POST">
@@ -267,7 +263,7 @@
                                                     method="POST">
                                                     @csrf @method('DELETE')
                                                     <button type="submit"
-                                                        class="w-full px-3 py-2 hover:bg-gray-100 text-center"
+                                                        class="w-full px-3 py-2 hover:bg-gray-100 text-left"
                                                         onclick="return confirm('Hapus produk?')">
                                                         Delete
                                                     </button>
@@ -281,9 +277,24 @@
 
                                         </ul>
                                     </td>
-
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="8"
+                                        class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
+                                        @if (request('search'))
+                                            <span class="font-bold">"{{ request('search') }}"</span> not found
+                                        @elseif(request()->filled('status'))
+                                            There is no Product with status
+                                            <span class="font-bold">
+                                                {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
+                                            </span>
+                                        @else
+                                            There are no Product available yet
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

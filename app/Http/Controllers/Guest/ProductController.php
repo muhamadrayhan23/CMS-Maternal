@@ -43,8 +43,10 @@ class ProductController extends Controller
     {
         $product = Product::with(['details', 'links'])
             ->findOrFail($id);
+        
+        $products = Product::with(['details', 'links']);
 
-        return view('guest.detProduct', compact('product'));
+        return view('guest.detProduct', compact('product', 'products'));
     }
 
     /**
