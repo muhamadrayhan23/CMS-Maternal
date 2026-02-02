@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::query();
+        $query = Product::with(['details', 'links']);
 
         if ($request->search) {
             $query->where('product_name', 'like', '%' . $request->search . '%');
@@ -27,7 +27,11 @@ class ProductController extends Controller
             $query->orderBy('price', 'asc');
         }
 
-        $products = $query->paginate(12);
+        $products = $query->where('is_active', true)->paginate(10)->withQueryString();
+
+        if($request->ajax()) {
+            return view('guest.searchProducts', compact('products'));
+        }
 
         return view('guest.products', compact('products'));
     }

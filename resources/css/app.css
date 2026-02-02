@@ -9,6 +9,9 @@
   --font-sans: 'Space Grotesk', ui-sans-serif, system-ui;
 }
 
+@theme {
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui;
+}
 @tailwind base;
 @tailwind utilities;
 @tailwind utilities;

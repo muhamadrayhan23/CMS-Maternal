@@ -1,6 +1,7 @@
 {{-- Sidebar Container Utama --}}
-<div class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
-    
+<div
+    class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
+
     {{--  BAGIAN LOGO --}}
     <div class="flex items-center justify-center h-16">
         <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
@@ -12,10 +13,18 @@
         <li class="mb-2">
             <a href="{{ route('dashboardadmin') }}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
-                    <path d="M7.125 2.375H3.167a.792.792 0 0 0-.792.792v5.541c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792V3.167a.792.792 0 0 0-.792-.792Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15.833 2.375h-3.958a.792.792 0 0 0-.792.792v2.375c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792V3.167a.792.792 0 0 0-.792-.792Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15.833 9.5h-3.958a.792.792 0 0 0-.792.792v5.541c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792v-5.541a.792.792 0 0 0-.792-.792Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M7.125 12.667H3.167a.792.792 0 0 0-.792.791v2.375c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792v-2.375a.792.792 0 0 0-.792-.791Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path
+                        d="M7.125 2.375H3.167a.792.792 0 0 0-.792.792v5.541c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792V3.167a.792.792 0 0 0-.792-.792Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M15.833 2.375h-3.958a.792.792 0 0 0-.792.792v2.375c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792V3.167a.792.792 0 0 0-.792-.792Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M15.833 9.5h-3.958a.792.792 0 0 0-.792.792v5.541c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792v-5.541a.792.792 0 0 0-.792-.792Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M7.125 12.667H3.167a.792.792 0 0 0-.792.791v2.375c0 .437.355.792.792.792h3.958a.792.792 0 0 0 .792-.792v-2.375a.792.792 0 0 0-.792-.791Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 <span>Dashboard</span>
             </a>
@@ -24,9 +33,12 @@
         {{-- Produk --}}
         <li class="mb-2">
             <a href="{{ route('produk.index') }}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                    <path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 12h.01" />
+                    <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                    <path d="M22 13a18.15 18.15 0 0 1-20 0" />
+                    <rect width="20" height="14" x="2" y="6" rx="2" />
                 </svg>
                 <span>Products</span>
             </a>
@@ -35,9 +47,11 @@
         {{-- Banner --}}
         <li class="mb-2">
             <a href="{{ route('Bhome') }}" class="flex items-center gap-3 p-2 pb-3 hover:bg-gray-100 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m20 13.7-2.1-2.1a2 2 0 0 0-2.8 0L9.7 17"/>
-                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><circle cx="10" cy="8" r="2"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m20 13.7-2.1-2.1a2 2 0 0 0-2.8 0L9.7 17" />
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+                    <circle cx="10" cy="8" r="2" />
                 </svg>
                 <span>Banners</span>
             </a>
@@ -55,10 +69,13 @@
 
         {{-- User --}}
         <li class="mb-2">
-            <a href="#" class="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/>
+            <a href="{{ route('homeUser') }}" class="flex items-center gap-3 p-2 hover:bg-gray-100 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <circle cx="9" cy="7" r="4" />
                 </svg>
                 <span>Users</span>
             </a>
@@ -71,13 +88,15 @@
         <div class="border border-[#D9DEE3] rounded-xl p-3 bg-gray-50">
             <div class="flex items-center justify-between mb-2">
                 <h3 class="font-semibold text-sm">Quick access</h3>
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                 </svg>
             </div>
             <p class="text-xs text-gray-500 mb-3">View the live version of the website.</p>
-            <a href="#" target="_blank" class="block text-center bg-gray-700 text-white py-1 rounded-lg hover:bg-gray-900 transition-colors">
+            <a href="#" target="_blank"
+                class="block text-center bg-gray-700 text-white py-1 rounded-lg hover:bg-gray-900 transition-colors">
                 Click Here
             </a>
         </div>
@@ -88,11 +107,15 @@
             <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                 @csrf
                 <button type="submit" class="text-gray-500 hover:text-red-600 transition-colors p-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m16 17 5-5-5-5" />
+                        <path d="M21 12H9" />
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                     </svg>
                 </button>
             </form>
         </div>
     </div>
-</div> 
+</div>

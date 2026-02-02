@@ -48,4 +48,9 @@ class Product extends Model
     {
         return $this->hasMany(ProdukDetail::class, 'id_product', 'id_product');
     }
+
+    public function links()
+    {
+        return $this->hasMany(LinkProduk::class, 'id_product', 'id_product');
+    }
 }
