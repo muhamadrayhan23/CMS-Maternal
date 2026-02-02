@@ -2,45 +2,132 @@
 
 @section('content')
 
+<section class="w-full py-12">
+    <h2 class="text-center text-sm tracking-widest mb-8">
+        EXPLORE LINK
+    </h2>
 
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-center text-2xl font-bold tracking-[0.2em] mb-12 uppercase">
-            Explore Link
-        </h2>
+    <div
+        id="linktree"
+        class="flex gap-6 overflow-x-auto px-10 snap-x snap-mandatory scrollbar-hide"
+    >
 
-        <div class="flex overflow-x-auto gap-8 pb-10 hide-scroll-bar snap-x snap-mandatory">
-{{-- --- instagram --- --}}
-            <a href="https://instagram.com/akun_kamu" target="_blank" class="flex-none w-[300px] snap-center group">
-    <div class="flex items-center gap-3 mb-4">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="w-6 h-6" alt="IG">
-        <span class="font-semibold text-lg group-hover:text-blue-600 transition">Instagram</span>
-    </div>
-
-    <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-md group-hover:shadow-xl transition-all duration-300">
-        <img src="{{ asset('img/linktree/instagram.jpeg') }}" alt="Preview" class="w-full h-auto object-cover">
-    </div>
-</a>
-
-{{-- --- Shopee --- --}}
-<a href="https://shopee.co.id/nama_tokomu" target="_blank" class="flex-none w-[300px] snap-center group">
-
-    <div class="flex items-center gap-3 mb-4">
-      <div class="flex items-center gap-3 mb-4">
-          <img src="{{ asset('img/linktree/logo/shopee-logo.png') }}" class="w-8 h-8 object-contain" alt="Logo">
-     </div>
-        <span class="font-bold text-lg group-hover:text-[#EE4D2D] transition-colors duration-300">Shopee</span>
-    </div>
-
-    <div class="rounded-2xl overflow-hidden border-2 border-transparent shadow-md group-hover:border-[#EE4D2D] group-hover:shadow-orange-100 transition-all duration-300">
-        <img src="{{ asset('img/linktree/instagram.jpeg') }}"
-             alt="Shopee Preview"
-             class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500">
-    </div>
-
-</a>
+        {{-- Shopee --}}
+        <div
+            onclick="goToLink('https://shopee.com')"
+            class="snap-center flex-shrink-0 w-64 transition-all duration-300 link-item"
+        >
+            <div class="flex items-center gap-2 text-xs mb-2">
+                <img src="/icons/tokopedia.svg" class="w-4 h-4">
+                <span>Tokopedia</span>
             </div>
+
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="{{ asset('img/linktree/shopee.jpeg') }}" class="w-full">
+            </div>
+        </div>
+
+        {{-- -- Instagram -- --}}
+        <div
+            onclick="goToLink('https://instagram.com')"
+            class="snap-center flex-shrink-0 w-64 transition-all duration-300 link-item"
+        >
+            <div class="flex items-center gap-2 text-xs mb-2">
+                <img src="/icons/instagram.svg" class="w-4 h-4">
+                <span>Instagram</span>
+            </div>
+
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full">
+            </div>
+        </div>
+
+        {{-- -- Tiktok -- --}}
+        <div
+            onclick="goToLink('https://tiktok.com')"
+            class="snap-center flex-shrink-0 w-64 transition-all duration-300 link-item"
+        >
+            <div class="flex items-center gap-2 text-xs mb-2">
+                <img src="/icons/tiktok.svg" class="w-4 h-4">
+                <span>Tiktok</span>
+            </div>
+
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full">
+            </div>
+        </div>
+
+        {{-- -- Facebook -- --}}
+        <div
+            onclick="goToLink('https://tiktok.com')"
+            class="snap-center flex-shrink-0 w-64 transition-all duration-300 link-item"
+        >
+            <div class="flex items-center gap-2 text-xs mb-2">
+                <img src="/icons/tiktok.svg" class="w-4 h-4">
+                <span>Facebook</span>
+            </div>
+
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full">
+            </div>
+        </div>
+
+          {{-- -- Tokopedia -- --}}
+        <div
+            onclick="goToLink('https://tiktok.com')"
+            class="snap-center flex-shrink-0 w-64 transition-all duration-300 link-item"
+        >
+            <div class="flex items-center gap-2 text-xs mb-2">
+                <img src="/icons/tiktok.svg" class="w-4 h-4">
+                <span>Tokopedia</span>
+            </div>
+
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full">
+            </div>
+        </div>
+
+         {{-- -- Telegram -- --}}
+        <div
+            onclick="goToLink('https://tiktok.com')"
+            class="snap-center flex-shrink-0 w-64 transition-all duration-300 link-item"
+        >
+            <div class="flex items-center gap-2 text-xs mb-2">
+                <img src="/icons/tiktok.svg" class="w-4 h-4">
+                <span>Telegram</span>
+            </div>
+
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full">
+            </div>
+        </div>
+
+         {{-- -- Lazada -- --}}
+        <div
+            onclick="goToLink('https://tiktok.com')"
+            class="snap-center flex-shrink-0 w-64 transition-all duration-300 link-item"
+        >
+            <div class="flex items-center gap-2 text-xs mb-2">
+                <img src="/icons/tiktok.svg" class="w-4 h-4">
+                <span>Lazada</span>
+            </div>
+
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full">
+            </div>
+        </div>
+
     </div>
+
+    <p class="text-center text-xs mt-8 opacity-60">
+        Stay Connected With Us
+    </p>
 </section>
+
+<script>
+    function goToLink(url) {
+        window.open(url, '_blank');
+    }
+</script>
 
 @endsection

@@ -8,8 +8,8 @@
 
         <a href="{{ route('home') }}">Home</a>
         <a href="{{ route('products') }}">Products</a>
-        <a href="#">About Us</a>
-        <a href="#">Links</a>
+        <a href="{{ route(name:'about') }}">About Us</a>
+        <a href="{{ route(name:'linktree') }}">Links</a>
 
         <a href="{{ route('login') }}"
             class="flex items-center gap-2 px-4 py-2 transition">
