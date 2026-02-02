@@ -41,9 +41,6 @@
                 <h4 class="text-lg font-bold mb-1">Users</h4>
                 <div class="text-3xl md:text-4xl font-bold">
                     {{ $totalUsers }}
-                    <span class="block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded w-fit">
-                        Active
-                    </span>
                 </div>
                 <p class="text-gray-500 text-xs mt-4">Users registered in the system</p>
             </div>

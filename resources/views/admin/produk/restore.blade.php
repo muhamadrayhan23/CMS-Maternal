@@ -38,8 +38,45 @@
                             <a href="{{ route('produk.kelola_card') }}"
                                 class="inline-flex items-center gap-2 px-4 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-gray-700 text-white' : 'bg-white text-gray-800' }}">
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">...</svg>
-                                <span>Grid View</span>
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M7.03353 2.28335C7.47075 2.28335 7.8252 1.9289 7.8252 1.49168C7.8252 1.05445 7.47075 0.700012 7.03353 0.700012C6.5963 0.700012 6.24186 1.05445 6.24186 1.49168C6.24186 1.9289 6.5963 2.28335 7.03353 2.28335Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M12.5752 2.28335C13.0124 2.28335 13.3669 1.9289 13.3669 1.49168C13.3669 1.05445 13.0124 0.700012 12.5752 0.700012C12.138 0.700012 11.7835 1.05445 11.7835 1.49168C11.7835 1.9289 12.138 2.28335 12.5752 2.28335Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M1.49186 2.28335C1.92909 2.28335 2.28353 1.9289 2.28353 1.49168C2.28353 1.05445 1.92909 0.700012 1.49186 0.700012C1.05464 0.700012 0.700195 1.05445 0.700195 1.49168C0.700195 1.9289 1.05464 2.28335 1.49186 2.28335Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M7.03353 7.82501C7.47075 7.82501 7.8252 7.47057 7.8252 7.03335C7.8252 6.59612 7.47075 6.24168 7.03353 6.24168C6.5963 6.24168 6.24186 6.59612 6.24186 7.03335C6.24186 7.47057 6.5963 7.82501 7.03353 7.82501Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M12.5752 7.82501C13.0124 7.82501 13.3669 7.47057 13.3669 7.03335C13.3669 6.59612 13.0124 6.24168 12.5752 6.24168C12.138 6.24168 11.7835 6.59612 11.7835 7.03335C11.7835 7.47057 12.138 7.82501 12.5752 7.82501Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M1.49186 7.82501C1.92909 7.82501 2.28353 7.47057 2.28353 7.03335C2.28353 6.59612 1.92909 6.24168 1.49186 6.24168C1.05464 6.24168 0.700195 6.59612 0.700195 7.03335C0.700195 7.47057 1.05464 7.82501 1.49186 7.82501Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M7.03353 13.3667C7.47075 13.3667 7.8252 13.0122 7.8252 12.575C7.8252 12.1378 7.47075 11.7833 7.03353 11.7833C6.5963 11.7833 6.24186 12.1378 6.24186 12.575C6.24186 13.0122 6.5963 13.3667 7.03353 13.3667Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M12.5752 13.3667C13.0124 13.3667 13.3669 13.0122 13.3669 12.575C13.3669 12.1378 13.0124 11.7833 12.5752 11.7833C12.138 11.7833 11.7835 12.1378 11.7835 12.575C11.7835 13.0122 12.138 13.3667 12.5752 13.3667Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M1.49186 13.3667C1.92909 13.3667 2.28353 13.0122 2.28353 12.575C2.28353 12.1378 1.92909 11.7833 1.49186 11.7833C1.05464 11.7833 0.700195 12.1378 0.700195 12.575C0.700195 13.0122 1.05464 13.3667 1.49186 13.3667Z"
+                                        stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <span class="font-[Space_Grotesk]">Grid View</span>
                             </a>
 
                             <a href="{{ route('produk.create') }}"
@@ -61,21 +98,34 @@
                                 class="md:col-span-9 px-4 py-2 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400"
                                 oninput="submitFilter()">
 
-                            <div class="md:col-span-3 flex gap-2">
-                                <select name="status"
-                                    class="flex-1 px-4 py-2 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400"
-                                    onchange="filterForm.submit()">
-                                    <option value="">Show All</option>
-                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published
-                                    </option>
-                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpublished
-                                    </option>
-                                </select>
-
+                            <div class="md:col-span-3 flex gap-2 justify-center">
                                 <a href="{{ route('produk.restore') }}"
-                                    class="flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100">
+                                    class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
                                     All Product
                                 </a>
+                                <div class="relative flex-1">
+                                    <select name="status"
+                                        class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
+                                        onchange="filterForm.submit()">
+                                        <option value="">Show All</option>
+                                        <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published
+                                        </option>
+                                        <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>
+                                            Unpublished
+                                        </option>
+                                    </select>
+                                    <div
+                                        class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-badge-check">
+                                            <path
+                                                d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                            <path d="m9 12 2 2 4-4" />
+                                        </svg>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -102,7 +152,7 @@
                             </thead>
 
                             <tbody class="text-gray-700 font-[Space_Grotesk]">
-                                @foreach ($produk as $p)
+                                @forelse ($produk as $p)
                                     <tr class="hover:bg-gray-50">
                                         <td class="p-4">{{ $p->deleted_at }}</td>
                                         <td class="p-4">{{ $p->deleter?->name ?? '-' }}</td>
@@ -121,7 +171,23 @@
                                         <td class="p-4 text-center relative">
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="8"
+                                            class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
+                                            @if (request('search'))
+                                                <span class="font-bold">"{{ request('search') }}"</span> not found
+                                            @elseif(request()->filled('status'))
+                                                There is no Product with status
+                                                <span class="font-bold">
+                                                    {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
+                                                </span>
+                                            @else
+                                                There are no Product available yet
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

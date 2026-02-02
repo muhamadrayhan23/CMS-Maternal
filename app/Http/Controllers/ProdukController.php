@@ -51,6 +51,10 @@ class ProdukController extends Controller
             });
         }
 
+        // if ($request->ajax()) {
+        //     return view('admin.produk.partials.list', compact('produk'));
+        // }
+
         if ($request->status !== null && $request->status !== '') {
             $query->where('is_active', $request->status);
         }
@@ -66,9 +70,10 @@ class ProdukController extends Controller
 
     public function store(Request $request)
     {
+        $price = preg_replace('/[^0-9]/', '', $request->price);
         $product = Product::create([
             'product_name' => $request->product_name,
-            'price'        => $request->price,
+            'price'        => $price,
             'is_active' => 1,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
@@ -135,10 +140,11 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $produk = Product::findOrFail($id);
+        $price = preg_replace('/[^0-9]/', '', $request->price);
 
         $produk->update([
             'product_name' => $request->product_name,
-            'price' => $request->price,
+            'price' => $price,
             'is_active' => $request->is_active ?? 0,
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),

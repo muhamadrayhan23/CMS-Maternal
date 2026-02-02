@@ -38,10 +38,13 @@
                     <input name="product_name" value="{{ old('product_name', $produk->product_name ?? '') }}"
                         placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
 
-                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>{{ old('desc', $produk->desc ?? '') }}</textarea>
-                    <input name="price" type="number" value="{{ old('price', $produk->price ?? '') }}"
-                        placeholder="Price" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" min="1"
-                        max="999999999999999" required>
+                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>
+                        {{ old('desc', $produk->desc ?? '') }}</textarea>
+
+                    <input type="text" id="price" name="price"
+                        class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Price"
+                        value="{{ old('price', isset($produk) ? 'Rp ' . number_format($produk->price, 0, ',', '.') : '') }}"
+                        required oninput="formatRupiah(this)" max="999999999999999" required>
                 </div>
 
                 <div class="bg-white rounded-2xl p-8 shadow-sm mb-8">
@@ -153,6 +156,13 @@
 
         function removeRow(btn) {
             btn.parentElement.remove()
+        }
+
+        function formatRupiah(el) {
+            let angka = el.value.replace(/[^0-9]/g, '');
+            let format = new Intl.NumberFormat('id-ID').format(angka);
+
+            el.value = angka ? 'Rp ' + format : '';
         }
     </script>
 @endsection

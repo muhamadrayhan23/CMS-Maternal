@@ -97,6 +97,10 @@
                             oninput="submitFilter()">
 
                         <div class="md:col-span-3 flex gap-2 justify-center">
+                            <a href="{{ route('produk.index') }}"
+                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
+                                All Product
+                            </a>
                             <div class="relative flex-1">
                                 <select name="status"
                                     class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
@@ -119,11 +123,6 @@
                                     </svg>
                                 </div>
                             </div>
-
-                            <a href="{{ route('produk.index') }}"
-                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
-                                All Product
-                            </a>
                         </div>
                     </div>
                 </form>
@@ -149,7 +148,7 @@
                         </thead>
 
                         <tbody class="text-gray-700 font-[Space_Grotesk] text-center">
-                            @foreach ($produk as $p)
+                            @forelse ($produk as $p)
                                 <tr class="hover:bg-gray-50 transition">
 
                                     <td class="p-4 font-medium">{{ $p->product_name }}</td>
@@ -278,9 +277,24 @@
 
                                         </ul>
                                     </td>
-
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="8"
+                                        class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
+                                        @if (request('search'))
+                                            <span class="font-bold">"{{ request('search') }}"</span> not found
+                                        @elseif(request()->filled('status'))
+                                            There is no Product with status
+                                            <span class="font-bold">
+                                                {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
+                                            </span>
+                                        @else
+                                            There are no Product available yet
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
