@@ -66,7 +66,8 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-//About
-    Route::view('/about', 'guest.about');
+Route::get('/about', function () { return view('guest.about');})->name('about');
+Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
+
 
 
