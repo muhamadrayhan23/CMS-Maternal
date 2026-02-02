@@ -51,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/about', function () { return view('guest.about');})->name('about');
+Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
+
 
 
 
