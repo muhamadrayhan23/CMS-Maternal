@@ -224,6 +224,38 @@
 
                                         <ul
                                             class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-xl">
+                                            <li>
+                                                <form action="{{ route('produk.toggle', $p->id_product) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button
+                                                        class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                        @if ($p->is_active)
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                width="18"height="18" viewBox="0 0 24 24"
+                                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-circle-minus-icon lucide-circle-minus">
+                                                                <circle cx="12" cy="12" r="10" />
+                                                                <path d="M8 12h8" />
+                                                            </svg>
+                                                            <span>Unpublish</span>
+                                                        @else
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                height="18" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-circle-plus-icon lucide-circle-plus">
+                                                                <circle cx="12" cy="12" r="10" />
+                                                                <path d="M8 12h8" />
+                                                                <path d="M12 8v8" />
+                                                            </svg>
+                                                            <span>Publish</span>
+                                                        @endif
+                                                    </button>
+                                                </form>
+                                            </li>
 
                                             <li>
                                                 <a href="{{ route('produk.edit', $p->id_product) }}"

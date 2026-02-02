@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
 
     //manajemen banner
     Route::get('/banner', [BannerController::class, 'index'])->name('Bhome');
-    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB'); 
+    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB');
     Route::post('/addBanner', [BannerController::class, 'store'])->name('addBanner');
     Route::patch('/banner/{banner}/toggle', [BannerController::class, 'toggle'])->name('banner.toggle');
     Route::get('/banner/edit/{id}', [BannerController::class, 'edit'])->name('editB');
@@ -63,7 +63,6 @@ Route::middleware(['auth'])->group(function () {
 
     //Logout
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-
 });
 
 Route::get('/about', function () { return view('guest.about');})->name('about');
