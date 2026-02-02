@@ -65,5 +65,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
-//About
-Route::view('/about', 'guest.about');
+Route::get('/about', function () { return view('guest.about');})->name('about');
+Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
+
+
+
