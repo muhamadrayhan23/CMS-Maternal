@@ -4,13 +4,11 @@
 @section('title', 'Dashboard Admin')
 
 @section('content')
-    {{-- ================= STATISTIC OVERVIEW ================= --}}
     <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-6 md:p-8 mb-8">
         <h3 class="text-xl md:text-2xl font-semibold mb-2">Statistic Overview</h3>
         <p class="text-gray-300 mb-6 text-sm md:text-base">Your store at a glance</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {{-- CARD --}}
             <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
                 <h4 class="text-lg font-bold mb-1">Total Products</h4>
                 <div class="text-3xl md:text-4xl font-bold">
@@ -106,8 +104,9 @@
                     </svg>
                 </a>
                 <p class="font-semibold text-2xl"> Manage Banners </p>
-                <a href="{{ route('addB') }}" class="ml-auto"> <svg width="26" height="26" viewBox="0 0 26 26"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="{{ route('addB') }}" class="ml-auto">
+                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
@@ -115,8 +114,7 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 @foreach ($latestBanners as $b)
-                    <img src="{{ asset($b->banner_image) }}"
-                        class="w-full h-full object-cover {{ $loop->first ? 'border rounded' : '' }}">
+                    <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover rounded-2xl">
                 @endforeach
             </div>
         </div>
@@ -183,7 +181,3 @@
     </main>
     </div>
 @endsection
-
-{{-- CARD LAIN (BANNERS, LINKS, USERS) --}}
-{{-- SVG DI BAGIAN ITU JUGA TETAP ASLI, HANYA WRAPPER FLEX-WRAP & GRID RESPONSIVE --}}
-{{-- (Strukturnya sama seperti di atas) --}}

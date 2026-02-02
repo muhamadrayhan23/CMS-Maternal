@@ -1,5 +1,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
+@section('title', 'Product - Grid View')
 
 @section('content')
     <div class="space-y-4">
@@ -164,13 +165,13 @@
                                         </button>
 
                                         <div
-                                            class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50">
+                                            class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50 text-left">
 
                                             <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
                                                 <button
-                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5">
                                                     @if ($p->is_active)
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18"height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -197,7 +198,7 @@
                                             </form>
 
                                             <button onclick="toggleSubMenu(this)"
-                                                class="block w-full text-left px-3 py-2 hover:bg-gray-100">
+                                                class="block w-full px-3 py-2 hover:bg-gray-100 text-left">
                                                 View Links
                                             </button>
 
@@ -222,7 +223,7 @@
                                             <form action="{{ route('produk.destroy', $p->id_product) }}" method="POST">
                                                 @csrf @method('DELETE')
                                                 <button onclick="return confirm('Hapus produk?')"
-                                                    class="w-full text-left px-3 py-2 text-red-600 hover:bg-gray-100">
+                                                    class="w-full px-3 py-2 hover:bg-gray-100 text-left">
                                                     Delete
                                                 </button>
                                             </form>

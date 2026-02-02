@@ -12,6 +12,9 @@ class ProdukController extends Controller
 {
     public function index(Request $request)
     {
+        if (!session()->has('produk_back')) {
+            session(['produk_back' => url()->full()]);
+        }
         $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
@@ -34,6 +37,9 @@ class ProdukController extends Controller
 
     public function kelola_card(Request $request)
     {
+        if (!session()->has('produk_back')) {
+            session(['produk_back' => url()->full()]);
+        }
         $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
@@ -63,12 +69,10 @@ class ProdukController extends Controller
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $request->price,
-            'is_active' => $request->is_active ?? 0,
+            'is_active' => 1,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
-        $product->is_active = $request->boolean('is_active');
-        $product->save();
 
         if ($request->atribut_value) {
             foreach ($request->atribut_value as $i => $value) {
@@ -117,11 +121,9 @@ class ProdukController extends Controller
         }
 
 
-        return redirect()
-            ->route('produk.index')
+        return redirect(session('produk_back', route('produk.index')))
             ->with('success', 'Produk berhasil ditambahkan');
     }
-
 
     public function edit($id)
     {
@@ -207,7 +209,8 @@ class ProdukController extends Controller
                 ]));
             }
         }
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil diupdate');
+        return redirect(session('produk_back', route('produk.index')))
+            ->with('success', 'Produk berhasil diupdate');
     }
 
 
