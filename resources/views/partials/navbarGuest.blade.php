@@ -8,7 +8,7 @@
 
         <a href="{{ route('home') }}">Home</a>
         <a href="{{ route('products') }}">Products</a>
-        <a href="#">About Us</a>
+        <a href="{{ route('aboutus') }}">About Us</a>
         <a href="#">Links</a>
 
         <a href="{{ route('login') }}"

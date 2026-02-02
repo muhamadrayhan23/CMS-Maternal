@@ -8,14 +8,14 @@
     </section>
 
 
-   <section class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
+    <section class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20">
 
 
-    <div class="space-y-12">
+        <div class="space-y-12">
 
-        <div class="w-full h-[420px] bg-gray-100 overflow-hidden">
-            <img src="{{ asset('img/about/about-flat.jpeg') }}" alt="Bag Flatlay" class="w-full h-full object-cover">
-        </div>
+            <div class="w-full h-[420px] bg-gray-100 overflow-hidden">
+                <img src="{{ asset('img/about/about-flat.jpeg') }}" alt="Bag Flatlay" class="w-full h-full object-cover">
+            </div>
 
             <div>
                 <h2 class="text-3xl font-semibold leading-snug">
@@ -37,8 +37,8 @@
                     continuous learning, innovation, and delivering
                     reliable products for everyday use.
                 </p>
-                </div>
-    </div>
+            </div>
+        </div>
 
         <div class="space-y-12">
             <div>
@@ -67,8 +67,7 @@
 
             <div class="w-full h-[420px] bg-gray-100 overflow-hidden">
                 <img
-                    src="{{ asset('img/about/about-wear.jpeg') }}"alt="Bag Usage"  class="w-full h-full object-cover" >
+                    src="{{ asset('img/about/about-wear.jpeg') }}" alt="Bag Usage" class="w-full h-full object-cover">
             </div>
-    </div>
+        </div>
     </section>
-
