@@ -55,12 +55,4 @@
             All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
         </p>
     </div>
-
-    <div class="w-full h-[1px] bg-white/30 mb-8"></div>
-
-    <div class="text-center">
-        <p class="text-lg opacity-90">
-            All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
-        </p>
-    </div>
 </div>

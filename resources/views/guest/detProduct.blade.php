@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="">
-    <img src="{{ asset('storage') }}" alt="">
+    <img src="{{ asset('') }}" alt="">
 </div>
 @endsection

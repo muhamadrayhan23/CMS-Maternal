@@ -1,7 +1,6 @@
 @extends('layout.guest')
 
 @section('content')
-
 <div class="rounded-xl p-10 py-4">
     <form action="{{ route('products') }}" method="GET"
         class="flex flex-col md:flex-row md:items-center gap-3">
@@ -53,16 +52,18 @@
         const sort = sortSelect.value;
 
         fetch(`{{ route('products') }}?search=${search}&sort=${sort}`, {
-            headers: { 'X-Requested-With': 'XMLHttpRequest'}
-        })
-        .then(response => response.text())
-        .then(data => {
-            container.innerHTML = data;
-        });
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.text())
+            .then(data => {
+                container.innerHTML = data;
+            });
     }
 
-searchInput.addEventListener('input', fetchProducts);
+    searchInput.addEventListener('input', fetchProducts);
 
-sortSelect.addEventListener('change', fetchProducts);
+    sortSelect.addEventListener('change', fetchProducts);
 </script>
 @endsection

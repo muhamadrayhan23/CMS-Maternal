@@ -106,7 +106,7 @@
 </div>
 <div id="about us" class="flex mb-5">
     <img src="{{ asset('img/1769659981_ant wpp.png') }}" alt="About Us"
-        class="w-1/2">
+        class="lg:w-1/2 sm:w-screen">
 
     <div class="">
         <div class="flex items-center justify-between">
