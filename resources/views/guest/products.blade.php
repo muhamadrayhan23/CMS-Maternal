@@ -28,9 +28,8 @@
 <img src="{{ asset('img/banner.png') }}" alt="" class="w-full">
 
 <div class="flex items-center mt-10 mb-14">
-    <span class="flex-1 h-px bg-gray-300"></span>
 
-    <h1 class="mx-6 font-sans text-2xl tracking-wide whitespace-nowrap">
+    <h1 class="mx-6 font-sans text-2xl tracking-wide whitespace-nowrap ml-10">
         WE PRESENT
     </h1>
 
