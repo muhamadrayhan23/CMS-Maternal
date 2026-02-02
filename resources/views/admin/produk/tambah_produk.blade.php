@@ -1,29 +1,10 @@
-{{-- @extends('admin.produk.layout.main')
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@extends('layout.admin')
+@section('title', isset($produk) ? 'Edit Product' : 'Add New Product')
 
-@section('content') --}}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-@include('layout.sidebarAdmin')
-
-<body>
-    <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
+@section('content')
+    <div class="h-screen" id="wrapp">
         <div class="p-10">
-            @yield('content')
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title fw-bold">
-                    {{ isset($produk) ? 'Edit Product' : 'Add New Product' }}
-                </h3>
-            </div>
-
             <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
@@ -31,111 +12,157 @@
                     @method('PUT')
                 @endif
 
-                <div class="card-body">
-                    <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-danger">
-                            {{ isset($produk) ? 'Update Product' : 'Save Product' }}
-                        </button>
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-3">
+                        <a href="{{ session('produk_back', route('dashboardadmin')) }}"
+                            class="text-gray-800 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left">
+                                <path d="m12 19-7-7 7-7" />
+                                <path d="M19 12H5" />
+                            </svg>
+                        </a>
+                        <h1 class="text-sm font-bold uppercase">
+                            {{ isset($produk) ? 'Edit Product' : 'Add New Product' }}
+                        </h1>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" name="product_name" class="form-control"
-                            value="{{ old('product_name', $produk->product_name ?? '') }}" required>
-                    </div>
-
-                    <div class="field">
-                        <label>Description</label>
-                        <input type="text" name="desc" value="{{ old('desc', $produk->desc ?? '') }}">
-                    </div>
-
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Link</label>
-                        <input type="text" name="link" class="form-control"
-                            value="{{ old('link', $produk->link ?? '') }}">
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control"
-                            value="{{ old('price', $produk->price ?? '') }}" required>
-                    </div>
+                    <button class="px-8 py-2 text-white bg-[#2D2D2A] rounded-lg hover:bg-black">
+                        {{ isset($produk) ? 'Update' : 'Save' }}
+                    </button>
                 </div>
 
-                <br>
+                <div class="bg-white rounded-2xl p-8 shadow-sm space-y-4 mb-8">
+                    <h3 class="font-semibold text-gray-800">Product Info</h3>
+                    <input name="product_name" value="{{ old('product_name', $produk->product_name ?? '') }}"
+                        placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
 
-                <h5 class="fw-bold mb-3">Product Attributes</h5>
-                <div id="detail-wrapper">
-                    @php
-                        $details = $produk->details ?? collect([null]);
-                    @endphp
-                    @foreach ($details as $detail)
-                        <div class="detail-row">
-                            <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}">
+                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>
+                        {{ old('desc', $produk->desc ?? '') }}</textarea>
 
-                            <div class="field">
-                                <label>Image</label>
-                                <input type="file" name="image_product[]">
-                                @if (!empty($detail?->image_product))
-                                    <img src="{{ asset('storage/' . $detail->image_product) }}" width="80">
+                    <input type="text" id="price" name="price"
+                        class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Price"
+                        value="{{ old('price', isset($produk) ? 'Rp ' . number_format($produk->price, 0, ',', '.') : '') }}"
+                        required oninput="formatRupiah(this)" max="999999999999999" required>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm mb-8">
+                    <h3 class="font-semibold text-gray-800 mb-4">Product Links</h3>
+                    <div id="links" class="space-y-4">
+                        @foreach ($produk->links ?? [null] as $link)
+                            <div class="link-row border rounded-xl p-5 space-y-3 relative">
+
+                                @if ($link)
+                                    <input type="hidden" name="link_id[]" value="{{ $link->id_link_produk }}">
                                 @endif
-                            </div>
 
-                            <div class="field">
-                                <label>Attribute Name</label>
-                                <input type="text" name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}">
-                            </div>
+                                <input type="file" name="link_image[]"
+                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
 
-                            <div class="field">
-                                <label>Attribute Value</label>
-                                <input type="text" name="atribut_value[]"
-                                    value="{{ $detail->atribut_value ?? '' }}">
+                                @if ($link && $link->link_image)
+                                    <img src="{{ asset('storage/' . $link->link_image) }}" class="w-20">
+                                @endif
+
+                                <input name="link_name[]" value="{{ $link->link_name ?? '' }}" placeholder="Link Name"
+                                    class="w-full px-4 py-2 border rounded-lg" required>
+
+                                <input name="link_address[]" value="{{ $link->link_address ?? '' }}"
+                                    placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
+
+                                <button type="button" onclick="removeLink(this)"
+                                    class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center">
+                                    ✖
+                                </button>
                             </div>
-                            <button type="button" onclick="removeRow(this)">✖</button>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <button type="button" onclick="addLink()"
+                        class="w-full mt-5 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-700">
+                        Add Link
+                    </button>
                 </div>
-                <button type="button" class="btn-add" onclick="addRow()">➕ Add More Attribute</button>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm">
+
+                    <h3 class="font-semibold text-gray-800 mb-4">Attributes</h3>
+
+                    <div id="detail-wrapper" class="space-y-4">
+
+                        @foreach ($produk->details ?? [null] as $detail)
+                            <div class="detail-row border rounded-xl p-5 space-y-3 relative">
+
+                                <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
+
+                                <input type="file" name="image_product[]"
+                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
+
+                                @if ($detail && $detail->image_product)
+                                    <img src="{{ asset('storage/' . $detail->image_product) }}" class="w-20">
+                                @endif
+
+                                <input name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}"
+                                    placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
+
+                                <input name="atribut_value[]" value="{{ $detail->atribute_value ?? '' }}"
+                                    placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
+
+                                <button type="button" onclick="removeRow(this)"
+                                    class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center"
+                                    @required(true)>
+                                    ✖
+                                </button>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    <button type="button" onclick="addRow()"
+                        class="w-full mt-5 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-700">
+                        Add Attribute
+                    </button>
+
+                </div>
+
+            </form>
         </div>
-        </form>
-        </div>
-    </main>
-</body>
-<script>
-    function addRow() {
-        const wrapper = document.getElementById('detail-wrapper');
+    </div>
+    <script>
+        function addLink() {
+            document.getElementById('links').insertAdjacentHTML('beforeend', `
+                <div class="link-row border rounded-xl p-5 space-y-3 relative">
+                <input type="file" name="link_image[]" required>
+                <input name="link_name[]" placeholder="Link Name" class="w-full px-4 py-2 border rounded-lg" required>
+                <input name="link_address[]" placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
+                <button type="button" onclick="removeLink(this)"
+                class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
+                </div>`)
+        }
 
-        wrapper.insertAdjacentHTML('beforeend', `
-            <div class="detail-row" style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
-                <input type="hidden" name="detail_id[]" value="">
+        function removeLink(btn) {
+            btn.parentElement.remove()
+        }
 
-                <div class="field">
-                    <label>Image</label>
-                    <input type="file" name="image_product[]">
-                </div>
+        function addRow() {
+            document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
+                <div class="detail-row border rounded-xl p-5 space-y-3 relative">
+                <input type="file" name="image_product[]" required>
+                <input name="atribute_name[]" placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
+                <input name="atribut_value[]" placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
+                <button type="button" onclick="removeRow(this)"
+                class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
+                </div>`)
+        }
 
-                <div class="field">
-                    <label>Attribute Name</label>
-                    <input type="text" name="atribute_name[]">
-                </div>
+        function removeRow(btn) {
+            btn.parentElement.remove()
+        }
 
-                <div class="field">
-                    <label>Attribute Value</label>
-                    <input type="text" name="atribut_value[]">
-                </div>
+        function formatRupiah(el) {
+            let angka = el.value.replace(/[^0-9]/g, '');
+            let format = new Intl.NumberFormat('id-ID').format(angka);
 
-                <button type="button" onclick="removeRow(this)">✖</button>
-            </div>
-        `);
-    }
-
-    function removeRow(button) {
-        button.closest('.detail-row').remove();
-    }
-</script>
-
-
-</html>
-
-
-{{-- @endsection --}}
+            el.value = angka ? 'Rp ' + format : '';
+        }
+    </script>
+@endsection

@@ -1,158 +1,320 @@
-<!DOCTYPE html>
-<html lang="en">
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@extends('layout.admin')
+@section('title', 'Product - Grid View')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-@include('layout.sidebarAdmin')
+@section('content')
+    <div class="space-y-4">
+        <div class="flex items-center justify-between">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                    <h3 class="text-xl font-bold font-[Space_Grotesk]">MANAGE PRODUCTS</h3>
 
-<body>
-    <!DOCTYPE html>
-    <html lang="en">
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{{ route('produk.restore') }}"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-gray-700 text-white' : 'bg-white text-gray-800' }}">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
+                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M2.125 4.25002H14.875M13.4583 4.25002V14.1667C13.4583 14.875 12.75 15.5834 12.0417 15.5834H4.95833C4.25 15.5834 3.54167 14.875 3.54167 14.1667V4.25002M5.66667 4.25002V2.83335C5.66667 2.12502 6.375 1.41669 7.08333 1.41669H9.91667C10.625 1.41669 11.3333 2.12502 11.3333 2.83335V4.25002"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
 
-    <body>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3 class="fw-bold">MANAGE PRODUCTS</h3>
-            <a href="{{ route('produk.restore') }}" class="btn btn-danger">
-                Trash
-            </a>
-            <a href="{{ route('produk.index') }}" class="btn btn-danger">
-                List View
-            </a>
-            <a href="{{ route('produk.kelola_card') }}" class="btn btn-danger">
-                Grid View
-            </a>
-            <a href="{{ route('produk.create') }}" class="btn btn-danger">
-                + Add New Product
-            </a>
-        </div>
-
-        <div class="row mb-3">
-            <form method="GET" action="{{ route('produk.kelola_card') }}">
-                <div class="row mb-3">
-                    <div class="col-md-9">
-                        <input type="text" name="search" class="form-control" placeholder="Search Products"
-                            value="{{ request('search') }}">
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-dark w-100">
-                            Search Products
-                        </button>
-                        <a href="{{ route('produk.kelola_card') }}" class="btn btn-danger">
-                            Reset
+                            <span class="font-[Space_Grotesk]">Trash</span>
+                        </a>
+                        <a href="{{ route('produk.index') }}"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-gray-700 text-white' : 'bg-white text-gray-800' }}">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g opacity="0.87">
+                                    <path
+                                        d="M9.5 2.375V16.625M2.375 7.125H16.625M2.375 11.875H16.625M3.95833 2.375H15.0417C15.9161 2.375 16.625 3.08388 16.625 3.95833V15.0417C16.625 15.9161 15.9161 16.625 15.0417 16.625H3.95833C3.08388 16.625 2.375 15.9161 2.375 15.0417V3.95833C2.375 3.08388 3.08388 2.375 3.95833 2.375Z"
+                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                            </svg>
+                            <span class="font-[Space_Grotesk]">List View</span>
+                        </a>
+                        <a href="{{ route('produk.kelola_card') }}"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-gray-700 text-white' : 'bg-white text-gray-800' }}">
+                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.03353 2.28335C7.47075 2.28335 7.8252 1.9289 7.8252 1.49168C7.8252 1.05445 7.47075 0.700012 7.03353 0.700012C6.5963 0.700012 6.24186 1.05445 6.24186 1.49168C6.24186 1.9289 6.5963 2.28335 7.03353 2.28335Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M12.5752 2.28335C13.0124 2.28335 13.3669 1.9289 13.3669 1.49168C13.3669 1.05445 13.0124 0.700012 12.5752 0.700012C12.138 0.700012 11.7835 1.05445 11.7835 1.49168C11.7835 1.9289 12.138 2.28335 12.5752 2.28335Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M1.49186 2.28335C1.92909 2.28335 2.28353 1.9289 2.28353 1.49168C2.28353 1.05445 1.92909 0.700012 1.49186 0.700012C1.05464 0.700012 0.700195 1.05445 0.700195 1.49168C0.700195 1.9289 1.05464 2.28335 1.49186 2.28335Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M7.03353 7.82501C7.47075 7.82501 7.8252 7.47057 7.8252 7.03335C7.8252 6.59612 7.47075 6.24168 7.03353 6.24168C6.5963 6.24168 6.24186 6.59612 6.24186 7.03335C6.24186 7.47057 6.5963 7.82501 7.03353 7.82501Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M12.5752 7.82501C13.0124 7.82501 13.3669 7.47057 13.3669 7.03335C13.3669 6.59612 13.0124 6.24168 12.5752 6.24168C12.138 6.24168 11.7835 6.59612 11.7835 7.03335C11.7835 7.47057 12.138 7.82501 12.5752 7.82501Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M1.49186 7.82501C1.92909 7.82501 2.28353 7.47057 2.28353 7.03335C2.28353 6.59612 1.92909 6.24168 1.49186 6.24168C1.05464 6.24168 0.700195 6.59612 0.700195 7.03335C0.700195 7.47057 1.05464 7.82501 1.49186 7.82501Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M7.03353 13.3667C7.47075 13.3667 7.8252 13.0122 7.8252 12.575C7.8252 12.1378 7.47075 11.7833 7.03353 11.7833C6.5963 11.7833 6.24186 12.1378 6.24186 12.575C6.24186 13.0122 6.5963 13.3667 7.03353 13.3667Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M12.5752 13.3667C13.0124 13.3667 13.3669 13.0122 13.3669 12.575C13.3669 12.1378 13.0124 11.7833 12.5752 11.7833C12.138 11.7833 11.7835 12.1378 11.7835 12.575C11.7835 13.0122 12.138 13.3667 12.5752 13.3667Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M1.49186 13.3667C1.92909 13.3667 2.28353 13.0122 2.28353 12.575C2.28353 12.1378 1.92909 11.7833 1.49186 11.7833C1.05464 11.7833 0.700195 12.1378 0.700195 12.575C0.700195 13.0122 1.05464 13.3667 1.49186 13.3667Z"
+                                    stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span class="font-[Space_Grotesk]">Grid View</span>
+                        </a>
+                        <a href="{{ route('produk.create') }}"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-gray-700 text-white' : 'bg-white text-gray-800' }}">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737"
+                                    stroke-width="1.7" stroke="currentColor" stroke-linejoin="round" />
+                            </svg>
+                            <span class="font-[Space_Grotesk]">Add Product</span>
                         </a>
                     </div>
                 </div>
-            </form>
 
-            <div class="col-md-3">
-                <select class="form-control">
-                    <option>Sort By Status</option>
-                    <option value="name">Published</option>
-                    <option value="price">Unpublished</option>
-                </select>
-            </div>
-        </div>
+                <form method="GET" action="{{ route('produk.kelola_card') }}" class="mb-6" id="filterForm">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search Products"
+                            class="md:col-span-9 px-4 py-2 rounded bg-white text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
+                            oninput="submitFilter()">
 
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
-        <div class="row g-4">
-            @foreach ($produk as $p)
-                <div class="col-md-4 col-lg-3">
-                    <div class="card h-100 shadow-sm position-relative">
-
-                        <span
-                            class="badge position-absolute top-0 start-0 m-2 {{ $p->is_active ? 'bg-success' : 'bg-secondary' }}">
-                            {{ $p->is_active ? 'Published' : 'Unpublished' }}
-                        </span>
-
-                        <div class="dropdown position-absolute top-0 end-0 m-2">
-                            <button class="btn btn-sm btn-light border" data-bs-toggle="dropdown">
-                                &#8942;
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-
-                                <li>
-                                    <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button class="dropdown-item">
-                                            {{ $p->is_active ? 'Unpublish' : 'Publish' }}
-                                        </button>
-                                    </form>
-                                </li>
-
-                                @if ($p->link)
-                                    <li>
-                                        <a class="dropdown-item" href="{{ $p->link }}" target="_blank">
-                                            View Link
-                                        </a>
-                                    </li>
-                                @endif
-
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('produk.edit', $p->id_product) }}">
-                                        Edit
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <form action="{{ route('produk.destroy', $p->id_product) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="dropdown-item text-danger"
-                                            onclick="return confirm('Hapus produk?')">
-                                            Delete
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-
-                        @if (optional($p->details->first())->image_product)
-                            <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
-                                class="card-img-top" style="height:200px; object-fit:cover;">
-                        @else
-                            <div class="bg-light d-flex align-items-center justify-content-center"
-                                style="height:200px;">
-                                No Image
+                        <div class="md:col-span-3 flex gap-2 justify-center">
+                            <a href="{{ route('produk.kelola_card') }}"
+                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
+                                All Product
+                            </a>
+                            <div class="relative flex-1">
+                                <select name="status"
+                                    class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
+                                    onchange="filterForm.submit()">
+                                    <option value="">Show All</option>
+                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published
+                                    </option>
+                                    <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpublished
+                                    </option>
+                                </select>
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check">
+                                        <path
+                                            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </div>
                             </div>
-                        @endif
-
-                        <div class="card-body">
-                            <h6 class="fw-bold">{{ $p->product_name }}</h6>
-                            <p class="text-muted small mb-2">
-                                {{ Str::limit($p->desc, 60) }}
-                            </p>
-                            <div class="fw-semibold">
-                                Rp {{ number_format($p->price, 0, ',', '.') }}
-                            </div>
-                        </div>
-
-                        <div class="card-footer text-muted small">
-                            Created {{ $p->created_at->format('d M Y') }}
                         </div>
                     </div>
+                </form>
+
+                @if (session('success'))
+                    <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 font-[Space_Grotesk]">
+
+                    @forelse ($produk as $p)
+                        <div
+                            class="bg-white rounded-xl shadow hover:shadow-xl transition flex flex-col overflow-visible relative group">
+                            <span
+                                class="absolute top-3 left-3 px-3 py-1 text-xs rounded-full {{ $p->is_active ? 'bg-green-500 text-green-800' : 'bg-red-400 text-red-800' }}">
+                                {{ $p->is_active ? 'Published' : 'Unpublished' }}
+                            </span>
+
+                            @if (optional($p->details->first())->image_product)
+                                <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
+                                    class="w-full h-48 object-cover group-hover:scale-105 transition">
+                            @else
+                                <div class="h-48 flex items-center justify-center bg-gray-100 text-gray-400">
+                                    No Image
+                                </div>
+                            @endif
+
+                            <div class="p-4 flex flex-col flex-1">
+                                <div class="flex items-start justify-between gap-3 mb-2">
+
+                                    <h4 class="font-bold text-xl line-clamp-1">
+                                        {{ $p->product_name }}
+                                    </h4>
+
+                                    <div class="relative shrink-0">
+                                        <button onclick="toggleMenu(this)"
+                                            class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100">
+                                            ⋮
+                                        </button>
+
+                                        <div
+                                            class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50 text-left">
+
+                                            <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button
+                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5">
+                                                    @if ($p->is_active)
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"height="18"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-circle-minus-icon lucide-circle-minus">
+                                                            <circle cx="12" cy="12" r="10" />
+                                                            <path d="M8 12h8" />
+                                                        </svg>
+                                                        <span>Unpublish</span>
+                                                    @else
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                            height="18" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-circle-plus-icon lucide-circle-plus">
+                                                            <circle cx="12" cy="12" r="10" />
+                                                            <path d="M8 12h8" />
+                                                            <path d="M12 8v8" />
+                                                        </svg>
+                                                        <span>Publish</span>
+                                                    @endif
+                                                </button>
+                                            </form>
+
+                                            <button onclick="toggleSubMenu(this)"
+                                                class="block w-full px-3 py-2 hover:bg-gray-100 text-left">
+                                                View Links
+                                            </button>
+
+                                            <div class="sub-menu hidden border-t">
+                                                @forelse($p->links as $link)
+                                                    <a href="{{ $link->link_address }}" target="_blank"
+                                                        class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
+                                                        <img src="{{ asset('storage/' . $link->link_image) }}"
+                                                            class="w-6 h-6 rounded object-cover">
+                                                        {{ $link->link_name }}
+                                                    </a>
+                                                @empty
+                                                    <div class="px-3 py-2 text-gray-400">No links</div>
+                                                @endforelse
+                                            </div>
+
+                                            <a href="{{ route('produk.edit', $p->id_product) }}"
+                                                class="block px-3 py-2 hover:bg-gray-100">
+                                                Edit
+                                            </a>
+
+                                            <form action="{{ route('produk.destroy', $p->id_product) }}" method="POST">
+                                                @csrf @method('DELETE')
+                                                <button onclick="return confirm('Hapus produk?')"
+                                                    class="w-full px-3 py-2 hover:bg-gray-100 text-left">
+                                                    Delete
+                                                </button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="p-4 flex flex-col flex-1">
+                                    <p class="text-sm text-gray-600 line-clamp-2 mb-1">
+                                        {{ $p->desc }}
+                                    </p>
+                                    <div class="meta text-gray-800">
+
+                                        @if ($p->updated_by && $p->updated_at)
+                                            <hr class="my-2 border-gray-200">
+
+                                            <div class="grid grid-cols-1 md:grid-cols-2 text-sm gap-y-1">
+                                                <h6>Updated by <strong>{{ $p->updater?->name ?? '-' }}</strong></h6>
+                                                <h6>Updated at <strong>{{ $p->updated_at }}</strong></h6>
+                                            </div>
+                                        @else
+                                            <hr class="my-2 border-gray-200">
+
+                                            <div class="grid grid-cols-1 md:grid-cols-2 text-sm gap-y-1">
+                                                <h6>Created by <strong>{{ $p->creator?->name ?? '-' }}</strong></h6>
+                                                <h6>Created at <strong>{{ $p->created_at }}</strong></h6>
+                                            </div>
+                                        @endif
+
+                                    </div>
+
+                                    <div class="mt-auto">
+                                        <div class="font-semibold text-sm">
+                                            Rp {{ number_format($p->price, 0, ',', '.') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div colspan="8"
+                            class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
+                            @if (request('search'))
+                                <span class="font-bold">"{{ request('search') }}"</span> not found
+                            @elseif(request()->filled('status'))
+                                There is no Product with status
+                                <span class="font-bold">
+                                    {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
+                                </span>
+                            @else
+                                There are no Product available yet
+                            @endif
+                        </div>
+                    @endforelse
                 </div>
-            @endforeach
+                <div class="mt-8 flex justify-end">
+                    {{ $produk->links() }}
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="d-flex justify-content-center mt-4">
-            {{ $produk->links() }}
-        </div>
+    <script>
+        let timeout = null;
 
-    </body>
+        function submitFilter() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => filterForm.submit(), 500);
+        }
 
-    </html>
+        function toggleMenu(btn) {
+            const menu = btn.parentElement.querySelector('.action-menu')
+            document.querySelectorAll('.action-menu').forEach(m => {
+                if (m !== menu) m.classList.add('hidden')
+            })
+            menu.classList.toggle('hidden')
+        }
+
+        function toggleSubMenu(btn) {
+            btn.parentElement.querySelector('.sub-menu')
+                .classList.toggle('hidden')
+        }
+
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.relative')) {
+                document.querySelectorAll('.action-menu')
+                    .forEach(m => m.classList.add('hidden'))
+            }
+        })
+    </script>
+@endsection

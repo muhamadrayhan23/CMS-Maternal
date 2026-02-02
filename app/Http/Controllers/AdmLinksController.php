@@ -3,77 +3,103 @@
 namespace App\Http\Controllers;
 
 use App\Models\Link;
-use App\Http\Requests\StoreLinkRequest;
-use App\Http\Requests\UpdateLinkRequest;
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class AdmLinksController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
+    //tampil semua link
+    public function index(Request $request)
     {
-        return view('admin.link.index', [
-            'links' => Link::latest()->paginate(10)
-        ]);
+        $search = $request->search;
+
+        $links = Link::when($search, function ($query, $search) {
+            return $query->where('link_name', 'like', "%$search%");
+        })->latest()->get();
+
+        return view('admin.link.index', compact('links'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): View
+    //tampil form buat tambah link
+    public function create()
     {
         return view('admin.link.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreLinkRequest $request): RedirectResponse
+    //simpan link baru
+    public function store(Request $request)
     {
-        Link::create($request->validated());
+        $data = $request->validate([
+            'link_logo' => 'required|image|mimes:jpg,jpeg,png',
+            'link_name' => 'required|string|max:100|unique:link,link_name,NULL,id_link,deleted_at,NULL',
+            'link_address' => 'required|string|max:255',
+        ]);
 
-        return redirect()->route('admin.link.index')
-            ->withSuccess('New links is added successfully.');
+        $file = $request->file('link_logo');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('link_pic'), $filename);
+
+        $data['link_logo'] = 'link_pic/' . $filename;
+        $data['is_active'] = $request->boolean('is_active');
+
+        Link::create($data);
+
+        return redirect()->route('homeLink')
+            ->with('success', 'Link berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Link $link): View
-    {
-        return view('admin.link.show', compact('link'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Link $link): View
+    //panggil edit link
+    public function edit(Link $link)
     {
         return view('admin.link.edit', compact('link'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateLinkRequest $request, Link $link): RedirectResponse
+    //update link
+    public function update(Request $request, Link $link)
     {
-        $link->update($request->validated());
+        $request->validate([
+            'link_logo' => 'nullable|image|mimes:jpg,jpeg,png',
+            'link_name' => 'required|string|max:100|unique:link,link_name,' . $link->id_link . ',id_link',
+            'link_address' => 'required|string|max:255',
+        ]);
 
-        return redirect()->back()
-            ->withSuccess('Link is updated successfully.');
+        $filename = $link->link_logo;
+
+        if ($request->hasFile('link_logo')) {
+            $file = $request->file('link_logo');
+            $newName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('link_pic'), $newName);
+
+            $filename = 'link_pic/' . $newName;
+        }
+
+        $link->update([
+            'link_logo' => $filename,
+            'link_name' => $request->link_name,
+            'link_address' => $request->link_address,
+            'is_active' => $request->boolean('is_active'),
+        ]);
+
+        return redirect()->route('homeLink')
+            ->with('success', 'Link berhasil diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Link $link): RedirectResponse
+
+    //delete link
+    public function destroy(Link $link)
     {
         $link->delete();
 
-        return redirect()->route('admin.link.index')
-            ->withSuccess('Link is deleted successfully.');
+        return redirect()->route('homeLink')
+            ->with('success', 'Link berhasil dihapus');
+    }
+
+    //toggle toggle an
+    public function toggle(Link $link)
+    {
+        $link->update([
+            'is_active' => ! $link->is_active
+        ]);
+
+        return back();
     }
 }

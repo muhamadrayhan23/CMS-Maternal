@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view ('guest.home');
+        $banners = Banner::where('is_active', true)->get();
+        $query = Product::with(['details', 'links'])->latest();
+        $products = $query->where('is_active', true)->take(9)->get();
+        return view ('guest.home', compact('banners', 'products'));
     }
 }
