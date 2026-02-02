@@ -3,7 +3,7 @@
 
 @section('content')
 {{-- NAV MANAGE --}}
-<div class="space-y-4">
+<div class="space-y-4 font-sans">
     <div class="flex items-center justify-between">
         <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
             Recently deleted
