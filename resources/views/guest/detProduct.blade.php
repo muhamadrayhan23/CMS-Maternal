@@ -1,5 +1,7 @@
 @extends('layout.guest')
 
 @section('content')
-<div class=""></div>
+<div class="">
+    <img src="{{ asset('storage') }}" alt="">
+</div>
 @endsection

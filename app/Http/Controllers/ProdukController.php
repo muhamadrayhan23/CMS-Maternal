@@ -63,6 +63,7 @@ class ProdukController extends Controller
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $request->price,
+            'link'         => $request->link,
             'is_active' => $request->is_active ?? 0,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
