@@ -3,7 +3,7 @@
 
 @section('content')
 {{-- NAV MANAGE --}}
-<div class="space-y-4">
+<div class="space-y-4 font-sans">
     <div class="flex items-center justify-between">
         <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
             Manage Banners
@@ -46,9 +46,9 @@
 
         <div class="relative w-72">
             <select id="filterStatus" class="w-full appearance-none pl-4 pr-10 py-2 text-sm text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
-                <option value=""disabled selected hidden >Sort by status </option>
-                <option value="1">Unpublished</option>
-                <option value="0">published</option>
+                <option value=""> All status </option>
+                <option value="0">Unpublished</option>
+                <option value="1">published</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check">
@@ -61,13 +61,13 @@
 
   
 
-        {{-- {{-- CARD BANNER --} --}}
-    <div id="bannerContainer" class="mt-5">
+        {{-- CARD BANNER --}}
+        <div id="bannerContainer" class="mt-5">
             @include('admin.banner.search_cardH')
         </div>
     
 <script>
-    //TOGGLE
+    //TOOLTIP
     function toggleMenu(btn){
         const menu = btn.parentElement.querySelector('.action-menu')
 
@@ -89,19 +89,23 @@
     // SEARCH
     const searchInput = document.getElementById('liveSearch');
     const container = document.getElementById('bannerContainer');
+    const filterBanner = document.getElementById('filterStatus')
 
-    searchInput.addEventListener('input', function() {
-        const query = this.value;
-        fetch(`{{ route('Bhome') }}?search=${query}`, {
-            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    function fetchFilter(){
+        const search = searchInput.value
+        const status = filterBanner.value
+        
+        fetch(`{{ route('Bhome') }}?search=${search}&status=${status}`, {
+            headers: { 'X-requested-With' : 'XMLHttpRequest' }
         })
         .then(response => response.text())
-        .then(data => {
-            container.innerHTML = data; 
-        });
-        });
-    
-    
+        .then( data => {
+            container.innerHTML = data
+        })
+    }
+
+    searchInput.addEventListener('input', fetchFilter)
+    filterBanner.addEventListener('change', fetchFilter)
 
 </script>
 @endsection

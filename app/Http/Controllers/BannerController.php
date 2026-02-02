@@ -17,13 +17,15 @@ class BannerController extends Controller
         }
         $status = $request->input('status');
         $search = $request->input('search');
+        $status = $request->input('status');
 
-        $banner = Banner::when($search, function ($query, $search) {
-            return $query->where('banner_name', 'like', "%{$search}%");
-        })->when($status !== null && $status !== '', function ($query) use ($status) {
-            // Filter kolom is_active di database
-            return $query->where('is_active', $status);
-        })
+        $banner = Banner::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('banner_name', 'like', '%{$search}%');
+            })
+            ->when($status !== null && $status !== '', function ($query) use ($status) {
+                return $query->where('is_active', $status);
+            })
             ->latest()
             ->paginate(6)
             ->withQueryString();
@@ -73,12 +75,12 @@ class BannerController extends Controller
     }
 
 
-    public function toggle(Banner $banner)
+
+    public function status(Banner $banner)
     {
         $banner->update([
             'is_active' => ! $banner->is_active
         ]);
-
         return back();
     }
 
@@ -123,7 +125,6 @@ class BannerController extends Controller
             'banner_name' => $request->banner_name,
             'banner_image' => $filename,
         ]);
-
         return redirect()->route('Bhome');
     }
 
@@ -146,7 +147,6 @@ class BannerController extends Controller
     public function restore(Request $request)
     {
         $search = $request->input('search');
-
         $banner = Banner::onlyTrashed()
             ->when($search, function ($query, $search) {
                 return $query->where('banner_name', 'like', "%{$search}%");
@@ -163,7 +163,11 @@ class BannerController extends Controller
 
     public function restoreProses($id)
     {
-        Banner::withTrashed()->findOrFail($id)->restore();
+        $banner = Banner::withTrashed()->findOrFail($id);
+
+        $banner->is_active = 0;
+
+        $banner->restore();
 
         return redirect()->route('Btrash');
     }

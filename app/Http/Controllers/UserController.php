@@ -75,7 +75,7 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->regenerateToken();
 
-        return redirect('login')->with('alerts');
+        return redirect('login')->with('alerts', 'Anda berhasil Log out!');
     }
 
     //tampil daftar user
