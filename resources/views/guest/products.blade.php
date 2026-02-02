@@ -10,21 +10,31 @@
             name="search"
             placeholder="Search Products Here..."
             value="{{ request('search') }}"
-            class="border px-4 py-2 flex-1 rounded-lg">
+            class="w-full appearance-none px-4 py-3 flex-1 text-sm text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
 
-        <select name="sort"
-            id="filterStatus"
-            class="border px-3 py-2 rounded-lg"
-            placeholder="Sort by Price">
-            <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>
-                High to low
-            </option>
-            <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>
-                Low to high
-            </option>
-        </select>
-
+        <div class="relative w-fit">
+            <select
+                name="sort"
+                id="filterStatus"
+                class="w-full appearance-none pl-4 pr-10 py-3 text-sm text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
+                <option value="">Sort by Price</option>
+                <option value="price_desc">High to low</option>
+                <option value="price_asc">Low to high</option>
+            </select>
+        </div>
     </form>
+</div>
+
+<img src="{{ asset('img/banner.png') }}" alt="" class="w-full">
+
+<div class="flex items-center mt-10 mb-14">
+    <span class="flex-1 h-px bg-gray-300"></span>
+
+    <h1 class="mx-6 font-sans text-2xl tracking-wide whitespace-nowrap">
+        WE PRESENT
+    </h1>
+
+    <span class="flex-1 h-px bg-gray-300"></span>
 </div>
 
 <div id="card-product" class="mt-10">
