@@ -46,6 +46,7 @@
             </div>
 
             <div class="flex gap-4 mt-8">
+                <h2 class="font-sans">Available on : </h2>
                 @foreach ($product->links as $link)
                     <a href="{{ $link->url }}" target="_blank"
                         class="px-6 py-3 bg-black text-white rounded-lg">
