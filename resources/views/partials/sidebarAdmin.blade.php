@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-[#f4f4f4]">
+<body class="bg-[#f4f4f4] font-sans">
     {{-- Sidebar Container Atas --}}
     <div
         class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
@@ -119,7 +119,7 @@
                     </svg>
                 </div>
                 <p class="text-xs text-gray-500 mb-3">View the live version of the website.</p>
-                <a href="#" target="_blank"
+                <a href="{{ route ('home') }}" target="_blank"
                     class="block text-center bg-gray-700 text-white text-xs py-2 rounded-lg hover:bg-gray-900 transition-colors">
                     Visit Landing page
                 </a>
