@@ -17,7 +17,7 @@ class BannerController extends Controller
         }
         $status = $request->input('status');
         $search = $request->input('search');
-        $status = $request->input('status');
+
 
         $banner = Banner::query()
             ->when($search, function ($query, $search) {
@@ -33,7 +33,7 @@ class BannerController extends Controller
         if ($request->ajax()) {
             return view('admin.banner.search_cardH', compact('banner'))->render();
         }
-        return view('admin.banner.Banner', compact('banner'));
+        return view('admin.banner.Banner', compact('banner', 'status', 'search'));
     }
 
     /**
@@ -156,9 +156,9 @@ class BannerController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin.banner.search_cardT', compact('banner'))->render();
+        return view('admin.banner.search_cardT', compact('banner', 'search'))->render();
         }
-        return view('admin.banner.btrash', compact('banner'));
+        return view ('admin.banner.btrash', compact ('banner', 'search'));
     }
 
     public function restoreProses($id)

@@ -27,7 +27,7 @@
                                     <span>Delete</span>
                                 </button>
                             </form> 
-                            <form method="POST" action="{{ route('Btrash.restore', $b->id_banner) }}">
+                            <form method="POST" action="{{ route('Btrash.restore', $b->id_banner) }}" >
                                 @csrf 
                                 <button type="submit" 
                                         onclick="return confirm('Yakin ingin me restore banner ini?')" 
@@ -53,7 +53,11 @@
         </div>
     @empty
         <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
-            Data "{{ request('search') }}" tidak ditemukan.
+            @if ($search)
+            <span class="font-bold">"{{ $search }}"</span> not found.
+            @else
+            Empty trash
+            @endif
         </div>
     @endforelse
 </div>
