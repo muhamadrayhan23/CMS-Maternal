@@ -38,8 +38,7 @@
                     <input name="product_name" value="{{ old('product_name', $produk->product_name ?? '') }}"
                         placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
 
-                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>
-                        {{ old('desc', $produk->desc ?? '') }}</textarea>
+                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>{{ old('desc', $produk->desc ?? '') }}</textarea>
 
                     <input type="text" id="price" name="price"
                         class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Price"
