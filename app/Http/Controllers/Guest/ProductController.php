@@ -39,9 +39,12 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function detail($id)
     {
-        //
+        $product = Product::with(['details', 'links'])
+            ->findOrFail($id);
+
+        return view('guest.detProduct', compact('product'));
     }
 
     /**
