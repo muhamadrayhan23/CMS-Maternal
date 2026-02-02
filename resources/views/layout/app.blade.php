@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,13 +12,16 @@
     {{-- SIDEBAR --}}
     @include('partials.sidebarAdmin')
 
-    {{-- CONTENT --}}
-    <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
-        <div class="p-10">
-            @yield('content')
-        </div>
-    </main>
-</div>
-
+        <div id="overlay" class="fixed inset-0 bg-black/50 z-[65] hidden md:hidden"></div>
+        {{-- CONTENT --}}
+        <main class="md:ml-64 min-h-screen p-4">
+            <div class="p-10">
+                @yield('content')
+            </div>
+        </main>
+    </div>  
+<script>
+    const 
+</script>
 </body>
-</html> -->
+</html>

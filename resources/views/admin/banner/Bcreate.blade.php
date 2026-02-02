@@ -37,8 +37,8 @@
                         <label class="text-sm font-medium text-gray-700">Image</label>
                         <div class="relative flex items-center">
                             <input type="text" placeholder="Banner Image" readonly
-                                class="file-name-display w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
-                            <label class="absolute right-2 px-3 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
+                                class="file-name-display w-full px-4 py-3 pr-28 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
+                            <label class="absolute right-2 px-2 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
                                 Choose File
                                 <input type="file" name="banners[0][image]" class="hidden" onchange="updateFileName(this)">
                             </label>

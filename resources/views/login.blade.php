@@ -14,10 +14,10 @@
                 </div>
         </div>
 
-        <div class="w-full md:w-1/2 max-w-sm mx-auto ">
+        <div class="w-full md:w-1/2 max-w-md mx-auto ">
             <div class="text-center">
                 <h1 class="font-semibold text-5xl tracking-tight text-black uppercase mb-5">welcome ! </h1>
-                <p class="text-lg mt-5 mb-8">Login to manage website content and data</p>
+                <p class="text-lg mt-5 mb-7">Login to manage website content and data</p>
             </div>
         
                 <form action="{{ route ('loginForm')}}" method="POST">

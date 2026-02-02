@@ -16,7 +16,7 @@ class BannerController extends Controller
 
         $banner = Banner::query()
         ->when($search, function ($query, $search){
-            return $query->where('banner_name', 'like', '%{$search}%');
+            return $query->where('banner_name', 'like', "%{$search}%");
         })
         ->when($status !== null && $status !== '', function ($query) use ($status){
             return $query->where('is_active', $status);
@@ -26,9 +26,9 @@ class BannerController extends Controller
         ->withQueryString(); 
 
         if ($request->ajax()) {
-        return view('admin.banner.search_cardH', compact('banner'))->render();
+        return view('admin.banner.search_cardH', compact('banner', 'search', 'status'))->render();
         }
-        return view('admin.banner.Banner', compact('banner'));
+        return view('admin.banner.Banner', compact('banner', 'status', 'search'));
     }
 
     /**
@@ -151,9 +151,9 @@ class BannerController extends Controller
         ->withQueryString(); 
 
         if ($request->ajax()) {
-        return view('admin.banner.search_cardT', compact('banner'))->render();
+        return view('admin.banner.search_cardT', compact('banner', 'search'))->render();
         }
-        return view ('admin.banner.btrash', compact ('banner'));
+        return view ('admin.banner.btrash', compact ('banner', 'search'));
     }
 
     public function restoreProses($id){

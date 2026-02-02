@@ -4,7 +4,6 @@
             <div class="relative h-48 rounded-t-2xl overflow-hidden">
                 <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover" alt="Banner">
                 <div class="absolute top-3 left-3">
-                    {{-- // kek mana nih logika nya ya --}}
                     <span class="px-3 py-1 text-[10px] uppercase {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
                         {{ $b->is_active ? 'Published' : 'Unpublished' }}
                     </span>
@@ -63,9 +62,15 @@
                 </div>
             </div>
         </div>
-    @empty
+       @empty
         <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
-            Data "{{ request('search') }}" tidak ditemukan.
+            @if ($search)
+            <span class="font-bold">"{{ $search }}"</span> not found.
+            @elseif($status !== null && $status !== '')
+            There is no banner with that status <span class="font-bold">{{$status == 1? 'Published' : 'Unpublished' }}</span>
+            @else
+            There are no banners available yet
+            @endif
         </div>
     @endforelse
 </div>
