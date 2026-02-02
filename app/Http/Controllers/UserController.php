@@ -78,6 +78,7 @@ class UserController extends Controller
         return redirect('login')->with('alerts');
     }
 
+    //tampil daftar user
     public function index(Request $request)
     {
         $search = $request->search;
@@ -86,22 +87,17 @@ class UserController extends Controller
             return $query->where('name', 'like', "%$search%");
         })->latest()->get();
 
-        // Jika request AJAX → return partial HTML
-        // if ($request->ajax()) {
-        //     return view('admin.user.tambahan.usershow', compact('users'))->render();
-        // }
-
         return view('admin.user.user', compact('users'));
     }
 
 
-    //tampil form buat tambah link
+    //tampil form buat tambah user
     public function create()
     {
         return view('admin.user.creuser');
     }
 
-    //simpan link baru
+    //simpan user baru
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -118,13 +114,13 @@ class UserController extends Controller
             ->with('success', 'User berhasil ditambahkan');
     }
 
-    //panggil edit link
+    //panggil edit user
     public function edit(User $user)
     {
         return view('admin.user.eduser', compact('user'));
     }
 
-    //update link
+    //update user
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -148,9 +144,7 @@ class UserController extends Controller
             ->with('success', 'User berhasil diupdate');
     }
 
-
-
-    //delete link
+    //delete user
     public function destroy(User $user)
     {
         $user->delete();
@@ -159,4 +153,13 @@ class UserController extends Controller
             ->with('success', 'User berhasil dihapus');
     }
 
+    //toggle toggle an
+    public function toggle(User $user)
+    {
+        $user->update([
+            'is_active' => ! $user->is_active
+        ]);
+
+        return back();
+    }
 }

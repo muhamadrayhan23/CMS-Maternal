@@ -1,3 +1,10 @@
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@extends('layout.admin')
+
+@section('content')
+
+
+
 <div class="row justify-content-center mt-3">
     <div class="col-md-8">
 
@@ -53,3 +60,5 @@
         </div>
     </div>
 </div>
+
+@endsection

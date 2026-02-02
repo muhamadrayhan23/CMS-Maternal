@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/link/{link}/edit', [AdmLinksController::class, 'edit'])->name('editLink');
     Route::put('/link/{link}', [AdmLinksController::class, 'update'])->name('updateLink');
     Route::delete('/link/{link}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
+    Route::patch('/link/{link}/toggle', [AdmLinksController::class, 'toggle'])->name('link.toggle');
 
     //manajemen user 
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
@@ -57,7 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user', [UserController::class, 'store'])->name('storeUser');
     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('editUser');
     Route::put('/user/{user}', [UserController::class, 'update'])->name('updateUser');
-    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('deleteUser');  
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('deleteUser');
+    Route::patch('/user/{user}/toggle', [UserController::class, 'toggle'])->name('user.toggle');
 
     //Logout
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
