@@ -2,7 +2,7 @@
 @extends('layout.admin')
 
 @section('content')
-<div class="h-screen" id="wrapp"> 
+<div class="h-screen font-sans" id="wrapp"> 
     <form action="{{ route ('addBanner') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="flex items-center justify-between mb-6">

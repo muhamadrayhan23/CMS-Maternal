@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white">
+<body class="bg-white font-sans">
     <div class="flex flex-col md:flex-row min-h-screen items-center justify-center ">
         <div class="w-full md:w-1/2 p-5">
                 <div class="rounded-[1rem] hidden md:block overflow-hidden h-[650px] w-full">

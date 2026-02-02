@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
     @forelse($banner as $b)
         <div class="bg-white rounded-2xl border border-gray-300 overflow-visible">
             <div class="relative h-48 rounded-t-2xl overflow-hidden">
