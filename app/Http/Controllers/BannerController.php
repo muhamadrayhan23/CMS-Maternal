@@ -13,7 +13,7 @@ class BannerController extends Controller
     public function index(Request $request)
     {
         if (!session()->has('banner_back')) {
-            session(['banner_back' => url()->full()]);
+            session(['produk_back' => url()->full()]);
         }
         $status = $request->input('status');
         $search = $request->input('search');
@@ -156,9 +156,9 @@ class BannerController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
-        return view('admin.banner.search_cardT', compact('banner', 'search'))->render();
+            return view('admin.banner.search_cardT', compact('banner', 'search'))->render();
         }
-        return view ('admin.banner.btrash', compact ('banner', 'search'));
+        return view('admin.banner.btrash', compact('banner', 'search'));
     }
 
     public function restoreProses($id)

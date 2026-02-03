@@ -10,12 +10,13 @@ class AdmLinksController extends Controller
     //tampil semua link
     public function index(Request $request)
     {
+        session(['link_back' => url()->current()]);
         $search = $request->search;
 
         $links = Link::when($search, function ($query, $search) {
             return $query->where('link_name', 'like', "%$search%");
         })->latest()
-        ->paginate(8)->withQueryString(); 
+            ->paginate(8)->withQueryString();
 
         return view('admin.link.index', compact('links'));
     }

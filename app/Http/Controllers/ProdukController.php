@@ -125,6 +125,16 @@ class ProdukController extends Controller
             }
         }
 
+        $request->validate([
+            'link_image.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024|dimensions:width=60,height=60',
+            'image_product.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=900,height=900',
+        ], [
+            'link_image.*.dimensions' =>
+            'Ukuran foto link harus 60 x 60 pixel',
+
+            'image_product.*.dimensions' =>
+            'Ukuran foto produk harus 900 x 900 pixel',
+        ]);
 
         return redirect(session('produk_back', route('produk.index')))
             ->with('success', 'Produk berhasil ditambahkan');
@@ -132,6 +142,7 @@ class ProdukController extends Controller
 
     public function edit($id)
     {
+        session(['produk_back' => url()->previous()]);
         $produk = Product::with(['details', 'links'])
             ->findOrFail($id);
         return view('admin.produk.tambah_produk', compact('produk'));
@@ -220,13 +231,19 @@ class ProdukController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $produk = Product::findOrFail($id);
 
         $produk->deleted_by = auth()->id();
         $produk->save();
         $produk->delete();
+
+        if ($request->from === 'grid') {
+            return redirect()
+                ->route('produk.kelola_card')
+                ->with('success', 'Produk berhasil dihapus');
+        }
 
         return redirect()
             ->route('produk.index')
@@ -260,22 +277,22 @@ class ProdukController extends Controller
         return view('admin.produk.detail_trash', compact('produk'));
     }
 
-    public function restoreProcess($id)
+    public function restoreProcess(request $request, $id)
     {
         Product::withTrashed()->findOrFail($id)->restore();
 
         return redirect()
-            ->route('produk.restore')
+            ->route('produk.restore', ['page' => $request->page])
             ->with('success', 'Produk berhasil direstore');
     }
 
-    public function forceDelete($id)
+    public function forceDelete(Request $request, $id)
     {
         Product::withTrashed()->findOrFail($id)->forceDelete();
 
         return redirect()
-            ->route('produk.restore')
-            ->with('success', 'Produk dihapus permanen');
+            ->route('produk.restore', ['page' => $request->page])
+            ->with('success', 'Produk berhasil dihapus permanen');
     }
 
     public function show($id)
