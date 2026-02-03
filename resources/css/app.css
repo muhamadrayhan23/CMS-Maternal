@@ -17,21 +17,6 @@
 @tailwind utilities;
 
 
-#linktree {
-    scroll-snap-type: x mandatory;
-}
-
-.link-item {
-    transform: scale(0.9);
-    opacity: 0.7;
-}
-
-.link-item:has(:hover),
-.link-item:hover {
-    transform: scale(1);
-    opacity: 1;
-}
-
 
 
 
