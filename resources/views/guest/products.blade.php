@@ -10,13 +10,13 @@
             name="search"
             placeholder="Search Products Here..."
             value="{{ request('search') }}"
-            class="w-full appearance-none px-4 py-3 flex-1 text-sm text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
+            class="w-full appearance-none px-4 py-3 flex-1 text-sm text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-[#F9F9FB] cursor-pointer">
 
         <div class="relative w-fit">
             <select
                 name="sort"
                 id="filterStatus"
-                class="w-full appearance-none pl-4 pr-10 py-3 text-sm text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
+                class="w-full appearance-none pl-4 pr-10 py-3 text-sm  text-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-[#F9F9FB] cursor-pointer">
                 <option value="">Sort by Price</option>
                 <option value="price_desc">High to low</option>
                 <option value="price_asc">Low to high</option>
@@ -25,7 +25,9 @@
     </form>
 </div>
 
-<img src="{{ asset('img/banner.png') }}" alt="" class="w-full">
+<div class="px-10">
+    <img src="{{ asset('img/banner.png') }}" alt="" class="w-full rounded-md">
+</div>
 
 <div class="flex items-center mt-10 mb-14">
 

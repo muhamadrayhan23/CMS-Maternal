@@ -29,7 +29,7 @@ stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lu
         
         {{-- 1. BAGIAN LOGO --}}
         <div class="flex items-center justify-center px-6 h-16">
-            <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
+            <img src="{{ asset('img/logo/logoblack.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
             <button id="closeSidebar" class="md:hidden p-2 text-gray-400 hover:text-black">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 6 6 18"/><path d="m6 6 12 12"/>

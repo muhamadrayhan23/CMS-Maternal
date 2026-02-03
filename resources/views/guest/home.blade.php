@@ -16,7 +16,7 @@
 </style>
 
 <div id="default-carousel" data-carousel="slide">
-    <div class="relative w-full h-screen font-sans -mt-19 overflow-hidden">
+    <div class="relative w-full h-screen font-sans -mt-30 overflow-hidden">
         @foreach($banners as $index => $banner)
         <div class="{{ $index === 0 ? '' : 'hidden' }} duration-700 ease-in-out" data-carousel-item="{{ $index === 0 ? 'active' : '' }}">
             <img src="{{ asset($banner->banner_image) }}"
