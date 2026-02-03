@@ -53,14 +53,14 @@ class BannerController extends Controller
         $request->validate([
             'banners' => 'required|array',
             'banners.*.name' => 'required|string',
-            'banners.*.image' => 'required|image',
+            'banners.*.image' => 'required|image|mimes:jpg,png,jpeg,webp',
         ]);
 
 
-        // looping ini meng insert data ke database 
+        // looping ini insert data ke database 
         foreach ($request->banners as $item) {
             $file = $item['image'];
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = time() . '_' . uniqid() . '_' . $file->getClientOriginalName();
             $file->move(public_path('img'), $filename);
 
             Banner::create([
@@ -107,26 +107,36 @@ class BannerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $banner = Banner::where('id_banner', $id)->firstOrFail();
-        $request->validate([
-            'banner_name' => 'required',
-            'banner_image' => 'nullable|image|mimes:jpg,png,jpeg'
-        ]);
 
+    // Cari data, pastiin dapet
+    $banner = Banner::where('id_banner', $id)->firstOrFail();
 
-        $filename = $banner->banner_image;
+    $request->validate([
+        'banner_name' => 'required',
+        'banner_image' => 'nullable|image|mimes:jpg,png,jpeg,webp'
+    ]);
 
-        if ($request->hasFile('banner_image')) {
-            $filename = time() . '_' . $request->banner_image->getClientOriginalName();
-            $request->banner_image->move(public_path('img'), $filename);
+    $data = $request->only(['banner_name']);
+
+    if($request->hasFile('banner_image')){
+        //hapus foto lama
+        if($banner->banner_image && file_exists(public_path($banner->banner_image))) {
+            unlink(public_path($banner->banner_image));
         }
+    
 
-        $banner->update([
-            'banner_name' => $request->banner_name,
-            'banner_image' => $filename,
-        ]);
-        return redirect()->route('Bhome');
+    $file = $request->file('banner_image');
+    $filename = time(). '_' . $file->getClientOriginalName();
+    $file->move(public_path('img'), $filename);
+
+    $data['banner_image'] = 'img/' . $filename;
     }
+
+    $banner->update($data);
+
+    return redirect()->route('Bhome')->with('success', 'Berhasil update bray!');
+    }
+       
 
     /**
      * Remove the specified resource from storage.
