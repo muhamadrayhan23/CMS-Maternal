@@ -64,6 +64,13 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/about', function () { return view('guest.about');})->name('about');
 Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
 
+//landing page
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//products
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detproduct');
+
 
 //home
 Route::get('/', [HomeController::class, 'index'])->name('home');

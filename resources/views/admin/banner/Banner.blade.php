@@ -31,7 +31,6 @@
         </div>
     </div>
 
-    {{-- SEARCH & FILTER --}}
     <div class="flex items-center gap-3">
         <div class="relative flex-1">
             <div >

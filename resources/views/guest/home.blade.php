@@ -49,7 +49,6 @@
             <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
             </svg>
-            <span class="sr-only">Previous</span>
         </span>
     </button>
     <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
@@ -57,7 +56,6 @@
             <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
             </svg>
-            <span class="sr-only">Next</span>
         </span>
     </button>
 </div>
@@ -77,7 +75,7 @@
 
         @if ($product->details->count())
         <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                class="w-full h-full object-cover rounded-lg">
+            class="w-full h-full object-cover rounded-lg">
         @else
         <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
             No Image
@@ -104,14 +102,26 @@
         See More
     </a>
 </div>
+
+<section class="pt-12 pb-14 text-center">
+    <span class="block text-[10px] tracking-[0.3em] uppercase text-gray-500 mb-3">
+        Our Essence
+    </span>
+
+    <h2 class="text-4xl md:text-6xl font-normal leading-[1.1] tracking-tight mb-12">
+        Elevating the everyday through <br>
+        <span class="text-gray-400 italic">intentional design</span> and honest craft.
+    </h2>
+</section>
+
 <div id="about us" class="flex mb-5">
     <img src="{{ asset('img/1769659981_ant wpp.png') }}" alt="About Us"
-        class="w-1/2">
+        class="lg:w-1/2 md:w-screen sm:w-screen">
 
     <div class="">
         <div class="flex items-center justify-between">
             <h1 class="ml-5 text-5xl font-bold">THE STORY BEHIND</h1>
-            <a href="#"
+            <a href="{{ route('about') }}"
                 class="flex gap-3 mr-5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
                     <path d="M18 8L22 12L18 16" />

@@ -29,7 +29,7 @@ class ProductController extends Controller
 
         $products = $query->where('is_active', true)->paginate(10)->withQueryString();
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
             return view('guest.searchProducts', compact('products'));
         }
 
@@ -39,9 +39,17 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function detail($id)
     {
-        //
+        $product = Product::with(['details', 'links'])
+            ->findOrFail($id);
+
+        $products = Product::with(['details', 'links'])
+            ->where('id_product', '!=', $id)
+            ->limit(4)
+            ->get();
+
+        return view('guest.detProduct', compact('product', 'products'));
     }
 
     /**
