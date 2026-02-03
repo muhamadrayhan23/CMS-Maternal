@@ -140,25 +140,23 @@
     <div class="mt-3">
         {{ $users->withQueryString()->links() }}
     </div>
-</div>
 
-<script>
-    function toggleMenu(btn) {
-        const menu = btn.parentElement.querySelector('.action-menu')
+    <script>
+        function toggleMenu(btn) {
+            const menu = btn.parentElement.querySelector('.action-menu')
 
-        document.querySelectorAll('.action-menu').forEach(m => {
-            if (m !== menu) m.classList.add('hidden')
-        })
+            document.querySelectorAll('.action-menu').forEach(m => {
+                if (m !== menu) m.classList.add('hidden')
+            })
 
-        menu.classList.toggle('hidden');
-    }
-
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.relative')) {
-            document.querySelectorAll('.action-menu')
-                .forEach(m => m.classList.add('hidden'));
+            menu.classList.toggle('hidden');
         }
-    });
-</script>
 
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.relative')) {
+                document.querySelectorAll('.action-menu')
+                    .forEach(m => m.classList.add('hidden'));
+            }
+        });
+    </script>
 @endsection

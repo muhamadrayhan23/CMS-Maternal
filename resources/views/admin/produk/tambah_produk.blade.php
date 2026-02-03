@@ -1,5 +1,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
+@section('title', isset($produk) ? 'Edit Product' : 'Add New Product')
 
 @section('content')
     <div class="h-screen" id="wrapp">
@@ -13,7 +14,8 @@
 
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
-                        <a href="{{ route('produk.index') }}" class="text-gray-800 hover:text-black">
+                        <a href="{{ session('produk_back', route('dashboardadmin')) }}"
+                            class="text-gray-800 hover:text-black">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left">
@@ -36,9 +38,13 @@
                     <input name="product_name" value="{{ old('product_name', $produk->product_name ?? '') }}"
                         placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
 
-                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>{{ old('desc', $produk->desc ?? '') }}</textarea>
-                    <input name="price" type="number" value="{{ old('price', $produk->price ?? '') }}"
-                        placeholder="Price" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
+                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>
+                        {{ old('desc', $produk->desc ?? '') }}</textarea>
+
+                    <input type="text" id="price" name="price"
+                        class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Price"
+                        value="{{ old('price', isset($produk) ? 'Rp ' . number_format($produk->price, 0, ',', '.') : '') }}"
+                        required oninput="formatRupiah(this)" max="999999999999999" required>
                 </div>
 
                 <div class="bg-white rounded-2xl p-8 shadow-sm mb-8">
@@ -52,8 +58,7 @@
                                 @endif
 
                                 <input type="file" name="link_image[]"
-                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600"
-                                    required>
+                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
 
                                 @if ($link && $link->link_image)
                                     <img src="{{ asset('storage/' . $link->link_image) }}" class="w-20">
@@ -90,8 +95,7 @@
                                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
 
                                 <input type="file" name="image_product[]"
-                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600"
-                                    required>
+                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
 
                                 @if ($detail && $detail->image_product)
                                     <img src="{{ asset('storage/' . $detail->image_product) }}" class="w-20">
@@ -100,7 +104,7 @@
                                 <input name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}"
                                     placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
 
-                                <input name="atribut_value[]" value="{{ $detail->atribut_value ?? '' }}"
+                                <input name="atribut_value[]" value="{{ $detail->atribute_value ?? '' }}"
                                     placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
 
                                 <button type="button" onclick="removeRow(this)"
@@ -152,6 +156,13 @@
 
         function removeRow(btn) {
             btn.parentElement.remove()
+        }
+
+        function formatRupiah(el) {
+            let angka = el.value.replace(/[^0-9]/g, '');
+            let format = new Intl.NumberFormat('id-ID').format(angka);
+
+            el.value = angka ? 'Rp ' + format : '';
         }
     </script>
 @endsection

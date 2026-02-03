@@ -22,9 +22,9 @@ Route::middleware(['auth'])->group(function () {
 
     //manajemen banner
     Route::get('/banner', [BannerController::class, 'index'])->name('Bhome');
-    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB'); 
+    Route::get('/addBanner', [BannerController::class, 'create'])->name('addB');
     Route::post('/addBanner', [BannerController::class, 'store'])->name('addBanner');
-    Route::patch('/banner/{banner}/toggle', [BannerController::class, 'toggle'])->name('banner.toggle');
+    Route::patch('/banner/{banner}/status', [BannerController::class, 'status'])->name('banner.toggle');
     Route::get('/banner/edit/{id}', [BannerController::class, 'edit'])->name('editB');
     Route::put('/banner/update/{id}', [BannerController::class, 'update'])->name('updateBanner');
     Route::delete('/banner/delete/{id}', [BannerController::class, 'destroy'])->name('dBanner');
@@ -63,10 +63,10 @@ Route::middleware(['auth'])->group(function () {
 
     //Logout
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-
 });
 
-//About
-    Route::view('/about', 'guest.about');
+Route::get('/about', function () { return view('guest.about');})->name('about');
+Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
+
 
 

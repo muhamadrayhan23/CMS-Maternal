@@ -39,6 +39,8 @@ class UserController extends Controller
 
     public function dashboard()
     {
+        session()->forget('produk_back');
+        session()->forget('banner_back');
         $totalProducts = Product::count();
         $publishedProducts = Product::where('is_active', 1)->count();
 
@@ -48,7 +50,6 @@ class UserController extends Controller
         $publishedBanners = Banner::where('is_active', 1)->count();
 
         $totalUsers = User::count();
-        // $activeUsers = User::where('is_active', 1)->count();
 
         $latestProducts = Product::latest()->take(3)->get();
         $latestBanners = Banner::latest()->take(2)->get();
@@ -62,7 +63,6 @@ class UserController extends Controller
             'totalBanners',
             'publishedBanners',
             'totalUsers',
-            // 'activeUsers',
             'latestProducts',
             'latestBanners',
             'links',
@@ -75,7 +75,7 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->regenerateToken();
 
-        return redirect('login')->with('alerts');
+        return redirect()->route('home')->with('alerts', 'Anda berhasil Log out!');
     }
 
     //tampil daftar user
