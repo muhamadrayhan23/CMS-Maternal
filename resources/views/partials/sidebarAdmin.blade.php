@@ -11,7 +11,7 @@
 
 <body class="bg-[#f4f4f4] font-sans ">
     
-    <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
+    {{-- <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
             <button id="openSidebar" class="p-2 text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
@@ -21,7 +21,8 @@
             </button>
         <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-6 w-auto">
         <div class="w-10"></div>
-    </div>
+    </div> --}} 
+    {{-- buat responsive yah --}}
 
 
 
