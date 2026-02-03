@@ -3,7 +3,7 @@
 
 
 @section('content')
-<div class="h-screen"> 
+<div class="h-screen font-sans"> 
     <form action="{{ route ('updateBanner', $banner->id_banner) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
