@@ -34,7 +34,11 @@
                 </div>
 
                 <div class="bg-white rounded-2xl p-8 shadow-sm space-y-4 mb-8">
-                    <h3 class="font-semibold text-gray-800">Product Info</h3>
+                    <div class="mb-4">
+                        <label class="text-sm font-semibold text-gray-800">
+                            Product Overview <span class="text-red-500">*</span>
+                        </label>
+                    </div>
                     <input name="product_name" value="{{ old('product_name', $produk->product_name ?? '') }}"
                         placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
 
@@ -164,30 +168,30 @@
             el.value = angka ? 'Rp ' + format : '';
         }
 
-        document.addEventListener('change', function(e) {
-            if (e.target.type !== 'file') return;
+        // document.addEventListener('change', function(e) {
+        //     if (e.target.type !== 'file') return;
 
-            const file = e.target.files[0];
-            if (!file) return;
+        //     const file = e.target.files[0];
+        //     if (!file) return;
 
-            const isLink = e.target.name.includes('link_image');
-            const requiredWidth = isLink ? 60 : 900;
-            const requiredHeight = isLink ? 60 : 900;
+        //     const isLink = e.target.name.includes('link_image');
+        //     const requiredWidth = isLink ? 60 : 900;
+        //     const requiredHeight = isLink ? 60 : 900;
 
-            const img = new Image();
-            img.src = URL.createObjectURL(file);
+        //     const img = new Image();
+        //     img.src = URL.createObjectURL(file);
 
-            img.onload = () => {
-                if (img.width !== requiredWidth || img.height !== requiredHeight) {
-                    alert(
-                        isLink ?
-                        'Ukuran foto link harus 60 x 60 px' :
-                        'Ukuran foto produk harus 900 x 900 px'
-                    );
-                    e.target.value = '';
-                }
-                URL.revokeObjectURL(img.src);
-            };
-        });
+        //     img.onload = () => {
+        //         if (img.width !== requiredWidth || img.height !== requiredHeight) {
+        //             alert(
+        //                 isLink ?
+        //                 'Ukuran foto link harus 60 x 60 px' :
+        //                 'Ukuran foto produk harus 900 x 900 px'
+        //             );
+        //             e.target.value = '';
+        //         }
+        //         URL.revokeObjectURL(img.src);
+        //     };
+        // });
     </script>
 @endsection

@@ -8,7 +8,7 @@
             <div class="max-w-7xl mx-auto w-full">
                 <div class="bg-white rounded-xl border border-gray-200 p-5 ">
                     <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-                        <h3 class="text-xl font-bold font-sans">MANAGE PRODUCTS</h3>
+                        <h3 class="text-sm font-bold font-sans">MANAGE PRODUCTS</h3>
                         <div class="flex flex-wrap gap-2">
                             <div class="flex flex-wrap gap-2">
                                 <a href="{{ route('produk.restore') }}"

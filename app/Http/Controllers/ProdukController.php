@@ -12,9 +12,8 @@ class ProdukController extends Controller
 {
     public function index(Request $request)
     {
-        if (!session()->has('produk_back')) {
-            session(['produk_back' => url()->full()]);
-        }
+
+        session(['produk_back' => url()->full()]);
         $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
@@ -37,9 +36,8 @@ class ProdukController extends Controller
 
     public function kelola_card(Request $request)
     {
-        if (!session()->has('produk_back')) {
-            session(['produk_back' => url()->full()]);
-        }
+
+        session(['produk_back' => url()->full()]);
         $query = Product::with(['details', 'links'])->latest();
 
         if ($request->filled('search')) {
@@ -239,14 +237,7 @@ class ProdukController extends Controller
         $produk->save();
         $produk->delete();
 
-        if ($request->from === 'grid') {
-            return redirect()
-                ->route('produk.kelola_card')
-                ->with('success', 'Produk berhasil dihapus');
-        }
-
-        return redirect()
-            ->route('produk.index')
+        return redirect(session('produk_back', route('produk.index')))
             ->with('success', 'Produk berhasil dihapus');
     }
 

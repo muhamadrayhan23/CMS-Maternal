@@ -12,9 +12,8 @@ class BannerController extends Controller
      */
     public function index(Request $request)
     {
-        if (!session()->has('banner_back')) {
-            session(['produk_back' => url()->full()]);
-        }
+
+        session(['banner_back' => url()->full()]);
         $status = $request->input('status');
         $search = $request->input('search');
 

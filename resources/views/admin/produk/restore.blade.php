@@ -140,7 +140,7 @@
                                         <th class="p-4 w-56">Description</th>
                                         <th class="p-4 w-32">Price</th>
                                         <th class="p-4 w-28">Image</th>
-                                        <th class="p-4 w-15">Action</th>
+                                        <th class="p-4 w-15 text-left">Action</th>
                                     </tr>
                                 </thead>
 
@@ -177,7 +177,7 @@
                                                             <input type="hidden" name="page"
                                                                 value="{{ request('page') }}">
                                                             <button onclick="return confirm('Pulihkan produk ini?')"
-                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-green-700">
+                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 text-left">
                                                                 Restore
                                                             </button>
                                                         </form>
@@ -192,7 +192,7 @@
                                                                 value="{{ request('page') }}">
                                                             <button
                                                                 onclick="return confirm('Hapus PERMANEN? Data tidak bisa dikembalikan!')"
-                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-red-700">
+                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 text-left">
                                                                 Delete Permanen
                                                             </button>
                                                         </form>
