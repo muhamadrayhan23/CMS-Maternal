@@ -9,8 +9,9 @@ $isProductPage = request()->routeIs('products*');
 <nav id="main-navbar"
     data-product="{{ request()->routeIs('products*') ? '1' : '0' }}"
     data-about="{{ request()->routeIs('about*') ? '1' : '0' }}"
+    data-home="{{ request()->routeIs('home') ? '1' : '0' }}"
     class="flex w-full h-18.75 items-center gap-56.25 px-21.75
-     bg-transparent text-white transition-all duration-300">
+     bg-transparent text-white transition-all duration-300 justify-between">
 
     <a href="{{ route('home') }}">
         <img
@@ -23,7 +24,7 @@ $isProductPage = request()->routeIs('products*');
     </a>
 
 
-    <div class="w-196 h-6.5 flex items-center gap-17 text-current mr-3.25 font-sans text-base font-light">
+    <div class="flex items-center gap-17 text-current mr-3.25 font-sans text-base font-light">
 
         <!-- <a href="{{ route('home') }}"
             class="group relative inline-block px-1 py-2 {{ request()->routeIs('products*') }}">
@@ -43,10 +44,12 @@ $isProductPage = request()->routeIs('products*');
             <span>Products</span>
 
             <span
-                class="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-[#373737] transition-all duration-300
+            class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
             {{ request()->routeIs('products*') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
             origin-center">
             </span>
+
+
         </a>
 
 
@@ -57,7 +60,7 @@ $isProductPage = request()->routeIs('products*');
             <span>About Us</span>
 
             <span
-                class="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-[#373737] transition-all duration-300
+            class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
             {{ request()->routeIs('about*') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
             origin-center">
             </span>
@@ -69,14 +72,14 @@ $isProductPage = request()->routeIs('products*');
             <span>Links</span>
 
             <span
-                class="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-[#373737] transition-all duration-300
+            class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
             {{ request()->routeIs('#') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
             origin-center">
             </span>
         </a>
 
         <a href="{{ route('login') }}"
-            class="group relative inline-flex items-center gap-2 px-4 py-2">
+            class="group relative inline-flex items-center gap-2 py-2">
 
             <svg xmlns="http://www.w3.org/2000/svg"
                 width="20" height="20"
@@ -94,7 +97,7 @@ $isProductPage = request()->routeIs('products*');
             <span>Login</span>
 
             <span
-                class="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-[#373737] transition-all duration-300 opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100
+                class="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-current transition-all duration-300 opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100
             origin-center">
             </span>
         </a>

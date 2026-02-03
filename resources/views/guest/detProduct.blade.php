@@ -79,7 +79,7 @@
     @foreach ($products as $product)
     <div class="aspect-square">
 
-        <a href="{{ route('detproduct',  $product->id_product) }}">
+        <a href="{{ route('detproduct',  $product['id_product']) }}">
             <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                 class="w-full h-full object-cover rounded-lg">
         </a>

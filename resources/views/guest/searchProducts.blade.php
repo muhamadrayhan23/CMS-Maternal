@@ -1,7 +1,7 @@
 <div id="product-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 m-10">
 
     @foreach ($products as $product)
-    <div class="aspect-square">
+    <div class="aspect-square transition-all duration-300 ease-out hover:-translate-y-2">
 
         @if ($product->details->count())
         <a href="{{ route('detproduct',  $product->id_product) }}">
