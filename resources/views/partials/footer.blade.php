@@ -1,6 +1,6 @@
 <div class="w-full bg-[#1A1A1A] font-sans py-16 px-10 relative text-white">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
-        
+
         <div class="flex flex-col gap-6">
             <h3 class="text-xl font-bold">Let us know!</h3>
             <div class="text-base leading-relaxed">
@@ -47,6 +47,23 @@
             </div>
         </div>
     </div>
+
+    <div class="w-full h-px bg-white/30 mb-6"></div>
+
+    <div class="text-center mb-0">
+        <p class="text-sm opacity-90">
+            All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
+        </p>
+    </div>
+
+    <div class="w-full h-[1px] bg-white/30 mb-8"></div>
+
+    <div class="text-center">
+        <p class="text-lg opacity-90">
+            All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
+        </p>
+    </div>
+</div>
 
     <div class="w-full h-px bg-white/30 mb-6"></div>
 

@@ -1,58 +1,66 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-<<<<<<< HEAD @extends('layout.app') @section('title', 'Dashboard Admin' ) @section('content') <section
-    class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-8 mb-8">
-    <h3 class="text-2xl font-semibold mb-2">Statistic Overview</h3>
-    <p class="text-gray-300 mb-6">Your store at a glance</p>
+@extends('layout.app')
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
-        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-            <h4 class="text-xl font-sans mb-2 font-bold">Total Products</h4>
-            <div class="text-4xl font-bold">{{ $totalProducts }}
-                <span class="inline-block text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                    Published : {{ $publishedProducts }}
-                </span>
+@section('title', 'Dashboard Admin')
+
+@section('content')
+    <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-6 md:p-8 mb-8">
+        <h3 class="text-xl md:text-2xl font-semibold mb-2">Statistic Overview</h3>
+        <p class="text-gray-300 mb-6 text-sm md:text-base">Your store at a glance</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+                <h4 class="text-lg font-bold mb-1">Total Products</h4>
+                <div class="text-3xl md:text-4xl font-bold">
+                    {{ $totalProducts }}
+                    <span class="block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded w-fit">
+                        Published : {{ $publishedProducts }}
+                    </span>
+                </div>
+                <p class="text-gray-500 text-xs mt-4">Currently listed in the catalog</p>
             </div>
-            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Currently listed in the catalog</p>
-        </div>
-        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-            <h4 class="text-xl font-sans mb-2 font-bold">Total Links</h4>
-            <div class="text-4xl font-bold">{{ $totalLinks }}</div>
-            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Links available on the website</p>
-        </div>
-        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-            <h4 class="text-xl font-sans mb-2 font-bold">Total Banners</h4>
-            <div class="text-4xl font-bold">{{ $totalBanners }}
-                <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                    Published : {{ $publishedBanners }}
-                </span>
+
+            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+                <h4 class="text-lg font-bold mb-1">Total Links</h4>
+                <div class="text-3xl md:text-4xl font-bold">{{ $totalLinks }}</div>
+                <p class="text-gray-500 text-xs mt-4">Links available on the website</p>
             </div>
-            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Banners stored in the system</p>
-        </div>
-        <div class="bg-white text-gray-800 rounded-xl p-6 shadow-md">
-            <h4 class="text-xl font-sans mb-2"><strong>Users</strong></h4>
-            <div class="text-4xl font-bold">{{ $totalUsers }}
-                <span class="inline-block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded">
-                    Active :
-                </span>
+
+            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+                <h4 class="text-lg font-bold mb-1">Total Banners</h4>
+                <div class="text-3xl md:text-4xl font-bold">
+                    {{ $totalBanners }}
+                    <span class="block mt-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded w-fit">
+                        Published : {{ $publishedBanners }}
+                    </span>
+                </div>
+                <p class="text-gray-500 text-xs mt-4">Banners stored in the system</p>
             </div>
-            <p class="text-gray-500 text-xs font-sans mt-4 mb-6">Users registered in the system</p>
+
+            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+                <h4 class="text-lg font-bold mb-1">Users</h4>
+                <div class="text-3xl md:text-4xl font-bold">
+                    {{ $totalUsers }}
+                </div>
+                <p class="text-gray-500 text-xs mt-4">Users registered in the system</p>
+            </div>
         </div>
-    </div>
     </section>
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div class="bg-white rounded-2xl p-6 shadow-md">
-            <div class="flex items-center gap-3 mb-4">
-                <a href="{{ route('produk.index') }}">
-                    <svg class="w-6 h-6 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 20 20">
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl p-5 shadow-md">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+                <a href="{{ route('produk.index') }}" class="shrink-0">
+                    <svg class="w-6 h-6 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
                         <path fill="currentColor"
                             d="M8 1V0v1Zm4 0V0v1Zm2 4v1h1V5h-1ZM6 5H5v1h1V5Zm2-3h4V0H8v2Zm4 0a1 1 0 0 1 .707.293L14.121.879A3 3 0 0 0 12 0v2Zm.707.293A1 1 0 0 1 13 3h2a3 3 0 0 0-.879-2.121l-1.414 1.414ZM13 3v2h2V3h-2Zm1 1H6v2h8V4ZM7 5V3H5v2h2Zm0-2a1 1 0 0 1 .293-.707L5.879.879A3 3 0 0 0 5 3h2Zm.293-.707A1 1 0 0 1 8 2V0a3 3 0 0 0-2.121.879l1.414 1.414ZM2 6h16V4H2v2Zm16 0h2a2 2 0 0 0-2-2v2Zm0 0v12h2V6h-2Zm0 12v2a2 2 0 0 0 2-2h-2Zm0 0H2v2h16v-2ZM2 18H0a2 2 0 0 0 2 2v-2Zm0 0V6H0v12h2ZM2 6V4a2 2 0 0 0-2 2h2Zm16.293 3.293C16.557 11.029 13.366 12 10 12c-3.366 0-6.557-.97-8.293-2.707L.293 10.707C2.557 12.971 6.366 14 10 14c3.634 0 7.444-1.03 9.707-3.293l-1.414-1.414ZM10 9v2a2 2 0 0 0 2-2h-2Zm0 0H8a2 2 0 0 0 2 2V9Zm0 0V7a2 2 0 0 0-2 2h2Zm0 0h2a2 2 0 0 0-2-2v2Z" />
                     </svg>
                 </a>
-                <p class="font-semibold text-2xl">
-                    Latest Products
-                </p>
-                <a href="{{ route('produk.create') }}" class="ml-auto">
+
+                <p class="font-semibold text-lg md:text-xl">Latest Products</p>
+
+                <a href="{{ route('produk.create') }}" class="ml-auto shrink-0">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
@@ -60,30 +68,28 @@
                     </svg>
                 </a>
             </div>
-            <ul class="space-y-4">
+
+            <ul class="space-y-3">
                 @foreach ($latestProducts as $p)
-                    <li class="flex items-center justify-between border p-3 rounded-xl shadow-sm">
-                        <div class="space-y-1">
-                            <p class="font-medium text-lg font-bold">{{ $p->product_name }}</p>
+                    <li class="flex items-center gap-3 border p-3 rounded-xl shadow-sm">
+                        <div class="flex-1 min-w-0">
+                            <p class="font-bold truncate">{{ $p->product_name }}</p>
                             <span class="text-sm text-gray-500">
                                 Rp {{ number_format($p->price, 0, ',', '.') }}
                             </span>
                         </div>
-                        <div class="flex items-center">
-                            @if (optional($p->details->first())->image_product)
-                                <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
-                                    alt="Product Image" class="w-10 h-10 rounded-lg object-cover">
-                            @else
-                                <span class="text-gray-400 text-sm">-</span>
-                            @endif
-                        </div>
 
+                        @if (optional($p->details->first())->image_product)
+                            <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
+                                class="w-10 h-10 rounded-lg object-cover shrink-0">
+                        @else
+                            <span class="text-gray-400 text-sm">-</span>
+                        @endif
                     </li>
                 @endforeach
             </ul>
         </div>
 
-        <!-- Manage Banners -->
         <div class="bg-white rounded-2xl p-6 shadow-md">
             <div class="flex items-center gap-3 mb-4">
                 <a href="{{ route('Bhome') }}">
@@ -94,9 +100,7 @@
                             stroke="#282623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <p class="font-semibold text-2xl">
-                    Manage Banners
-                </p>
+                <p class="font-semibold text-2xl"> Manage Banners </p>
                 <a href="{{ route('addB') }}" class="ml-auto">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -107,14 +111,10 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 @foreach ($latestBanners as $b)
-                    <img src="{{ asset($b->banner_image) }}"
-                        class="w-full h-full object-cover 
-                   {{ $loop->first ? 'border rounded' : '' }}">
+                    <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover rounded-2xl">
                 @endforeach
             </div>
         </div>
-
-        <!-- See Links -->
         <div class="bg-white rounded-2xl p-6 shadow-md">
             <div class="flex items-center gap-3 mb-4">
                 <a href="{{ route('homeLink') }}">
@@ -132,10 +132,8 @@
                         </defs>
                     </svg>
                 </a>
-                <p class="font-semibold text-2xl">
-                    See Links
-                </p>
-                <a href="" class="ml-auto"> {{-- {{ route('adm-links.create') }} --}}
+                <p class="font-semibold text-2xl"> See Links </p>
+                <a href="{{ route('createUser') }}" class="ml-auto">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
@@ -145,15 +143,11 @@
             </div>
             <ul class="space-y-2 text-sm">
                 @foreach ($links as $link)
-                    <li class="border-b pb-2">
-                        {{ $link->title }} :
-                        <span class="text-blue-600">{{ $link->url }}</span>
-                    </li>
+                    <li class="border-b pb-2"> {{ $link->title }} : <span
+                            class="text-blue-600">{{ $link->url }}</span> </li>
                 @endforeach
             </ul>
         </div>
-
-        <!-- Users -->
         <div class="bg-white rounded-2xl p-6 shadow-md">
             <div class="flex items-center gap-3 mb-4">
                 <a href="{{ route('homeUser') }}">
@@ -164,10 +158,8 @@
                             stroke="#282623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <p class="font-semibold text-2xl">
-                    Users
-                </p>
-                <a href="{{ route('produk.create') }}" class="ml-auto">
+                <p class="font-semibold text-2xl"> Users </p>
+                <a href="{{ route('createUser') }}" class="ml-auto">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
@@ -177,16 +169,12 @@
             </div>
             <ul class="space-y-3 text-sm">
                 @foreach ($users as $user)
-                    <li class="border p-3 rounded-xl shadow-sm">
-                        {{ $user->email }}
-                        <span class="block text-xs text-gray-500">Admin</span>
-                    </li>
+                    <li class="border p-3 rounded-xl shadow-sm"> {{ $user->email }} <span
+                            class="block text-xs text-gray-500">Admin</span> </li>
                 @endforeach
             </ul>
         </div>
-
     </section>
-
     </main>
     </div>
 @endsection

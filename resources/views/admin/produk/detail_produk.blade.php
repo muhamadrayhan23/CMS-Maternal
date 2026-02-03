@@ -1,5 +1,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
+@section('title', 'Product Detail')
 
 @section('content')
     <div class="space-y-4">

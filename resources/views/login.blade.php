@@ -2,32 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>@yield('title', 'Login')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <h1>Login</h1>
-    <div class="form-container">
-    <form action="{{ route ('loginForm')}}" method="POST">
-        @csrf
-            @if (session('alerts'))
-                @foreach (session('alerts') as $type => $message)
-                <div class="alert alert-{{ $type }}">
-                {{ $message }}
+<body class="bg-white font-sans">
+    <div class="flex flex-col md:flex-row min-h-screen items-center justify-center ">
+        <div class="w-full md:w-1/2 p-5">
+                <div class="rounded-[1rem] hidden md:block overflow-hidden h-[650px] w-full">
+                    <img src="{{ asset('img/logo/WithModel.webp') }}" alt="" class="w-full h-full object-cover">
                 </div>
-                @endforeach
-            @endif
+        </div>
 
-        <label for="email">Email </label>
-        <input type="email" name="email" id="email" required>
+        <div class="w-full md:w-1/2 max-w-md mx-auto ">
+            <div class="text-center">
+                <h1 class="font-semibold text-5xl tracking-tight text-black uppercase mb-5">welcome ! </h1>
+                <p class="text-lg mt-5 mb-7">Login to manage website content and data</p>
+            </div>
+        
+                <form action="{{ route ('loginForm')}}" method="POST">
+                    @csrf
+                    <div class="space-y-3">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-800">Email :</label>
+                        <input type="text" name="email" placeholder="Enter your email addres" 
+                        class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-800 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400">
+                    </div>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-800">Password :</label>
+                        <input type="password" name="password" placeholder="Enter password" 
+                        class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-800 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400 mb-4">
+                    </div>
+                    
 
-        <button>Submit</button>
+                    <button class="w-full px-4 py-3 bg-[#000000] border rounded-lg font-semibold font-2xl text-gray-100 ">Log in</button>
+                    </div>
+                </form>
 
-    </form>
+        </div>
     </div>
 </body>
 </html>

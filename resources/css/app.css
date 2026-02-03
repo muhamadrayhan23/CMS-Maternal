@@ -13,8 +13,20 @@
   --font-sans: 'Space Grotesk', ui-sans-serif, system-ui;
 }
 @tailwind base;
+@tailwind components;
 @tailwind utilities;
-@tailwind utilities;
+
+
+@layer utilities {
+  .hide-scroll-bar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scroll-bar::-webkit-scrollbar {
+    display: none; 
+  }
+}
+
 
 
 /* ul{

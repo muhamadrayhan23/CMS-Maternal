@@ -1,5 +1,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
+@section('title', 'Product - Grid View')
 
 @section('content')
     <div class="space-y-4">
@@ -95,6 +96,10 @@
                             oninput="submitFilter()">
 
                         <div class="md:col-span-3 flex gap-2 justify-center">
+                            <a href="{{ route('produk.kelola_card') }}"
+                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
+                                All Product
+                            </a>
                             <div class="relative flex-1">
                                 <select name="status"
                                     class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 font-[Space_Grotesk]"
@@ -116,11 +121,6 @@
                                     </svg>
                                 </div>
                             </div>
-
-                            <a href="{{ route('produk.kelola_card') }}"
-                                class="flex-1 flex items-center justify-center px-4 py-2 rounded bg-white border border-gray-300 hover:bg-gray-100 font-[Space_Grotesk]">
-                                All Product
-                            </a>
                         </div>
                     </div>
                 </form>
@@ -133,7 +133,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 font-[Space_Grotesk]">
 
-                    @foreach ($produk as $p)
+                    @forelse ($produk as $p)
                         <div
                             class="bg-white rounded-xl shadow hover:shadow-xl transition flex flex-col overflow-visible relative group">
                             <span
@@ -164,13 +164,13 @@
                                         </button>
 
                                         <div
-                                            class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50">
+                                            class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50 text-left">
 
                                             <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
                                                 <button
-                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5">
                                                     @if ($p->is_active)
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18"height="18"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -197,7 +197,7 @@
                                             </form>
 
                                             <button onclick="toggleSubMenu(this)"
-                                                class="block w-full text-left px-3 py-2 hover:bg-gray-100">
+                                                class="block w-full px-3 py-2 hover:bg-gray-100 text-left">
                                                 View Links
                                             </button>
 
@@ -222,7 +222,7 @@
                                             <form action="{{ route('produk.destroy', $p->id_product) }}" method="POST">
                                                 @csrf @method('DELETE')
                                                 <button onclick="return confirm('Hapus produk?')"
-                                                    class="w-full text-left px-3 py-2 text-red-600 hover:bg-gray-100">
+                                                    class="w-full px-3 py-2 hover:bg-gray-100 text-left">
                                                     Delete
                                                 </button>
                                             </form>
@@ -266,7 +266,21 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div colspan="8"
+                            class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
+                            @if (request('search'))
+                                <span class="font-bold">"{{ request('search') }}"</span> not found
+                            @elseif(request()->filled('status'))
+                                There is no Product with status
+                                <span class="font-bold">
+                                    {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
+                                </span>
+                            @else
+                                There are no Product available yet
+                            @endif
+                        </div>
+                    @endforelse
                 </div>
                 <div class="mt-8 flex justify-end">
                     {{ $produk->links() }}
