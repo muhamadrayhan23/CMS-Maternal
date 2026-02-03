@@ -47,7 +47,7 @@
             <select id="filterStatus" class="w-full appearance-none pl-4 pr-10 py-2 text-sm text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
                 <option value=""> All status </option>
                 <option value="0">Unpublished</option>
-                <option value="1">published</option>
+                <option value="1">Published</option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check">
@@ -101,10 +101,15 @@
         .then( data => {
             container.innerHTML = data
         })
+        .catch(error => console.error('Error nih, Bre:', error));
     }
 
     searchInput.addEventListener('input', fetchFilter)
-    filterBanner.addEventListener('change', fetchFilter)
+    filterBanner.addEventListener('change', function(e){
+        // console.log('event ke trigger ga?')
+        e.preventDefault(); //menghentikan behavior form 
+        fetchFilter();
+    })
 
 </script>
 @endsection

@@ -75,7 +75,7 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->regenerateToken();
 
-        return redirect('login')->with('alerts', 'Anda berhasil Log out!');
+        return redirect()->route('home')->with('alerts', 'Anda berhasil Log out!');
     }
 
     //tampil daftar user
@@ -85,7 +85,7 @@ class UserController extends Controller
 
         $users = User::when($search, function ($query, $search) {
             return $query->where('name', 'like', "%$search%");
-        })->latest()->get();
+        })->latest()->paginate(10)->withQueryString();
 
         return view('admin.user.user', compact('users'));
     }

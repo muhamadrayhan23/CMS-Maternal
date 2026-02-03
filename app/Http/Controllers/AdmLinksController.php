@@ -14,7 +14,8 @@ class AdmLinksController extends Controller
 
         $links = Link::when($search, function ($query, $search) {
             return $query->where('link_name', 'like', "%$search%");
-        })->latest()->get();
+        })->latest()
+        ->paginate(8)->withQueryString(); 
 
         return view('admin.link.index', compact('links'));
     }

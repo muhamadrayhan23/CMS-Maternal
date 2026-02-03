@@ -9,14 +9,32 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-[#f4f4f4] font-sans">
-    {{-- Sidebar Container Atas --}}
-    <div
-        class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
+<body class="bg-[#f4f4f4] font-sans ">
+    
+<div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
+<button id="openSidebar" class="p-2 text-gray-600">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
+<path d="M3 5h18"/><path d="M3 12h18"/>
+<path d="M3 19h18"/></svg>
+</button>
+<img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-6 w-auto">
+<div class="w-10"></div>
+</div>
 
+
+
+    {{-- Sidebar Container Atas --}}
+    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
+        
         {{-- 1. BAGIAN LOGO --}}
-        <div class="flex items-center justify-center h-16">
+        <div class="flex items-center justify-center px-6 h-16">
             <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
+            <button id="closeSidebar" class="md:hidden p-2 text-gray-400 hover:text-black">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+        </button>
         </div>
 
         {{-- Fitur --}}
@@ -126,14 +144,15 @@
             </div>
 
             {{-- User & Logout --}}
-            <div class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between">
-                <form action="{{ route('logout') }}" method="POST" class="flex items-center">
+            <div class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between hover:text-red-400 transition-all duration-300 group">
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center" >
                     @csrf
-                    <button type="submit"
-                        class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group">
-                        <p class="font-semibold text-sm px-2 py-2 truncate ">{{ auth()->user()->email }}</p>
+                    <button type="submit" onclick="return confirm('Yakin anda ingin log out?')"
+                        class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group ">
+                        <p class="font-semibold text-sm px-2 py-2 truncate group-hover:text-red-600 transition-colors duration-300 ">{{ auth()->user()->email }}</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            class="text-gray-500 group-hover:text-red-600 transition-colors duration-300"
                             stroke-linejoin="round">
                             <path d="m16 17 5-5-5-5" />
                             <path d="M21 12H9" />

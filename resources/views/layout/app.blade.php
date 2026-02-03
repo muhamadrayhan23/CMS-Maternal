@@ -14,8 +14,9 @@
         {{-- SIDEBAR --}}
         @include('partials.sidebarAdmin')
 
+        <div id="overlay" class="fixed inset-0 bg-black/50 z-[65] hidden md:hidden"></div>
         {{-- CONTENT --}}
-        <main class="flex-1 min-h-screen md:ml-64 transition-all duration-300">
+        <main class="md:ml-64 min-h-screen p-4">
             <div class="p-10">
                 @yield('content')
             </div>
