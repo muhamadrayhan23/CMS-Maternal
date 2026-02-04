@@ -10,7 +10,7 @@ $isProductPage = request()->routeIs('products*');
     data-product="{{ request()->is('products*') ? '1' : '0' }}"
     data-about="{{ request()->routeIs('about') ? '1' : '0' }}"
     data-home="{{ request()->routeIs('home') ? '1' : '0' }}"
-    data-link="{{ request()->routeIs('link') ? '1' : '0' }}"
+    data-link="{{ request()->routeIs('linktree') ? '1' : '0' }}"
     class="flex w-full h-18.75 items-center gap-56.25 p-10 py-15
      bg-transparent text-white transition-all duration-300 justify-between">
 

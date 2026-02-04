@@ -78,7 +78,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detproduct');
 
-
 //home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

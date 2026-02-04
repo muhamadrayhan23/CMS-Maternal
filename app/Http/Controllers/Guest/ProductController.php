@@ -57,7 +57,13 @@ class ProductController extends Controller
             ->limit(4)
             ->get();
 
-        return view('guest.detProduct', compact('product', 'products'));
+        $breadcrumbs = [
+        ['title' => 'Home', 'url' => route('home')],
+        ['title' => 'Products', 'url' => route('products')],
+        ['title' => $product->product_name]
+    ];
+        
+        return view('guest.detProduct', compact('product', 'products', 'breadcrumbs'));
     }
 
     /**
