@@ -12,13 +12,20 @@ class AdmLinksController extends Controller
     {
         $search = $request->search;
 
-        $links = Link::when($search, function ($query, $search) {
-            return $query->where('link_name', 'like', "%$search%");
-        })->latest()
-        ->paginate(8)->withQueryString(); 
+        $links = Link::when($search, function ($q) use ($search) {
+            $q->where('link_name', 'like', "%{$search}%");
+        })
+            ->latest()
+            ->paginate(8)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.link.tablelink', compact('links'))->render();
+        }
 
         return view('admin.link.index', compact('links'));
     }
+
 
     //tampil form buat tambah link
     public function create()
@@ -29,24 +36,42 @@ class AdmLinksController extends Controller
     //simpan link baru
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'link_logo' => 'required|image|mimes:jpg,jpeg,png',
-            'link_name' => 'required|string|max:100|unique:link,link_name,NULL,id_link,deleted_at,NULL',
-            'link_address' => 'required|string|max:255',
-        ]);
+        $request->validate([
+            'links.*.name' => 'required|string|max:100',
+            'links.*.address' => 'required|string|max:255',
+            'links.*.logo_link' => 'required|image|mimes:jpg,jpeg,png',
+        ],
+        [
+            'links.*.name.required' => 'Link Name is required',
+            'links.*.name.max' => 'Link Name may not be greater than 100 characters',
 
-        $file = $request->file('link_logo');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('link_pic'), $filename);
+            'links.*.address.required' => 'Link Address is required',
+            'links.*.address.max' => 'Link Address may not be greater than 255 characters',
 
-        $data['link_logo'] = 'link_pic/' . $filename;
-        $data['is_active'] = $request->boolean('is_active');
+            'links.*.logo_link.required' => 'Logo Link is required',
+            'links.*.logo_link.image' => 'Logo Link must be an image',
+            'links.*.logo_link.mimes' => 'Logo Link must be a file of type: jpg, jpeg, png',
+        ]
+        );
 
-        Link::create($data);
+        foreach ($request->links as $i => $link) {
+
+            $file = $request->file("links.$i.logo_link");
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('link_pic'), $filename);
+
+            Link::create([
+                'link_name'    => $link['name'],
+                'link_address' => $link['address'],
+                'link_logo'    => 'link_pic/' . $filename,
+                'is_active'    => 1,
+            ]);
+        }
 
         return redirect()->route('homeLink')
-            ->with('success', 'Link berhasil ditambahkan');
+            ->with('success', 'Added new link successfully');
     }
+
 
     //panggil edit link
     public function edit(Link $link)
@@ -81,7 +106,7 @@ class AdmLinksController extends Controller
         ]);
 
         return redirect()->route('homeLink')
-            ->with('success', 'Link berhasil diupdate');
+            ->with('success', 'Link successfully updated');
     }
 
 
@@ -91,7 +116,45 @@ class AdmLinksController extends Controller
         $link->delete();
 
         return redirect()->route('homeLink')
-            ->with('success', 'Link berhasil dihapus');
+            ->with('success', 'Link successfully deleted');
+    }
+
+    //restore
+    public function restore(Request $request)
+    {
+        $search = $request->search;
+
+        $links = Link::onlyTrashed()
+            ->when($search, function ($q) use ($search) {
+                $q->where('link_name', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.link.tablelinktrash', compact('links'))->render();
+        }
+
+        return view('admin.link.trash', compact('links'));
+    }
+
+
+    public function restoreProses($id)
+    {
+        $link = Link::withTrashed()->findOrFail($id);
+
+        $link->is_active = 0;
+
+        $link->restore();
+        return redirect()->route('trashLink')->with('success', 'Link successfully restored');
+    }
+
+    public function forceDelete($id)
+    {
+        Link::withTrashed()->findOrFail($id)->forceDelete();
+
+        return redirect()->route('trashLink')->with('success', 'Link successfully deleted permanently');
     }
 
     //toggle toggle an

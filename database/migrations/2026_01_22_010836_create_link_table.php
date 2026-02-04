@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('link_logo');
             $table->string('link_name', (100));
             $table->string('link_address', (255));
+            $table->boolean('is_active')->default(true);
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->nullOnDelete();

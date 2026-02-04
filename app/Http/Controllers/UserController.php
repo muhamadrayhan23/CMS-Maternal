@@ -87,6 +87,10 @@ class UserController extends Controller
             return $query->where('name', 'like', "%$search%");
         })->latest()->paginate(10)->withQueryString();
 
+        if ($request->ajax()) {
+            return view('admin.user.usertable', compact('users'))->render();
+        }
+
         return view('admin.user.user', compact('users'));
     }
 
@@ -100,19 +104,36 @@ class UserController extends Controller
     //simpan user baru
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+        $validated = $request->validate([
+            'users.*.name' => 'required|string|max:100',
+            'users.*.email' => 'required|email|max:255|unique:users,email',
+            'users.*.password' => 'required|string|min:8',
+        ],
+        [
+            'users.*.name.required' => 'Name is required',
+            'users.*.name.max' => 'Name may not be greater than 100 characters',
+
+            'users.*.email.unique' => 'Email has already been taken',
+            'users.*.email.required' => 'Email is required',
+            'users.*.email.email' => 'Email must be a valid email address',
+
+            'users.*.password.required' => 'Password is required',
+            'users.*.password.min' => 'Password must be at least 8 characters',
         ]);
 
-        $data['password'] = bcrypt($data['password']);
-        User::create($data);
+        foreach ($validated['users'] as $user) {
+            User::create([
+                'name'     => $user['name'],
+                'email'    => $user['email'],
+                'password' => bcrypt($user['password']),
+            ]);
+        }
 
-
-        return redirect()->route('homeUser')
-            ->with('success', 'User berhasil ditambahkan');
+        return redirect()
+            ->route('homeUser')
+            ->with('success', 'Added new users successfully');
     }
+
 
     //panggil edit user
     public function edit(User $user)
@@ -141,7 +162,7 @@ class UserController extends Controller
         $user->update($data);
 
         return redirect()->route('homeUser')
-            ->with('success', 'User berhasil diupdate');
+            ->with('success', 'User successfully updated');
     }
 
     //delete user
@@ -150,7 +171,45 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('homeUser')
-            ->with('success', 'User berhasil dihapus');
+            ->with('success', 'User successfully deleted');
+    }
+
+    //restore
+    public function restore(Request $request)
+    {
+        $search = $request->search;
+
+        $users = User::onlyTrashed()
+            ->when($search, function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.user.usertabletrash', compact('users'))->render();
+        }
+
+        return view('admin.user.truser', compact('users'));
+    }
+
+
+    public function restoreProses($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+
+        $user->is_active = 0;
+
+        $user->restore();
+        return redirect()->route('trashUser')->with('success', 'User successfully restored');
+    }
+
+    public function forceDelete($id)
+    {
+        User::withTrashed()->findOrFail($id)->forceDelete();
+
+        return redirect()->route('trashUser')->with('success', 'User successfully deleted permanently');
     }
 
     //toggle toggle an

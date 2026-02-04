@@ -51,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/link/{link}', [AdmLinksController::class, 'update'])->name('updateLink');
     Route::delete('/link/{link}', [AdmLinksController::class, 'destroy'])->name('deleteLink');
     Route::patch('/link/{link}/toggle', [AdmLinksController::class, 'toggle'])->name('link.toggle');
+    Route::get('/link/trash', [AdmLinksController::class, 'restore'])->name('trashLink');
+    Route::post('/link/trash/{id}', [AdmLinksController::class, 'restoreProses'])->name('trashLink.restore');
+    Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('trashLink.permanent');
 
     //manajemen user 
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
@@ -60,6 +63,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/user/{user}', [UserController::class, 'update'])->name('updateUser');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('deleteUser');
     Route::patch('/user/{user}/toggle', [UserController::class, 'toggle'])->name('user.toggle');
+    Route::get('/user/truser', [UserController::class, 'restore'])->name('trashUser');
+    Route::post('/user/truser/{id}', [UserController::class, 'restoreProses'])->name('trashUser.restore');
+    Route::delete('/user/force-delete/{id}', [UserController::class, 'forceDelete'])->name('trashUser.permanent');
+
 
     //Logout
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');

@@ -36,8 +36,9 @@
                     <div class="mb-3 row">
                         <label for="link_name" class="text-sm font-medium text-gray-700">Link Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="link_name" name="link_name" value="{{ old('link_name') }}" placeholder="Link Name">
-                            @error('link_name')
+                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="link_name" name="links[0][name]"
+                                value="{{ old('links.0.name') }}" placeholder="Link Name">
+                            @error('links.*.name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -46,8 +47,9 @@
                     <div class="mb-3 row">
                         <label for="link_address" class="text-sm font-medium text-gray-700">Link Address</label>
                         <div class="col-md-6">
-                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="link_address" name="link_address" value="{{ old('link_address') }}" placeholder="Link Address">
-                            @error('link_address')
+                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="link_address" name="links[0][address]"
+                                value="{{ old('links.0.address') }}" placeholder="Link Address">
+                            @error('links.*.address')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -60,8 +62,11 @@
                                 class="file-name-display w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
                             <label class="absolute right-2 px-3 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
                                 Choose File
-                                <input type="file" id="link_logo" name="link_logo" value="{{ old('link_logo') }}" class="hidden" onchange="updateFileName(this)">
+                                <input type="file" id="link_logo" name="links[0][logo_link]" value="{{ old('link_logo') }}" class="hidden" onchange="updateFileName(this)">
                             </label>
+                            @error('links.*.logo_link')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                     </div>
