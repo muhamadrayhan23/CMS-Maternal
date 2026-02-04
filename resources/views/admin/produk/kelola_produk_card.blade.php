@@ -136,16 +136,17 @@
                     </form>
 
                     @if (session('success'))
-                        <div id="success-alert"
-                            class="relative mb-4 p-3 bg-green-100 text-green-800 rounded flex items-start justify-between gap-4">
-
-                            <span>{{ session('success') }}</span>
-
-                            <button onclick="document.getElementById('success-alert').remove()"
-                                class="text-green-800 hover:text-green-900 text-xl leading-none font-bold">
-                                &times;
-                            </button>
-                        </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: @json(session('success')),
+                                    timer: 2000,
+                                    showConfirmButton: true
+                                })
+                            })
+                        </script>
                     @endif
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 font-sans">
@@ -220,15 +221,26 @@
                                                 </button>
 
                                                 <div class="sub-menu hidden border-t">
-                                                    @forelse($p->links as $link)
+                                                    @forelse ($p->links as $link)
                                                         <a href="{{ $link->link_address }}" target="_blank"
-                                                            class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
-                                                            <img src="{{ asset('storage/' . $link->link_image) }}"
-                                                                class="w-6 h-6 rounded object-cover">
-                                                            {{ $link->link_name }}
+                                                            class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15"
+                                                                height="15" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path
+                                                                    d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                                                                <path d="m21 3-9 9" />
+                                                                <path d="M15 3h6v6" />
+                                                            </svg>
+
+                                                            <span class="break-all text-sm">
+                                                                {{ $link->link_name }}
+                                                            </span>
                                                         </a>
                                                     @empty
-                                                        <div class="px-3 py-2 text-gray-400">No links</div>
+                                                        <li class="px-3 py-2 text-gray-400">Tidak ada link</li>
                                                     @endforelse
                                                 </div>
 
@@ -238,14 +250,15 @@
                                                 </a>
 
                                                 <form action="{{ route('produk.destroy', $p->id_product) }}"
-                                                    method="POST">
+                                                    id="hapus-{{ $p->id_product }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <input type="hidden" name="from" value="grid">
+                                                    <input type="hidden" name="page" value="{{ request('page') }}">
 
-                                                    <button onclick="return confirm('Hapus produk?')"
-                                                        class="w-full px-3 py-2 hover:bg-gray-100 text-left">
+                                                    <button type="button"
+                                                        class="w-full px-3 py-2 hover:bg-gray-100 text-left"
+                                                        onclick="confirmDelete('hapus-{{ $p->id_product }}')">
                                                         Delete
                                                     </button>
                                                 </form>
@@ -336,5 +349,19 @@
                     .forEach(m => m.classList.add('hidden'))
             }
         })
+
+        window.confirmDelete = (formId) => {
+            Swal.fire({
+                text: 'This product will be restored. Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(formId).submit()
+                }
+            })
+        }
     </script>
 @endsection

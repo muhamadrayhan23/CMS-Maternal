@@ -4,20 +4,6 @@
 @section('content')
     <div class="h-screen" id="wrapp">
         <div class="p-10">
-            @if (session('success'))
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: @json(session('success')),
-                            timer: 2000,
-                            showConfirmButton: true
-                        })
-                    })
-                </script>
-            @endif
-
             <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf

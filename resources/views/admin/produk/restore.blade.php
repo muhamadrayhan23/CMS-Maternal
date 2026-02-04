@@ -118,16 +118,17 @@
                         </form>
 
                         @if (session('success'))
-                            <div id="success-alert"
-                                class="relative mb-4 p-3 bg-green-100 text-green-800 rounded flex items-start justify-between gap-4">
-
-                                <span>{{ session('success') }}</span>
-
-                                <button onclick="document.getElementById('success-alert').remove()"
-                                    class="text-green-800 hover:text-green-900 text-xl leading-none font-bold">
-                                    &times;
-                                </button>
-                            </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil',
+                                        text: @json(session('success')),
+                                        timer: 2000,
+                                        showConfirmButton: true
+                                    })
+                                })
+                            </script>
                         @endif
 
                         <div class="bg-white rounded-xl shadow overflow-visible">
@@ -184,14 +185,15 @@
                                                     </li>
 
                                                     <li>
-                                                        <form action="{{ route('produk.force.delete', $p->id_product) }}"
+                                                        <form id="hapus-{{ $p->id_product }}"
+                                                            action="{{ route('produk.force.delete', $p->id_product) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="page"
                                                                 value="{{ request('page') }}">
-                                                            <button
-                                                                onclick="return confirm('Hapus PERMANEN? Data tidak bisa dikembalikan!')"
+                                                            <button type="button"
+                                                                onclick="confirmDelete('hapus-{{ $p->id_product }}')"
                                                                 class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 text-left">
                                                                 Delete Permanen
                                                             </button>
@@ -250,5 +252,19 @@
                         .forEach(m => m.classList.add('hidden'));
                 }
             });
+
+            window.confirmDelete = (formId) => {
+                Swal.fire({
+                    text: 'Produk ini akan dihapus PERMANEN. Data tidak bisa dikembalikan!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus Permanen',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit()
+                    }
+                })
+            }
         </script>
     @endsection

@@ -72,8 +72,7 @@ class ProdukController extends Controller
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $price,
-            
-            'is_active' => $request->is_active ?? 0,
+            'is_active' => 1,
             'desc' => $request->desc,
             'created_by'   => auth()->id(),
         ]);
@@ -103,6 +102,27 @@ class ProdukController extends Controller
                 ]);
             }
         }
+
+        // if ($request->latribut_name) {
+        //     foreach ($request->atribut_name as $i => $nameat) {
+
+        //         if (!$nameat) continue;
+
+        //         $imagePath = null;
+        //         if (!empty($request->file('image_product')[$i])) {
+        //             $file = $request->file('image_product')[$i];
+        //             $image_name = $file->getClientOriginalName();
+        //             $imagePath = $file->store('produk', 'public');
+        //         }
+
+        //         LinkProduk::create([
+        //             'id_product'     => $product->id_product,
+        //             'atribute_name'  => $request->atribute_name[$i] ?? null,
+        //             'image_name'     => $image_name,
+        //             'image_product'  => $imagePath,
+        //         ]);
+        //     }
+        // }
 
         if ($request->link_address) {
             foreach ($request->link_address as $i => $address) {
@@ -135,7 +155,7 @@ class ProdukController extends Controller
             'Ukuran foto produk harus 900 x 900 pixel',
         ]);
 
-        return redirect(session('produk_back', route('produk.index')))
+        return redirect()->route('produk.create')
             ->with('success', 'Produk berhasil ditambahkan');
     }
 
@@ -144,7 +164,7 @@ class ProdukController extends Controller
         session(['produk_back' => url()->previous()]);
         $produk = Product::with(['details', 'links'])
             ->findOrFail($id);
-        return view('admin.produk.tambah_produk', compact('produk'));
+        return view('admin.produk.edit_produk', compact('produk'));
     }
 
     public function update(Request $request, $id)
@@ -155,7 +175,6 @@ class ProdukController extends Controller
         $produk->update([
             'product_name' => $request->product_name,
             'price' => $price,
-            'is_active' => $request->is_active ?? 0,
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),
         ]);
@@ -197,6 +216,33 @@ class ProdukController extends Controller
                 ]));
             }
         }
+
+        // foreach ($request->attribute_name as $i => $nameat) {
+
+        //     $detailId  = $request->link_id[$i] ?? null;
+        //     $imageFile = $request->file('image_product')[$i] ?? null;
+
+        //     if (!$nameat && !$imageFile) {
+        //         continue;
+        //     }
+
+        //     $data = [
+        //         'attribute_name'  => $nameat
+        //     ];
+
+        //     if ($imageFile) {
+        //         $data['image_name'] = $imageFile->getClientOriginalName();
+        //         $data['image_product'] = $imageFile->store('produk', 'public');
+        //     }
+
+        //     if ($detailId) {
+        //         ProdukDetail::find($detailId)?->update($data);
+        //     } else {
+        //         ProdukDetail::create(array_merge($data, [
+        //             'id_product' => $produk->id_product,
+        //         ]));
+        //     }
+        // }
 
         foreach ($request->link_address as $i => $link) {
 

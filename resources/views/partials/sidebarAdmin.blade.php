@@ -10,37 +10,43 @@
 </head>
 
 <body class="bg-[#f4f4f4] font-sans ">
-    
+
     @php
         $active = 'bg-[#373737] text-white shadow-sm border-l-4 border-gray-800';
-        $default = 'text-gray-600 border-l-4 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200'
+        $default =
+            'text-gray-600 border-l-4 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200';
     @endphp
-    {{-- <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
-            <button id="openSidebar" class="p-2 text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
-                <path d="M3 5h18"/><path d="M3 12h18"/>
-                <path d="M3 19h18"/>
-                </svg>
-            </button>
+    <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
+        <button id="openSidebar" class="p-2 text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
+                <path d="M3 5h18" />
+                <path d="M3 12h18" />
+                <path d="M3 19h18" />
+            </svg>
+        </button>
         <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-6 w-auto">
         <div class="w-10"></div>
-    </div> --}} 
+    </div>
     {{-- buat responsive yah --}}
 
 
 
     {{-- Sidebar Container Atas --}}
-    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
-        
+    <div id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
+
         {{-- 1. BAGIAN LOGO --}}
         <div class="flex items-center justify-center px-6 h-16">
-            <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
+            <img src="{{ asset('img/logo/logoblack.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
             <button id="closeSidebar" class="md:hidden p-2 text-gray-400 hover:text-black">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-            </svg>
-        </button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
+            </button>
         </div>
 
         {{-- Fitur --}}
@@ -48,7 +54,7 @@
             {{-- Dashboard --}}
             <li class="mb-2">
                 <a href="{{ route('dashboardadmin') }}"
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('dashboardadmin') ? $active : $default }}">
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('dashboardadmin') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"
                         fill="none">
                         <path
@@ -71,7 +77,7 @@
             {{-- Product --}}
             <li class="mb-2">
                 <a href="{{ route('produk.index') }}"
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index') ? $active : $default }}">
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('produk.index') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -86,7 +92,8 @@
 
             {{-- Banner --}}
             <li class="mb-2">
-                <a href="{{ route('Bhome') }}" class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('Bhome') ? $active : $default }}">
+                <a href="{{ route('Bhome') }}"
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('Bhome') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -101,7 +108,8 @@
 
             {{-- Link --}}
             <li class="mb-2">
-                <a href="{{ route('homeLink') }}" class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink') ? $active : $default }}">
+                <a href="{{ route('homeLink') }}"
+                    class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -115,7 +123,8 @@
 
             {{-- User --}}
             <li class="mb-2">
-                <a href="{{ route('homeUser') }}" class="flex items-center gap-3 p-2  rounded-lg {{  Route::is ('homeUser') ? $active: $default }}">
+                <a href="{{ route('homeUser') }}"
+                    class="flex items-center gap-3 p-2  rounded-lg {{ Route::is('homeUser') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -143,19 +152,22 @@
                     </svg>
                 </div>
                 <p class="text-xs text-gray-500 mb-3">View the live version of the website.</p>
-                <a href="{{ route ('home') }}" target="_blank"
+                <a href="{{ route('home') }}" target="_blank"
                     class="block text-center bg-[#373737] text-white text-xs py-2 rounded-lg hover:bg-gray-900 transition-colors">
                     Visit Landing page
                 </a>
             </div>
 
             {{-- User & Logout --}}
-            <div class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between hover:text-red-400 transition-all duration-300 group">
-                <form action="{{ route('logout') }}" method="POST" class="flex items-center" >
+            <div
+                class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between hover:text-red-400 transition-all duration-300 group">
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
                     <button type="submit" onclick="return confirm('Yakin anda ingin log out?')"
                         class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group ">
-                        <p class="font-semibold text-sm px-2 py-2 truncate group-hover:text-red-600 transition-colors duration-300 ">{{ auth()->user()->email }}</p>
+                        <p
+                            class="font-semibold text-sm px-2 py-2 truncate group-hover:text-red-600 transition-colors duration-300 ">
+                            {{ auth()->user()->email }}</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             class="text-gray-900 group-hover:text-red-600 transition-colors duration-300 mt-1"

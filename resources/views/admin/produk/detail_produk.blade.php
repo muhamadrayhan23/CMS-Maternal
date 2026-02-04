@@ -67,13 +67,20 @@
                             <h3 class="font-semibold mb-3">Product Links</h3>
 
                             @if ($produk->links->count())
-                                <div class="flex flex-wrap gap-3">
+                                <div class="flex flex-row gap-4 flex-wrap">
                                     @foreach ($produk->links as $link)
                                         <a href="{{ $link->link_address }}" target="_blank"
-                                            class="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-100 transition">
-                                            <img src="{{ asset('storage/' . $link->link_image) }}"
-                                                class="w-6 h-6 object-cover rounded">
-                                            <span>{{ $link->link_name }}</span>
+                                            class="flex items-center gap-3 px-6 py-3 bg-black text-white rounded-lg">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                                                <path d="m21 3-9 9" />
+                                                <path d="M15 3h6v6" />
+                                            </svg>
+
+                                            {{ $link->link_name }}
                                         </a>
                                     @endforeach
                                 </div>
