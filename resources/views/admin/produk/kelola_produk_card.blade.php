@@ -380,11 +380,11 @@
 
         window.confirmDelete = (formId) => {
             Swal.fire({
-                text: 'This product will be restored. Are you sure?',
+                text: 'This product will be moved to trash. Are you sure?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById(formId).submit()

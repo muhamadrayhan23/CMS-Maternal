@@ -277,11 +277,11 @@
 
             window.confirmDelete = (formId) => {
                 Swal.fire({
-                    text: 'Produk ini akan dihapus PERMANEN',
+                    text: 'This product will be permanently removed. Are you sure?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Hapus Permanen',
-                    cancelButtonText: 'Batal'
+                    confirmButtonText: 'Permanent deletion',
+                    cancelButtonText: 'Cancel'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById(formId).submit()
@@ -291,11 +291,11 @@
 
             window.confirmRestore = (formId) => {
                 Swal.fire({
-                    text: 'Pulihkan data?',
+                    text: 'This product will be restored. Are you sure?',
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Restore',
-                    cancelButtonText: 'Batal'
+                    cancelButtonText: 'Cancel'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         document.getElementById(formId).submit()

@@ -112,7 +112,7 @@ class ProdukController extends Controller
         }
 
         return redirect(session('produk_back', route('produk.index')))
-            ->with('success', 'Produk berhasil diupdate');
+            ->with('success', 'Product successfully added');
     }
 
     public function edit($id)
@@ -207,7 +207,7 @@ class ProdukController extends Controller
         }
 
         return redirect(session('produk_back', route('produk.index')))
-            ->with('success', 'Produk berhasil diupdate');
+            ->with('success', 'Product successfully updated');
     }
 
 
@@ -220,7 +220,7 @@ class ProdukController extends Controller
         $produk->delete();
 
         return redirect(session('produk_back', route('produk.index')))
-            ->with('success', 'Produk berhasil dihapus');
+            ->with('success', 'Product deleted successfully');
     }
 
     public function restore(Request $request)
@@ -256,7 +256,7 @@ class ProdukController extends Controller
 
         return redirect()
             ->route('produk.restore', ['page' => $request->page])
-            ->with('success', 'Produk berhasil direstore');
+            ->with('success', 'Product successfully restored');
     }
 
     public function forceDelete(Request $request, $id)
@@ -265,7 +265,7 @@ class ProdukController extends Controller
 
         return redirect()
             ->route('produk.restore', ['page' => $request->page])
-            ->with('success', 'Produk berhasil dihapus permanen');
+            ->with('success', 'The product has been successfully deleted permanently');
     }
 
     public function show($id)

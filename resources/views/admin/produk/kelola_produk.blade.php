@@ -340,7 +340,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7"
+                                        <td colspan="8"
                                             class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300 font-sans ">
                                             @if (request('search'))
                                                 <span class="font-bold">"{{ request('search') }}"</span> not found
@@ -390,11 +390,11 @@
 
         window.confirmDelete = (formId) => {
             Swal.fire({
-                text: 'This product will be restored. Are you sure?',
+                text: 'This product will be moved to trash. Are you sure?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel'
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById(formId).submit()

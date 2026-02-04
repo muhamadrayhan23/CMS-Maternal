@@ -32,7 +32,8 @@
                         <div class="flex gap-3 mt-4">
                             @foreach ($produk->details as $detail)
                                 @if ($detail->image_product)
-                                    <img src="{{ asset('storage/' . $detail->image_product) }}" onclick="changeImage(this)"
+                                    <img src="{{ asset('storage/' . $detail->image_product) }}"
+                                        data-attribute="{{ $detail->atribute_name }}" onclick="changeImage(this)"
                                         class="thumb w-20 h-20 object-cover rounded-lg cursor-pointer border border-gray-300 hover:ring-2 hover:ring-gray-400 transition">
                                 @endif
                             @endforeach
@@ -52,12 +53,9 @@
                         </p>
 
                         <div class="bg-white rounded-xl shadow p-6 gap-8">
-                            <h3 class="font-semibold mb-2">Attributes</h3>
-                            <p class="list-disc list-inside text-gray-700">
-                                @foreach ($produk->details as $detail)
-                                    <strong>{{ $detail->atribute_name }}:</strong>
-                                    {{ $detail->atribute_value }}
-                                @endforeach
+                            <h3 class="font-semibold mb-2">Attribute Name:</h3>
+                            <p id="attributeText" class="text-gray-700 font-semibold">
+                                {{ $produk->details->first()?->atribute_name ?? '-' }}
                             </p>
                         </div>
 
@@ -115,9 +113,16 @@
                 img.classList.remove('border-black');
                 img.classList.add('border-gray-300');
             });
+
             el.classList.remove('border-gray-300');
             el.classList.add('border-black');
+
+            const attr = el.dataset.attribute;
+            if (attr) {
+                document.getElementById('attributeText').textContent = attr;
+            }
         }
     </script>
+
     </div>
 @endsection
