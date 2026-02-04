@@ -13,7 +13,7 @@
             </h2>
 
             <div class="flex items-center gap-2">
-                <a href="{{ route('trashUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium  text-black bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
+                <a href="{{ route('trashUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium  text-white bg-[#333333] border border-gray-300  rounded-md hover:bg-gray-50 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-icon lucide-trash">
                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
@@ -22,7 +22,7 @@
                     </svg>
                     Trash
                 </a>
-                <a href="{{ route('homeUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium  text-white bg-[#333333] border border-gray-300 rounded-md transition-all">
+                <a href="{{ route('homeUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium  text-black bg-gray-100 border border-gray-300 rounded-md transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="1" />
                         <circle cx="19"
@@ -64,7 +64,7 @@
 
     <!-- TABLE USER -->
     <div id="userContainer" class="mt-5">
-        @include('admin.user.usertable')
+        @include('admin.user.usertabletrash')
     </div>
 
 

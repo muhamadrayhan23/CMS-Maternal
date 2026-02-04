@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Link extends Model
 {
+
+    use SoftDeletes;
+
     protected $table = 'link';
     protected $primaryKey = 'id_link';
 
