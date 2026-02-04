@@ -45,7 +45,7 @@
         </div>
     </a>
 
-    {{-- --- navbar --- --}}
+    {{--navbar--}}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const navbar = document.getElementById('main-navbar');
@@ -54,6 +54,7 @@
 
             const isProductPage = navbar.dataset.product === '1';
             const isAboutPage = navbar.dataset.about === '1';
+            const isLinkPage = navbar.dataset.link === '1';
 
             const logoWhite = logo.dataset.logoWhite;
             const logoBlack = logo.dataset.logoBlack;
@@ -61,7 +62,7 @@
             const updateNavbar = () => {
                 const scrolled = window.scrollY > 20;
 
-                if (scrolled || isProductPage || isAboutPage) {
+                if (scrolled || isProductPage || isAboutPage || isLinkPage) {
                     navbar.classList.remove('bg-transparent', 'text-white');
                     navbar.classList.add('bg-white/80', 'text-black', 'backdrop-blur');
                     logo.src = logoBlack;

@@ -13,28 +13,36 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::with(['details', 'links']);
+        if (!session()->has('produk_back')) {
+            session(['produk_back' => url()->full()]);
+        }
 
-        if ($request->search) {
+        $query = Product::with(['details', 'links'])->latest();
+
+        if ($request->filled('search')) {
             $query->where('product_name', 'like', '%' . $request->search . '%');
         }
 
-        if ($request->sort == 'price_desc') {
+        if ($request->sort === 'price_desc') {
             $query->orderBy('price', 'desc');
         }
 
-        if ($request->sort == 'price_asc') {
+        if ($request->sort === 'price_asc') {
             $query->orderBy('price', 'asc');
         }
 
-        $products = $query->where('is_active', true)->paginate(10)->withQueryString();
+        $products = $query
+            ->where('is_active', true)
+            ->paginate(12)
+            ->withQueryString();
 
         if ($request->ajax()) {
-            return view('guest.searchProducts', compact('products'));
+            return view('guest.searchProducts', compact('products'))->render();
         }
 
         return view('guest.products', compact('products'));
     }
+
 
     /**
      * Show the form for creating a new resource.

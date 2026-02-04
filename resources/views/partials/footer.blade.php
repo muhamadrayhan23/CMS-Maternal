@@ -24,7 +24,7 @@
             <div class="flex items-center gap-4 text-left mt-10 mr-0.1">
                 <img src="{{ asset('img/logo/Craft_Logo White.png') }}" class="w-15 h-15 object-contain" alt="Logo">
                 <p class="text-2xl font-medium leading-tight">
-                    Look Confident,<br>Starting with Your Bag
+                    Alttt Craftedgoods<br>Be an Artist, Be You.
                 </p>
             </div>
 

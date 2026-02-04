@@ -7,10 +7,11 @@ $isProductPage = request()->routeIs('products*');
 @endphp
 
 <nav id="main-navbar"
-    data-product="{{ request()->routeIs('products*') ? '1' : '0' }}"
-    data-about="{{ request()->routeIs('about*') ? '1' : '0' }}"
+    data-product="{{ request()->is('products*') ? '1' : '0' }}"
+    data-about="{{ request()->routeIs('about') ? '1' : '0' }}"
     data-home="{{ request()->routeIs('home') ? '1' : '0' }}"
-    class="flex w-full h-18.75 items-center gap-56.25 px-21.75
+    data-link="{{ request()->routeIs('link') ? '1' : '0' }}"
+    class="flex w-full h-18.75 items-center gap-56.25 p-10 py-15
      bg-transparent text-white transition-all duration-300 justify-between">
 
     <a href="{{ route('home') }}">
@@ -18,7 +19,7 @@ $isProductPage = request()->routeIs('products*');
             id="navbar-logo"
             src="{{ asset('img/logo/logowhite.png') }}"
             data-logo-white="{{ asset('img/logo/logowhite.png') }}"
-            data-logo-black="{{ asset('img/logo/logoblack.png') }}"
+            data-logo-black="{{ asset('img/logo/logo.png') }}"
             class="w-57.5 h-4.75 aspect-[4.57] object-cover transition-all duration-300"
             alt="Weblogo" />
     </a>
@@ -26,17 +27,20 @@ $isProductPage = request()->routeIs('products*');
 
     <div class="flex items-center gap-17 text-current mr-3.25 font-sans text-base font-light">
 
-        <!-- <a href="{{ route('home') }}"
+        
+        <a href="{{ route('home') }}"
             class="group relative inline-block px-1 py-2 {{ request()->routeIs('products*') }}">
 
             <span>Home</span>
 
             <span
-                class="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-[#373737] transition-all duration-300
-            {{ request()->routeIs('home*') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
+            class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
+            {{ request()->routeIs('home') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
             origin-center">
             </span>
-        </a> -->
+
+
+        </a>
 
         <a href="{{ route('products') }}"
             class="group relative inline-block px-1 py-2 {{ request()->routeIs('products*') }}">
