@@ -8,16 +8,16 @@
 </head>
 <body class="bg-white font-sans">
     <div class="flex flex-col md:flex-row min-h-screen items-center justify-center ">
-        <div class="w-full md:w-1/2 p-5">
-                <div class="rounded-[1rem] hidden md:block overflow-hidden h-[650px] w-full">
+        <div class="w-full md:w-1/2">
+                <div class= "hidden md:block overflow-hidden h-screen w-full">
                     <img src="{{ asset('img/logo/WithModel.webp') }}" alt="" class="w-full h-full object-cover">
                 </div>
         </div>
 
-        <div class="w-full md:w-1/2 max-w-md mx-auto ">
-            <div class="text-center">
-                <h1 class="font-semibold text-5xl tracking-tight text-black uppercase mb-5">welcome ! </h1>
-                <p class="text-lg mt-5 mb-7">Login to manage website content and data</p>
+        <div class="w-full md:w-1/2 max-w-md mx-auto px-8 md:px-0">
+            <div class="text-start mb-8 md:mb-12">
+                <h1 class="font-semibold text-3xl md:text-5xl md:text-5xl tracking-tight text-black uppercase gap-3 md:mb-5">welcome ! </h1>
+                <p class="text-base md:text-lg mt-5 mb-7">Login to manage website content and data</p>
             </div>
         
                 <form action="{{ route ('loginForm')}}" method="POST">
@@ -39,7 +39,6 @@
                     <button class="w-full px-4 py-3 bg-[#000000] border rounded-lg font-semibold font-2xl text-gray-100 ">Log in</button>
                     </div>
                 </form>
-
         </div>
     </div>
 </body>

@@ -29,8 +29,8 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('dashboardadmin')
-                ->with('success_login', 'true');
+            return redirect()->route('dashboardadmin');
+                // ->with('success_login', 'true');
         }
         return back()->withErrors([
             'email' => 'Incorrect password!'

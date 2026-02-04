@@ -71,7 +71,7 @@
             {{-- Product --}}
             <li class="mb-2">
                 <a href="{{ route('produk.index') }}"
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index') ? $active : $default }}">
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index', 'produk.create','produk.edit','produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -86,7 +86,7 @@
 
             {{-- Banner --}}
             <li class="mb-2">
-                <a href="{{ route('Bhome') }}" class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('Bhome') ? $active : $default }}">
+                <a href="{{ route('Bhome') }}" class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('Bhome', 'addB', 'editB', 'dBanner', 'Btrash') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -101,7 +101,7 @@
 
             {{-- Link --}}
             <li class="mb-2">
-                <a href="{{ route('homeLink') }}" class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink') ? $active : $default }}">
+                <a href="{{ route('homeLink') }}" class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink', 'createLink', 'editLink', 'deleteLink') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -115,7 +115,7 @@
 
             {{-- User --}}
             <li class="mb-2">
-                <a href="{{ route('homeUser') }}" class="flex items-center gap-3 p-2  rounded-lg {{  Route::is ('homeUser') ? $active: $default }}">
+                <a href="{{ route('homeUser') }}" class="flex items-center gap-3 p-2  rounded-lg {{  Route::is ('homeUser', 'createUser', 'editUser', 'deleteUser') ? $active: $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
