@@ -55,7 +55,7 @@ $isProductPage = request()->routeIs('products*');
 
 
         <a href="{{ route('about') }}"
-            class="group relative inline-block px-1 py-2 {{ request()->routeIs('products*') }}">
+            class="group relative inline-block px-1 py-2 {{ request()->routeIs('about*') }}">
 
             <span>About Us</span>
 
@@ -66,8 +66,8 @@ $isProductPage = request()->routeIs('products*');
             </span>
         </a>
 
-        <a href="#"
-            class="group relative inline-block px-1 py-2 {{ request()->routeIs('products*') }}">
+        <a href="{{ route('linktree') }}"
+            class="group relative inline-block px-1 py-2 {{ request()->routeIs('links*') }}">
 
             <span>Links</span>
 

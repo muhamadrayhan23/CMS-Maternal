@@ -28,7 +28,7 @@
 
 
     {{-- --- wa --- --}}
-    <a href="https://wa.me/625325490929"
+    <a href="https://wa.me/625349770100"
         target="_blank"
         class="fixed bottom-6 right-6 z-50 flex items-center group">
 

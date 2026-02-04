@@ -55,9 +55,5 @@
             All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | BTEKLabs | sigeulises
         </p>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 49e5af9087917540ba4ef0b034f42c3181836e07
 </div>
 </div>
