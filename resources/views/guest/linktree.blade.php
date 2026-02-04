@@ -41,24 +41,23 @@
         padding-top: 50px;
         padding-bottom: 50px;
     }
-/*
-    .linktree-section {
-  background:
-    radial-gradient(1200px 400px at 50% -10%, rgba(0,0,0,0.04), transparent),
-    linear-gradient(to bottom, #ffffff, #f9fafb);
-} */
 
 
 </style>
 
-<section class="w-full py-20 bg-white overflow-hidden">
-    <h2 class="text-center text-xl font-medium tracking-[0.3em] mb-16 uppercase">
+<section class="w-full pt-4 py-20  bg-white overflow-hidden">
+    <h2 class="text-center text-lg md:text-500 font-medium tracking-[0.3em] mb-3 md:mb-12 uppercase">
         EXPLORE LINK
     </h2>
 
+     <h2 class="text-center text-3xl font-medium tracking-[0.3em] mb-20 uppercase">
+           Intentional design for everyday movement <br>
+            <span class="text-gray-400 italic">be an artist be you.
+        </h2>
+
     <div
         id="linktree"
-        class="flex gap-4 overflow-x-auto px-[30%] items-center snap-x snap-mandatory scrollbar-hide"
+        class="flex gap-4 overflow-x-auto px-[20%] md:px-[30%] items-center snap-x snap-mandatory scrollbar-hide"
     >
         {{-- Tokopedia --}}
         <div data-index="0" onclick="goToLink('https://tokopedia.com')" class="snap-center flex-shrink-0 w-64 cursor-pointer link-item">
@@ -67,7 +66,7 @@
                 <span class="text-sm font-semibold">Tokopedia</span>
             </div>
             <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-                <img src="{{ asset('img/linktree/shopee.jpeg') }}" class="w-full object-cover">
+                <img src="{{ asset('img/linktree/tokopedia.jpeg') }}" class="w-full object-cover">
             </div>
         </div>
 
@@ -88,7 +87,7 @@
                 <img src="{{ asset('img/linktree/logo/instagram-logo.png') }}" class="w-5 h-5">
                 <span class="text-sm font-semibold">Instagram</span>
             </div>
-            <div class="rounded-2xl overflow-hidden shadow-2xl border border-gray-100 bg-gray-50">
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
                 <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full object-cover">
             </div>
         </div>
@@ -104,11 +103,11 @@
             </div>
         </div>
 
-        {{-- Facebook --}}
+        {{-- X --}}
         <div data-index="4" onclick="goToLink('https://facebook.com')" class="snap-center flex-shrink-0 w-64 cursor-pointer link-item">
             <div class="flex items-center gap-2 mb-3">
-                <img src="{{ asset('img/linktree/logo/facebook-logo.png') }}" class="w-5 h-5">
-                <span class="text-sm font-semibold">Facebook</span>
+                <img src="{{ asset('img/linktree/logo/x-logo.png') }}" class="w-5 h-5">
+                <span class="text-sm font-semibold">X</span>
             </div>
             <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
                 <img src="{{ asset('img/linktree/instagram.jpeg') }}" class="w-full object-cover">
@@ -116,7 +115,7 @@
         </div>
     </div>
 
-    {{-- Pagination nyaa  --}}
+    {{-- Pagination nyaa yach  --}}
     <div id="pagination" class="flex justify-center gap-2 mt-12">
         <div class="dot w-2 h-2 rounded-full bg-gray-300" data-dot="0"></div>
         <div class="dot w-2 h-2 rounded-full bg-gray-300" data-dot="1"></div>
@@ -139,7 +138,7 @@
     const items = document.querySelectorAll('.link-item');
     const dots = document.querySelectorAll('.dot');
 
-    // mendeteksi halaman mana yang di lihat user yang paling tengah
+    // mendteksi halaman mana yang di lihat user yang paling tengah
     const handleScroll = () => {
         let closestItem = null;
         let minDistance = Infinity;
@@ -159,7 +158,7 @@
             items.forEach(i => i.classList.remove('active'));
             dots.forEach(d => d.classList.remove('active'));
 
-            // Tambahkan halaman yang di lihat user ke tengah (utama) yaa
+
             closestItem.classList.add('active');
             const index = closestItem.getAttribute('data-index');
             document.querySelector(`[data-dot="${index}"]`).classList.add('active');
@@ -176,5 +175,6 @@
         container.scrollTo({ left: scrollPos, behavior: 'instant' });
     });
 </script>
+
 
 @endsection
