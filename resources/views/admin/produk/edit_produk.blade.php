@@ -62,10 +62,6 @@
                                     <input type="hidden" name="link_id[]" value="{{ $link->id_link_produk }}">
                                 @endif
 
-                                @if ($link && $link->link_image)
-                                    <img src="{{ asset('storage/' . $link->link_image) }}" class="w-20">
-                                @endif
-
                                 <input name="link_name[]" value="{{ $link->link_name ?? '' }}" placeholder="Link Name"
                                     class="w-full px-4 py-2 border rounded-lg" required>
 
@@ -105,9 +101,6 @@
 
                                 <input name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}"
                                     placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
-
-                                <input name="atribut_value[]" value="{{ $detail->atribute_value ?? '' }}"
-                                    placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
 
                                 <button type="button" onclick="removeRow(this)"
                                     class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center"
@@ -149,8 +142,6 @@
                 <div class="detail-row border rounded-xl p-5 space-y-3 relative">
                 <input type="file" name="image_product[]" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
                 <input name="atribute_name[]" placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
-                <input name="atribut_value[]" value="{{ $detail->atribute_value ?? '' }}"
-                                    placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
                 <button type="button" onclick="removeRow(this)"
                 class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
                 </div>`)

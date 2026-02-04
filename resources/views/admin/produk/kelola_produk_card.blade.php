@@ -175,7 +175,8 @@
                                             {{ $p->product_name }}
                                         </h4>
 
-                                        <div class="relative shrink-0">
+                                        <div
+                                            class="bg-white rounded-xl shadow transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:bg-gray-50 flex flex-col relative group">
                                             <button onclick="toggleMenu(this)"
                                                 class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100">
                                                 &#8942;
@@ -325,18 +326,19 @@
                                 </div>
                             </div>
                         @empty
-                            <div colspan="8"
-                                class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
-                                @if (request('search'))
-                                    <span class="font-bold">"{{ request('search') }}"</span> not found
-                                @elseif(request()->filled('status'))
-                                    There is no Product with status
-                                    <span class="font-bold">
-                                        {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
-                                    </span>
-                                @else
-                                    There are no Product available yet
-                                @endif
+                            <div class="col-span-full flex justify-center">
+                                <div class="text-center py-10 text-gray-500">
+                                    @if (request('search'))
+                                        <span class="font-bold">"{{ request('search') }}"</span> not found
+                                    @elseif(request()->filled('status'))
+                                        There is no Product with status
+                                        <span class="font-bold">
+                                            {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
+                                        </span>
+                                    @else
+                                        There are no Product available yet
+                                    @endif
+                                </div>
                             </div>
                         @endforelse
                     </div>

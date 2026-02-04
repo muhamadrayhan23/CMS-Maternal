@@ -73,86 +73,46 @@ class ProdukController extends Controller
             'created_by'   => auth()->id(),
         ]);
 
-        if ($request->atribut_value) {
-            foreach ($request->atribut_value as $i => $value) {
+        if ($request->has('atribute_name')) {
 
-                if (!$value && empty($request->file('image_product')[$i])) {
-                    continue;
-                }
+            foreach ($request->atribute_name as $i => $name) {
+
+                if (!$name) continue;
 
                 $imagePath = null;
-                $image_name = null;
+                $imageName = null;
 
-                if (!empty($request->file('image_product')[$i])) {
-                    $file = $request->file('image_product')[$i];
-                    $image_name = $file->getClientOriginalName();
+                if ($request->hasFile("image_product.$i")) {
+                    $file = $request->file("image_product.$i");
+                    $imageName = $file->getClientOriginalName();
                     $imagePath = $file->store('produk', 'public');
                 }
 
                 ProdukDetail::create([
-                    'id_product'     => $product->id_product,
-                    'atribute_name'  => $request->atribute_name[$i] ?? null,
-                    'atribute_value' => $value,
-                    'image_name'     => $image_name,
-                    'image_product'  => $imagePath,
+                    'id_product' => $product->getKey(),
+                    'atribute_name' => $name,
+                    'image_name' => $imageName,
+                    'image_product' => $imagePath,
                 ]);
             }
         }
 
-        // if ($request->latribut_name) {
-        //     foreach ($request->atribut_name as $i => $nameat) {
+        if ($request->filled('link_address')) {
 
-        //         if (!$nameat) continue;
-
-        //         $imagePath = null;
-        //         if (!empty($request->file('image_product')[$i])) {
-        //             $file = $request->file('image_product')[$i];
-        //             $image_name = $file->getClientOriginalName();
-        //             $imagePath = $file->store('produk', 'public');
-        //         }
-
-        //         LinkProduk::create([
-        //             'id_product'     => $product->id_product,
-        //             'atribute_name'  => $request->atribute_name[$i] ?? null,
-        //             'image_name'     => $image_name,
-        //             'image_product'  => $imagePath,
-        //         ]);
-        //     }
-        // }
-
-        if ($request->link_address) {
             foreach ($request->link_address as $i => $address) {
 
                 if (!$address) continue;
 
-                $imagePath = null;
-                if (!empty($request->file('link_image')[$i])) {
-                    $imagePath = $request->file('link_image')[$i]
-                        ->store('link_produk', 'public');
-                }
-
                 LinkProduk::create([
-                    'id_product'   => $product->id_product,
-                    'link_name'    => $request->link_name[$i] ?? 'Link',
+                    'id_product' => $product->id_product,
+                    'link_name' => $request->link_name[$i] ?? 'Link',
                     'link_address' => $address,
-                    'link_image'   => $imagePath,
                 ]);
             }
         }
 
-        $request->validate([
-            'link_image.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024|dimensions:width=60,height=60',
-            'image_product.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048|dimensions:width=900,height=900',
-        ], [
-            'link_image.*.dimensions' =>
-            'Ukuran foto link harus 60 x 60 pixel',
-
-            'image_product.*.dimensions' =>
-            'Ukuran foto produk harus 900 x 900 pixel',
-        ]);
-
-        return redirect()->route('produk.create')
-            ->with('success', 'Produk berhasil ditambahkan');
+        return redirect(session('produk_back', route('produk.index')))
+            ->with('success', 'Produk berhasil diupdate');
     }
 
     public function edit($id)
@@ -185,88 +145,67 @@ class ProdukController extends Controller
         $deleteLinkIds = array_diff($existingLinkIds, $sentLinkIds);
         LinkProduk::whereIn('id_link_produk', $deleteLinkIds)->delete();
 
-        foreach ($request->atribut_value as $i => $value) {
+        if ($request->has('atribute_name')) {
 
-            $detailId  = $request->detail_id[$i] ?? null;
-            $imageFile = $request->file('image_product')[$i] ?? null;
+            foreach ($request->atribute_name as $i => $nameat) {
 
-            if (!$value && !$imageFile) {
-                continue;
+                $detailId = $request->detail_id[$i] ?? null;
+                $imageFile = $request->file("image_product.$i");
+
+                if (!$nameat && !$imageFile) {
+                    continue;
+                }
+
+                $data = [
+                    'atribute_name' => $nameat,
+                ];
+
+                if ($imageFile) {
+                    $data['image_name'] = $imageFile->getClientOriginalName();
+                    $data['image_product'] = $imageFile->store('produk', 'public');
+                }
+
+                if ($detailId) {
+                    ProdukDetail::where('id', $detailId)->update($data);
+                } else {
+                    ProdukDetail::create(array_merge($data, [
+                        'id_product' => $produk->id_product,
+                    ]));
+                }
             }
+        }
 
-            $data = [
-                'atribute_name'  => $request->atribute_name[$i] ?? null,
-                'atribute_value' => $value,
-            ];
+        if ($request->has('link_address')) {
 
-            if ($imageFile) {
-                $data['image_name'] = $imageFile->getClientOriginalName();
-                $data['image_product'] = $imageFile->store('produk', 'public');
-            }
+            foreach ($request->link_address as $i => $link) {
 
-            if ($detailId) {
-                ProdukDetail::find($detailId)?->update($data);
-            } else {
-                ProdukDetail::create(array_merge($data, [
-                    'id_product' => $produk->id_product,
-                ]));
+                $linkId = $request->link_id[$i] ?? null;
+
+                $imageFile = $request->file("link_image.$i");
+
+                if (!$link && !$imageFile) {
+                    continue;
+                }
+
+                $data = [
+                    'link_name'    => $request->link_name[$i] ?? 'Link',
+                    'link_address' => $link,
+                ];
+
+                if ($imageFile) {
+                    $data['link_image'] = $imageFile->store('link_produk', 'public');
+                }
+
+                if ($linkId) {
+                    LinkProduk::where('id_link_produk', $linkId)->update($data);
+                } else {
+                    LinkProduk::create(array_merge($data, [
+                        'id_product' => $produk->id_product,
+                    ]));
+                }
             }
         }
 
-        // foreach ($request->attribute_name as $i => $nameat) {
-
-        //     $detailId  = $request->link_id[$i] ?? null;
-        //     $imageFile = $request->file('image_product')[$i] ?? null;
-
-        //     if (!$nameat && !$imageFile) {
-        //         continue;
-        //     }
-
-        //     $data = [
-        //         'attribute_name'  => $nameat
-        //     ];
-
-        //     if ($imageFile) {
-        //         $data['image_name'] = $imageFile->getClientOriginalName();
-        //         $data['image_product'] = $imageFile->store('produk', 'public');
-        //     }
-
-        //     if ($detailId) {
-        //         ProdukDetail::find($detailId)?->update($data);
-        //     } else {
-        //         ProdukDetail::create(array_merge($data, [
-        //             'id_product' => $produk->id_product,
-        //         ]));
-        //     }
-        // }
-
-        foreach ($request->link_address as $i => $link) {
-
-            $linkId  = $request->link_id[$i] ?? null;
-            $imageFile = $request->file('link_image')[$i] ?? null;
-
-            if (!$link && !$imageFile) {
-                continue;
-            }
-
-            $data = [
-                'link_name'  => $request->link_name[$i] ?? null,
-                'link_address' => $link,
-            ];
-
-            if ($imageFile) {
-                $data['link_image'] = $imageFile->getClientOriginalName();
-                $data['link_image'] = $imageFile->store('link_produk', 'public');
-            }
-
-            if ($linkId) {
-                LinkProduk::find($linkId)?->update($data);
-            } else {
-                LinkProduk::create(array_merge($data, [
-                    'id_product' => $produk->id_product,
-                ]));
-            }
-        }
         return redirect(session('produk_back', route('produk.index')))
             ->with('success', 'Produk berhasil diupdate');
     }

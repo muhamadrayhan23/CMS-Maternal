@@ -1,4 +1,3 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
 @section('title', 'Product - Trash')
 
@@ -151,7 +150,11 @@
                                             <td class="p-4">{{ $p->deleted_at }}</td>
                                             <td class="p-4">{{ $p->deleter?->name ?? '-' }}</td>
                                             <td class="p-4 font-medium">{{ $p->product_name }}</td>
-                                            <td class="p-4">{{ Str::limit($p->desc, 80) }}</td>
+                                            <td class="p-4">
+                                                <p class="line-clamp-2" title="{{ $p->desc }}">
+                                                    {{ Str::limit($p->desc, 60) }}
+                                                </p>
+                                            </td>
                                             <td class="p-4">Rp {{ number_format($p->price, 0, ',', '.') }}</td>
                                             <td class="p-4 text-center">
                                                 @if (optional($p->details->first())->image_product)
@@ -179,7 +182,7 @@
                                                                 value="{{ request('page') }}">
                                                             <button
                                                                 onclick="confirmRestore('restore-{{ $p->id_product }}')"
-                                                                class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                                class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
                                                                 <svg width="15" height="15" viewBox="0 0 15 15"
                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path
@@ -202,7 +205,7 @@
                                                                 value="{{ request('page') }}">
                                                             <button type="button"
                                                                 onclick="confirmDelete('hapus-{{ $p->id_product }}')"
-                                                                class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                                class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                                     height="18" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
@@ -223,7 +226,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8"
+                                            <td colspan="7"
                                                 class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
                                                 @if (request('search'))
                                                     <span class="font-bold">"{{ request('search') }}"</span> not found

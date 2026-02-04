@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('image_name');
             $table->string('image_product');
             $table->string('atribute_name');
-            $table->string('atribute_value');
 
             $table->timestamps();
 

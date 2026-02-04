@@ -140,7 +140,7 @@
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil',
-                                    text: (session('success')),
+                                    text: @json(session('success')),
                                     timer: 2000,
                                     showConfirmButton: true
                                 })
@@ -340,7 +340,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8"
+                                        <td colspan="7"
                                             class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300 font-sans ">
                                             @if (request('search'))
                                                 <span class="font-bold">"{{ request('search') }}"</span> not found
