@@ -15,7 +15,7 @@
     }
 </style>
 
-<div id="default-carousel" data-carousel="slide">
+<div id="default-carousel" data-carousel="slide" class="group relative">
     <div class="relative w-full h-screen font-sans -mt-30 overflow-hidden">
         @foreach($banners as $index => $banner)
         <div class="{{ $index === 0 ? '' : 'hidden' }} duration-700 ease-in-out" data-carousel-item="{{ $index === 0 ? 'active' : '' }}">
@@ -23,7 +23,7 @@
                 class="absolute inset-0 w-full h-full object-cover"
                 alt="Banner {{ $index + 1 }}">
 
-            <div class="absolute inset-x-0 bottom-20 flex justify-center">
+            <div class="absolute inset-x-0 bottom-15 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
                 <a href="{{ $banner->link ?? '#' }}"
                     class="px-10 py-3 rounded-full border-2 border-white text-white font-medium text-xl font-[Space_Grotesk] hover:bg-white hover:text-black transition">
                     Shop Now
@@ -33,7 +33,7 @@
         @endforeach
     </div>
 
-    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse opacity-0 group-hover:opacity-100 transition-opacity duration-400">
         @foreach($banners as $index => $banner)
         <button type="button"
             class="w-3 h-3 rounded-full transition-colors {{ $index == 0 ? 'bg-white' : 'bg-white/50 hover:bg-white/80' }}"
@@ -44,20 +44,54 @@
         @endforeach
     </div>
 
-    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white group-hover:bg-white/50 dark:group-hover:bg-black/70 group-hover:border-gray-800/50">
-            <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
+    <button
+        id="leftArrow"
+        type="button"
+        data-carousel-prev
+        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4
+           cursor-pointer focus:outline-none
+           opacity-0 group-hover:opacity-100
+           transition-opacity duration-400">
+
+        <span
+            class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white transition
+            hover:bg-white/5 dark:hover:bg-black/70 hover:border-gray-800/50">
+
+            <svg class="w-5 h-5 text-white rtl:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2"
+                    d="m15 19-7-7 7-7" />
             </svg>
         </span>
     </button>
-    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white group-hover:bg-white/50 dark:group-hover:bg-black/70 group-hover:border-gray-800/50">
-            <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+
+    <button
+        id="rightArrow"
+        type="button"
+        data-carousel-next
+        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer focus:outline-none
+        opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+
+        <span
+            class="inline-flex items-center justify-center w-10 h-10 rounded-full
+               border border-white
+               transition
+               hover:bg-white/50
+               dark:hover:bg-black/70
+               hover:border-gray-800/50">
+
+            <svg class="w-5 h-5 text-white rtl:rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2"
+                    d="m9 5 7 7-7 7" />
             </svg>
         </span>
     </button>
+
 </div>
 
 <div id="product-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 m-10">
@@ -68,11 +102,12 @@
             </h1>
 
             <p class="mx-6 my-5 text-justify">Timeless daily wear designed for comfort and sensory connection. Each piece is crafted to feel natural on your skin, offering ease you can return to every day.
-            <br><br>Through tactile paracord details, our creations become a quiet sanctuary helping you slow down, reconnect with nature, and find calm in a crowded world.</p>
+                <br><br>Through tactile paracord details, our creations become a quiet sanctuary helping you slow down, reconnect with nature, and find calm in a crowded world.
+            </p>
 
             <div class="">
                 <a href="{{ route('products') }}"
-                    class="mx-6 inline-flex items-center px-8 py-3 border rounded-full hover:bg-[#1A1A1A] hover:text-white transition gap-2">
+                    class="mx-6 inline-flex items-center px-8 py-3 bg-[#1A1A1A] text-white rounded-full hover:bg-[#5c5c5c] hover:text-white transition durat gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
                         <path d="M18 8L22 12L18 16" />
                         <path d="M2 12H22" />

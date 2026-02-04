@@ -1,4 +1,4 @@
-<div class="w-full bg-[#1A1A1A] font-sans py-16 px-10 relative text-white">
+<div class="w-full bg-black font-sans py-16 px-10 relative text-white">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
 
         <div class="flex flex-col gap-6">
