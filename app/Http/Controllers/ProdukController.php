@@ -49,10 +49,6 @@ class ProdukController extends Controller
             });
         }
 
-        // if ($request->ajax()) {
-        //     return view('admin.produk.partials.list', compact('produk'));
-        // }
-
         if ($request->status !== null && $request->status !== '') {
             $query->where('is_active', $request->status);
         }

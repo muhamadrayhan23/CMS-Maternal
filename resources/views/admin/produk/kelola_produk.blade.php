@@ -140,7 +140,7 @@
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil',
-                                    text: @json(session('success')),
+                                    text: (session('success')),
                                     timer: 2000,
                                     showConfirmButton: true
                                 })
@@ -240,7 +240,7 @@
                                             </button>
 
                                             <ul
-                                                class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-40 bg-white border rounded-lg shadow-xl text-left">
+                                                class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-40 bg-white border overflow-visible rounded-lg shadow-xl text-left">
                                                 <li>
                                                     <form action="{{ route('produk.toggle', $p->id_product) }}"
                                                         method="POST">
@@ -276,7 +276,18 @@
 
                                                 <li>
                                                     <a href="{{ route('produk.edit', $p->id_product) }}"
-                                                        class="block px-3 py-2 hover:bg-gray-100">Edit</a>
+                                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-pen-line-icon lucide-pen-line">
+                                                            <path d="M13 21h8" />
+                                                            <path
+                                                                d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                                        </svg>
+                                                        <span>Edit </span>
+                                                    </a>
                                                 </li>
 
                                                 <li>
@@ -289,9 +300,20 @@
                                                             value="{{ request('page') }}">
 
                                                         <button type="button"
-                                                            class="w-full px-3 py-2 hover:bg-gray-100 text-left"
-                                                            onclick="confirmDelete('hapus-{{ $p->id_product }}')">
-                                                            Delete
+                                                            onclick="confirmDelete('hapus-{{ $p->id_product }}')"
+                                                            class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                height="18" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-trash2-icon lucide-trash-2">
+                                                                <path d="M10 11v6" />
+                                                                <path d="M14 11v6" />
+                                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                                <path d="M3 6h18" />
+                                                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                            </svg>
+                                                            <span>Delete</span>
                                                         </button>
                                                     </form>
 
@@ -299,7 +321,18 @@
 
                                                 <li>
                                                     <a href="{{ route('produk.show', $p->id_product) }}"
-                                                        class="block px-3 py-2 hover:bg-gray-100">Detail</a>
+                                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-eye-icon lucide-eye">
+                                                            <path
+                                                                d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                                                            <circle cx="12" cy="12" r="3" />
+                                                        </svg>
+                                                        <span>Detail</span>
+                                                    </a>
                                                 </li>
 
                                             </ul>

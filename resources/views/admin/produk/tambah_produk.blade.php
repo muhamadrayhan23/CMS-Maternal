@@ -17,7 +17,6 @@
                     })
                 </script>
             @endif
-
             <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
@@ -180,31 +179,5 @@
 
             el.value = angka ? 'Rp ' + format : '';
         }
-
-        // document.addEventListener('change', function(e) {
-        //     if (e.target.type !== 'file') return;
-
-        //     const file = e.target.files[0];
-        //     if (!file) return;
-
-        //     const isLink = e.target.name.includes('link_image');
-        //     const requiredWidth = isLink ? 200 : 1200;
-        //     const requiredHeight = isLink ? 200 : 1200;
-
-        //     const img = new Image();
-        //     img.src = URL.createObjectURL(file);
-
-        //     img.onload = () => {
-        //         if (img.width !== requiredWidth || img.height !== requiredHeight) {
-        //             alert(
-        //                 isLink ?
-        //                 'Ukuran foto link harus 200 x 200 px' :
-        //                 'Ukuran foto produk harus 1200 × 1200 px'
-        //             );
-        //             e.target.value = '';
-        //         }
-        //         URL.revokeObjectURL(img.src);
-        //     };
-        // });
     </script>
 @endsection

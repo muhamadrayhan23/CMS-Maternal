@@ -171,15 +171,23 @@
                                                     class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-44 bg-white border rounded-lg shadow-xl text-left">
 
                                                     <li>
-                                                        <form
+                                                        <form id="restore-{{ $p->id_product }}"
                                                             action="{{ route('produk.restore.process', $p->id_product) }}"
                                                             method="POST">
                                                             @csrf
                                                             <input type="hidden" name="page"
                                                                 value="{{ request('page') }}">
-                                                            <button onclick="return confirm('Pulihkan produk ini?')"
-                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 text-left">
-                                                                Restore
+                                                            <button
+                                                                onclick="confirmRestore('restore-{{ $p->id_product }}')"
+                                                                class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                                <svg width="15" height="15" viewBox="0 0 15 15"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M7.5 1.25C8.71259 1.24978 9.89906 1.6023 10.9148 2.2646C11.9305 2.9269 12.7317 3.87037 13.2206 4.98002C13.7095 6.08968 13.8651 7.3176 13.6683 8.51411C13.4716 9.71063 12.931 10.8241 12.1125 11.7188M10 7.5L7.5 5M7.5 5L5 7.5M7.5 5V10M1.5625 5.54688C1.36334 6.15229 1.25796 6.7846 1.25 7.42188M1.7688 10C2.11974 10.8074 2.63729 11.5315 3.28755 12.125M2.89749 3.27183C3.07189 3.08198 3.25787 2.90309 3.45437 2.73621M5.40253 13.3875C6.96109 13.9428 8.67621 13.8573 10.1719 13.15"
+                                                                        stroke="#282623" stroke-width="1.5"
+                                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                                </svg>
+                                                                <span>Restore</span>
                                                             </button>
                                                         </form>
                                                     </li>
@@ -194,8 +202,19 @@
                                                                 value="{{ request('page') }}">
                                                             <button type="button"
                                                                 onclick="confirmDelete('hapus-{{ $p->id_product }}')"
-                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 text-left">
-                                                                Delete Permanen
+                                                                class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                    height="18" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="lucide lucide-trash2-icon lucide-trash-2">
+                                                                    <path d="M10 11v6" />
+                                                                    <path d="M14 11v6" />
+                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                                    <path d="M3 6h18" />
+                                                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                                </svg>
+                                                                <span>Delete Permanen</span>
                                                             </button>
                                                         </form>
                                                     </li>
@@ -255,10 +274,24 @@
 
             window.confirmDelete = (formId) => {
                 Swal.fire({
-                    text: 'Produk ini akan dihapus PERMANEN. Data tidak bisa dikembalikan!',
+                    text: 'Produk ini akan dihapus PERMANEN',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Hapus Permanen',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit()
+                    }
+                })
+            }
+
+            window.confirmRestore = (formId) => {
+                Swal.fire({
+                    text: 'Pulihkan data?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Restore',
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
