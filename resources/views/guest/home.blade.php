@@ -60,7 +60,7 @@
     </button>
 </div>
 
-<div class="flex items-center mt-10 mb-14">
+<div class="flex items-center mt-15 mb-14">
     <span class="flex-1 h-px bg-gray-300"></span>
 
     <h1 class="mx-6 font-sans text-2xl tracking-wide whitespace-nowrap">
@@ -71,11 +71,14 @@
 </div>
 <div id="product-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 m-10">
     @foreach ($products as $product)
-    <div class="aspect-square">
+    <div class="aspect-square transition-all duration-400 hover:scale-105">
 
         @if ($product->details->count())
-        <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-            class="w-full h-full object-cover rounded-lg">
+        <a href="{{ route('detproduct', $product->id_product) }}">
+            <img
+                src="{{ asset('storage/' . $product->details->first()->image_product) }}"
+                class="w-full h-full object-cover rounded-lg">
+        </a>
         @else
         <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
             No Image
@@ -92,7 +95,7 @@
     </div>
     @endforeach
 </div>
-<div class="flex justify-center mt-10 mb-20">
+<div class="flex justify-center mt-8 mb-8">
     <a href="{{ route('products') }}"
         class="flex px-8 py-3 border rounded-full hover:bg-[#1A1A1A] hover:text-white transition gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
@@ -103,37 +106,31 @@
     </a>
 </div>
 
-<section class="pt-12 pb-14 text-center">
-    <span class="block text-[10px] tracking-[0.3em] uppercase text-gray-500 mb-3">
-        Our Essence
-    </span>
+<div class="">
+    <div class="relative w-full rounded-md overflow-hidden">
+        <img src="{{ asset('img/bg_about.png') }}" alt=""
+            class="w-full h-auto object-cover">
 
-    <h2 class="text-4xl md:text-6xl font-normal leading-[1.1] tracking-tight mb-12">
-        Elevating the everyday through <br>
-        <span class="text-gray-400 italic">intentional design</span> and honest craft.
-    </h2>
-</section>
-
-<div id="about us" class="flex mb-5">
-    <img src="{{ asset('img/1769659981_ant wpp.png') }}" alt="About Us"
-        class="lg:w-1/2 md:w-screen sm:w-screen">
-
-    <div class="">
-        <div class="flex items-center justify-between">
-            <h1 class="ml-5 text-5xl font-bold">THE STORY BEHIND</h1>
-            <a href="{{ route('about') }}"
-                class="flex gap-3 mr-5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
-                    <path d="M18 8L22 12L18 16" />
-                    <path d="M2 12H22" />
-                </svg>
-                See More
-            </a>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+            <span class="block text-[10px] tracking-[0.3em] uppercase text-gray-200 mb-3">
+                About Us
+            </span>
+            <h2 class="text-4xl md:text-6xl font-normal leading-[1.1] tracking-tight text-white">
+                <span class="text-gray-200 italic font-bold">Born from Curiosity,</span> crafted with Care.
+            </h2>
+            <div class="font-sans text-xl text-white mt-5">We craft timeless daily wear that prioritizes comfort and sensory connection. Our paracord creations are a tactile sanctuary, a way to reconnect with nature and find calm in a crowded world.</div>
+            <div class="flex justify-center mt-10 mb-5">
+                <a href="{{ route('about') }}"
+                    class="flex px-8 py-3 border rounded-full border-white text-white hover:bg-white hover:text-black transition gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
+                        <path d="M18 8L22 12L18 16" />
+                        <path d="M2 12H22" />
+                    </svg>
+                    Explore Our Journey
+                </a>
+            </div>
         </div>
-
-        <p class="m-5 text-justify text-xl">More than just a bag, alttt.craftedgoods is your fashion icon. We present fresh, bold, and youthful designs, specifically designed to set trends, not just follow them. With carefully curated color combinations, our bags are ready to complement your look—from casual to edgy street style. So, are you ready to make your style unforgettable?</p>
-
-        <p class="m-5 text-justify text-xl">Another more than just a bag, alttt.craftedgoods is your fashion icon. We present fresh, bold, and youthful designs, specifically designed to set trends, not just follow them. With carefully curated color combinations, our bags are ready to complement your look—from casual to edgy street style. So, are you ready to make your style unforgettable?</p>
     </div>
 </div>
+
 @endsection

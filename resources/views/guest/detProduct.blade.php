@@ -42,24 +42,32 @@
                 Rp {{ number_format($product->price) }}
             </p>
 
-            <p class="mt-6 text-gray-600 text-xl leading-relaxed bg-gray-200 rounded-md p-5">
+            <p class="mt-6 text-gray-600 text-xl leading-relaxed bg-gray-100 rounded-md p-5">
                 {{ $product->desc }}
             </p>
 
-            <div class="flex-col gap-4 mt-8 mb-8">
-                <h2 class="font-sans">Available on : </h2>
-                @foreach ($product->links as $link)
-                <a href="{{ $link->link_address }}" target="_blank"
-                    class="p-3 bg-black text-white rounded-lg flex-row gap-3 px-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-arrow-out-up-right-icon lucide-square-arrow-out-up-right">
-                        <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-                        <path d="m21 3-9 9" />
-                        <path d="M15 3h6v6" />
-                    </svg>
-                    {{ $link->link_name }}
-                </a>
-                @endforeach
+            <div class="flex flex-col gap-4 mt-8 mb-8">
+                <h2 class="font-sans">Available on :</h2>
+
+                <div class="flex flex-row gap-4 flex-wrap">
+                    @foreach ($product->links as $link)
+                    <a href="{{ $link->link_address }}" target="_blank"
+                        class="flex items-center gap-3 px-6 py-3 bg-black text-white rounded-lg">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                            <path d="m21 3-9 9" />
+                            <path d="M15 3h6v6" />
+                        </svg>
+
+                        {{ $link->link_name }}
+                    </a>
+                    @endforeach
+                </div>
             </div>
+
         </div>
 
     </div>
