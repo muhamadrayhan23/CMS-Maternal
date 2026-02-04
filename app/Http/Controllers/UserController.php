@@ -41,6 +41,8 @@ class UserController extends Controller
     {
         session()->forget('produk_back');
         session()->forget('banner_back');
+        session()->forget('link_back');
+        session()->forget('user_back');
         $totalProducts = Product::count();
         $publishedProducts = Product::where('is_active', 1)->count();
 
@@ -81,6 +83,7 @@ class UserController extends Controller
     //tampil daftar user
     public function index(Request $request)
     {
+        session(['user_back' => url()->current()]);
         $search = $request->search;
 
         $users = User::when($search, function ($query, $search) {

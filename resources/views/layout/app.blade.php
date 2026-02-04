@@ -14,7 +14,7 @@
         {{-- SIDEBAR --}}
         @include('partials.sidebarAdmin')
 
-        <div id="overlay" class="fixed inset-0 bg-black/50 z-[65] hidden md:hidden"></div>
+        {{-- <div id="overlay" class="fixed inset-0 bg-black/50 z-[65] hidden md:hidden"></div> --}}
         {{-- CONTENT --}}
         <main class="md:ml-64 min-h-screen p-4">
             <div class="p-10">

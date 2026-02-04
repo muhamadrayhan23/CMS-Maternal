@@ -15,7 +15,7 @@
 <div class="max-w-7xl mx-auto px-6">
 
     <section class="pt-12 pb-14 text-center">
-        <span class="block text-[10px] tracking-[0.3em] uppercase text-gray-500 mb-3">
+        <span class="block text-[20px] tracking-[0.3em] uppercase text-gray-500 mb-3">
             Our Essence
         </span>
 
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="space-y-12 md:pt-20">
+        <div class="space-y-12">
             <div>
                 <h3 class="text-3xl font-semibold">
                     Crafted for Everyday Life

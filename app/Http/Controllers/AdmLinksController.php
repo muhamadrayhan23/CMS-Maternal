@@ -10,6 +10,7 @@ class AdmLinksController extends Controller
     //tampil semua link
     public function index(Request $request)
     {
+        session(['link_back' => url()->current()]);
         $search = $request->search;
 
         $links = Link::when($search, function ($q) use ($search) {

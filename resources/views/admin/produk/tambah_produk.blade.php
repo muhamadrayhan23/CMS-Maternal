@@ -34,12 +34,15 @@
                 </div>
 
                 <div class="bg-white rounded-2xl p-8 shadow-sm space-y-4 mb-8">
-                    <h3 class="font-semibold text-gray-800">Product Info</h3>
+                    <div class="mb-4">
+                        <label class="text-sm font-semibold text-gray-800">
+                            Product Overview <span class="text-red-500">*</span>
+                        </label>
+                    </div>
                     <input name="product_name" value="{{ old('product_name', $produk->product_name ?? '') }}"
                         placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
 
-                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>
-                        {{ old('desc', $produk->desc ?? '') }}</textarea>
+                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>{{ old('desc', $produk->desc ?? '') }}</textarea>
 
                     <input type="text" id="price" name="price"
                         class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Price"
@@ -57,7 +60,7 @@
                                     <input type="hidden" name="link_id[]" value="{{ $link->id_link_produk }}">
                                 @endif
 
-                                <input type="file" name="link_image[]"
+                                <input type="file" name="link_image[]" accept="image/png,image/jpeg,image/webp"
                                     class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
 
                                 @if ($link && $link->link_image)
@@ -71,7 +74,7 @@
                                     placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
 
                                 <button type="button" onclick="removeLink(this)"
-                                    class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center">
+                                    class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">
                                     ✖
                                 </button>
                             </div>
@@ -79,7 +82,7 @@
                     </div>
                     <button type="button" onclick="addLink()"
                         class="w-full mt-5 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-700">
-                        Add Link
+                        Add More Link
                     </button>
                 </div>
 
@@ -94,7 +97,7 @@
 
                                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
 
-                                <input type="file" name="image_product[]"
+                                <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
                                     class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
 
                                 @if ($detail && $detail->image_product)
@@ -108,7 +111,7 @@
                                     placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
 
                                 <button type="button" onclick="removeRow(this)"
-                                    class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center"
+                                    class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center"
                                     @required(true)>
                                     ✖
                                 </button>
@@ -119,7 +122,7 @@
 
                     <button type="button" onclick="addRow()"
                         class="w-full mt-5 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-700">
-                        Add Attribute
+                        Add More Attribute
                     </button>
 
                 </div>
@@ -131,11 +134,11 @@
         function addLink() {
             document.getElementById('links').insertAdjacentHTML('beforeend', `
                 <div class="link-row border rounded-xl p-5 space-y-3 relative">
-                <input type="file" name="link_image[]" required>
+                <input type="file" name="link_image[]" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
                 <input name="link_name[]" placeholder="Link Name" class="w-full px-4 py-2 border rounded-lg" required>
                 <input name="link_address[]" placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
                 <button type="button" onclick="removeLink(this)"
-                class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
+                class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
                 </div>`)
         }
 
@@ -146,11 +149,11 @@
         function addRow() {
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
                 <div class="detail-row border rounded-xl p-5 space-y-3 relative">
-                <input type="file" name="image_product[]" required>
+                <input type="file" name="image_product[]" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
                 <input name="atribute_name[]" placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
                 <input name="atribut_value[]" placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
                 <button type="button" onclick="removeRow(this)"
-                class="absolute top-3 right-3 bg-gray-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
+                class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
                 </div>`)
         }
 
@@ -164,5 +167,31 @@
 
             el.value = angka ? 'Rp ' + format : '';
         }
+
+        // document.addEventListener('change', function(e) {
+        //     if (e.target.type !== 'file') return;
+
+        //     const file = e.target.files[0];
+        //     if (!file) return;
+
+        //     const isLink = e.target.name.includes('link_image');
+        //     const requiredWidth = isLink ? 60 : 900;
+        //     const requiredHeight = isLink ? 60 : 900;
+
+        //     const img = new Image();
+        //     img.src = URL.createObjectURL(file);
+
+        //     img.onload = () => {
+        //         if (img.width !== requiredWidth || img.height !== requiredHeight) {
+        //             alert(
+        //                 isLink ?
+        //                 'Ukuran foto link harus 60 x 60 px' :
+        //                 'Ukuran foto produk harus 900 x 900 px'
+        //             );
+        //             e.target.value = '';
+        //         }
+        //         URL.revokeObjectURL(img.src);
+        //     };
+        // });
     </script>
 @endsection

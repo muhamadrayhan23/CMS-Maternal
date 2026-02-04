@@ -8,10 +8,6 @@ use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Guest\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/products', [ProductController::class, 'index'])->name('products');
-
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 
@@ -30,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/banner/delete/{id}', [BannerController::class, 'destroy'])->name('dBanner');
     Route::get('/banner/trash', [BannerController::class, 'restore'])->name('Btrash');
     Route::post('/banner/trash/{id}', [BannerController::class, 'restoreProses'])->name('Btrash.restore');
-    Route::delete('/banner/force-delete{id}', [BannerController::class, 'forceDelete'])->name('Btrash.permanent');
+    Route::delete('/banner/force-delete/{id}', [BannerController::class, 'forceDelete'])->name('Btrash.permanent');
 
 
     //manajemen produk
@@ -75,5 +71,16 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/about', function () { return view('guest.about');})->name('about');
 Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
 
+//landing page
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//products
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detproduct');
 
 
+//home
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//products
+Route::get('/products', [ProductController::class, 'index'])->name('products');

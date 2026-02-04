@@ -133,7 +133,7 @@
                     </svg>
                 </a>
                 <p class="font-semibold text-2xl"> See Links </p>
-                <a href="{{ route('createUser') }}" class="ml-auto">
+                <a href="{{ route('createLink') }}" class="ml-auto">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
