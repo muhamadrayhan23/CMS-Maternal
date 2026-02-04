@@ -84,5 +84,68 @@
         });
         });
 
+
+        
+        //ALERT RESTORE YA ENIH
+
+            //alert info delete berhasil iyes
+            document.addEventListener('DOMContentLoaded', function() {
+
+            const successRestore = "{{ session('success') }}"
+            
+            if (successRestore) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success !',
+                    text: successRestore,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            } 
+
+                    // alert confirm delete
+                    document.querySelectorAll('.btn-hapus-permanent').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+            
+                    Swal.fire({
+                        title: 'This banner will be restored. Are you sure?',
+                        text: '',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.closest('form').submit();
+                        }
+                        })
+                    });
+                });
+
+                    // alert confirm restore
+                    document.querySelectorAll('.btn-restore').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+            
+                    Swal.fire({
+                        title: 'This banner will be restored. Are you sure?',
+                        text: '',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.closest('form').submit();
+                        }
+                        })
+                    });
+                }); 
+
+             });
+
 </script>
 @endsection

@@ -44,7 +44,7 @@
                             </a>
                             <form method="POST" action="{{ route('dBanner', $b->id_banner) }}">
                                 @csrf @method('DELETE')
-                                <button type="submit" onclick="return confirm('Yakin mau hapus?')" class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                <button type="submit" class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2">
                                         <path d="M10 11v6"/><path d="M14 11v6"/>
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
@@ -72,6 +72,29 @@
             There are no banners available yet
             @endif
         </div>
+
+        <script > 
+        document.querySelectorAll('.btn-hapus').forEach(button => {
+        button.addEventListener('click', function(e) {
+        e.preventDefault(); 
+        
+        // Munculin alert buat nanya
+        Swal.fire({
+            title: 'This banner will be moved to trash. Are you sure??',
+            text: '',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.closest('form').submit();
+            }
+        })
+    });
+}); 
+        </script>
     @endforelse
 </div>
 <div class="mt-6">

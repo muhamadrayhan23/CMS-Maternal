@@ -66,7 +66,7 @@
             @include('admin.banner.search_cardH')
         </div>
     
-<script>
+<script >
     //TOOLTIP
     function toggleMenu(btn){
         const menu = btn.parentElement.querySelector('.action-menu')
@@ -111,6 +111,47 @@
         e.preventDefault(); //menghentikan behavior form 
         fetchFilter();
     })
+
+        //ALERT DELETE YA ENIH
+
+            //alert info delete berhasil iyes
+            document.addEventListener('DOMContentLoaded', function() {
+
+            const successMessage = "{{ session('success') }}";
+
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: successMessage,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+
+                    // alert confirm Delete
+                    document.querySelectorAll('.btn-hapus').forEach(button => {
+                    button.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+            
+                    Swal.fire({
+                        title: 'This banner will be moved to trash. Are you sure??',
+                        text: '',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.closest('form').submit();
+                        }
+                        })
+                    });
+                }); 
+
+             });
+
 
 </script>
 @endsection
