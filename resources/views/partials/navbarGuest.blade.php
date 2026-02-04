@@ -19,7 +19,7 @@ $isProductPage = request()->routeIs('products*');
             id="navbar-logo"
             src="{{ asset('img/logo/logowhite.png') }}"
             data-logo-white="{{ asset('img/logo/logowhite.png') }}"
-            data-logo-black="{{ asset('img/logo/logoblack.png') }}"
+            data-logo-black="{{ asset('img/logo/logo.png') }}"
             class="w-57.5 h-4.75 aspect-[4.57] object-cover transition-all duration-300"
             alt="Weblogo" />
     </a>

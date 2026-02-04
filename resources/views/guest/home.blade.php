@@ -60,16 +60,29 @@
     </button>
 </div>
 
-<div class="flex items-center mt-15 mb-14">
-    <span class="flex-1 h-px bg-gray-300"></span>
-
-    <h1 class="mx-6 font-sans text-2xl tracking-wide whitespace-nowrap">
-        OUR PRODUCTS
-    </h1>
-
-    <span class="flex-1 h-px bg-gray-300"></span>
-</div>
 <div id="product-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 m-10">
+    <div id="opening-products" class="">
+        <div class="flex flex-col justify-center mt-8 mb-8">
+            <h1 class="mx-6 font-sans text-4xl tracking-wide whitespace-nowrap font-bold">
+                INTRODUCING, <br> OUR PRODUCTS
+            </h1>
+
+            <p class="mx-6 my-5 text-justify">Timeless daily wear designed for comfort and sensory connection. Each piece is crafted to feel natural on your skin, offering ease you can return to every day.
+            <br><br>Through tactile paracord details, our creations become a quiet sanctuary helping you slow down, reconnect with nature, and find calm in a crowded world.</p>
+
+            <div class="">
+                <a href="{{ route('products') }}"
+                    class="mx-6 inline-flex items-center px-8 py-3 border rounded-full hover:bg-[#1A1A1A] hover:text-white transition gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
+                        <path d="M18 8L22 12L18 16" />
+                        <path d="M2 12H22" />
+                    </svg>
+                    See More
+                </a>
+            </div>
+        </div>
+
+    </div>
     @foreach ($products as $product)
     <div class="aspect-square transition-all duration-400 hover:scale-105">
 
@@ -86,7 +99,7 @@
         @endif
 
         <h3 class="mt-3 font-semibold text-lg text-center">
-            {{ $product->product_name }}
+            {{ Str::upper($product->product_name) }}
         </h3>
 
         <p class="mt-2 font-bold text-center">
@@ -95,19 +108,9 @@
     </div>
     @endforeach
 </div>
-<div class="flex justify-center mt-8 mb-8">
-    <a href="{{ route('products') }}"
-        class="flex px-8 py-3 border rounded-full hover:bg-[#1A1A1A] hover:text-white transition gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
-            <path d="M18 8L22 12L18 16" />
-            <path d="M2 12H22" />
-        </svg>
-        See More
-    </a>
-</div>
 
-<div class="">
-    <div class="relative w-full rounded-md overflow-hidden">
+<div class="transition-all duration-700 hover:scale-105">
+    <div class="relative w-full overflow-hidden ">
         <img src="{{ asset('img/bg_about.png') }}" alt=""
             class="w-full h-auto object-cover">
 

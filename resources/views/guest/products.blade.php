@@ -96,8 +96,8 @@
             });
     }
 
-    // searchInput.addEventListener('input', () => fetchProducts(true));
-    // sortSelect.addEventListener('change', () => fetchProducts(true));
+    searchInput.addEventListener('input', () => fetchProducts(true));
+    sortSelect.addEventListener('change', () => fetchProducts(true));
 
     loadMoreBtn?.addEventListener('click', () => fetchProducts());
 </script>

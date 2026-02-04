@@ -33,7 +33,7 @@ class ProductController extends Controller
 
         $products = $query
             ->where('is_active', true)
-            ->paginate(4)
+            ->paginate(12)
             ->withQueryString();
 
         if ($request->ajax()) {

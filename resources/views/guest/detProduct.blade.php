@@ -94,7 +94,7 @@
         </a>
 
         <h3 class="mt-3 font-semibold text-lg text-center">
-            {{ $product->product_name }}
+            {{ Str::upper($product->product_name) }}
         </h3>
 
         <p class="mt-2 font-bold text-center">
