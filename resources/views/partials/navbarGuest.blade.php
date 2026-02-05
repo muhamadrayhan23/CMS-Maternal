@@ -43,13 +43,13 @@ $isProductPage = request()->routeIs('products*');
         </a>
 
         <a href="{{ route('products') }}"
-            class="group relative inline-block px-1 py-2 {{ request()->routeIs('products*') }}">
+            class="group relative inline-block px-1 py-2 {{ request()->routeIs('products') }}">
 
             <span>Products</span>
 
             <span
             class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
-            {{ request()->routeIs('products*') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
+            {{ request()->routeIs('products', 'detproduct') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
             origin-center">
             </span>
 
@@ -71,13 +71,13 @@ $isProductPage = request()->routeIs('products*');
         </a>
 
         <a href="{{ route('linktree') }}"
-            class="group relative inline-block px-1 py-2 {{ request()->routeIs('links*') }}">
+            class="group relative inline-block px-1 py-2 {{ request()->routeIs('linktree') }}">
 
             <span>Links</span>
 
             <span
             class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
-            {{ request()->routeIs('#') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
+            {{ request()->routeIs('linktree') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
             origin-center">
             </span>
         </a>
