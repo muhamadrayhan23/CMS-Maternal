@@ -19,6 +19,40 @@
         </div>
     </main>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function (){
 
+        const success = "{{session ('success')}}"
+        if(success){
+            Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: successMessage,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+        }
+    // alert confirm Logout
+        document.querySelectorAll('.btn-logout').forEach(button => {
+            button.addEventListener('click', function(e) {
+            e.preventDefault(); 
+                        
+            Swal.fire({
+            title: 'Confirm Logout',
+            text: 'Are you sure you want to Logout?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                this.closest('form').submit()
+                }
+                })
+            })
+         })
+    })
+</script>
 </body>
 </html>
