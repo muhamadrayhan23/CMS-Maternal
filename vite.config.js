@@ -3,6 +3,7 @@ import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite'; // Pastikan baris ini ada
 
 export default defineConfig({
+    
     plugins: [
         tailwindcss(), // Pastikan baris ini dipanggil
         laravel({

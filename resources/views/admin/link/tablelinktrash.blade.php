@@ -36,16 +36,13 @@
 
                         {{-- TOOLTIP --}}
                         <div class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
-                            <form method="POST" action="{{ route('trashLink.permanent', $link->id_link) }}">
+                            <form id="delete-form-{{ $link->id_link }}" method="POST" action="{{ route('forceDeleteLink', $link) }}">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" onclick="return confirm('Yakin mau hapus?')" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-black
-                                        hover:bg-gray-100 transition-all text-left">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="lucide lucide-trash-2">
+                                <button type="button" data-id="{{ $link->id_link }}" onclick="DeletePermanentL(this)" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-100 transition-all text-left">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M10 11v6" />
                                         <path d="M14 11v6" />
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
@@ -56,23 +53,29 @@
                                     <span>Delete</span>
                                 </button>
                             </form>
-                            <form method="POST" action="{{ route('trashLink.restore', $link->id_link) }}">
+                            <form id="restore-form-{{ $link->id_link }}"
+                                method="POST"
+                                action="{{ route('trashLink.restore', $link->id_link) }}">
                                 @csrf
-                                <button type="submit"
-                                    onclick="return confirm('Yakin ingin me restore link ini?')"
-                                    class="w-full flex items-center gap-2 px-4 py-3 text-sm hover:bg-green-50 transition-all text-left border-t border-gray-50 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-fading-arrow-up-icon lucide-circle-fading-arrow-up">
+
+                                <button type="button" data-id="{{ $link->id_link }}" onclick="confirmRestoreL(this)" class="w-full flex items-center gap-2 px-4 py-3 text-sm hover:bg-green-50 transition-all text-left border-t border-gray-50">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M12 2a10 10 0 0 1 7.38 16.75" />
                                         <path d="m16 12-4-4-4 4" />
                                         <path d="M12 16V8" />
                                         <path d="M2.5 8.875a10 10 0 0 0-.5 3" />
                                         <path d="M2.83 16a10 10 0 0 0 2.43 3.4" />
-                                        <path d="M4.636 5.235a10 10 0 0 1 .891-.857">
-                                            <path d="M8.644 21.42a10 10 0 0 0 7.631-.38" />
+                                        <path d="M4.636 5.235a10 10 0 0 1 .891-.857" />
+                                        <path d="M8.644 21.42a10 10 0 0 0 7.631-.38" />
                                     </svg>
+
                                     <span>Restore</span>
                                 </button>
                             </form>
+
                         </div>
                     </div>
                 </td>
@@ -90,3 +93,42 @@
 <div class="mt-3">
     {{ $links->withQueryString()->links() }}
 </div>
+
+<script>
+    window.DeletePermanentL = function(el) {
+        const id = el.dataset.id
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will permanently delete your link!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit()
+            }
+        })
+    }
+    window.confirmRestoreL = function(el) {
+        const id = el.dataset.id
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will return your link back',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#16a34a',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Yes, restore',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('restore-form-' + id).submit()
+            }
+        })
+    }
+</script>

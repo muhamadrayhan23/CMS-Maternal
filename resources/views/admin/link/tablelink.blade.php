@@ -13,7 +13,7 @@
             <tbody class="text-center">
                 @forelse ($links as $link)
                 <tr class="hover:bg-gray-50 transition">
-                    <td class=" text-black text-center">
+                    <td class="text-green-700 bg-green-100/90 text-[10px] rounded-full">
                         Published
                     </td>
                     <td class="flex justify-center items-center">
@@ -48,16 +48,13 @@
                                 </a>
 
 
-                                <form method="POST" action="{{ route('deleteLink', $link) }}">
+                                <form id="delete-form-{{ $link->id_link }}" method="POST" action="{{ route('deleteLink', $link) }}">
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" onclick="return confirm('Yakin mau hapus?')" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-black
-                                        hover:bg-gray-100 transition-all text-left">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-trash-2">
+                                    <button type="button" data-id="{{ $link->id_link }}" onclick="confirmDeleteL(this)" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-100 transition-all text-left">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M10 11v6" />
                                             <path d="M14 11v6" />
                                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
@@ -68,6 +65,7 @@
                                         <span>Delete</span>
                                     </button>
                                 </form>
+
                             </div>
                         </div>
                     </td>
@@ -86,3 +84,24 @@
         {{ $links->withQueryString()->links() }}
     </div>
 </div>
+
+<script>
+    window.confirmDeleteL = function(el) {
+        const id = el.dataset.id
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will delete your link!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit()
+            }
+        })
+    }
+</script>
