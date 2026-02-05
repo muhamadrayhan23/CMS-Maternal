@@ -159,6 +159,7 @@
                                     <th class="p-4 w-44">Link</th>
                                     <th class="p-4 w-24 text-left">Image</th>
                                     <th class="p-4 w-32">Status</th>
+                                    <th class="p-4 w-32">Stok</th>
                                     <th class="p-4 w-15">Action</th>
                                 </tr>
                             </thead>
@@ -233,6 +234,13 @@
                                             </span>
                                         </td>
 
+                                        <td class="p-4 text-center">
+                                            <span
+                                                class="px-3 py-1 text-xs rounded-full {{ $p->is_available ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }}">
+                                                {{ $p->is_available ? 'Available' : 'Unavailable' }}
+                                            </span>
+                                        </td>
+
                                         <td class="p-4 relative overflow-visible text-center">
                                             <button type="button" onclick="toggleMenu(this)"
                                                 class="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded">
@@ -269,6 +277,37 @@
                                                                     <path d="M12 8v8" />
                                                                 </svg>
                                                                 <span>Publish</span>
+                                                            @endif
+                                                        </button>
+                                                    </form>
+                                                </li>
+
+                                                <li>
+                                                    <form action="{{ route('produk.toggleLagi', $p->id_product) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button
+                                                            class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                            @if ($p->is_available)
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="lucide lucide-x-icon lucide-x">
+                                                                    <path d="M18 6 6 18" />
+                                                                    <path d="m6 6 12 12" />
+                                                                </svg>
+                                                                <span>Unavailable</span>
+                                                            @else
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="lucide lucide-check-icon lucide-check">
+                                                                    <path d="M20 6 9 17l-5-5" />
+                                                                </svg>
+                                                                <span>Available</span>
                                                             @endif
                                                         </button>
                                                     </form>

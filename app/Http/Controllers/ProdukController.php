@@ -287,4 +287,16 @@ class ProdukController extends Controller
 
         return back()->with('success', 'Status produk diperbarui');
     }
+
+    public function toggleLagi($id)
+    {
+        $produk = Product::findOrFail($id);
+
+        $produk->update([
+            'is_available' => !$produk->is_available,
+            'updated_by' => auth()->id()
+        ]);
+
+        return back()->with('success', 'Status produk diperbarui');
+    }
 }
