@@ -24,8 +24,8 @@
                 alt="Banner {{ $index + 1 }}">
 
             <div class="absolute inset-x-0 bottom-15 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                <a href="{{ $banner->link ?? '#' }}"
-                    class="px-10 py-3 rounded-full border-2 border-white text-white font-medium text-xl font-[Space_Grotesk] hover:bg-white hover:text-black transition">
+                <a href="{{ route('products')}}"
+                    class="px-7 py-2 rounded-full border-2 border-white text-white font-medium text-md font-[Space_Grotesk] hover:bg-white hover:text-black transition">
                     Shop Now
                 </a>
             </div>
@@ -94,55 +94,87 @@
 
 </div>
 
-<div id="product-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 m-10">
-    <div id="opening-products" class="">
-        <div class="flex flex-col justify-center mt-8 mb-8">
-            <h1 class="mx-6 font-sans text-4xl tracking-wide whitespace-nowrap font-bold">
-                INTRODUCING, <br> OUR PRODUCTS
-            </h1>
+<div id="product-cards" class="relative flex gap-20 m-10">
 
-            <p class="mx-6 my-5 text-justify">Timeless daily wear designed for comfort and sensory connection. Each piece is crafted to feel natural on your skin, offering ease you can return to every day.
-                <br><br>Through tactile paracord details, our creations become a quiet sanctuary helping you slow down, reconnect with nature, and find calm in a crowded world.
-            </p>
+    {{-- LEFT CONTENT --}}
+    <div class="flex flex-col justify-center w-105 shrink-0">
+        <h1 class="mx-6 font-sans text-4xl tracking-wide font-bold">
+            INTRODUCING, <br> OUR PRODUCTS
+        </h1>
 
-            <div class="">
-                <a href="{{ route('products') }}"
-                    class="mx-6 inline-flex items-center px-8 py-3 bg-[#1A1A1A] text-white rounded-full hover:bg-[#5c5c5c] hover:text-white transition durat gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
-                        <path d="M18 8L22 12L18 16" />
-                        <path d="M2 12H22" />
-                    </svg>
-                    See More
-                </a>
+        <p class="mx-6 my-5 text-justify">
+            Timeless daily wear designed for comfort and sensory connection. Each piece is crafted to feel natural on your skin, offering ease you can return to every day. <br><br> Through tactile paracord details, our creations become a quiet sanctuary helping you slow down, reconnect with nature, and find calm in a crowded world.
+        </p>
+
+        <a href="{{ route('products') }}"
+            class="mx-6 inline-flex items-center px-8 py-3 bg-black text-white rounded-full gap-2 w-fit">
+            → View More
+        </a>
+    </div>
+
+    {{-- SLIDER WRAPPER --}}
+    <div class="relative w-[920px] items-center">
+
+        {{-- ARROW LEFT --}}
+        <button id="prevBtn"
+            class="absolute -left-5 top-1/2 -translate-y-1/2 z-30
+                   bg-black w-10 h-10 rounded-full shadow hidden items-center">
+            <svg class="w-5 h-5 text-white ml-2"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-width="2"
+                    d="m15 19-7-7 7-7" />
+            </svg>
+        </button>
+
+        {{-- ARROW RIGHT --}}
+        <button id="nextBtn"
+            class="absolute -right-5 top-1/2 -translate-y-1/2 z-30
+                   bg-black w-10 h-10 rounded-full shadow items-center">
+            <svg class="w-5 h-5 text-white ml-3"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-width="2"
+                    d="m9 5 7 7-7 7" />
+            </svg>
+        </button>
+
+        {{-- VIEWPORT --}}
+        <div class="overflow-hidden py-14">
+
+            {{-- TRACK --}}
+            <div id="cardTrack"
+                class="flex gap-15 transition-transform duration-500 ease-out mx-3">
+
+                @foreach ($products as $product)
+                <div class="w-[420px] shrink-0">
+
+                    <div
+                        class="aspect-square rounded-xl
+                               transition-transform duration-300
+                               hover:scale-105 will-change-transform">
+
+                        <a href="{{ route('detproduct', $product->id_product) }}">
+                            <img
+                                src="{{ asset('storage/' . $product->details->first()->image_product) }}"
+                                class="w-full h-full object-cover rounded-xl">
+                        </a>
+
+                    </div>
+
+                    <h3 class="mt-4 font-semibold text-lg text-center">
+                        {{ Str::upper($product->product_name) }}
+                    </h3>
+
+                    <p class="mt-1 font-bold text-center">
+                        Rp {{ number_format($product->price) }}
+                    </p>
+                </div>
+                @endforeach
+
             </div>
         </div>
-
     </div>
-    @foreach ($products as $product)
-    <div class="aspect-square transition-all duration-400 hover:scale-105">
-
-        @if ($product->details->count())
-        <a href="{{ route('detproduct', $product->id_product) }}">
-            <img
-                src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                class="w-full h-full object-cover rounded-lg">
-        </a>
-        @else
-        <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
-            No Image
-        </div>
-        @endif
-
-        <h3 class="mt-3 font-semibold text-lg text-center">
-            {{ Str::upper($product->product_name) }}
-        </h3>
-
-        <p class="mt-2 font-bold text-center">
-            Rp {{ number_format($product->price) }}
-        </p>
-    </div>
-    @endforeach
 </div>
+
 
 <div class="transition-all duration-700 hover:scale-105">
     <div class="relative w-full overflow-hidden ">
@@ -170,5 +202,43 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('cardTrack');
+        const next = document.getElementById('nextBtn');
+        const prev = document.getElementById('prevBtn');
+
+        const cardWidth = 420 + 40; // card + gap
+        const visibleCards = 2;
+
+        let index = 0;
+        const totalCards = track.children.length;
+        const maxIndex = totalCards - visibleCards;
+
+        function update() {
+            track.style.transform = `translateX(-${index * cardWidth}px)`;
+            prev.classList.toggle('hidden', index === 0);
+            next.classList.toggle('hidden', index >= maxIndex);
+        }
+
+        next.onclick = () => {
+            if (index < maxIndex) {
+                index++;
+                update();
+            }
+        };
+
+        prev.onclick = () => {
+            if (index > 0) {
+                index--;
+                update();
+            }
+        };
+
+        update();
+    });
+</script>
+
 
 @endsection
