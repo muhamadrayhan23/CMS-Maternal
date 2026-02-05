@@ -1,4 +1,4 @@
-<div class="w-full bg-[#1A1A1A] font-sans py-16 px-10 relative text-white">
+<div class="w-full bg-black font-sans py-16 px-10 relative text-white">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
 
         <div class="flex flex-col gap-6">
@@ -24,7 +24,7 @@
             <div class="flex items-center gap-4 text-left mt-10 mr-0.1">
                 <img src="{{ asset('img/logo/Craft_Logo White.png') }}" class="w-15 h-15 object-contain" alt="Logo">
                 <p class="text-2xl font-medium leading-tight">
-                    Look Confident,<br>Starting with Your Bag
+                    Alttt Craftedgoods<br>Be an Artist, Be You.
                 </p>
             </div>
 

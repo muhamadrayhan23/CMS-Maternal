@@ -1,10 +1,22 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
 @section('title', isset($produk) ? 'Edit Product' : 'Add New Product')
 
 @section('content')
     <div class="h-screen" id="wrapp">
         <div class="p-10">
+            @if (session('success'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: @json(session('success')),
+                            timer: 2000,
+                            showConfirmButton: true
+                        })
+                    })
+                </script>
+            @endif
             <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
@@ -33,45 +45,45 @@
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-sm space-y-4 mb-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg space-y-4 mb-8">
                     <div class="mb-4">
                         <label class="text-sm font-semibold text-gray-800">
                             Product Overview <span class="text-red-500">*</span>
                         </label>
                     </div>
-                    <input name="product_name" value="{{ old('product_name', $produk->product_name ?? '') }}"
-                        placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
+                    <input name="product_name" value="{{ isset($produk) ? $produk->product_name : '' }}"
+                        placeholder="Product Name"
+                        class="w-full px-4 py-3 text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                        required>
 
-                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>{{ old('desc', $produk->desc ?? '') }}</textarea>
+                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg" placeholder="Description"
+                        required>{{ isset($produk) ? $produk->desc : '' }}</textarea>
 
                     <input type="text" id="price" name="price"
-                        class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Price"
-                        value="{{ old('price', isset($produk) ? 'Rp ' . number_format($produk->price, 0, ',', '.') : '') }}"
-                        required oninput="formatRupiah(this)" max="999999999999999" required>
+                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg" placeholder="Price"
+                        value="{{ isset($produk) ? 'Rp ' . number_format($produk->price, 0, ',', '.') : '' }}" required
+                        oninput="formatRupiah(this)">
+
                 </div>
 
                 <div class="bg-white rounded-2xl p-8 shadow-sm mb-8">
                     <h3 class="font-semibold text-gray-800 mb-4">Product Links</h3>
                     <div id="links" class="space-y-4">
                         @foreach ($produk->links ?? [null] as $link)
-                            <div class="link-row border rounded-xl p-5 space-y-3 relative">
+                            <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
 
+                                <br>
+                                <hr class="border-gray-200">
                                 @if ($link)
                                     <input type="hidden" name="link_id[]" value="{{ $link->id_link_produk }}">
                                 @endif
 
-                                <input type="file" name="link_image[]" accept="image/png,image/jpeg,image/webp"
-                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
-
-                                @if ($link && $link->link_image)
-                                    <img src="{{ asset('storage/' . $link->link_image) }}" class="w-20">
-                                @endif
-
                                 <input name="link_name[]" value="{{ $link->link_name ?? '' }}" placeholder="Link Name"
-                                    class="w-full px-4 py-2 border rounded-lg" required>
+                                    class="w-full px-4 py-2 border border-gray-200 rounded-lg" required>
 
                                 <input name="link_address[]" value="{{ $link->link_address ?? '' }}"
-                                    placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
+                                    placeholder="Link Address" class="w-full px-4 py-2 border border-gray-200 rounded-lg"
+                                    required>
 
                                 <button type="button" onclick="removeLink(this)"
                                     class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">
@@ -88,12 +100,12 @@
 
                 <div class="bg-white rounded-2xl p-8 shadow-sm">
 
-                    <h3 class="font-semibold text-gray-800 mb-4">Attributes</h3>
+                    <h3 class="font-semibold text-gray-800 mb-4">Variants</h3>
 
                     <div id="detail-wrapper" class="space-y-4">
 
                         @foreach ($produk->details ?? [null] as $detail)
-                            <div class="detail-row border rounded-xl p-5 space-y-3 relative">
+                            <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
 
                                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
 
@@ -105,10 +117,8 @@
                                 @endif
 
                                 <input name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}"
-                                    placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
-
-                                <input name="atribut_value[]" value="{{ $detail->atribute_value ?? '' }}"
-                                    placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
+                                    placeholder="Variant Name" class="w-full px-4 py-2 border border-gray-200 rounded-lg"
+                                    required>
 
                                 <button type="button" onclick="removeRow(this)"
                                     class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center"
@@ -126,7 +136,6 @@
                     </button>
 
                 </div>
-
             </form>
         </div>
     </div>
@@ -134,9 +143,8 @@
         function addLink() {
             document.getElementById('links').insertAdjacentHTML('beforeend', `
                 <div class="link-row border rounded-xl p-5 space-y-3 relative">
-                <input type="file" name="link_image[]" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
-                <input name="link_name[]" placeholder="Link Name" class="w-full px-4 py-2 border rounded-lg" required>
-                <input name="link_address[]" placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
+                <input name="link_name[]" placeholder="Link Name" class="w-full px-4 py-2 border border-gray-200 rounded-lg" required>
+                <input name="link_address[]" placeholder="Link Address" class="w-full px-4 py-2 border border-gray-200 rounded-lg" required>
                 <button type="button" onclick="removeLink(this)"
                 class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
                 </div>`)
@@ -150,8 +158,7 @@
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
                 <div class="detail-row border rounded-xl p-5 space-y-3 relative">
                 <input type="file" name="image_product[]" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
-                <input name="atribute_name[]" placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
-                <input name="atribut_value[]" placeholder="Attribute Value" class="w-full px-4 py-2 border rounded-lg" required>
+                <input name="atribute_name[]" placeholder="Attribute Name" class="w-full px-4 py-2 border border-gray-200 rounded-lg" required>
                 <button type="button" onclick="removeRow(this)"
                 class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
                 </div>`)
@@ -167,31 +174,5 @@
 
             el.value = angka ? 'Rp ' + format : '';
         }
-
-        // document.addEventListener('change', function(e) {
-        //     if (e.target.type !== 'file') return;
-
-        //     const file = e.target.files[0];
-        //     if (!file) return;
-
-        //     const isLink = e.target.name.includes('link_image');
-        //     const requiredWidth = isLink ? 60 : 900;
-        //     const requiredHeight = isLink ? 60 : 900;
-
-        //     const img = new Image();
-        //     img.src = URL.createObjectURL(file);
-
-        //     img.onload = () => {
-        //         if (img.width !== requiredWidth || img.height !== requiredHeight) {
-        //             alert(
-        //                 isLink ?
-        //                 'Ukuran foto link harus 60 x 60 px' :
-        //                 'Ukuran foto produk harus 900 x 900 px'
-        //             );
-        //             e.target.value = '';
-        //         }
-        //         URL.revokeObjectURL(img.src);
-        //     };
-        // });
     </script>
 @endsection
