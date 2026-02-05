@@ -1,18 +1,18 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
     @forelse($banner as $b)
         <div class="bg-white rounded-2xl border border-gray-300 overflow-visible">
-            <div class="relative h-48 rounded-t-2xl overflow-hidden">
+            <div class="relative h-52 md:h-60 rounded-t-2xl overflow-hidden">
                 <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover" alt="Banner">
                 <div class="absolute top-3 left-3">
-                    <span class="px-3 py-1 text-[10px] uppercase {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
+                    <span class="px-3 py-1 text-[10px] {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
                         {{ $b->is_active ? 'Published' : 'Unpublished' }}
                     </span>
                 </div>
             </div>
 
-            <div class="p-5">
+            <div class="p-3 md:p-4">
                 <div class="flex justify-between items-start mb-2">
-                    <h3 class="font-bold text-gray-800 text-base leading-tight">{{ $b->banner_name }}</h3>
+                    <h3 class="font-bold text-gray-800 text-base leading-tight ">{{ $b->banner_name }}</h3>
                     <div class="relative">
                         <button onclick="toggleMenu(this)" class="text-gray-600 hover:text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -44,7 +44,7 @@
                             </a>
                             <form method="POST" action="{{ route('dBanner', $b->id_banner) }}">
                                 @csrf @method('DELETE')
-                                <button type="submit" onclick="return confirm('Yakin mau hapus?')" class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                <button type="submit" class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2">
                                         <path d="M10 11v6"/><path d="M14 11v6"/>
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-between items-center mt-6 text-gray-600">
+                <div class="flex justify-between items-center mt-3 text-gray-600">
                     <div class="text-xs">By <span class="font-semibold text-gray-700">{{ $b->user->name ?? 'Admin' }}</span></div>
                      <div class="text-xs">Created At {{ $b->created_at->format('Y-m-d') }}</div>
                 </div>
@@ -72,6 +72,29 @@
             There are no banners available yet
             @endif
         </div>
+
+        <script > 
+        document.querySelectorAll('.btn-hapus').forEach(button => {
+        button.addEventListener('click', function(e) {
+        e.preventDefault(); 
+        
+        // Munculin alert buat nanya
+        Swal.fire({
+            title: 'This banner will be moved to trash. Are you sure??',
+            text: '',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.closest('form').submit();
+            }
+        })
+    });
+}); 
+        </script>
     @endforelse
 </div>
 <div class="mt-6">

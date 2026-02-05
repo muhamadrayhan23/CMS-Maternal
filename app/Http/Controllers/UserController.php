@@ -29,12 +29,12 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('dashboardadmin')
-                ->with('alerts');
+            return redirect()->route('dashboardadmin');
+                // ->with('success_login', 'true');
         }
         return back()->withErrors([
-            'email' => 'Email atau password salah!'
-        ])->onlyInput('email');
+            'email' => 'Incorrect password!'
+        ])->with('error_login','true')->onlyInput('email');
     }
 
     public function dashboard()
@@ -77,7 +77,7 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->regenerateToken();
 
-        return redirect()->route('home')->with('alerts', 'Anda berhasil Log out!');
+        return redirect()->route('home')->with('alerts', 'Successfuly Logout!');
     }
 
     //tampil daftar user

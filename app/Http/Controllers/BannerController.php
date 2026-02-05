@@ -70,7 +70,7 @@ class BannerController extends Controller
             ]);
         }
 
-        return redirect()->route('Bhome')->with('success', 'Banner berhasil ditambahkan');
+        return redirect()->route('Bhome')->with('success', 'Banner successfully added');
     }
 
 
@@ -80,7 +80,8 @@ class BannerController extends Controller
         $banner->update([
             'is_active' => ! $banner->is_active
         ]);
-        return back();
+        return back()
+        ->with('success', 'Banner status updated succesfully!');
     }
 
 
@@ -133,7 +134,7 @@ class BannerController extends Controller
 
     $banner->update($data);
 
-    return redirect()->route('Bhome')->with('success', 'Berhasil update bray!');
+    return redirect()->route('Bhome')->with('success', 'Banner succesfully updated!');
     }
        
 
@@ -150,7 +151,8 @@ class BannerController extends Controller
         $banner->delete();
 
         return redirect()
-            ->route('Bhome');
+            ->route('Bhome')
+            ->with('success', 'Banner has been moved to trash!');
     }
 
     public function restore(Request $request)
@@ -178,14 +180,15 @@ class BannerController extends Controller
 
         $banner->restore();
 
-        return redirect()->route('Btrash');
+        return redirect()->route('Btrash')
+        ->with('success', 'Banner successfully restored');
     }
 
     public function forceDelete($id)
     {
         Banner::withTrashed()->findOrFail($id)->forceDelete();
 
-        return redirect()->route('Btrash')->with('succes', 'berhasil di hapus');
+        return redirect()->route('Btrash')->with('success', 'This banner deleted permanently !');
     }
 
     public function tooggle($id)
