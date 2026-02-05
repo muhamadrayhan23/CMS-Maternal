@@ -24,6 +24,8 @@
                     @method('PUT')
                 @endif
 
+                <input type="hidden" name="redirect_to" id="redirect_to" value="index">
+
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
                         <a href="{{ session('produk_back', route('dashboardadmin')) }}"
@@ -40,7 +42,8 @@
                         </h1>
                     </div>
 
-                    <button class="px-8 py-2 text-white bg-[#2D2D2A] rounded-lg hover:bg-black">
+                    <button type="submit" onclick="confirmSave()"
+                        class="px-8 py-2 text-white bg-[#2D2D2A] rounded-lg hover:bg-black">
                         {{ isset($produk) ? 'Update' : 'Save' }}
                     </button>
                 </div>
@@ -99,9 +102,7 @@
                 </div>
 
                 <div class="bg-white rounded-2xl p-8 shadow-sm">
-
                     <h3 class="font-semibold text-gray-800 mb-4">Variants</h3>
-
                     <div id="detail-wrapper" class="space-y-4">
 
                         @foreach ($produk->details ?? [null] as $detail)
@@ -174,5 +175,22 @@
 
             el.value = angka ? 'Rp ' + format : '';
         }
+
+        // function confirmSave() {
+        //     Swal.fire({
+        //         title: 'Produk berhasil disimpan?',
+        //         text: 'Pilih Back untuk melanjutkan menambah produk',
+        //         icon: 'question',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'Back',
+        //         cancelButtonText: 'Ke List',
+        //         reverseButtons: true
+        //     }).then((result) => {
+        //         document.getElementById('redirect_to').value =
+        //             result.isConfirmed ? 'back' : 'index'
+
+        //         document.querySelector('form').submit()
+        //     })
+        // }
     </script>
 @endsection

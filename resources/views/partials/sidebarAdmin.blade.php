@@ -6,7 +6,7 @@
     <title>@yield('title', 'Dashboard')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-[#f4f4f4] font-sans ">
@@ -77,11 +77,7 @@
             {{-- Product --}}
             <li class="mb-2">
                 <a href="{{ route('produk.index') }}"
-<<<<<<< HEAD
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('produk.index') ? $active : $default }}">
-=======
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index', 'produk.create','produk.edit','produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
->>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('produk.index', 'produk.create', 'produk.edit', 'produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -96,12 +92,8 @@
 
             {{-- Banner --}}
             <li class="mb-2">
-<<<<<<< HEAD
                 <a href="{{ route('Bhome') }}"
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('Bhome') ? $active : $default }}">
-=======
-                <a href="{{ route('Bhome') }}" class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('Bhome', 'addB', 'editB', 'dBanner', 'Btrash') ? $active : $default }}">
->>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('Bhome', 'addB', 'editB', 'dBanner', 'Btrash') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -116,12 +108,8 @@
 
             {{-- Link --}}
             <li class="mb-2">
-<<<<<<< HEAD
                 <a href="{{ route('homeLink') }}"
-                    class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink') ? $active : $default }}">
-=======
-                <a href="{{ route('homeLink') }}" class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink', 'createLink', 'editLink', 'deleteLink') ? $active : $default }}">
->>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
+                    class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink', 'createLink', 'editLink', 'deleteLink') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -135,12 +123,8 @@
 
             {{-- User --}}
             <li class="mb-2">
-<<<<<<< HEAD
                 <a href="{{ route('homeUser') }}"
-                    class="flex items-center gap-3 p-2  rounded-lg {{ Route::is('homeUser') ? $active : $default }}">
-=======
-                <a href="{{ route('homeUser') }}" class="flex items-center gap-3 p-2  rounded-lg {{  Route::is ('homeUser', 'createUser', 'editUser', 'deleteUser') ? $active: $default }}">
->>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
+                    class="flex items-center gap-3 p-2  rounded-lg {{ Route::is('homeUser', 'createUser', 'editUser', 'deleteUser') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -179,17 +163,11 @@
                 class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between hover:text-red-400 transition-all duration-300 group">
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
                     @csrf
-<<<<<<< HEAD
-                    <button type="submit" onclick="return confirm('Yakin anda ingin log out?')"
-                        class="w-full text-gray-900 flex items-center justify-between transition-colors p-1 group ">
+                    <button type="submit"
+                        class="btn-logout w-full text-gray-900 flex items-center justify-between transition-colors p-1 group ">
                         <p
                             class="font-semibold text-sm px-2 py-2 truncate group-hover:text-red-600 transition-colors duration-300 ">
                             {{ auth()->user()->email }}</p>
-=======
-                    <button type="submit"
-                        class="btn-logout w-full text-gray-900 flex items-center justify-between transition-colors p-1 group ">
-                        <p class="font-semibold text-sm px-2 py-2 truncate group-hover:text-red-600 transition-colors duration-300 ">{{ auth()->user()->email }}</p>
->>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             class="text-gray-900 group-hover:text-red-600 transition-colors duration-300 mt-1"
@@ -203,3 +181,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar')
+        const openBtn = document.getElementById('openSidebar')
+        const closeBtn = document.getElementById('closeSidebar')
+        const overlay = document.getElementById('sidebarOverlay')
+
+        openBtn?.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full')
+            overlay.classList.remove('hidden')
+        })
+
+        closeBtn?.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full')
+            overlay.classList.add('hidden')
+        })
+
+        overlay?.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full')
+            overlay.classList.add('hidden')
+        })
+    </script>

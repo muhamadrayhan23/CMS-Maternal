@@ -1,10 +1,10 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 @extends('layout.admin')
 
 @section('title', 'Dashboard Admin')
 
 @section('content')
-    <section class="bg-gradient-to from-gray-800 to-gray-600 text-white rounded-2xl p-6 md:p-8 mb-8">
+    <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-6 md:p-8 mb-8">
         <h3 class="text-xl md:text-2xl font-semibold mb-2">Statistic Overview</h3>
         <p class="text-gray-300 mb-6 text-sm md:text-base">Your store at a glance</p>
 
