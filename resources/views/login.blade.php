@@ -16,7 +16,7 @@
 
         <div class="w-full md:w-1/2 max-w-md mx-auto px-8 md:px-0">
             <div class="text-start mb-8 md:mb-12">
-                <h1 class="font-semibold text-3xl md:text-5xl md:text-5xl tracking-tight text-black uppercase gap-3 md:mb-5">welcome ! </h1>
+                <h1 class="font-semibold text-3xl md:text-5xl tracking-tight text-black uppercase gap-3 md:mb-5">welcome!</h1>
                 <p class="text-base md:text-lg mt-5 mb-7">Login to manage website content and data</p>
             </div>
         
