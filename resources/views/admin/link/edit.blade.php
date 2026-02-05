@@ -3,14 +3,16 @@
 
 @section('content')
 
+
 <div class="row justify-content-center mt-3">
-    <form action="{{ route('updateLink', $link->id_link) }}" method="post" enctype="multipart/form-data">
+    <form id="edit-form" action="{{ route('updateLink', $link->id_link) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
         <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-3">
-                <a href="{{ route ('homeLink') }}" class="text-gray-800 hover:text-black">
+                <a href="javascript:void(0)" onclick="confirmBack()" class="text-gray-800 hover:text-black">
+
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left">
                         <path d="m12 19-7-7 7-7" />
@@ -19,9 +21,10 @@
                 </a>
                 <h1 class="text-sm font-bold tracking-wider text-gray-800 uppercase">Add New Link</h1>
             </div>
-            <button type="submit" class="px-8 py-2 text-sm font-medium text-white bg-[#2D2D2A] rounded-lg hover:bg-black transition-colors">
+            <button type="button" onclick="confirmEdit()" class="px-8 py-2 text-sm font-medium text-white bg-[#2D2D2A] rounded-lg hover:bg-black transition-colors">
                 Submit
             </button>
+
         </div>
 
         <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
@@ -95,6 +98,12 @@
             display.value = input.files[0].name;
         }
     }
+
+    window.routes = {
+        homeLink: "{{ route('homeLink') }}"
+    }
+
+    
 </script>
 
 

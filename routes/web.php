@@ -39,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/produk-detail_trash/{id}', [ProdukController::class, 'restore'])->name('produk.detail_trash');
     Route::delete('/produk-force-delete/{id}', [ProdukController::class, 'forceDelete'])->name('produk.force.delete');
     Route::patch('/produk/{id}/toggle', [ProdukController::class, 'toggle'])->name('produk.toggle');
+    Route::patch('/produk/{id}/toggle-lagi', [ProdukController::class, 'toggleLagi'])
+        ->name('produk.toggleLagi');
+
 
     //manajemen link
     Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
@@ -50,8 +53,11 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/link/{link}/toggle', [AdmLinksController::class, 'toggle'])->name('link.toggle');
     Route::get('/link/trash', [AdmLinksController::class, 'restore'])->name('trashLink');
     Route::post('/link/trash/{id}', [AdmLinksController::class, 'restoreProses'])->name('trashLink.restore');
-    Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('trashLink.permanent');
+    Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('forceDeleteLink');
 
+    //manajemen announcement
+    Route::get('/link/creannouncement', [AdmLinksController::class, 'createAnnouncement'])->name('createAnnouncement');
+    Route::post('/link', [AdmLinksController::class, 'storeAnnouncement'])->name('storeAnnouncement');
     //manajemen user
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
     Route::get('/user/create', [UserController::class, 'create'])->name('createUser');

@@ -23,6 +23,13 @@
                 </svg>
                 Trash
             </a>
+            <a href="{{ route('createAnnouncement') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] border border-gray-300 rounded-md hover:bg-black transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                </svg>
+                Add New Announcement
+            </a>
             <a href="{{ route('createLink') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] border border-gray-300 rounded-md hover:bg-black transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14" />
@@ -48,9 +55,9 @@
 
 </div>
 
-<!-- hiasan -->
-<div class="mt-5">
-    <img src="{{ asset('pic-link-banner/alt_pages-to-jpg-0001.jpg') }}" alt="banner hiasan" class="w-full rounded-xl">
+<!-- Table announcement -->
+<div id="AnnouncementContainer" class="mt-5">
+    @include('admin.link.announcement')
 </div>
 
 <!-- TABLE Link -->
@@ -96,6 +103,22 @@
     }
 
     searchInput.addEventListener('input', fetchFilter)
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const successMessage = "{{ session('success') }}";
+
+        if (successMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: successMessage,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+    });
 </script>
+
 
 @endsection

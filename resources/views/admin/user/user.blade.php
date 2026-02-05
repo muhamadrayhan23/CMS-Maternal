@@ -22,7 +22,7 @@
                     </svg>
                     Trash
                 </a>
-                <a href="{{ route('homeUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium  text-white bg-[#333333] border border-gray-300 rounded-md transition-all">
+                <a href="{{ route('homeUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] hover:bg-black border border-gray-300 rounded-md transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="1" />
                         <circle cx="19"
@@ -104,5 +104,20 @@
         }
 
         searchInput.addEventListener('input', fetchFilter)
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const successMessage = "{{ session('success') }}";
+
+            if (successMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: successMessage,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
     </script>
     @endsection

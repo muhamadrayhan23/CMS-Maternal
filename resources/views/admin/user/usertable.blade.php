@@ -39,16 +39,13 @@
                             </a>
 
 
-                            <form method="POST" action="{{ route('deleteUser', $user) }}">
+                            <form id="delete-form-{{ $user->id }}" method="POST" action="{{ route('deleteUser', $user) }}">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" onclick="return confirm('Yakin mau hapus?')" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-black
-                                        hover:bg-gray-100 transition-all text-left">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="lucide lucide-trash-2">
+                                <button type="button" data-id="{{ $user->id }}" onclick="confirmDeleteU(this)" class="flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-100 transition-all text-left">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M10 11v6" />
                                         <path d="M14 11v6" />
                                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
@@ -77,3 +74,24 @@
 <div class="mt-3">
     {{ $users->withQueryString()->links() }}
 </div>
+
+<script>
+    window.confirmDeleteU = function(el) {
+        const id = el.dataset.id
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will delete the user!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + id).submit()
+            }
+        })
+    }
+</script>

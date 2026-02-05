@@ -136,16 +136,17 @@
                     </form>
 
                     @if (session('success'))
-                        <div id="success-alert"
-                            class="relative mb-4 p-3 bg-green-100 text-green-800 rounded flex items-start justify-between gap-4">
-
-                            <span>{{ session('success') }}</span>
-
-                            <button onclick="document.getElementById('success-alert').remove()"
-                                class="text-green-800 hover:text-green-900 text-xl leading-none font-bold">
-                                &times;
-                            </button>
-                        </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: @json(session('success')),
+                                    timer: 2000,
+                                    showConfirmButton: true
+                                })
+                            })
+                        </script>
                     @endif
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 font-sans">
@@ -174,14 +175,15 @@
                                             {{ $p->product_name }}
                                         </h4>
 
-                                        <div class="relative shrink-0">
+                                        <div
+                                            class="bg-white rounded-xl shadow transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:bg-gray-50 flex flex-col relative group">
                                             <button onclick="toggleMenu(this)"
                                                 class="w-8 h-8 bg-white rounded flex items-center justify-center hover:bg-gray-100">
-                                                ⋮
+                                                &#8942;
                                             </button>
 
                                             <div
-                                                class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50 text-left">
+                                                class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border overflow-visible rounded-lg shadow-lg z-50 text-left">
 
                                                 <form action="{{ route('produk.toggle', $p->id_product) }}"
                                                     method="POST">
@@ -215,38 +217,76 @@
                                                 </form>
 
                                                 <button onclick="toggleSubMenu(this)"
-                                                    class="block w-full px-3 py-2 hover:bg-gray-100 text-left">
+                                                    class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M5.99967 11.3334H4.66634C3.78229 11.3334 2.93444 10.9822 2.30932 10.3571C1.6842 9.73198 1.33301 8.88414 1.33301 8.00008C1.33301 7.11603 1.6842 6.26818 2.30932 5.64306C2.93444 5.01794 3.78229 4.66675 4.66634 4.66675H5.99967M9.99967 4.66675H11.333C12.2171 4.66675 13.0649 5.01794 13.69 5.64306C14.3152 6.26818 14.6663 7.11603 14.6663 8.00008C14.6663 8.88414 14.3152 9.73198 13.69 10.3571C13.0649 10.9822 12.2171 11.3334 11.333 11.3334H9.99967M5.33301 8.00008H10.6663"
+                                                            stroke="#0E0F11" stroke-width="1.5" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
                                                     View Links
                                                 </button>
 
                                                 <div class="sub-menu hidden border-t">
-                                                    @forelse($p->links as $link)
+                                                    @forelse ($p->links as $link)
                                                         <a href="{{ $link->link_address }}" target="_blank"
-                                                            class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
-                                                            <img src="{{ asset('storage/' . $link->link_image) }}"
-                                                                class="w-6 h-6 rounded object-cover">
-                                                            {{ $link->link_name }}
+                                                            class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
+
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15"
+                                                                height="15" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                                <path
+                                                                    d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                                                                <path d="m21 3-9 9" />
+                                                                <path d="M15 3h6v6" />
+                                                            </svg>
+
+                                                            <span class="break-all text-sm">
+                                                                {{ $link->link_name }}
+                                                            </span>
                                                         </a>
                                                     @empty
-                                                        <div class="px-3 py-2 text-gray-400">No links</div>
+                                                        <li class="px-3 py-2 text-gray-400">Tidak ada link</li>
                                                     @endforelse
                                                 </div>
 
                                                 <a href="{{ route('produk.edit', $p->id_product) }}"
-                                                    class="block px-3 py-2 hover:bg-gray-100">
-                                                    Edit
+                                                    class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-pen-line-icon lucide-pen-line">
+                                                        <path d="M13 21h8" />
+                                                        <path
+                                                            d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                                    </svg>
+                                                    <span>Edit </span>
                                                 </a>
 
                                                 <form action="{{ route('produk.destroy', $p->id_product) }}"
-                                                    method="POST">
+                                                    id="hapus-{{ $p->id_product }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <input type="hidden" name="from" value="grid">
+                                                    <input type="hidden" name="page" value="{{ request('page') }}">
 
-                                                    <button onclick="return confirm('Hapus produk?')"
-                                                        class="w-full px-3 py-2 hover:bg-gray-100 text-left">
-                                                        Delete
+                                                    <button type="button"
+                                                        onclick="confirmDelete('hapus-{{ $p->id_product }}')"
+                                                        class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                            height="18" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-trash2-icon lucide-trash-2">
+                                                            <path d="M10 11v6" />
+                                                            <path d="M14 11v6" />
+                                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                            <path d="M3 6h18" />
+                                                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                        </svg>
+                                                        <span>Delete</span>
                                                     </button>
                                                 </form>
                                             </div>
@@ -286,18 +326,19 @@
                                 </div>
                             </div>
                         @empty
-                            <div colspan="8"
-                                class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
-                                @if (request('search'))
-                                    <span class="font-bold">"{{ request('search') }}"</span> not found
-                                @elseif(request()->filled('status'))
-                                    There is no Product with status
-                                    <span class="font-bold">
-                                        {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
-                                    </span>
-                                @else
-                                    There are no Product available yet
-                                @endif
+                            <div class="col-span-full flex justify-center">
+                                <div class="text-center py-10 text-gray-500">
+                                    @if (request('search'))
+                                        <span class="font-bold">"{{ request('search') }}"</span> not found
+                                    @elseif(request()->filled('status'))
+                                        There is no Product with status
+                                        <span class="font-bold">
+                                            {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
+                                        </span>
+                                    @else
+                                        There are no Product available yet
+                                    @endif
+                                </div>
                             </div>
                         @endforelse
                     </div>
@@ -336,5 +377,19 @@
                     .forEach(m => m.classList.add('hidden'))
             }
         })
+
+        window.confirmDelete = (formId) => {
+            Swal.fire({
+                text: 'This product will be moved to trash. Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(formId).submit()
+                }
+            })
+        }
     </script>
 @endsection
