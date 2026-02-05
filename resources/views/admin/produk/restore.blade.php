@@ -2,13 +2,21 @@
 @section('title', 'Product - Trash')
 
 @section('content')
-    <div class="bg-white rounded-xl border border-gray-200 p-5 ">
+
+    <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
+
         <div class="space-y-4">
-            <div class="flex items-center justify-between">
+
+            {{-- HEADER --}}
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
-                    TRASH
+                    Trash
                 </h2>
-                <div class="flex items-center gap-2">
+
+                {{-- NAV BUTTONS --}}
+                <div class="flex flex-wrap gap-2">
+
                     <a href="{{ route('produk.restore') }}"
                         class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-800' }}">
 
@@ -76,40 +84,29 @@
                         </svg>
                         <span class="hidden md:inline font-sans">Add New Product</span>
                     </a>
-                </div>
-            </div>
 
-            <form method="GET" action="{{ route('produk.restore') }}" id="filterForm" class="mb-6">
-                <div class="relative flex-1">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
-                        oninput="submitFilter()"
-                        class="w-full px-4 py-2 pr-10 rounded bg-gray-100 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
-                    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.3-4.3" />
-                        </svg>
+                </div>
+
+            </div>
+            <form method="GET" action="{{ route('produk.restore') }}" id="filterForm">
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                    <div class="md:col-span-9 relative bg-gray-100">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
+                            oninput="submitFilter()"
+                            class="w-full px-4 py-2 pr-10 rounded bg-gray-100 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
+                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.3-4.3" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </form>
-
-            @if (session('success'))
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: @json(session('success')),
-                            timer: 2000,
-                            showConfirmButton: true
-                        })
-                    })
-                </script>
-            @endif
-
-            <div class="bg-white rounded-xl border border-gray-200 overflow-visible p-3 mt-5">
-                <table class="w-full text-sm table-fixed p-3">
+            <div class="bg-white rounded-xl shadow overflow-visible">
+                <table class="w-full text-sm table-fixed">
                     <thead class="text-gray-600 font-bold font-sans text-center bg-gray-100">
                         <tr>
                             <th class="p-4 w-40">Deleted At</th>
@@ -218,16 +215,17 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="flex justify-end mt-4">
+                {{ $produk->links() }}
+            </div>
+
         </div>
-        <div class="p-4 flex justify-end">
-            {{ $produk->onEachSide(1)->links() }}
-        </div>
-    </div>
-    </div>
+
     </div>
 
     <script>
-        let timeout = null;
+        let timeout;
 
         function submitFilter() {
             clearTimeout(timeout);
@@ -235,46 +233,60 @@
         }
 
         function toggleMenu(btn) {
+
             const menu = btn.parentElement.querySelector('.action-menu');
+
             document.querySelectorAll('.action-menu').forEach(m => {
                 if (m !== menu) m.classList.add('hidden');
             });
+
             menu.classList.toggle('hidden');
         }
 
         document.addEventListener('click', e => {
-            if (!e.target.closest('.relative')) {
+
+            if (!e.target.closest('td')) {
                 document.querySelectorAll('.action-menu')
                     .forEach(m => m.classList.add('hidden'));
             }
+
         });
 
-        window.confirmDelete = (formId) => {
+        function confirmDelete(formId) {
+
             Swal.fire({
-                text: 'This product will be permanently removed. Are you sure?',
+                title: 'Permanent Delete?',
+                text: 'This product will be removed forever.',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Permanent deletion',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(formId).submit()
+                confirmButtonText: 'Delete'
+            }).then(res => {
+
+                if (res.isConfirmed) {
+                    document.getElementById(formId).submit();
                 }
-            })
+
+            });
+
         }
 
-        window.confirmRestore = (formId) => {
+        function confirmRestore(formId) {
+
             Swal.fire({
-                text: 'This product will be restored. Are you sure?',
+                title: 'Restore Product?',
+                text: 'This product will be restored.',
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Restore',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(formId).submit()
+                confirmButtonText: 'Restore'
+            }).then(res => {
+
+                if (res.isConfirmed) {
+                    document.getElementById(formId).submit();
                 }
-            })
+
+            });
+
         }
     </script>
+
 @endsection

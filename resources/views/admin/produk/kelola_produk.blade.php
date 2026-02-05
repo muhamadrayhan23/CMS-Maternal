@@ -2,13 +2,16 @@
 @section('title', 'Product - List View')
 
 @section('content')
-    <div class="bg-white rounded-xl border border-gray-200 p-5 ">
+
+    <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
         <div class="space-y-4">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
-                    MANAGE PRODUCTS
+                    Manage Products
                 </h2>
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2">
+
                     <a href="{{ route('produk.restore') }}"
                         class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-800' }}">
 
@@ -76,12 +79,14 @@
                         </svg>
                         <span class="hidden md:inline font-sans">Add New Product</span>
                     </a>
+
                 </div>
+
             </div>
 
             <form method="GET" action="{{ route('produk.index') }}" id="filterForm" class="mb-6">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-                    <div class="md:col-span-9 relative">
+                    <div class="md:col-span-9 relative bg-gray-100">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
                             oninput="submitFilter()"
                             class="w-full px-4 py-2 pr-10 rounded bg-gray-100 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
@@ -120,22 +125,8 @@
                 </div>
             </form>
 
-            @if (session('success'))
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: @json(session('success')),
-                            timer: 2000,
-                            showConfirmButton: true
-                        })
-                    })
-                </script>
-            @endif
-
-            <div class="bg-white rounded-xl border border-gray-200 overflow-visible p-3 mt-5">
-                <table class="w-full text-sm table-fixed p-3">
+            <div class="bg-white rounded-xl shadow overflow-visible">
+                <table class="w-full text-sm table-fixed">
 
                     <thead>
                         <tr class="text-center text-gray-600 font-bold font-sans bg-gray-100">
@@ -377,15 +368,17 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="mt-6 flex justify-end">
+                {{ $produk->links() }}
+            </div>
+
         </div>
-        <div class="p-4 flex justify-end">
-            {{ $produk->onEachSide(1)->links() }}
-        </div>
+
     </div>
-    </div>
-    </div>
+
     <script>
-        let timeout = null;
+        let timeout;
 
         function submitFilter() {
             clearTimeout(timeout);
@@ -393,32 +386,39 @@
         }
 
         function toggleMenu(btn) {
+
             const menu = btn.parentElement.querySelector('.action-menu');
+
             document.querySelectorAll('.action-menu').forEach(m => {
                 if (m !== menu) m.classList.add('hidden');
             });
+
             menu.classList.toggle('hidden');
         }
 
         document.addEventListener('click', e => {
-            if (!e.target.closest('.relative')) {
-                document.querySelectorAll('.action-menu')
-                    .forEach(m => m.classList.add('hidden'));
+            if (!e.target.closest('td')) {
+                document.querySelectorAll('.action-menu').forEach(m => m.classList.add('hidden'));
             }
         });
 
-        window.confirmDelete = (formId) => {
+        function confirmDelete(formId) {
+
             Swal.fire({
-                text: 'This product will be moved to trash. Are you sure?',
+                title: 'Delete Product?',
+                text: 'Product will be moved to trash',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Delete',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
+                confirmButtonText: 'Delete'
+            }).then(result => {
+
                 if (result.isConfirmed) {
-                    document.getElementById(formId).submit()
+                    document.getElementById(formId).submit();
                 }
-            })
+
+            });
+
         }
     </script>
+
 @endsection
