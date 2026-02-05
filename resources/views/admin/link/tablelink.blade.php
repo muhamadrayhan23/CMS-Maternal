@@ -4,7 +4,6 @@
             <thead>
                 <tr class="text-center text-black font-bold">
                     <th class="p-3 w-24">Status</th>
-                    <th class="p-3 w-28">Img</th>
                     <th class="text-left p-3 w-46 ml-3">Link Name</th>
                     <th class="p-3 w-64">Link</th>
                     <th class=" p-3 w-32">Action</th>
@@ -16,13 +15,10 @@
                     <td class="text-green-700 bg-green-100/90 text-[10px] rounded-full">
                         Published
                     </td>
-                    <td class="flex justify-center items-center">
-                        <img src="{{ asset($link->link_logo) }}" alt="{{ $link->link_name }}" width="25">
-                    </td>
                     <td class="text-left text-black ml-6">{{ $link->link_name }}</td>
-                    <td class="text-blue-600">
+                    <td class="text-black border-b border-gray-100 p-2">
                         <a href="{{ $link->link_address }}" target="_blank">
-                            {{ Str::limit($link->link_address, 44) }}
+                            Visit Link
                         </a>
                     </td>
                     <td class=" p-2 relative overflow-visible">
@@ -71,7 +67,7 @@
                     </td>
                 </tr>
                 @empty
-                <td colspan="6">
+                <td colspan="4">
                     <span class="text-center text-gray-500">
                         No Link Found!
                     </span>

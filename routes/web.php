@@ -56,7 +56,8 @@ Route::middleware(['auth'])->group(function () {
 
     //manajemen announcement
     Route::get('/link/creannouncement', [AdmLinksController::class, 'createAnnouncement'])->name('createAnnouncement');
-    Route::post('/link', [AdmLinksController::class, 'storeAnnouncement'])->name('storeAnnouncement');
+    Route::post('/announcement', [AdmLinksController::class, 'storeAnnouncement'])->name('storeAnnouncement');
+    
     //manajemen user 
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
     Route::get('/user/create', [UserController::class, 'create'])->name('createUser');

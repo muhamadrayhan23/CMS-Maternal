@@ -4,7 +4,7 @@
 @section('title', 'Dashboard Admin')
 
 @section('content')
-    <section class="bg-gradient-to from-gray-800 to-gray-600 text-white rounded-2xl p-6 md:p-8 mb-8">
+    <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-6 md:p-8 mb-8">
         <h3 class="text-xl md:text-2xl font-semibold mb-2">Statistic Overview</h3>
         <p class="text-gray-300 mb-6 text-sm md:text-base">Your store at a glance</p>
 
@@ -190,7 +190,7 @@
             </ul>
         </div>
     </section>
-    <<<<<<< HEAD=======<script type="module">
+    <script type="module">
         document.addEventListener('DOMContentLoaded', function() {
             if (!window.Swal) return;
 
@@ -229,6 +229,4 @@
             }
         });
     </script>
-
-    >>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
 @endsection
