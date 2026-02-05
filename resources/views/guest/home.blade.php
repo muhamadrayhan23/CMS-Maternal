@@ -113,50 +113,48 @@
     </div>
 
     {{-- SLIDER WRAPPER --}}
-    <div class="relative w-[920px] items-center">
+    <div class="relative flex items-center">
 
         {{-- ARROW LEFT --}}
         <button id="prevBtn"
-            class="absolute -left-5 top-1/2 -translate-y-1/2 z-30
-                   bg-black w-10 h-10 rounded-full shadow hidden items-center">
-            <svg class="w-5 h-5 text-white ml-2"
+            class="absolute -left-10 top-1/2 -translate-y-1/2 z-40
+               bg-black w-10 h-10 rounded-full shadow
+               hidden flex items-center justify-center">
+            <svg class="w-5 h-5 text-white"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-width="2"
                     d="m15 19-7-7 7-7" />
             </svg>
         </button>
 
-        {{-- ARROW RIGHT --}}
-        <button id="nextBtn"
-            class="absolute -right-5 top-1/2 -translate-y-1/2 z-30
-                   bg-black w-10 h-10 rounded-full shadow items-center">
-            <svg class="w-5 h-5 text-white ml-3"
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-width="2"
-                    d="m9 5 7 7-7 7" />
-            </svg>
-        </button>
-
         {{-- VIEWPORT --}}
-        <div class="overflow-hidden py-14">
+        <div class="relative w-[920px] overflow-hidden py-14">
 
             {{-- TRACK --}}
             <div id="cardTrack"
-                class="flex gap-15 transition-transform duration-500 ease-out mx-3">
+                class="flex gap-15 transition-transform duration-500 ease-out mx-3 items-center">
 
                 @foreach ($products as $product)
-                <div class="w-[420px] shrink-0">
+                <div class="w-105 shrink-0">
 
                     <div
                         class="aspect-square rounded-xl
-                               transition-transform duration-300
-                               hover:scale-105 will-change-transform">
+                           transition-transform duration-300
+                           hover:scale-105 will-change-transform">
 
                         <a href="{{ route('detproduct', $product->id_product) }}">
                             <img
                                 src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                                 class="w-full h-full object-cover rounded-xl">
                         </a>
+
+                        @if (!$product->is_active)
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span class="bg-red-700/70 text-white w-110 h-20 flex items-center justify-center text-sm">
+                                SOLD OUT
+                            </span>
+                        </div>
+                        @endif
 
                     </div>
 
@@ -172,7 +170,21 @@
 
             </div>
         </div>
+
+        {{-- ARROW RIGHT --}}
+        <button id="nextBtn"
+            class="absolute -right-10 top-1/2 -translate-y-1/2 z-40
+               bg-black w-10 h-10 rounded-full shadow
+               flex items-center justify-center">
+            <svg class="w-5 h-5 text-white"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-width="2"
+                    d="m9 5 7 7-7 7" />
+            </svg>
+        </button>
+
     </div>
+
 </div>
 
 
@@ -206,18 +218,30 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const track = document.getElementById('cardTrack');
+        const viewport = track.parentElement;
         const next = document.getElementById('nextBtn');
         const prev = document.getElementById('prevBtn');
 
-        const cardWidth = 420 + 40; // card + gap
-        const visibleCards = 2;
+        const cards = track.children;
+
+        // ukur real width card + gap
+        const cardRect = cards[0].getBoundingClientRect();
+        const cardWidth = cardRect.width;
+
+        // jarak antar card (gap)
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const step = cardWidth + gap;
+
+        // hitung berapa card yg kelihatan
+        const viewportWidth = viewport.getBoundingClientRect().width;
+        const visibleCards = Math.floor(viewportWidth / step);
 
         let index = 0;
-        const totalCards = track.children.length;
+        const totalCards = cards.length;
         const maxIndex = totalCards - visibleCards;
 
         function update() {
-            track.style.transform = `translateX(-${index * cardWidth}px)`;
+            track.style.transform = `translateX(-${index * step}px)`;
             prev.classList.toggle('hidden', index === 0);
             next.classList.toggle('hidden', index >= maxIndex);
         }
@@ -239,6 +263,5 @@
         update();
     });
 </script>
-
 
 @endsection
