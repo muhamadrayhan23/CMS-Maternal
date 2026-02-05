@@ -54,20 +54,6 @@
                             @enderror
                         </div>
 
-                    <div class="mb-3 row">
-                        <label for="link_logo" class="text-sm font-medium text-gray-700">Link Logo</label>
-                        <div class="relative flex items-center">
-                            <input type="text" placeholder="Link Logo" readonly
-                                class="file-name-display w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
-                            <label class="absolute right-2 px-3 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
-                                Choose File
-                                <input type="file" id="link_logo" name="links[0][logo_link]" value="{{ old('link_logo') }}" class="hidden" onchange="updateFileName(this)">
-                            </label>
-                            @error('links.*.logo_link')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
                         </div>
                     </div>
 
@@ -104,17 +90,6 @@
                 <label class="text-sm font-medium text-gray-700">Link</label>
                 <input type="text" name="links[${rowCount}][address]" placeholder="Link Address" 
                     class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400">
-            </div>
-            <div class="space-y-2">
-                <label class="text-sm font-medium text-gray-700">Link Logo</label>
-                <div class="relative flex items-center">
-                    <input type="text" placeholder="Link Logo" readonly
-                        class="file-name-display w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
-                    <label class="absolute right-2 px-3 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
-                        Choose File
-                        <input type="file" name="links[${rowCount}][logo_link]" class="hidden" onchange="updateFileName(this)">
-                    </label>
-                </div>
             </div>
         `;
 

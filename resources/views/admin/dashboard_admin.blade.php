@@ -229,6 +229,4 @@
             }
         });
     </script>
-
-
 @endsection
