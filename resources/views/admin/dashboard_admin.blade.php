@@ -1,4 +1,4 @@
-{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
 
 @section('title', 'Dashboard Admin')
@@ -9,7 +9,8 @@
         <p class="text-gray-300 mb-6 text-sm md:text-base">Your store at a glance</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+            <div
+                class="bg-white text-gray-800 rounded-xl p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <h4 class="text-lg font-bold mb-1">Total Products</h4>
                 <div class="text-3xl md:text-4xl font-bold">
                     {{ $totalProducts }}
@@ -20,13 +21,15 @@
                 <p class="text-gray-500 text-xs mt-4">Currently listed in the catalog</p>
             </div>
 
-            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+            <div
+                class="bg-white text-gray-800 rounded-xl p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <h4 class="text-lg font-bold mb-1">Total Links</h4>
                 <div class="text-3xl md:text-4xl font-bold">{{ $totalLinks }}</div>
                 <p class="text-gray-500 text-xs mt-4">Links available on the website</p>
             </div>
 
-            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+            <div
+                class="bg-white text-gray-800 rounded-xl p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <h4 class="text-lg font-bold mb-1">Total Banners</h4>
                 <div class="text-3xl md:text-4xl font-bold">
                     {{ $totalBanners }}
@@ -37,7 +40,8 @@
                 <p class="text-gray-500 text-xs mt-4">Banners stored in the system</p>
             </div>
 
-            <div class="bg-white text-gray-800 rounded-xl p-5 shadow-md">
+            <div
+                class="bg-white text-gray-800 rounded-xl p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <h4 class="text-lg font-bold mb-1">Users</h4>
                 <div class="text-3xl md:text-4xl font-bold">
                     {{ $totalUsers }}
@@ -50,7 +54,8 @@
     <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl p-5 shadow-md">
             <div class="flex flex-wrap items-center gap-3 mb-4">
-                <a href="{{ route('produk.index') }}" class="shrink-0">
+                <a href="{{ route('produk.index') }}"
+                    class="shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg class="w-6 h-6 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 20 20">
                         <path fill="currentColor"
@@ -60,7 +65,8 @@
 
                 <p class="font-semibold text-lg md:text-xl">Latest Products</p>
 
-                <a href="{{ route('produk.create') }}" class="ml-auto shrink-0">
+                <a href="{{ route('produk.create') }}"
+                    class="ml-auto shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
@@ -71,7 +77,8 @@
 
             <ul class="space-y-3">
                 @foreach ($latestProducts as $p)
-                    <li class="flex items-center gap-3 border p-3 rounded-xl shadow-sm">
+                    <li
+                        class="flex items-center gap-3 border p-3 rounded-xl shadow-smtransition duration-200 hover:bg-gray-200 hover:shadow-md">
                         <div class="flex-1 min-w-0">
                             <p class="font-bold truncate">{{ $p->product_name }}</p>
                             <span class="text-sm text-gray-500">
@@ -92,7 +99,8 @@
 
         <div class="bg-white rounded-2xl p-6 shadow-md">
             <div class="flex items-center gap-3 mb-4">
-                <a href="{{ route('Bhome') }}">
+                <a href="{{ route('Bhome') }}"
+                    class="shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg width="21" height="24" viewBox="0 0 21 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -101,7 +109,8 @@
                     </svg>
                 </a>
                 <p class="font-semibold text-2xl"> Manage Banners </p>
-                <a href="{{ route('addB') }}" class="ml-auto">
+                <a href="{{ route('addB') }}"
+                    class="ml-auto shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
@@ -111,13 +120,15 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 @foreach ($latestBanners as $b)
-                    <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover rounded-2xl">
+                    <img src="{{ asset($b->banner_image) }}"
+                        class="w-full h-full object-cover rounded-2xl transition duration-300 hover:scale-105 hover:shadow-xl">
                 @endforeach
             </div>
         </div>
         <div class="bg-white rounded-2xl p-6 shadow-md">
             <div class="flex items-center gap-3 mb-4">
-                <a href="{{ route('homeLink') }}">
+                <a href="{{ route('homeLink') }}"
+                    class="shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg width="21" height="24" viewBox="0 0 21 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_211_605)">
@@ -133,7 +144,8 @@
                     </svg>
                 </a>
                 <p class="font-semibold text-2xl"> See Links </p>
-                <a href="{{ route('createLink') }}" class="ml-auto">
+                <a href="{{ route('createLink') }}"
+                    class="ml-auto shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
@@ -150,7 +162,8 @@
         </div>
         <div class="bg-white rounded-2xl p-6 shadow-md">
             <div class="flex items-center gap-3 mb-4">
-                <a href="{{ route('homeUser') }}">
+                <a href="{{ route('homeUser') }}"
+                    class="shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -159,7 +172,8 @@
                     </svg>
                 </a>
                 <p class="font-semibold text-2xl"> Users </p>
-                <a href="{{ route('createUser') }}" class="ml-auto">
+                <a href="{{ route('createUser') }}"
+                    class="ml-auto shrink-0 transition-transform duration-200 hover:scale-110 hover:rotate-90">
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.41699 13H20.5837M13.0003 5.41666V20.5833" stroke="#282623" stroke-width="2"
@@ -169,51 +183,52 @@
             </div>
             <ul class="space-y-3 text-sm">
                 @foreach ($users as $user)
-                    <li class="border p-3 rounded-xl shadow-sm"> {{ $user->email }} <span
-                            class="block text-xs text-gray-500">Admin</span> </li>
+                    <li
+                        class="border p-3 rounded-xl shadow-sm transition duration-200 hover:bg-gray-50 hover:border-gray-400">
+                        {{ $user->email }} <span class="block text-xs text-gray-500">Admin</span> </li>
                 @endforeach
             </ul>
         </div>
     </section>
+    <<<<<<< HEAD=======<script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!window.Swal) return;
 
-    <script type="module">
-    document.addEventListener('DOMContentLoaded', function() {
-        if (!window.Swal) return;
+            const succes = "{{ session('success_login') }}";
+            const error = "{{ session('error_login') }}";
 
-        const succes = "{{ session('success_login') }}";
-        const error = "{{ session('error_login') }}";
-        
-        const validationError = "{{ $errors->first() }}"; 
-        
-        let config = null;
-        
-        if (succes) {
-            config = {
-                icon: 'success',
-                title: 'Login Successfully!',
-                text: succes !== 'true' ? succes : '',
-                showConfirmButton: false,
-                timer: 3000,       
-            };
-        } else if (error || validationError) { 
-            config = {
-                icon: 'error', 
-                title: 'Login Failed!',
-                text: (error ===  'true' || !error ) ? validationError : error,
-                showConfirmButton: true,
-                confirmButtonColor: '#d33',
-            };
-        } 
-        
-        if (config) {
-            window.Swal.fire({
-                ...config,
-                width: '350px',
-                padding: '3rem 1rem',
-                borderRadius: '20px',
-            });
-        }
-    }); 
-</script>
+            const validationError = "{{ $errors->first() }}";
 
+            let config = null;
+
+            if (succes) {
+                config = {
+                    icon: 'success',
+                    title: 'Login Successfully!',
+                    text: succes !== 'true' ? succes : '',
+                    showConfirmButton: false,
+                    timer: 3000,
+                };
+            } else if (error || validationError) {
+                config = {
+                    icon: 'error',
+                    title: 'Login Failed!',
+                    text: (error === 'true' || !error) ? validationError : error,
+                    showConfirmButton: true,
+                    confirmButtonColor: '#d33',
+                };
+            }
+
+            if (config) {
+                window.Swal.fire({
+                    ...config,
+                    width: '350px',
+                    padding: '3rem 1rem',
+                    borderRadius: '20px',
+                });
+            }
+        });
+    </script>
+
+    >>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
 @endsection

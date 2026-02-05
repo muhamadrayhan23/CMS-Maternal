@@ -1,4 +1,3 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 @extends('layout.admin')
 @section('title', 'Product - Trash')
 
@@ -118,16 +117,17 @@
                         </form>
 
                         @if (session('success'))
-                            <div id="success-alert"
-                                class="relative mb-4 p-3 bg-green-100 text-green-800 rounded flex items-start justify-between gap-4">
-
-                                <span>{{ session('success') }}</span>
-
-                                <button onclick="document.getElementById('success-alert').remove()"
-                                    class="text-green-800 hover:text-green-900 text-xl leading-none font-bold">
-                                    &times;
-                                </button>
-                            </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil',
+                                        text: @json(session('success')),
+                                        timer: 2000,
+                                        showConfirmButton: true
+                                    })
+                                })
+                            </script>
                         @endif
 
                         <div class="bg-white rounded-xl shadow overflow-visible">
@@ -150,7 +150,11 @@
                                             <td class="p-4">{{ $p->deleted_at }}</td>
                                             <td class="p-4">{{ $p->deleter?->name ?? '-' }}</td>
                                             <td class="p-4 font-medium">{{ $p->product_name }}</td>
-                                            <td class="p-4">{{ Str::limit($p->desc, 80) }}</td>
+                                            <td class="p-4">
+                                                <p class="line-clamp-2" title="{{ $p->desc }}">
+                                                    {{ Str::limit($p->desc, 60) }}
+                                                </p>
+                                            </td>
                                             <td class="p-4">Rp {{ number_format($p->price, 0, ',', '.') }}</td>
                                             <td class="p-4 text-center">
                                                 @if (optional($p->details->first())->image_product)
@@ -170,30 +174,50 @@
                                                     class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-44 bg-white border rounded-lg shadow-xl text-left">
 
                                                     <li>
-                                                        <form
+                                                        <form id="restore-{{ $p->id_product }}"
                                                             action="{{ route('produk.restore.process', $p->id_product) }}"
                                                             method="POST">
                                                             @csrf
                                                             <input type="hidden" name="page"
                                                                 value="{{ request('page') }}">
-                                                            <button onclick="return confirm('Pulihkan produk ini?')"
-                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 text-left">
-                                                                Restore
+                                                            <button
+                                                                onclick="confirmRestore('restore-{{ $p->id_product }}')"
+                                                                class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                                <svg width="15" height="15" viewBox="0 0 15 15"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M7.5 1.25C8.71259 1.24978 9.89906 1.6023 10.9148 2.2646C11.9305 2.9269 12.7317 3.87037 13.2206 4.98002C13.7095 6.08968 13.8651 7.3176 13.6683 8.51411C13.4716 9.71063 12.931 10.8241 12.1125 11.7188M10 7.5L7.5 5M7.5 5L5 7.5M7.5 5V10M1.5625 5.54688C1.36334 6.15229 1.25796 6.7846 1.25 7.42188M1.7688 10C2.11974 10.8074 2.63729 11.5315 3.28755 12.125M2.89749 3.27183C3.07189 3.08198 3.25787 2.90309 3.45437 2.73621M5.40253 13.3875C6.96109 13.9428 8.67621 13.8573 10.1719 13.15"
+                                                                        stroke="#282623" stroke-width="1.5"
+                                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                                </svg>
+                                                                <span>Restore</span>
                                                             </button>
                                                         </form>
                                                     </li>
 
                                                     <li>
-                                                        <form action="{{ route('produk.force.delete', $p->id_product) }}"
+                                                        <form id="hapus-{{ $p->id_product }}"
+                                                            action="{{ route('produk.force.delete', $p->id_product) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="page"
                                                                 value="{{ request('page') }}">
-                                                            <button
-                                                                onclick="return confirm('Hapus PERMANEN? Data tidak bisa dikembalikan!')"
-                                                                class="w-full px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 text-left">
-                                                                Delete Permanen
+                                                            <button type="button"
+                                                                onclick="confirmDelete('hapus-{{ $p->id_product }}')"
+                                                                class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                    height="18" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="lucide lucide-trash2-icon lucide-trash-2">
+                                                                    <path d="M10 11v6" />
+                                                                    <path d="M14 11v6" />
+                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                                    <path d="M3 6h18" />
+                                                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                                </svg>
+                                                                <span>Delete Permanen</span>
                                                             </button>
                                                         </form>
                                                     </li>
@@ -202,7 +226,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8"
+                                            <td colspan="7"
                                                 class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300">
                                                 @if (request('search'))
                                                     <span class="font-bold">"{{ request('search') }}"</span> not found
@@ -250,5 +274,33 @@
                         .forEach(m => m.classList.add('hidden'));
                 }
             });
+
+            window.confirmDelete = (formId) => {
+                Swal.fire({
+                    text: 'This product will be permanently removed. Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Permanent deletion',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit()
+                    }
+                })
+            }
+
+            window.confirmRestore = (formId) => {
+                Swal.fire({
+                    text: 'This product will be restored. Are you sure?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Restore',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit()
+                    }
+                })
+            }
         </script>
     @endsection

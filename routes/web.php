@@ -38,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/produk-detail_trash/{id}', [ProdukController::class, 'restore'])->name('produk.detail_trash');
     Route::delete('/produk-force-delete/{id}', [ProdukController::class, 'forceDelete'])->name('produk.force.delete');
     Route::patch('/produk/{id}/toggle', [ProdukController::class, 'toggle'])->name('produk.toggle');
+    Route::patch('/produk/{id}/toggle-lagi', [ProdukController::class, 'toggleLagi'])
+        ->name('produk.toggleLagi');
+
 
     //manajemen link 
     Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
@@ -68,8 +71,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
-Route::get('/about', function () { return view('guest.about');})->name('about');
-Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
+Route::get('/about', function () {
+    return view('guest.about');
+})->name('about');
+Route::get('/linktree', function () {
+    return view('guest.linktree');
+})->name('linktree');
 
 //landing page
 Route::get('/', [HomeController::class, 'index'])->name('home');

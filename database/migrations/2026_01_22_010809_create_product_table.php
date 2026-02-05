@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('product_name', (100));
             $table->decimal('price', 15, 2);
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_available')->default(true);
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('deleted_by')->nullable()->constrained('users')->nullOnDelete();

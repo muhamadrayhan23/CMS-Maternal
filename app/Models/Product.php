@@ -19,6 +19,7 @@ class Product extends Model
         'price',
         'link',
         'is_active',
+        'is_available',
         'created_by',
         'updated_by',
         'deleted_by',
