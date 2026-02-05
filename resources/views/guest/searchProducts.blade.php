@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 px-10 mb-10"
+<div class="md:grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10 px-10 mb-10"
     data-has-more="{{ $products->hasMorePages() ? '1' : '0' }}">
 
     @foreach ($products as $product)
@@ -14,7 +14,7 @@
             </a>
 
 
-            @if (!$product->is_active)
+            @if (!$product->is_available)
             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <span class="bg-red-700/70 text-white w-90 h-20 flex items-center justify-center
                  text-sm">

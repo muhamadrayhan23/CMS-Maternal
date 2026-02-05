@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            @if (!$product->is_active)
+            @if (!$product->is_available)
             <div class="flex gap-2 mt-8 mb-8 opacity-40">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert">
                     <circle cx="12" cy="12" r="10" />
@@ -153,7 +153,7 @@
                 class="w-full h-full object-cover rounded-lg">
         </a>
 
-        @if (!$product->is_active)
+        @if (!$product->is_available)
         <div class="absolute inset-0 flex items-center justify-center  pointer-events-none">
             <span class="bg-red-700/70 text-white w-90 h-20 flex items-center justify-center
                  text-sm">
