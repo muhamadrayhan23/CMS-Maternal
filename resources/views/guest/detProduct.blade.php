@@ -1,48 +1,74 @@
 @extends('layout.guest')
 
 @section('content')
-<div class="flex justify-start mx-10 my-5 text-gray-400">
-    Breadcrumbs / Products / Tas Baru
-</div>
+
 <div class="mx-auto px-10">
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
-        <div class="flex gap-6">
-            <div class="flex flex-col gap-4">
-                @foreach ($product->details as $index => $detail)
-                <button
-                    type="button"
-                    class="thumb w-30 h-30 rounded-lg overflow-hidden
-                    {{ $index === 0 ? 'ring-2 ring-black' : 'hover:ring-2 hover:ring-black' }}"
-                    data-src="{{ asset('storage/' . $detail->image_product) }}">
+        <div class="flex flex-col gap-4">
 
+            {{-- NAV (row di dalamnya) --}}
+            <nav class="flex items-center justify-between text-sm text-gray-400">
+                <div>
+                    @foreach ($breadcrumbs as $breadcrumb)
+                    @if (!$loop->last)
+                    <a href="{{ $breadcrumb['url'] }}" class="hover:text-black">
+                        {{ $breadcrumb['title'] }}
+                    </a>
+                    <span class="mx-2">/</span>
+                    @else
+                    <span class="text-black">{{ $breadcrumb['title'] }}</span>
+                    @endif
+                    @endforeach
+                </div>
+
+                <div
+                    id="variant-name"
+                    class="text-black text-sm font-medium tracking-wide">
+                    {{ $product->details->first()->name ?? '' }}
+                </div>
+            </nav>
+
+            {{-- IMAGE AREA (layout lama kamu) --}}
+            <div class="flex gap-6">
+                <div class="flex flex-col gap-4">
+                    @foreach ($product->details as $index => $detail)
+                    <button
+                        type="button"
+                        class="thumb w-30 h-30 rounded-lg overflow-hidden
+                {{ $index === 0 ? 'ring-2 ring-black' : 'hover:ring-2 hover:ring-black' }}"
+                        data-src="{{ asset('storage/' . $detail->image_product) }}"
+                        data-name="{{ $detail->atribute_name }}">
+
+                        <img
+                            src="{{ asset('storage/' . $detail->image_product) }}"
+                            class="w-full h-full object-cover">
+                    </button>
+                    @endforeach
+                </div>
+
+                <div class="aspect-square bg-gray-100 rounded-xl overflow-hidden">
                     <img
-                        src="{{ asset('storage/' . $detail->image_product) }}"
+                        id="main-image"
+                        src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                         class="w-full h-full object-cover">
-                </button>
-                @endforeach
-            </div>
-
-            <div class="aspect-square bg-gray-100 rounded-xl overflow-hidden">
-                <img
-                    id="main-image"
-                    src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                    class="w-full h-full object-cover">
+                </div>
             </div>
 
         </div>
 
+
         <div class="">
-            <h1 class="text-5xl font-semibold uppercase">
+            <h1 class="text-3xl font-semibold uppercase">
                 {{ $product->product_name }}
             </h1>
 
-            <p class="text-4xl font-semibold mt-5">
+            <p class="text-2xl font-semibold mt-2">
                 Rp {{ number_format($product->price) }}
             </p>
 
-            <p class="mt-6 text-gray-600 text-xl leading-relaxed bg-gray-100 rounded-md p-5">
+            <p class="mt-6 text-gray-600 text-md leading-relaxed bg-gray-100 rounded-md p-5">
                 {{ $product->desc }}
             </p>
 
@@ -86,11 +112,11 @@
 <div id="product-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 m-10">
 
     @foreach ($products as $product)
-    <div class="aspect-square transition-all duration-300 ease-out hover:-translate-y-2">
+    <div class="aspect-square transition-all duration-300 ease-out hover:scale-105">
 
         <a href="{{ route('detproduct',  $product['id_product']) }}">
             <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                class="w-full h-full object-cover rounded-lg hover:shadow-xl">
+                class="w-full h-full object-cover rounded-lg">
         </a>
 
         <h3 class="mt-3 font-semibold text-lg text-center">
@@ -107,11 +133,16 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const mainImage = document.getElementById('main-image');
+        const variantName = document.getElementById('variant-name');
         const thumbs = document.querySelectorAll('.thumb');
 
         thumbs.forEach(thumb => {
             thumb.addEventListener('click', () => {
                 mainImage.src = thumb.dataset.src;
+
+                if (variantName) {
+                    variantName.innerText = thumb.dataset.name;
+                }
 
                 thumbs.forEach(t => {
                     t.classList.remove('ring-2', 'ring-black');

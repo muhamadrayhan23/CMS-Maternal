@@ -6,6 +6,7 @@ use App\Http\Controllers\AdmLinksController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Guest\ProductController;
+use App\Http\Controllers\Guest\LinkController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
@@ -39,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/produk-force-delete/{id}', [ProdukController::class, 'forceDelete'])->name('produk.force.delete');
     Route::patch('/produk/{id}/toggle', [ProdukController::class, 'toggle'])->name('produk.toggle');
 
-    //manajemen link 
+    //manajemen link
     Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
     Route::get('/link/create', [AdmLinksController::class, 'create'])->name('createLink');
     Route::post('/link', [AdmLinksController::class, 'store'])->name('storeLink');
@@ -51,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/link/trash/{id}', [AdmLinksController::class, 'restoreProses'])->name('trashLink.restore');
     Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('trashLink.permanent');
 
-    //manajemen user 
+    //manajemen user
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
     Route::get('/user/create', [UserController::class, 'create'])->name('createUser');
     Route::post('/user', [UserController::class, 'store'])->name('storeUser');
@@ -69,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/about', function () { return view('guest.about');})->name('about');
-Route::get('/linktree', function () { return view('guest.linktree');})->name('linktree');
+Route::get('/linktree', [LinkController::class, 'index'])->name('linktree');
 
 //landing page
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -77,7 +78,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 //products
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detproduct');
-
 
 //home
 Route::get('/', [HomeController::class, 'index'])->name('home');
