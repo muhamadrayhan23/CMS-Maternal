@@ -2,22 +2,22 @@
 
 @section('content')
 
-<div class="rounded-xl p-10 py-4">
-    <form action="{{ route('products') }}" method="GET"
-        class="flex flex-col md:flex-row md:items-center gap-3">
+<div class="flex flex-row items-center gap-2 w-full px-10 py-5">
+    <div class="relative flex-[4] md:flex-5">
 
-        <input
-            type="text"
-            id="liveSearch"
-            name="search"
-            placeholder="Search Products Here..."
-            value="{{ request('search') }}"
-            class="w-full appearance-none px-4 py-3 flex-1 text-sm text-gray-500 border border-gray-300 rounded-md bg-[#F9F9FB]">
+        <div>
+            <input id="liveSearch" type="text" placeholder="Search Products Here..." name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+            </svg>
+        </div>
+    </div>
 
-        <select
-            name="sort"
-            id="filterStatus"
-            class="pl-4 pr-10 py-3 text-sm text-gray-500 border border-gray-300 rounded-md bg-[#F9F9FB]">
+    <div class="relative w-28 md:w-72">
+        <select id="filterStatus" name="sort" class="w-full appearance-none pl-4 pr-10 py-2 text-xs md:text-sm  text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
             <option value="">Sort by Price</option>
             <option value="price_desc" @selected(request('sort')=='price_desc' )>
                 High to low
@@ -26,15 +26,15 @@
                 Low to high
             </option>
         </select>
-    </form>
+    </div>
 </div>
 
-<div class="px-10">
+<div class="hidden md:block md:px-10">
     <img src="{{ asset('img/banner.png') }}" alt="" class="w-full rounded-md">
 </div>
 
 
-<div class="mt-10" id="card-product">
+<div class="mt-2 md:mt-10 lg:mt=10" id="card-product">
     @include('guest.searchProducts', ['products' => $products])
 </div>
 
