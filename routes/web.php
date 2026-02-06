@@ -55,11 +55,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/link/trash/{id}', [AdmLinksController::class, 'restoreProses'])->name('trashLink.restore');
     Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('forceDeleteLink');
 
-    //manajemen announcement
-    Route::get('/link/creannouncement', [AdmLinksController::class, 'createAnnouncement'])->name('createAnnouncement');
-    Route::post('/announcement', [AdmLinksController::class, 'storeAnnouncement'])->name('storeAnnouncement');
+    // manajemen announcement
+        Route::get('/announcement/create', [AdmLinksController::class, 'createAnnouncement'])->name('createAnnouncement');
+        Route::post('/announcement', [AdmLinksController::class, 'storeAnnouncement'])->name('storeAnnouncement');
+        Route::get('/announcement/{announcement}/edit', [AdmLinksController::class, 'editAnnouncement'])->name('editAnnouncement');
+        Route::put('/announcement/{announcement}', [AdmLinksController::class, 'updateAnnouncement'])->name('updateAnnouncement');
+        Route::delete('/announcement/{announcement}', [AdmLinksController::class, 'destroyAnnouncement'])->name('deleteAnnouncement');
+        Route::patch('/announcement/{announcement}/status', [AdmLinksController::class, 'status'])->name('statusAnnouncement');
+        Route::get('/announcement/trash', [AdmLinksController::class, 'restoreAnnouncement'])->name('trashAnnouncement');
+        Route::post('/announcement/trash/{id}', [AdmLinksController::class, 'restoreProsesAnnouncement'])->name('restoreAnnouncement');
+        Route::delete('/announcement/force-delete/{id}', [AdmLinksController::class, 'forceDeleteAnnouncement'])->name('forceDeleteAnnouncement');
 
-    //manajemen user
+
+    //manajemen user 
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
     Route::get('/user/create', [UserController::class, 'create'])->name('createUser');
     Route::post('/user', [UserController::class, 'store'])->name('storeUser');
