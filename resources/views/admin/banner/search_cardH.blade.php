@@ -4,12 +4,10 @@
             <div class="relative h-52 md:h-60 rounded-t-2xl overflow-hidden">
                 <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover" alt="Banner">
                 <div class="absolute top-3 left-3">
-                    <<span
+                    <span
                         class="px-3 py-1 text-[10px] uppercase {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
-                        
                         <span
                             class="px-3 py-1 text-[10px] {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
-                            
                             {{ $b->is_active ? 'Published' : 'Unpublished' }}
                         </span>
                 </div>

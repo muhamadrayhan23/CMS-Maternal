@@ -1,4 +1,4 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 @extends('layout.admin')
 
 @section('title', 'Dashboard Admin')
