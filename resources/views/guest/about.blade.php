@@ -41,18 +41,18 @@
                     A Bag Made for Everyday Activities
                 </h3>
 
-                <p class="mt-6 text-gray-600 leading-relaxed">
+                <p class="mt-6 text-gray-600 leading-relaxed text-justify">
                     Each bag from alttt.craftedgoods is carefully crafted with purpose—balancing function,
                     comfort, and a clean, timeless design. We use durable materials and thoughtful construction
                     to ensure every bag can be relied on for everyday movement without losing its aesthetic value.
                 </p>
 
-                <p class="mt-4 text-gray-600 leading-relaxed">
+                <p class="mt-4 text-gray-600 leading-relaxed text-justify">
                     Designed to support daily needs, our bags feature a spacious main compartment and
                     well-considered functional pockets to keep essentials organized and easy to access.
                 </p>
 
-                <p class="mt-4 text-gray-600 leading-relaxed">
+                <p class="mt-4 text-gray-600 leading-relaxed text-justify">
                     For us, a bag is more than an accessory. It is a crafted good—built to move with the user,
                     support productivity, and adapt to everyday routines with reliability and intention.
                 </p>

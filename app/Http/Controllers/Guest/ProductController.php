@@ -13,11 +13,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if (!session()->has('produk_back')) {
-            session(['produk_back' => url()->full()]);
-        }
-
-        $query = Product::with(['details', 'links'])->latest();
+        $query = Product::with(['details', 'links']);
 
         if ($request->filled('search')) {
             $query->where('product_name', 'like', '%' . $request->search . '%');
@@ -25,16 +21,13 @@ class ProductController extends Controller
 
         if ($request->sort === 'price_desc') {
             $query->orderBy('price', 'desc');
-        }
-
-        if ($request->sort === 'price_asc') {
+        } elseif ($request->sort === 'price_asc') {
             $query->orderBy('price', 'asc');
+        } else {
+            $query->latest();
         }
 
-        $products = $query
-            ->where('is_active', true)
-            ->paginate(12)
-            ->withQueryString();
+        $products = $query->paginate(8)->withQueryString();
 
         if ($request->ajax()) {
             return view('guest.searchProducts', compact('products'))->render();
@@ -54,15 +47,15 @@ class ProductController extends Controller
 
         $products = Product::with(['details', 'links'])
             ->where('id_product', '!=', $id)
-            ->limit(4)
+            ->limit(8)
             ->get();
 
         $breadcrumbs = [
-        ['title' => 'Home', 'url' => route('home')],
-        ['title' => 'Products', 'url' => route('products')],
-        ['title' => $product->product_name]
-    ];
-        
+            ['title' => 'Home', 'url' => route('home')],
+            ['title' => 'Products', 'url' => route('products')],
+            ['title' => $product->product_name]
+        ];
+
         return view('guest.detProduct', compact('product', 'products', 'breadcrumbs'));
     }
 
