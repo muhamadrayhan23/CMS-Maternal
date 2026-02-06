@@ -3,6 +3,7 @@ import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite'; // Pastikan baris ini ada
 
 export default defineConfig({
+
     plugins: [
         tailwindcss(), // Pastikan baris ini dipanggil
         laravel({
@@ -17,11 +18,17 @@ export default defineConfig({
     //         host : '192.168.101.15' 
     //     },
     // },
+    //  server : {
+    //     host: '0.0.0.0',
+    //     hmr: {
+    //         host : '192.168.137.154'
+    //     },
+    // },
 });
     // server : {
     //     host: '0.0.0.0',
     //     hmr: {
-    //         host : '192.168.1.11' 
+    //         host : '192.168.1.11'
     //     },
     // },
 // });

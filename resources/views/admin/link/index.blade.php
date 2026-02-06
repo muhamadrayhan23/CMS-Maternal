@@ -23,6 +23,13 @@
                 </svg>
                 Trash
             </a>
+            <a href="{{ route('createAnnouncement') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] border border-gray-300 rounded-md hover:bg-black transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                </svg>
+                Add New Announcement
+            </a>
             <a href="{{ route('createLink') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] border border-gray-300 rounded-md hover:bg-black transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14" />
@@ -48,18 +55,93 @@
 
 </div>
 
-<!-- hiasan -->
-<div class="mt-5">
-    <img src="{{ asset('pic-link-banner/alt_pages-to-jpg-0001.jpg') }}" alt="banner hiasan" class="w-full rounded-xl">
+<div id="managementCards">
+    <!-- Banner Discount -->
+    <div id="managementBannerDiscount"
+        class="group cursor-pointer bg-white p-8 py-15 rounded-2xl border border-blue-100 shadow-sm
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex justify-between items-center mt-5">
+
+        <div class="space-y-2">
+            <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition">
+                Management Banner Discount
+            </h3>
+            <p class="text-sm text-gray-500">
+                Create and manage promotional discount banners
+            </p>
+        </div>
+
+        <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600
+               group-hover:bg-blue-600 group-hover:text-white transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Management Links -->
+
+    <div id="managementLinks"
+        class="group cursor-pointer bg-white p-8 py-15 rounded-2xl border border-emerald-100 shadow-sm
+           hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex justify-between items-center mt-5">
+
+        <div class="space-y-2">
+            <h3 class="text-xl font-semibold text-gray-800 group-hover:text-emerald-600 transition">
+                Management Links
+            </h3>
+            <p class="text-sm text-gray-500">
+                Organize and update all website links
+            </p>
+        </div>
+
+        <div
+            class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-600
+               group-hover:bg-emerald-600 group-hover:text-white transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+            </svg>
+        </div>
+    </div>
+
 </div>
 
-<!-- TABLE Link -->
-<div id="linkContainer" class="mt-5">
+
+
+
+<!-- Links Section -->
+<div id="linkContainer" class="hidden mt-5">
     @include('admin.link.tablelink')
 </div>
+<!-- Announcement Section -->
+<div id="announcementContainer" class="hidden mt-5">
+    @include('admin.link.announcement')
+</div>
+
 
 
 <script>
+    const cards = document.getElementById('managementCards')
+    const bannerCard = document.getElementById('managementBannerDiscount')
+    const linkCard = document.getElementById('managementLinks')
+    const header = document.getElementById('header')
+
+    const announcementContainer = document.getElementById('announcementContainer')
+    const linkContainer = document.getElementById('linkContainer')
+
+
+    linkCard.addEventListener('click', () => {
+        cards.classList.add('hidden')
+        linkContainer.classList.remove('hidden')
+    })
+    bannerCard.addEventListener('click', () => {
+        cards.classList.add('hidden')
+        announcementContainer.classList.remove('hidden')
+    })
+
     function toggleMenu(btn) {
         const menu = btn.parentElement.querySelector('.action-menu')
 
@@ -96,6 +178,22 @@
     }
 
     searchInput.addEventListener('input', fetchFilter)
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const successMessage = "{{ session('success') }}";
+
+        if (successMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: successMessage,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+    });
 </script>
+
 
 @endsection

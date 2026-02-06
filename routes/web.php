@@ -6,6 +6,7 @@ use App\Http\Controllers\AdmLinksController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Guest\ProductController;
+use App\Http\Controllers\Guest\LinkController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
@@ -42,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('produk.toggleLagi');
 
 
-    //manajemen link 
+    //manajemen link
     Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
     Route::get('/link/create', [AdmLinksController::class, 'create'])->name('createLink');
     Route::post('/link', [AdmLinksController::class, 'store'])->name('storeLink');
@@ -52,7 +53,19 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/link/{link}/toggle', [AdmLinksController::class, 'toggle'])->name('link.toggle');
     Route::get('/link/trash', [AdmLinksController::class, 'restore'])->name('trashLink');
     Route::post('/link/trash/{id}', [AdmLinksController::class, 'restoreProses'])->name('trashLink.restore');
-    Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('trashLink.permanent');
+    Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('forceDeleteLink');
+
+    // manajemen announcement
+        Route::get('/announcement/create', [AdmLinksController::class, 'createAnnouncement'])->name('createAnnouncement');
+        Route::post('/announcement', [AdmLinksController::class, 'storeAnnouncement'])->name('storeAnnouncement');
+        Route::get('/announcement/{announcement}/edit', [AdmLinksController::class, 'editAnnouncement'])->name('editAnnouncement');
+        Route::put('/announcement/{announcement}', [AdmLinksController::class, 'updateAnnouncement'])->name('updateAnnouncement');
+        Route::delete('/announcement/{announcement}', [AdmLinksController::class, 'destroyAnnouncement'])->name('deleteAnnouncement');
+        Route::patch('/announcement/{announcement}/status', [AdmLinksController::class, 'status'])->name('statusAnnouncement');
+        Route::get('/announcement/trash', [AdmLinksController::class, 'restoreAnnouncement'])->name('trashAnnouncement');
+        Route::post('/announcement/trash/{id}', [AdmLinksController::class, 'restoreProsesAnnouncement'])->name('restoreAnnouncement');
+        Route::delete('/announcement/force-delete/{id}', [AdmLinksController::class, 'forceDeleteAnnouncement'])->name('forceDeleteAnnouncement');
+
 
     //manajemen user 
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
@@ -71,12 +84,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
-Route::get('/about', function () {
-    return view('guest.about');
-})->name('about');
-Route::get('/linktree', function () {
-    return view('guest.linktree');
-})->name('linktree');
+Route::get('/about', function () { return view('guest.about');})->name('about');
+Route::get('/linktree', [LinkController::class, 'index'])->name('linktree');
 
 //landing page
 Route::get('/', [HomeController::class, 'index'])->name('home');

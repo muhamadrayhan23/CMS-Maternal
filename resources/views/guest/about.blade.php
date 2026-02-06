@@ -41,18 +41,18 @@
                     A Bag Made for Everyday Activities
                 </h3>
 
-                <p class="mt-6 text-gray-600 leading-relaxed">
+                <p class="mt-6 text-gray-600 leading-relaxed text-justify">
                     Each bag from alttt.craftedgoods is carefully crafted with purpose—balancing function,
                     comfort, and a clean, timeless design. We use durable materials and thoughtful construction
                     to ensure every bag can be relied on for everyday movement without losing its aesthetic value.
                 </p>
 
-                <p class="mt-4 text-gray-600 leading-relaxed">
+                <p class="mt-4 text-gray-600 leading-relaxed text-justify">
                     Designed to support daily needs, our bags feature a spacious main compartment and
                     well-considered functional pockets to keep essentials organized and easy to access.
                 </p>
 
-                <p class="mt-4 text-gray-600 leading-relaxed">
+                <p class="mt-4 text-gray-600 leading-relaxed text-justify">
                     For us, a bag is more than an accessory. It is a crafted good—built to move with the user,
                     support productivity, and adapt to everyday routines with reliability and intention.
                 </p>
@@ -66,21 +66,24 @@
                 </h3>
 
                 <p class="mt-6 text-gray-600 leading-relaxed">
-                    alttt.craftedgoods was founded in 2026 with a focus on creating bags that are thoughtfully
-                    crafted for modern daily use. We believe a bag should be functional, durable, and visually
-                    relevant—designed to support movement without unnecessary complexity.
+                   alttt.craftedgoods was founded in 2026 with a focus on creating thoughtfully crafted bags for modern daily use.
+                   We believe a bag should be functional, durable, and visually relevant—designed to support movement without
+                   unnecessary complexity. alttt.craftedgoods is committed to crafting dependable goods with purpose—made to last,
+                    and made to move with you.
                 </p>
 
                 <p class="mt-4 text-gray-600 leading-relaxed">
-                    Every product is developed through careful design exploration, material selection, and
-                    functional refinement. We pay attention to details that matter, ensuring each bag delivers
-                    reliability and comfort in everyday activities.
+                    Every product is shaped through careful design exploration, material selection,
+                     and functional refinement. We pay close attention to the details that matter,
+                     ensuring each piece delivers reliability and comfort in everyday activities.
                 </p>
 
                 <p class="mt-4 text-gray-600 leading-relaxed">
-                    Our journey is driven by continuous learning and innovation. alttt.craftedgoods is committed
-                    to crafting dependable goods with purpose—made to last, and made to move with you.
+                    We craft timeless daily wear that prioritizes comfort and sensory connection.
+                     Our paracord creations are a tactile sanctuary, a way to reconnect with nature and find calm in a crowded world.
+                      Be an Artist, Be You..
                 </p>
+
             </div>
 
             <div class="w-full h-[420px] overflow-hidden bg-gray-100">

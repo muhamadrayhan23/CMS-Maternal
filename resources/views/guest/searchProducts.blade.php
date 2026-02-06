@@ -1,22 +1,39 @@
-<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 px-10 mb-10" class="products-wrapper" data-has-more="{{ $products->hasMorePages() ? '1' : '0' }}">
-    @foreach ($products as $product)
-        <div class="aspect-square transition-all duration-400 hover:scale-105">
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20 px-10 mb-10"
+    data-has-more="{{ $products->hasMorePages() ? '1' : '0' }}">
 
-            @if ($product->details->count())
-                <a href="{{ route('detproduct', $product->id_product) }}">
-                    <img
-                        src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                        class="w-full h-full object-cover rounded-lg">
-                </a>
+    @foreach ($products as $product)
+    <div class="relative aspect-square transition-all duration-300 hover:scale-105 cursor-pointer">
+
+        @if ($product->details->count())
+        <div class="relative">
+
+            <a href="{{ route('detproduct', $product->id_product) }}">
+                <img
+                    src="{{ asset('storage/' . $product->details->first()->image_product) }}"
+                    class="w-full h-full object-cover rounded-lg">
+            </a>
+
+
+            @if (!$product->is_active)
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <span class="bg-red-700/70 text-white w-90 h-20 flex items-center justify-center
+                 text-sm">
+                    SOLD OUT
+                </span>
+            </div>
             @endif
 
-            <h3 class="mt-3 font-semibold text-lg text-center">
-                {{ Str::upper($product->product_name) }}
-            </h3>
 
-            <p class="mt-2 font-bold text-center">
-                Rp {{ number_format($product->price) }}
-            </p>
         </div>
+        @endif
+
+        <h3 class="mt-3 font-semibold text-lg text-center">
+            {{ Str::upper($product->product_name) }}
+        </h3>
+
+        <p class="mt-2 font-bold text-center">
+            Rp {{ number_format($product->price) }}
+        </p>
+    </div>
     @endforeach
 </div>
