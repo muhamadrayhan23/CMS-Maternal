@@ -16,6 +16,7 @@ class announcement extends Model
         'announcement_image',
         'announcement_name',
         'announcement_address',
+        'is_active',
         'created_by',
         'updated_by',
         'deleted_by',

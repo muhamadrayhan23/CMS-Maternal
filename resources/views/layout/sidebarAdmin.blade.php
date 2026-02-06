@@ -4,7 +4,7 @@
 
     {{--  BAGIAN LOGO --}}
     <div class="flex items-center justify-center h-16">
-        <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
+        <img src="{{ asset('img/logo/logoblack.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
     </div>
 
     {{-- lIST --}}

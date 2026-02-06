@@ -56,48 +56,12 @@
                             @enderror
                         </div>
                     </div>
-
-                    <div class="mb-3 row">
-                        <label for="link_logo" class="text-sm font-medium text-gray-700">
-                            Link Logo
-                        </label>
-
-                        {{-- preview logo lama --}}
-                        @if ($link->link_logo)
-                        <div class="mb-3">
-                            <img
-                                src="{{ asset($link->link_logo) }}"
-                                alt="Current Logo"
-                                class="h-16 w-16 object-contain rounded border border-gray-200">
-                            <p class="text-xs text-gray-500 mt-1 italic">
-                                Current logo
-                            </p>
-                        </div>
-                        @endif
-
-                        <div class="relative flex items-center">
-                            <input type="text" placeholder="Choose new logo (optional)" readonly class="file-name-display w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
-                            <label class="absolute right-2 px-3 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
-                                Choose File
-                                <input type="file" id="link_logo" name="link_logo" class="hidden" onchange="updateFileName(this)">
-                            </label>
-                        </div>
-
-                    </div>
                 </div>
             </div>
     </form>
 </div>
 
 <script>
-    // Fungsi untuk nampilin nama file yang dipilih
-    function updateFileName(input) {
-        if (input.files && input.files[0]) {
-            const row = input.closest('.relative');
-            const display = row.querySelector('.file-name-display');
-            display.value = input.files[0].name;
-        }
-    }
 
     window.routes = {
         homeLink: "{{ route('homeLink') }}"

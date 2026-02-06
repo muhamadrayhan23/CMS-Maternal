@@ -26,7 +26,7 @@
                 <path d="M3 19h18" />
             </svg>
         </button>
-        <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-6 w-auto">
+        <img src="{{ asset('img/logo/logoblack.png') }}" alt="Logo" class="h-6 w-auto">
         <div class="w-10"></div>
     </div>
     {{-- buat responsive yah --}}

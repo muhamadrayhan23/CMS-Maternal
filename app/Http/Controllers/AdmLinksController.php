@@ -37,7 +37,7 @@ class AdmLinksController extends Controller
     {
         $search = $request->search;
 
-        $announcement = Announcement::when($search, function ($q) use ($search) {
+        $announcements = Announcement::when($search, function ($q) use ($search) {
             $q->where('announcement_name', 'like', "%{$search}%");
         })
             ->latest()
@@ -45,6 +45,7 @@ class AdmLinksController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
+            // Gunakan variabel yang sama: announcements
             return view('admin.link.announcement', compact('announcements'))->render();
         }
 
@@ -144,23 +145,11 @@ class AdmLinksController extends Controller
     {
         try{
             $request->validate([
-                'link_logo' => 'nullable|image|mimes:jpg,jpeg,png',
                 'link_name' => 'required|string|max:100|unique:link,link_name,' . $link->id_link . ',id_link',
                 'link_address' => 'required|string|max:255',
             ]);
 
-            $filename = $link->link_logo;
-
-            if ($request->hasFile('link_logo')) {
-                $file = $request->file('link_logo');
-                $newName = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('link_pic'), $newName);
-
-                $filename = 'link_pic/' . $newName;
-            }
-
             $link->update([
-                'link_logo' => $filename,
                 'link_name' => $request->link_name,
                 'link_address' => $request->link_address,
                 'is_active' => $request->boolean('is_active'),
@@ -172,10 +161,57 @@ class AdmLinksController extends Controller
             return back()->withErrors(['error' => 'An error occurred while updating the link: ' . $e->getMessage()]);
         }
         
-
-        
     }
 
+    //edit announcement
+    public function editAnnouncement(Announcement $announcement)
+    {
+        $announcements = Announcement::all();
+        return view('admin.link.edannouncement', compact('announcement', 'announcements'));
+    }
+
+    //update announcement
+    public function updateAnnouncement(Request $request, Announcement $announcement)
+    {
+        try {
+            $request->validate([
+                'announcement_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+                // PERBAIKAN DISINI: Nama tabel disesuaikan menjadi 'announcement'
+                'announcement_name' => 'required|string|max:100|unique:announcement,announcement_name,' . $announcement->id_announcement . ',id_announcement',
+                'announcement_address' => 'required|string|max:255',
+            ]);
+
+            $filename = $announcement->announcement_image;
+
+            if ($request->hasFile('announcement_image')) {
+                // Hapus file lama jika ada (opsional tapi disarankan)
+                if ($announcement->announcement_image && file_exists(public_path($announcement->announcement_image))) {
+                    unlink(public_path($announcement->announcement_image));
+                }
+
+                $file = $request->file('announcement_image');
+                $newName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('link_pic'), $newName);
+                $filename = 'link_pic/' . $newName;
+            }
+
+            // Pastikan is_active dikirim dengan benar
+            $announcement->update([
+                'announcement_image' => $filename,
+                'announcement_name' => $request->announcement_name,
+                'announcement_address' => $request->announcement_address,
+                'is_active' => $request->is_active, // Ambil langsung dari hidden input
+            ]);
+
+            return redirect()->route('homeLink')
+                ->with('success', 'Announcement successfully updated');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Ini untuk menangkap jika validasi gagal
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Error: ' . $e->getMessage()]);
+        }
+    }
 
     //delete link
     public function destroy(Link $link)
@@ -184,6 +220,15 @@ class AdmLinksController extends Controller
 
         return redirect()->route('homeLink')
             ->with('success', 'Link successfully deleted');
+    }
+
+    //delete announcement
+    public function destroyAnnouncement(Announcement $announcement)
+    {
+        $announcement->delete();
+
+        return redirect()->route('homeLink')
+            ->with('success', 'Announcement successfully deleted');
     }
 
     //restore
@@ -217,6 +262,37 @@ class AdmLinksController extends Controller
         return redirect()->route('homeLink')->with('success', 'Link successfully restored');
     }
 
+    //restore announcement
+    public function restoreAnnouncement(Request $request)
+    {
+        $search = $request->search;
+
+        $announcement = Announcement::onlyTrashed()
+            ->when($search, function ($q) use ($search) {
+                $q->where('announcement_name', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.link.tableannouncementtrash', compact('announcement'))->render();
+        }
+
+        return view('admin.link.trash', compact('announcement'));
+    }
+
+    public function restoreProsesAnnouncement($id)
+    {
+        $announcement = Announcement::withTrashed()->findOrFail($id);
+
+        $announcement->is_active = 0;
+
+        $announcement->restore();
+        return redirect()->route('homeLink')->with('success', 'Announcement successfully restored');
+    }
+
+
     //forced delete
     public function forceDelete($id)
     {
@@ -224,6 +300,25 @@ class AdmLinksController extends Controller
 
         return redirect()->route('trashLink')->with('success', 'Link successfully deleted permanently');
     }
+
+    //forced delete announcement
+    public function forceDeleteAnnouncement($id)
+    {
+        Announcement::withTrashed()->findOrFail($id)->forceDelete();
+
+        return redirect()->route('trashAnnouncement')->with('success', 'Announcement successfully deleted permanently');
+    }
+
+    //status banner
+    public function status(Announcement $announcement)
+    {
+        // Cara yang lebih aman untuk toggle boolean
+        $announcement->is_active = $announcement->is_active ? 0 : 1;
+        $announcement->save();
+
+        return back()->with('success', 'Announcement status updated successfully!');
+    }
+
 
     //toggle toggle an
     public function toggle(Link $link)
