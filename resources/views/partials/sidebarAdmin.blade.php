@@ -12,8 +12,8 @@
 <body class="bg-[#f4f4f4] font-sans ">
     
     @php
-        $active = 'bg-[#373737] text-white shadow-sm border-l-4 border-gray-800';
-        $default = 'text-gray-600 border-l-4 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200'
+        $active = ' bg-[#333333] text-white shadow-sm  ';
+        $default = 'text-gray-600 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200'
     @endphp
     {{-- <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
             <button id="openSidebar" class="p-2 text-gray-600">
@@ -71,7 +71,7 @@
             {{-- Product --}}
             <li class="mb-2">
                 <a href="{{ route('produk.index') }}"
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index', 'produk.create','produk.edit','produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index', 'produk.create','produk.edit','produk.restore','produk.kelola_card','produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                         stroke-linejoin="round">

@@ -189,15 +189,13 @@
         
         if (succes) {
             config = {
-                icon: 'success',
                 title: 'Login Successfully!',
                 text: succes !== 'true' ? succes : '',
                 showConfirmButton: false,
                 timer: 3000,       
             };
         } else if (error || validationError) { 
-            config = {
-                icon: 'error', 
+            config = { 
                 title: 'Login Failed!',
                 text: (error ===  'true' || !error ) ? validationError : error,
                 showConfirmButton: true,
