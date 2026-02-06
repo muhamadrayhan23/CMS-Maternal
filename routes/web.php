@@ -6,6 +6,7 @@ use App\Http\Controllers\AdmLinksController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\Guest\ProductController;
+use App\Http\Controllers\Guest\LinkController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
@@ -42,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('produk.toggleLagi');
 
 
-    //manajemen link 
+    //manajemen link
     Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
     Route::get('/link/create', [AdmLinksController::class, 'create'])->name('createLink');
     Route::post('/link', [AdmLinksController::class, 'store'])->name('storeLink');
@@ -83,12 +84,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
-Route::get('/about', function () {
-    return view('guest.about');
-})->name('about');
-Route::get('/linktree', function () {
-    return view('guest.linktree');
-})->name('linktree');
+Route::get('/about', function () { return view('guest.about');})->name('about');
+Route::get('/linktree', [LinkController::class, 'index'])->name('linktree');
 
 //landing page
 Route::get('/', [HomeController::class, 'index'])->name('home');

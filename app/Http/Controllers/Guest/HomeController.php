@@ -11,8 +11,8 @@ class HomeController extends Controller
 {
     public function index(){
         $banners = Banner::where('is_active', true)->get();
-        $query = Product::with(['details', 'links'])->latest();
-        $products = $query->where('is_active', true)->take(5)->get();
+        $query = Product::with(['details', 'links']);
+        $products = $query->take(12)->get();
         return view ('guest.home', compact('banners', 'products'));
     }
 }

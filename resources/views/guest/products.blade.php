@@ -34,46 +34,34 @@
 </div>
 
 
-<div id="card-product" class="mt-10">
-    @include('guest.searchProducts')
+<div class="mt-10" id="card-product">
+    @include('guest.searchProducts', ['products' => $products])
 </div>
 
-<!-- <div class="flex justify-center mt-10 mb-20 ">
-    <button
-        id="load-more"
-        data-page="2"
-        class="flex items-center gap-2 px-8 py-3 border rounded-full hover:bg-black">
-        See More
-    </button>
-</div> -->
-
-
 @if ($products->hasMorePages())
-<div class="flex justify-center mt-10 mb-20">
+<div class="flex justify-center mt-10 mb-20" id="load-more-wrapper">
     <button
         id="load-more"
         data-page="2"
         class="flex items-center gap-2 px-8 py-3 border rounded-full
                hover:bg-[#1A1A1A] hover:text-white transition">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right-icon lucide-move-right">
-            <path d="M18 8L22 12L18 16" />
-            <path d="M2 12H22" />
-        </svg>
-        See More
+        → View More
     </button>
 </div>
 @endif
+
+
 
 <script>
     const searchInput = document.getElementById('liveSearch');
     const sortSelect = document.getElementById('filterStatus');
     const container = document.getElementById('card-product');
-    const loadMoreBtn = document.getElementById('load-more');
 
     function fetchProducts(reset = false) {
         const search = searchInput.value;
         const sort = sortSelect.value;
-        const page = reset ? 1 : loadMoreBtn?.dataset.page ?? 1;
+        const loadMoreBtn = document.getElementById('load-more');
+        const page = reset ? 1 : (loadMoreBtn?.dataset.page ?? 1);
 
         fetch(`{{ route('products') }}?search=${search}&sort=${sort}&page=${page}`, {
                 headers: {
@@ -84,22 +72,28 @@
             .then(html => {
                 if (reset) {
                     container.innerHTML = html;
-                    if (loadMoreBtn) loadMoreBtn.dataset.page = 2;
                 } else {
                     container.insertAdjacentHTML('beforeend', html);
-                    loadMoreBtn.dataset.page = parseInt(page) + 1;
                 }
 
-                if (!html.trim() && loadMoreBtn) {
-                    loadMoreBtn.remove();
+                const wrapper = document.getElementById('load-more-wrapper');
+                if (!html.includes('id="load-more"')) {
+                    wrapper.innerHTML = '';
                 }
             });
+
     }
+
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('#load-more');
+        if (!btn) return;
+
+        e.preventDefault();
+        fetchProducts(false);
+    });
 
     searchInput.addEventListener('input', () => fetchProducts(true));
     sortSelect.addEventListener('change', () => fetchProducts(true));
-
-    loadMoreBtn?.addEventListener('click', () => fetchProducts());
 </script>
 
 @endsection
