@@ -31,7 +31,7 @@
         </button>
 
         <!-- MENU DESKTOP -->
-        <div class="hidden md:flex items-center gap-17 text-current mr-3.25 font-sans text-base font-light">
+        <div class="hidden sm:hidden md:flex items-center gap-17 text-current mr-3.25 font-sans text-base font-light">
 
             <a href="{{ route('home') }}" class="group relative inline-block px-1 py-2">
                 <span>Home</span>

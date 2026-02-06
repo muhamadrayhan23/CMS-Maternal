@@ -15,9 +15,6 @@
     }
 </style>
 
-{{-- =========================
-    HERO CAROUSEL
-========================= --}}
 <div id="default-carousel" data-carousel="slide" class="group relative">
 
     <div class="relative w-full h-screen md:h-screen font-sans -mt-22 overflow-hidden">
@@ -32,7 +29,7 @@
             {{-- Button --}}
             <div class="absolute inset-x-0 bottom-10 md:bottom-15 flex justify-center">
                 <a href="{{ route('products')}}"
-                    class="px-7 py-2 rounded-full border-2 border-white text-white font-medium text-md font-[Space_Grotesk] hover:bg-white hover:text-black transition">
+                    class="px-7 py-2 rounded-full border-2 border-white text-white font-medium text-md font-sans hover:bg-white hover:text-black transition">
                     Shop Now
                 </a>
             </div>

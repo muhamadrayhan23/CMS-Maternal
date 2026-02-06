@@ -30,10 +30,10 @@ class ProductController extends Controller
         $products = $query->paginate(8)->withQueryString();
 
         if ($request->ajax()) {
-            return view('guest.searchProducts', compact('products'))->render();
+            return view('guest.searchProducts', compact('products', 'request'))->render();
         }
 
-        return view('guest.products', compact('products'));
+        return view('guest.products', compact('products', 'request'));
     }
 
 
