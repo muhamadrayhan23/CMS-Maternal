@@ -5,13 +5,11 @@
 
     <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
         <div class="space-y-4">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-
+            <div class="flex items-center justify-between gap-3 flex-wrap md:flex-nowrap">
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
                     Manage Products
                 </h2>
                 <div class="flex flex-wrap items-center gap-2">
-
                     <a href="{{ route('produk.restore') }}"
                         class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
 
@@ -79,19 +77,18 @@
                         </svg>
                         <span class="hidden md:inline font-sans">Add New Product</span>
                     </a>
-
                 </div>
-
             </div>
 
-            <form method="GET" action="{{ route('produk.index') }}" id="filterForm" class="mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-                    <div class="md:col-span-9 relative bg-gray-100">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
+            <form method="GET" action="{{ route('produk.index') }}" id="filterForm" class="mb-4">
+                <div class="grid grid-cols-12 gap-2">
+                    <div class="col-span-6 sm:col-span-7 relative">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search"
                             oninput="submitFilter()"
-                            class="w-full px-4 py-2 pr-10 rounded bg-gray-100 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
-                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            class="w-full px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none" />
+                        <div
+                            class="absolute inset-y-0 right-2 sm:right-3 flex items-center pointer-events-none text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="11" cy="11" r="8" />
                                 <path d="m21 21-4.3-4.3" />
@@ -99,47 +96,41 @@
                         </div>
                     </div>
 
-                    <div class="md:col-span-3 flex gap-2">
-                        <div class="relative flex-1">
-                            <select name="status" onchange="filterForm.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
-                                <option value="">Status</option>
-                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
-                                    Published
-                                </option>
-                                <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>
-                                    Unpublished
-                                </option>
-                            </select>
+                    <div class="col-span-3 relative">
+                        <select name="status" onchange="this.form.submit()"
+                            class="w-full appearance-none px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none">
+                            <option value="">Status</option>
+                            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published</option>
+                            <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpublished</option>
+                        </select>
 
-                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
-                                    <path
-                                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                            </div>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-2 sm:right-3 flex items-center text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="black" stroke-width="2">
+                                <path
+                                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
                         </div>
-                        <div class="relative flex-1">
-                            <select name="stok" onchange="this.form.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
-                                <option value="">Stok</option>
-                                <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>
-                                    Available
-                                </option>
-                                <option value="0" {{ request('stok') === '0' ? 'selected' : '' }}>
-                                    Unavailable
-                                </option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
-                                    <path
-                                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                            </div>
+                    </div>
+
+                    <div class="col-span-3 sm:col-span-2 relative">
+                        <select name="stok" onchange="this.form.submit()"
+                            class="w-full appearance-none px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none">
+                            <option value="">Stok</option>
+                            <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>Available</option>
+                            <option value="0" {{ request('stok') === '0' ? 'selected' : '' }}>Unavailable</option>
+                        </select>
+
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-2 sm:right-3 flex items-center text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="black" stroke-width="2">
+                                <path
+                                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -166,17 +157,16 @@
 
             <div class="bg-white rounded-xl shadow overflow-visible">
                 <table class="w-full text-sm table-fixed">
-
                     <thead>
                         <tr class="text-center text-gray-600 font-bold font-sans bg-gray-100">
-                            <th class="p-4 w-40">Product</th>
-                            <th class="p-4 w-48">Description</th>
-                            <th class="p-4 w-32">Price</th>
-                            <th class="p-4 w-44">Link</th>
-                            <th class="p-4 w-24 text-left">Image</th>
-                            <th class="p-4 w-32">Status</th>
-                            <th class="p-4 w-32">Stok</th>
-                            <th class="p-4 w-15">Action</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Product</th>
+                            <th class="p-4 w-44 hidden md:table-cell">Description</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Price</th>
+                            <th class="p-4 w-44 hidden md:table-cell">Link</th>
+                            <th class="p-4 w-44 hidden md:table-cell">Image</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Status</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Stok</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Action</th>
                         </tr>
                     </thead>
 
@@ -184,19 +174,19 @@
                         @forelse ($produk as $p)
                             <tr class="hover:bg-gray-50 transition">
 
-                                <td class="p-4 font-medium">{{ $p->product_name }}</td>
+                                <td class="p-2 text-xs md:text-sm break-words align-top">{{ $p->product_name }}</td>
 
-                                <td class="p-4">
+                                <td class="p-2 break-words text-xs hidden md:text-sm md:p-4 md:w-44 md:table-cell">
                                     <p class="line-clamp-2" title="{{ $p->desc }}">
                                         {{ Str::limit($p->desc, 60) }}
                                     </p>
                                 </td>
 
-                                <td class="p-4 whitespace-nowrap">
+                                <td class="p-2 text-xs md:text-sm break-words align-top">
                                     Rp {{ number_format($p->price, 0, ',', '.') }}
                                 </td>
 
-                                <td class="p-4 relative overflow-visible">
+                                <td class="p-4 w-44 hidden md:table-cell relative overflow-visible">
                                     <div class="relative inline-block">
                                         <button type="button"
                                             class="px-3 py-1 border rounded hover:bg-gray-100 whitespace-nowrap"
@@ -234,32 +224,34 @@
                                     </div>
                                 </td>
 
-                                <td class="p-4">
+                                <td class="p-4 w-44 hidden md:table-cell">
                                     @if (optional($p->details->first())->image_product)
-                                        <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
-                                            class="w-10 h-10 object-cover rounded-lg">
+                                        <div class="flex justify-center">
+                                            <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
+                                                class="w-10 h-10 object-cover rounded-lg">
+                                        </div>
                                     @else
                                         -
                                     @endif
                                 </td>
 
-                                <td class="p-4 text-center">
+                                <td class="p-2 text-xs md:text-sm break-words align-top">
                                     <span
                                         class="px-3 py-1 text-xs rounded-full {{ $p->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }}">
                                         {{ $p->is_active ? 'Published' : 'Unpublished' }}
                                     </span>
                                 </td>
 
-                                <td class="p-4 text-center">
+                                <td class="p-2 text-xs md:text-sm break-words align-top">
                                     <span
                                         class="px-3 py-1 text-xs rounded-full {{ $p->is_available ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }}">
                                         {{ $p->is_available ? 'Available' : 'Unavailable' }}
                                     </span>
                                 </td>
 
-                                <td class="p-4 relative overflow-visible text-center">
+                                <td class="p-2 text-xs md:text-sm align-top relative text-center">
                                     <button type="button" onclick="toggleMenu(this)"
-                                        class="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded">
+                                        class="inline-flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-full hover:bg-gray-100 active:bg-gray-200 touch-manipulation">
                                         &#8942;
                                     </button>
 
@@ -406,13 +398,12 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="mt-6 flex justify-end">
-                {{ $produk->links() }}
-            </div>
-
         </div>
 
+        <div class="mt-6 flex justify-end">
+            {{ $produk->links() }}
+        </div>
+    </div>
     </div>
 
     <script>

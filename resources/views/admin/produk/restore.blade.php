@@ -5,12 +5,11 @@
 
     <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
         <div class="space-y-4">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-center justify-between gap-3 flex-wrap md:flex-nowrap">
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
                     Trash
                 </h2>
-                <div class="flex flex-wrap gap-2">
-
+                <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
                         class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
@@ -77,12 +76,10 @@
                         </svg>
                         <span class="hidden md:inline font-sans">Add New Product</span>
                     </a>
-
                 </div>
-
             </div>
-            <form method="GET" action="{{ route('produk.restore') }}" id="filterForm">
 
+            <form method="GET" action="{{ route('produk.restore') }}" id="filterForm">
                 <div class="relative flex-1">
                     <div class="md:col-span-9 relative bg-gray-100">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
