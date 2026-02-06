@@ -11,12 +11,12 @@ export default defineConfig({
         }),
     ],
 
-    server : {
-        host: '0.0.0.0',
-        hmr: {
-            host : '192.168.101.15' 
-        },
-    },
+    // server : {
+    //     host: '0.0.0.0',
+    //     hmr: {
+    //         host : '192.168.101.15' 
+    //     },
+    // },
 });
     // server : {
     //     host: '0.0.0.0',

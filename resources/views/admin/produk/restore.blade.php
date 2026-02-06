@@ -4,22 +4,15 @@
 @section('content')
 
     <div class="bg-white rounded-xl border border-gray-200 p-4 md:p-6">
-
         <div class="space-y-4">
-
-            {{-- HEADER --}}
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
                     Trash
                 </h2>
-
-                {{-- NAV BUTTONS --}}
                 <div class="flex flex-wrap gap-2">
 
                     <a href="{{ route('produk.restore') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-800' }}">
-
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -30,7 +23,7 @@
                         <span class="hidden md:inline font-sans">Trash</span>
                     </a>
                     <a href="{{ route('produk.index') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.87">
@@ -42,7 +35,7 @@
                         <span class="hidden md:inline font-sans">List View</span>
                     </a>
                     <a href="{{ route('produk.kelola_card') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
                         <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -76,7 +69,7 @@
                         <span class="hidden md:inline font-sans">Grid View</span>
                     </a>
                     <a href="{{ route('produk.create') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-gray-300 text-white' : 'bg-gray-100 text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
@@ -90,7 +83,7 @@
             </div>
             <form method="GET" action="{{ route('produk.restore') }}" id="filterForm">
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                <div class="relative flex-1">
                     <div class="md:col-span-9 relative bg-gray-100">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
                             oninput="submitFilter()"
@@ -105,6 +98,26 @@
                     </div>
                 </div>
             </form>
+
+            @if (session('success'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const successRestore = "{{ session('success') }}"
+                        if (successRestore) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: successRestore,
+                                showConfirmButton: true,
+
+                                customClass: {
+                                    confirmButton: '!bg-green-800'
+                                }
+                            });
+                        }
+                    });
+                </script>
+            @endif
+
             <div class="bg-white rounded-xl shadow overflow-visible">
                 <table class="w-full text-sm table-fixed">
                     <thead class="text-gray-600 font-bold font-sans text-center bg-gray-100">
@@ -154,8 +167,9 @@
                                                 method="POST">
                                                 @csrf
                                                 <input type="hidden" name="page" value="{{ request('page') }}">
-                                                <button onclick="confirmRestore('restore-{{ $p->id_product }}')"
-                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                <button
+                                                    class="btn-restore w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left"
+                                                    type="button">
                                                     <svg width="15" height="15" viewBox="0 0 15 15"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -176,8 +190,7 @@
                                                 @method('DELETE')
                                                 <input type="hidden" name="page" value="{{ request('page') }}">
                                                 <button type="button"
-                                                    onclick="confirmDelete('hapus-{{ $p->id_product }}')"
-                                                    class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                                    class="btn-hapus-permanent w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -252,41 +265,73 @@
 
         });
 
-        function confirmDelete(formId) {
+        document.querySelectorAll('.btn-restore').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
 
-            Swal.fire({
-                title: 'Permanent Delete?',
-                text: 'This product will be removed forever.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Delete'
-            }).then(res => {
+                Swal.fire({
+                    title: 'Restore Product?',
+                    text: 'This product will be restored. Are you sure?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel',
+                    showCloseButton: true,
+                    buttonsStyling: false,
 
-                if (res.isConfirmed) {
-                    document.getElementById(formId).submit();
-                }
+                    reverseButtons: false,
 
+                    customClass: {
+                        popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                        title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                        htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
+
+                        actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+
+                        confirmButton: 'flex-1 !bg-white !text-black !px-6 !py-3 !rounded-lg !font-bold !text-base !border !border-gray-900 hover:!bg-gray-200 transition-all !m-0 !outline-none !shadow-none',
+                        cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-gray-700 transition-all !m-0 !outline-none !shadow-none',
+                        closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit();
+                    }
+                });
             });
+        });
 
-        }
+        document.querySelectorAll('.btn-hapus-permanent').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
 
-        function confirmRestore(formId) {
+                Swal.fire({
+                    title: 'Delete Product?',
+                    text: 'This product will be permanently deleted. Are you sure?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel',
+                    showCloseButton: true,
+                    buttonsStyling: false,
 
-            Swal.fire({
-                title: 'Restore Product?',
-                text: 'This product will be restored.',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Restore'
-            }).then(res => {
+                    reverseButtons: false,
 
-                if (res.isConfirmed) {
-                    document.getElementById(formId).submit();
-                }
+                    customClass: {
+                        popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                        title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                        htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
 
+                        actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+
+                        confirmButton: 'flex-1 !bg-red-600 !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-red-700 transition-all !m-0 !outline-none !shadow-none',
+                        cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-black transition-all !m-0 !outline-gray-600 !shadow-none',
+                        closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit();
+                    }
+                });
             });
-
-        }
+        });
     </script>
 
 @endsection

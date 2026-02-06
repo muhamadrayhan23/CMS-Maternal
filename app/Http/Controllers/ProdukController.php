@@ -29,6 +29,10 @@ class ProdukController extends Controller
             $query->where('is_active', $request->status);
         }
 
+        if ($request->filled('stok')) {
+            $query->where('is_available', $request->stok);
+        }
+
         $produk = $query->paginate(10)->withQueryString();;
 
         return view('admin.produk.kelola_produk', compact('produk'));
@@ -51,6 +55,10 @@ class ProdukController extends Controller
 
         if ($request->status !== null && $request->status !== '') {
             $query->where('is_active', $request->status);
+        }
+
+        if ($request->filled('stok')) {
+            $query->where('is_available', $request->stok);
         }
 
         $produk = $query->paginate(8);

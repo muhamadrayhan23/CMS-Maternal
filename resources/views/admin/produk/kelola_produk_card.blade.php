@@ -11,7 +11,7 @@
                 </h2>
                 <div class="flex items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-gray-300 text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
 
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +23,7 @@
                         <span class="hidden md:inline font-sans">Trash</span>
                     </a>
                     <a href="{{ route('produk.index') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-gray-800 text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.87">
@@ -35,7 +35,7 @@
                         <span class="hidden md:inline font-sans">List View</span>
                     </a>
                     <a href="{{ route('produk.kelola_card') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-gray-700 text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
                         <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -69,7 +69,7 @@
                         <span class="hidden md:inline font-sans">Grid View</span>
                     </a>
                     <a href="{{ route('produk.create') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-gray-300 text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
@@ -116,21 +116,47 @@
                             </svg>
                         </div>
                     </div>
+
+                    <div class="relative w-28 md:w-72">
+                        <select name="stok" onchange="this.form.submit()"
+                            class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                            <option value="">Stok</option>
+                            <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>
+                                Available
+                            </option>
+                            <option value="0" {{ request('stok') === '0' ? 'selected' : '' }}>
+                                Unavailable
+                            </option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="black" stroke-width="2">
+                                <path
+                                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
 
         @if (session('success'))
             <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: @json(session('success')),
-                        timer: 2000,
-                        showConfirmButton: true
-                    })
-                })
+                document.addEventListener('DOMContentLoaded', function() {
+                    const successRestore = "{{ session('success') }}"
+                    if (successRestore) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: successRestore,
+                            showConfirmButton: true,
+
+                            customClass: {
+                                confirmButton: '!bg-green-800'
+                            }
+                        });
+                    }
+                });
             </script>
         @endif
 
@@ -288,8 +314,8 @@
 
                                         <input type="hidden" name="page" value="{{ request('page') }}">
 
-                                        <button type="button" onclick="confirmDelete('hapus-{{ $p->id_product }}')"
-                                            class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                        <button type="button"
+                                            class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -308,9 +334,16 @@
 
                         </div>
                         <div class="p-4 flex flex-col flex-1">
-                            <p class="text-sm text-gray-600 line-clamp-2 mb-1">
-                                {{ $p->desc }}
+                            <p class="text-sm text-gray-600 line-clamp-2 mb-1" title="{{ $p->desc }}">
+                                {{ Str::limit($p->desc, 60) }}
                             </p>
+
+                            <div class="mt-auto">
+                                <div class="font-semibold text-lg">
+                                    Rp {{ number_format($p->price, 0, ',', '.') }}
+                                </div>
+                            </div>
+
                             <div class="meta text-gray-800">
 
                                 @if ($p->updated_by && $p->updated_at)
@@ -329,12 +362,6 @@
                                     </div>
                                 @endif
 
-                            </div>
-
-                            <div class="mt-auto">
-                                <div class="font-semibold text-sm">
-                                    Rp {{ number_format($p->price, 0, ',', '.') }}
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -389,18 +416,38 @@
             }
         })
 
-        window.confirmDelete = (formId) => {
-            Swal.fire({
-                text: 'This product will be moved to trash. Are you sure?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Delete',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(formId).submit()
-                }
-            })
-        }
+        document.querySelectorAll('.btn-hapus').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'Delete Product?',
+                    text: 'This product will go into the trash. Are you sure?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel',
+                    showCloseButton: true,
+                    buttonsStyling: false,
+
+                    reverseButtons: false,
+
+                    customClass: {
+                        popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                        title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                        htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
+
+                        actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+
+                        confirmButton: 'flex-1 !bg-red-600 !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-red-700 transition-all !m-0 !outline-none !shadow-none',
+                        cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-black transition-all !m-0 !outline-gray-600 !shadow-none',
+                        closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit();
+                    }
+                });
+            });
+        });
     </script>
 @endsection

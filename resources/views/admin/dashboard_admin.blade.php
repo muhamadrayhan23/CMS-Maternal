@@ -190,7 +190,7 @@
             </ul>
         </div>
     </section>
-    <<<<<<< HEAD=======<script type="module">
+    <script type="module">
         document.addEventListener('DOMContentLoaded', function() {
             if (!window.Swal) return;
 
@@ -230,5 +230,4 @@
         });
     </script>
 
-    >>>>>>> 31472ad2068f5aca7fc0f6b2382023749ae921ed
 @endsection
