@@ -5,25 +5,25 @@
 {{-- NAV MANAGE --}}
 <div class="space-y-4 font-sans">
     <div class="flex items-center justify-between">
-        <h2 class="text-lg md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
+        <h2 class="text-md md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
             Manage Banners
         </h2>
 
         <div class="flex items-center gap-2">
             <a href="{{ route('Btrash') }}" class="flex items-center gap-2 px-2 md:px-3 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                 </svg>
                 <span class="hidden md:inline">Trash</span>
             </a>
             <a href="{{ route ('Bhome') }}" class="flex items-center gap-2 px-2 md:px-3 py-2 text-sm font-medium text-white bg-[#333333] border border-[#333333] rounded-md transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="19" cy="19" r="1"/><circle cx="5" cy="19" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="19" cy="5" r="1"/><circle cx="5" cy="5" r="1"/>
                 </svg>
                  <span class="hidden md:inline">All Banner</span>
             </a>
             <a href="{{ route('addB') }}" class="flex items-center gap-2 px-2 md:px-3 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M5 12h14"/><path d="M12 5v14"/>
                 </svg>
                 <span class="hidden md:inline">Add New Banner</span>
@@ -33,7 +33,7 @@
 
     {{-- SEARCH & FILTER --}}
     <div class="flex flex-row items-center gap-2 w-full">
-        <div class="relative flex-[4] md:flex-5">
+        <div class="relative flex-4 md:flex-5">
             <div >
             <input id="liveSearch" type="text" placeholder="Search Banners" name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
             </div>       
@@ -117,12 +117,12 @@
             //alert info delete berhasil iyes
             document.addEventListener('DOMContentLoaded', function() {
 
-            const successMessage = "{{ session('success') }}";
+            const success = "{{ session('success') }}";
 
-            if (successMessage) {
+            if (success) {
                 Swal.fire({
                     title: 'Success!',
-                    text: successMessage,
+                    text: success,
                     showConfirmButton: true,
                     
                     customClass:{

@@ -12,10 +12,13 @@
 <body class="bg-[#f4f4f4] font-sans ">
     
     @php
-        $active = ' bg-[#333333] text-white shadow-sm  ';
+        $active = ' bg-[#333333] text-white shadow-sm';
         $default = 'text-gray-600 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200'
     @endphp
-    {{-- <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
+
+
+    {{-- buat responsive yah hambeger di atas enih--}}
+    <div class=" md:hidden flex items-center justify-between p-2 bg-[#f4f4f4] border-b border-gray-200 sticky top-0 z-40 shadow">
             <button id="openSidebar" class="p-2 text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
@@ -23,27 +26,25 @@
                 <path d="M3 19h18"/>
                 </svg>
             </button>
-        <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-6 w-auto">
-        <div class="w-10"></div>
-    </div> --}} 
-    {{-- buat responsive yah --}}
+        <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-8 w-auto px-5">
+    </div> 
+    
 
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden md:hidden transition-opacity duration-300" ></div>
 
-
-    {{-- Sidebar Container Atas --}}
     <div id="sidebar" class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
         
-        {{-- 1. BAGIAN LOGO --}}
-        <div class="flex items-center justify-center px-6 h-16">
-            <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="mt-4 h-8 w-auto">
-            <button id="closeSidebar" class="md:hidden p-2 text-gray-400 hover:text-black">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-            </svg>
-        </button>
-        </div>
+        {{-- LOGO --}}
+    <div class="flex flex-row items-center px-6 h-16 w-full ">
+    <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="ml-4 md:ml-5 md:mt-4 h-8 w-auto">
+    <button id="closeSidebar" class="ml-7 p-2 text-gray-400 hover:text-black md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+    </button>
+    </div>
 
-        {{-- Fitur --}}
+        
         <ul class="list-none px-6 m-4 space-y-1 flex-1 overflow-y-auto">
             {{-- Dashboard --}}
             <li class="mb-2">
@@ -131,7 +132,7 @@
 
         {{-- bagian bawah kecilin yah kata sipa --}}
         <div class="p-6 space-y-4">
-            {{-- Quick Access Card --}}
+            {{-- Quick access card --}}
             <div class="border border-[#D9DEE3] rounded-xl p-3 bg-gray-50">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="font-semibold text-sm">Quick access</h3>
@@ -169,3 +170,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function (){
+            const sidebar = document.getElementById('sidebar')
+            const overlay = document.getElementById('sidebarOverlay')
+            const openBtn = document.getElementById('openSidebar')
+            const closeBtn = document.getElementById('closeSidebar')
+            
+
+
+            function toggleSidebar(isOpen){
+                if(isOpen){
+                    //buat geser sidebar nya yakk
+                sidebar.classList.remove('-translate-x-full')
+                overlay.classList.remove('hidden')
+                document.body.style.overflow = 'hidden'
+                }
+                else {
+                    //overlay 
+                sidebar.classList.add('-translate-x-full')
+                overlay.classList.add('hidden')
+                document.body.style.overflow = 'auto'
+                }
+
+                
+            }
+
+            openBtn.addEventListener('click', () => toggleSidebar(true))
+            closeBtn.addEventListener('click', () => toggleSidebar(false))
+
+            overlay.addEventListener('click', () => toggleSidebar(false))
+        })
+    </script>

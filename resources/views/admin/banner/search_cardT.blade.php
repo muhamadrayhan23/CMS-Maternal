@@ -51,7 +51,8 @@
                 </div>
             </div>
         </div>
-    @empty
+        
+        @empty
         <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
             @if ($search)
             <span class="font-bold">"{{ $search }}"</span> not found.
