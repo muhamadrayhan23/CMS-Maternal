@@ -87,10 +87,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-between items-center mt-6 text-gray-600">
-                    <div class="text-xs">By <span
-                            class="font-semibold text-gray-700">{{ $b->user->name ?? 'Admin' }}</span></div>
-                    <div class="text-xs">Created At {{ $b->created_at->format('Y-m-d') }}</div>
+                <div class="flex justify-between items-center mt-3 text-gray-600">
+                    <div class="text-xs">By <span class="font-semibold text-gray-700">{{ $b->creator->name ?? 'User tidak ditemukan' }}</span></div>
+                     <div class="text-xs">Created At {{ $b->created_at->format('Y-m-d') }}</div>
                 </div>
             </div>
         </div>
