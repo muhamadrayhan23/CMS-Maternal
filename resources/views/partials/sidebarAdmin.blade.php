@@ -16,7 +16,7 @@
         $default =
             'text-gray-600 border-l-4 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200';
     @endphp
-    <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
+    {{-- <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
         <button id="openSidebar" class="p-2 text-gray-600">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -28,7 +28,7 @@
         </button>
         <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-6 w-auto">
         <div class="w-10"></div>
-    </div>
+    </div> --}}
     {{-- buat responsive yah --}}
 
 
