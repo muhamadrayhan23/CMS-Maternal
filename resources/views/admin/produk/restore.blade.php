@@ -81,10 +81,10 @@
 
             <form method="GET" action="{{ route('produk.restore') }}" id="filterForm">
                 <div class="relative flex-1">
-                    <div class="md:col-span-9 relative bg-gray-100">
+                    <div class="col-span-6 sm:col-span-7 relative">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
                             oninput="submitFilter()"
-                            class="w-full px-4 py-2 pr-10 rounded bg-gray-100 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
+                            class="w-full px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none" />
                         <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
@@ -118,30 +118,32 @@
             <div class="bg-white rounded-xl shadow overflow-visible">
                 <table class="w-full text-sm table-fixed">
                     <thead class="text-gray-600 font-bold font-sans text-center bg-gray-100">
-                        <tr>
-                            <th class="p-4 w-40">Deleted At</th>
-                            <th class="p-4 w-40">Deleted By</th>
-                            <th class="p-4 w-40">Product</th>
-                            <th class="p-4 w-56">Description</th>
-                            <th class="p-4 w-32">Price</th>
-                            <th class="p-4 w-28">Image</th>
-                            <th class="p-4 w-15 text-left">Action</th>
+                        <tr class="hover:bg-gray-50 transition">
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Deleted At</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Deleted By</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Product</th>
+                            <th class="p-4 w-44 hidden md:table-cell">Description</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Price</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Image</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Action</th>
                         </tr>
                     </thead>
 
                     <tbody class="text-gray-700 font-sans text-center">
                         @forelse ($produk as $p)
                             <tr class="hover:bg-gray-50">
-                                <td class="p-4">{{ $p->deleted_at }}</td>
-                                <td class="p-4">{{ $p->deleter?->name ?? '-' }}</td>
-                                <td class="p-4 font-medium">{{ $p->product_name }}</td>
-                                <td class="p-4">
+                                <td class="p-2 text-xs md:text-sm break-words align-top">{{ $p->deleted_at }}</td>
+                                <td class="p-2 text-xs md:text-sm break-words align-top">{{ $p->deleter?->name ?? '-' }}
+                                </td>
+                                <td class="p-2 text-xs md:text-sm break-words align-top">{{ $p->product_name }}</td>
+                                <td class="p-4 hidden md:text-sm md:p-4 md:w-44 md:table-cell">
                                     <p class="line-clamp-2" title="{{ $p->desc }}">
                                         {{ Str::limit($p->desc, 60) }}
                                     </p>
                                 </td>
-                                <td class="p-4">Rp {{ number_format($p->price, 0, ',', '.') }}</td>
-                                <td class="p-4 text-center">
+                                <td class="p-2 text-xs md:text-sm break-words align-top">Rp
+                                    {{ number_format($p->price, 0, ',', '.') }}</td>
+                                <td class="p-2 text-xs md:text-sm break-words align-top">
                                     @if (optional($p->details->first())->image_product)
                                         <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
                                             class="w-10 h-10 object-cover rounded-lg mx-auto">
@@ -149,9 +151,10 @@
                                         -
                                     @endif
                                 </td>
-                                <td class="p-4 relative overflow-visible text-center">
+                                <td
+                                    class="p-2 text-xs md:text-sm break-words align-top relative overflow-visible text-center">
                                     <button type="button" onclick="toggleMenu(this)"
-                                        class="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded">
+                                        class="inline-flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-full hover:bg-gray-100 active:bg-gray-200 touch-manipulation">
                                         &#8942;
                                     </button>
 
