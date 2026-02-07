@@ -54,7 +54,7 @@
                     <h3 class="font-semibold text-gray-800 mb-4">Product Links</h3>
                     <div id="links" class="space-y-4">
                         <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-                            <hr class="border-gray-200">
+                            <br>
 
                             <input name="link_name[]" placeholder="Link Name"
                                 class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg"
@@ -73,8 +73,8 @@
                     </div>
 
                     <button type="button" onclick="addLink()"
-                        class="mt-3 px-4 py-2 bg-gray-700 text-white rounded-lg text-xs md:text-sm">
-                        + Add Link
+                        class="w-full mt-4 md:mt-5 py-2 text-xs md:text-sm bg-gray-400 text-white rounded-lg hover:bg-gray-700">
+                        Add More Link
                     </button>
                 </div>
 
@@ -82,8 +82,7 @@
                     <h3 class="font-semibold text-gray-800 mb-4">Variants</h3>
                     <div id="detail-wrapper" class="space-y-4">
                         <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-
-                            <hr class="border-gray-200">
+                            <br>
 
                             <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
                                 onchange="previewImage(this)"
@@ -106,8 +105,8 @@
                     </div>
 
                     <button type="button" onclick="addRow()"
-                        class="mt-3 px-4 py-2 bg-gray-700 text-white rounded-lg text-xs md:text-sm">
-                        + Add Variant
+                        class="w-full mt-4 md:mt-5 py-2 text-xs md:text-sm bg-gray-400 text-white rounded-lg hover:bg-gray-700">
+                        Add More Variant
                     </button>
                 </div>
             </form>
@@ -117,8 +116,7 @@
         function addLink() {
             document.getElementById('links').insertAdjacentHTML('beforeend', `
                 <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-            <hr class="border-gray-200">
-
+                    <br>
             <input name="link_name[]" placeholder="Link Name"
                 class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm bg-[#F9FAFB] border rounded-lg" required>
 
@@ -139,8 +137,7 @@
         function addRow() {
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
                 <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-            <hr class="border-gray-200">
-
+                    <br>
             <input type="file" name="image_product[]" accept="image/*"
                 onchange="previewImage(this)"
                 class="block w-full text-xs md:text-sm">

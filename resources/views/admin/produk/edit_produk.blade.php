@@ -62,9 +62,8 @@
                     <div id="links" class="space-y-4">
                         @foreach ($produk->links ?? [null] as $link)
                             <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-
                                 <br>
-                                <hr class="border-gray-200">
+
                                 @if ($link)
                                     <input type="hidden" name="link_id[]" value="{{ $link->id_link_produk }}">
                                 @endif
@@ -97,9 +96,7 @@
 
                         @foreach ($produk->details ?? [null] as $detail)
                             <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-
                                 <br>
-                                <hr class="border-gray-200">
 
                                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
 
@@ -127,7 +124,7 @@
 
                     <button type="button" onclick="addRow()"
                         class="w-full mt-4 md:mt-5 py-2 text-xs md:text-sm bg-gray-400 text-white rounded-lg hover:bg-gray-700">
-                        Add More Attribute
+                        Add More Variant
                     </button>
 
                 </div>
@@ -139,7 +136,6 @@
             document.getElementById('links').insertAdjacentHTML('beforeend', `
                 <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
                 <br>
-                <hr class="border-gray-200">
                 <input name="link_name[]" value="{{ $link->link_name ?? '' }}" placeholder="Link Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
                 <input name="link_address[]" value="{{ $link->link_address ?? '' }}" placeholder="Link Address"  class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
                 <button type="button" onclick="removeLink(this)" class="absolute top-2 right-2 md:top-3 md:right-3 w-6 h-6 md:w-7 md:h-7 text-xs md:text-sm bg-red-500 text-white rounded-full flex items-center justify-center"> ✖ </button>
@@ -154,7 +150,6 @@
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
                 <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
                 <br>
-                <hr class="border-gray-200">
                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
                 <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp" class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
                 <input name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}" placeholder="Variant Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
