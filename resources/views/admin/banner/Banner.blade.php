@@ -31,18 +31,6 @@
         </div>
     </div>
 
-    {{-- SEARCH & FILTER --}}
-    <div class="flex flex-row items-center gap-2 w-full">
-        <div class="relative flex-4 md:flex-5">
-            <div >
-            <input id="liveSearch" type="text" placeholder="Search Banners" name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
-            </div>       
-            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400">
-                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-                </svg>
-            </div>
-        </div>
 
 
         {{-- SEARCH & FILTER --}}
@@ -140,7 +128,7 @@
 
         //ALERT DELETE YA ENIH
 
-        //alert info delete berhasil iyes
+        //alert Succes
         document.addEventListener('DOMContentLoaded', function() {
 
             const success = "{{ session('success') }}";
@@ -149,9 +137,12 @@
                 Swal.fire({
                     title: 'Success!',
                     text: success,
+                    width : '320px',
                     showConfirmButton: true,
                     
                     customClass:{
+                        popup : 'rounded-3xl p-4 shadow-lg',
+                        title : 'text-xl font-bold',
                         confirmButton : '!bg-green-800'
                     }
                 });
@@ -168,7 +159,7 @@
                                 showCancelButton: true,
                                 confirmButtonText: 'Yes',
                                 cancelButtonText: 'Cancel',
-                                showCloseButton: true,
+                                showCloseButton: false,
                                 buttonsStyling: false,
                         
                                 reverseButtons: false, 
