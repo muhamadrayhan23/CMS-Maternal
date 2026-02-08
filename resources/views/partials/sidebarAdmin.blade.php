@@ -13,38 +13,59 @@
 
     @php
         $active = ' bg-[#333333] text-white shadow-sm';
-        $default = 'text-gray-600 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200'
+        $default = 'text-gray-600 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200';
     @endphp
+    <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200 sticky top-0 z-[60]">
+        <button id="openSidebar" class="p-2 text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
+                <path d="M3 5h18" />
+                <path d="M3 12h18" />
+                <path d="M3 19h18" />
+            </svg>
+        </button>
+        <img src="{{ asset('img/logo/logoblack.png') }}" alt="Logo" class="h-6 w-auto">
+        <div class="w-10"></div>
+    </div>
+    {{-- buat responsive yah --}}
 
 
-    {{-- buat responsive yah hambeger di atas enih--}}
-    <div class=" md:hidden flex items-center justify-between p-2 bg-[#f4f4f4] border-b border-gray-200 sticky top-0 z-40 shadow">
-            <button id="openSidebar" class="p-2 text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
-                <path d="M3 5h18"/><path d="M3 12h18"/>
-                <path d="M3 19h18"/>
-                </svg>
-            </button>
+    {{-- buat responsive yah hambeger di atas enih --}}
+    <div
+        class=" md:hidden flex items-center justify-between p-2 bg-[#f4f4f4] border-b border-gray-200 sticky top-0 z-40 shadow">
+        <button id="openSidebar" class="p-2 text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
+                <path d="M3 5h18" />
+                <path d="M3 12h18" />
+                <path d="M3 19h18" />
+            </svg>
+        </button>
         <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-8 w-auto px-5">
-    </div> 
-    
-
-<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden md:hidden transition-opacity duration-300" ></div>
-
-    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
-        
-        {{-- LOGO --}}
-    <div class="flex flex-row items-center px-6 h-16 w-full ">
-    <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="ml-4 md:ml-5 md:mt-4 h-8 w-auto">
-    <button id="closeSidebar" class="ml-7 p-2 text-gray-400 hover:text-black md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-        </svg>
-    </button>
     </div>
 
-        
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden md:hidden transition-opacity duration-300">
+    </div>
+
+    <div id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
+
+        {{-- LOGO --}}
+        <div class="flex flex-row items-center px-6 h-16 w-full ">
+            <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="ml-4 md:ml-5 md:mt-4 h-8 w-auto">
+            <button id="closeSidebar" class="ml-7 p-2 text-gray-400 hover:text-black md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
+            </button>
+        </div>
+
+
         <ul class="list-none px-6 m-4 space-y-1 flex-1 overflow-y-auto">
             {{-- Dashboard --}}
             <li class="mb-2">
@@ -72,7 +93,7 @@
             {{-- Product --}}
             <li class="mb-2">
                 <a href="{{ route('produk.index') }}"
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index', 'produk.create','produk.edit','produk.restore','produk.kelola_card','produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('produk.index', 'produk.create', 'produk.edit', 'produk.restore', 'produk.kelola_card', 'produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -178,29 +199,28 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function (){
+        document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar')
             const overlay = document.getElementById('sidebarOverlay')
             const openBtn = document.getElementById('openSidebar')
             const closeBtn = document.getElementById('closeSidebar')
-            
 
 
-            function toggleSidebar(isOpen){
-                if(isOpen){
+
+            function toggleSidebar(isOpen) {
+                if (isOpen) {
                     //buat geser sidebar nya yakk
-                sidebar.classList.remove('-translate-x-full')
-                overlay.classList.remove('hidden')
-                document.body.style.overflow = 'hidden'
-                }
-                else {
+                    sidebar.classList.remove('-translate-x-full')
+                    overlay.classList.remove('hidden')
+                    document.body.style.overflow = 'hidden'
+                } else {
                     //overlay 
-                sidebar.classList.add('-translate-x-full')
-                overlay.classList.add('hidden')
-                document.body.style.overflow = 'auto'
+                    sidebar.classList.add('-translate-x-full')
+                    overlay.classList.add('hidden')
+                    document.body.style.overflow = 'auto'
                 }
 
-                
+
             }
 
             openBtn.addEventListener('click', () => toggleSidebar(true))
