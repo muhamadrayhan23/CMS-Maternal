@@ -5,11 +5,11 @@
 @section('content')
     <div class="bg-gray-100 rounded-xl p-5 ">
         <div class="space-y-4 font-sans">
-            <div class="flex items-center justify-between">
+            <div class="mt-3 md:mt-0 md:flex md:items-center md:justify-between">
                 <h2 class="text-lg md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
-                    MANAGE
-                    PRODUCTS
+                    MANAGE PRODUCTS
                 </h2>
+
                 <div class="flex items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
                         class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">

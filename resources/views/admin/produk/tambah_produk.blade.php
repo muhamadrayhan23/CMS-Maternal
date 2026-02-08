@@ -82,22 +82,19 @@
                     <h3 class="font-semibold text-gray-800 mb-4">Variants</h3>
                     <div id="detail-wrapper" class="space-y-4">
                         <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-                            <br>
+                            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1500 x 1500 px</p>
 
                             <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
                                 onchange="previewImage(this)"
                                 class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
 
-                            <div class="preview-wrapper hidden relative inline-block mt-2">
+                            <div class="preview-wrapper hidden relative mt-2">
                                 <img class="preview-image w-14 md:w-20 rounded-lg object-cover">
-
                                 <button type="button" onclick="removePreview(this)"
                                     class="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">
                                     ✖
                                 </button>
                             </div>
-
-
 
                             <input name="atribute_name[]" placeholder="Variant Name"
                                 class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
@@ -122,19 +119,12 @@
     <script>
         function addLink() {
             document.getElementById('links').insertAdjacentHTML('beforeend', `
-                <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-                    <br>
-            <input name="link_name[]" placeholder="Link Name"
-                class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
-
-            <input name="link_address[]" placeholder="Link Address"
-                class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
-
-            <button type="button" onclick="removeLink(this)"
-                class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">
-                ✖
-            </button>
-        </div>`)
+            <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
+            <br>
+            <input name="link_name[]" placeholder="Link Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
+            <input name="link_address[]" placeholder="Link Address" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
+            <button type="button" onclick="removeLink(this)" class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">✖</button>
+            </div>`)
         }
 
         function removeLink(btn) {
@@ -143,31 +133,16 @@
 
         function addRow() {
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
-                <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-                    <br>
-            <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
-                onchange="previewImage(this)"
-                class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
-
-            <div class="preview-wrapper hidden relative inline-block mt-2">
-    <img class="preview-image w-14 md:w-20 rounded-lg object-cover">
-
-    <button type="button"
-        onclick="removePreview(this)"
-        class="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">
-        ✖
-    </button>
-</div>
-
-
-            <input name="atribute_name[]" placeholder="Variant Name"
-                class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
-
-            <button type="button" onclick="removeRow(this)"
-                class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">
-                ✖
-            </button>
-        </div>`)
+            <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
+            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1500 x 1500 px</p>
+            <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp" onchange="previewImage(this)" class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
+            <div class="preview-wrapper hidden relative mt-2">
+            <img class="preview-image w-14 md:w-20 rounded-lg object-cover">
+            <button type="button" onclick="removePreview(this)" class="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">✖</button>
+            </div>
+            <input name="atribute_name[]" placeholder="Variant Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
+            <button type="button" onclick="removeRow(this)" class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">✖</button>
+            </div>`)
         }
 
         function previewImage(input) {
