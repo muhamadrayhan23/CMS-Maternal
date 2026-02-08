@@ -4,10 +4,12 @@
 @section('content')
     <div class="bg-white rounded-xl p-5 ">
         <div class="sticky top-0 z-30 bg-white pt-4 pb-3 space-y-4">
-            <div class="md:flex md:items-center md:justify-between">
+
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
-                    Trash
+                    Manage Products
                 </h2>
+
                 <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
                         class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
@@ -137,11 +139,13 @@
                             <tbody class="text-gray-700 font-sans text-center">
                                 @forelse ($produk as $p)
                                     <tr class="hover:bg-gray-50">
-                                        <td class="p-2 text-xs md:text-sm break-words align-top">{{ $p->deleted_at }}</td>
+                                        <td class="p-2 text-xs md:text-sm break-words align-top">{{ $p->deleted_at }}
+                                        </td>
                                         <td class="p-2 text-xs md:text-sm break-words align-top">
                                             {{ $p->deleter?->name ?? '-' }}
                                         </td>
-                                        <td class="p-2 text-xs md:text-sm break-words align-top">{{ $p->product_name }}
+                                        <td class="p-2 text-xs md:text-sm break-words align-top">
+                                            {{ $p->product_name }}
                                         </td>
                                         <td class="p-2 text-xs md:text-sm break-words align-top">
                                             <p class="line-clamp-2" title="{{ $p->desc }}">
