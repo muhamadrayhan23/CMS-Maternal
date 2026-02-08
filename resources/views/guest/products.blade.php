@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="flex flex-row items-center gap-2 w-full px-10 py-5">
-    <div class="relative flex-[4] md:flex-5">
+<div class="flex flex-row items-center gap-2 w-full mx-auto px-4 md:px-10 py-5">
+    <div class="relative flex-4 md:flex-5">
 
         <div>
             <input id="liveSearch" type="text" placeholder="Search Products Here..." name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
@@ -30,11 +30,11 @@
 </div>
 
 <div class="hidden md:block md:px-10">
-    <img src="{{ asset('img/banner.png') }}" alt="" class="w-full rounded-md">
+    <img src="{{ asset('img/banner.png') }}" alt="" class="w-full">
 </div>
 
 
-<div class="mt-2 md:mt-10 lg:mt=10" id="card-product">
+<div class="mx-auto px-4 md:px-10 mt-2 md:mt-10 lg:mt=10" id="card-product">
     @include('guest.searchProducts', ['products' => $products])
 </div>
 

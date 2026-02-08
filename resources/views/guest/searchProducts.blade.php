@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 px-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-4 sm:px-10 mb-10"
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mb-10"
     data-has-more="{{ $products->hasMorePages() ? '1' : '0' }}">
 
     @forelse ($products as $product)
@@ -10,7 +10,7 @@
             <a href="{{ route('detproduct', $product->id_product) }}">
                 <img
                     src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                    class="w-full h-full object-cover rounded-lg">
+                    class="w-full h-full object-cover">
             </a>
 
 
