@@ -46,12 +46,13 @@
                     </div>
                 </div>
                 <div class="flex justify-between items-center mt-3 text-gray-600">
-                    <div class="text-xs">By <span class="font-semibold text-gray-700">{{ $b->user->name ?? 'Admin' }}</span></div>
+                    <div class="text-xs">By <span class="font-semibold text-gray-700">{{ $b->deleter->name ?? 'User tidak di temukan' }}</span></div>
                     <div class="text-xs">Deleted At {{ $b->deleted_at->format('Y-m-d') }}</div>
                 </div>
             </div>
         </div>
-    @empty
+        
+        @empty
         <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
             @if ($search)
             <span class="font-bold">"{{ $search }}"</span> not found.
@@ -62,48 +63,23 @@
 
         <script>
                     // alert confirm restore
-                    document.querySelectorAll('.btn-restore').forEach(button => {
-                    button.addEventListener('click', function(e) {
-                    e.preventDefault(); 
-            
-                    Swal.fire({
-                        title: 'This banner will be moved to trash. Are you sure??',
-                        text: '',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.closest('form').submit();
-                        }
-                        })
-                    });
-                }); 
+                        document.querySelectorAll('.btn-restore').forEach(button => {
+                        button.addEventListener('click', function(e) {
+                        e.preventDefault(); 
+                
+                            
+                        });
+                    }); 
 
 
-                // alert confirm delete
-                    document.querySelectorAll('.btn-hapus-permanent').forEach(button => {
-                    button.addEventListener('click', function(e) {
-                    e.preventDefault(); 
-            
-                    Swal.fire({
-                        title: 'This will permanently delete. Are you sure?',
-                        text: '',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.closest('form').submit();
-                        }
-                        })
-                    });
-                });
-
+                // alert confirm Delete permanent
+                        document.querySelectorAll('.btn-hapus-permanent').forEach(button => {
+                        button.addEventListener('click', function(e) {
+                        e.preventDefault(); 
+                
+                       
+                        });
+                    }); 
            
         </script>
     @endforelse
