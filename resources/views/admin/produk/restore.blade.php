@@ -122,9 +122,9 @@
                             <th class="p-2 text-xs md:text-sm w-28 md:w-40">Deleted At</th>
                             <th class="p-2 text-xs md:text-sm w-28 md:w-40">Deleted By</th>
                             <th class="p-2 text-xs md:text-sm w-28 md:w-40">Product</th>
-                            <th class="p-4 w-44 hidden md:table-cell">Description</th>
+                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Description</th>
                             <th class="p-2 text-xs md:text-sm w-28 md:w-40">Price</th>
-                            <th class="p-2 text-xs md:text-sm w-28 md:w-40">Image</th>
+                            <th class="p-4 w-44 hidden md:table-cell">Image</th>
                             <th class="p-2 text-xs md:text-sm w-28 md:w-40">Action</th>
                         </tr>
                     </thead>
