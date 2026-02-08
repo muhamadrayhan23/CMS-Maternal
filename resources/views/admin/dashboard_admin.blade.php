@@ -194,44 +194,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             if (!window.Swal) return;
 
-<<<<<<< HEAD
             const succes = "{{ session('success_login') }}";
             const error = "{{ session('error_login') }}";
-=======
-        const succes = "{{ session('success_login') }}";
-        const error = "{{ session('error_login') }}";
-        
-        const validationError = "{{ $errors->first() }}"; 
-        
-        let config = null;
-        
-        if (succes) {
-            config = {
-                title: 'Login Successfully!',
-                text: succes !== 'true' ? succes : '',
-                showConfirmButton: false,
-                timer: 3000,       
-            };
-        } else if (error || validationError) { 
-            config = { 
-                title: 'Login Failed!',
-                text: (error ===  'true' || !error ) ? validationError : error,
-                showConfirmButton: true,
-                confirmButtonColor: '#d33',
-            };
-        } 
-        
-        if (config) {
-            window.Swal.fire({
-                ...config,
-                width: '350px',
-                padding: '3rem 1rem',
-                borderRadius: '20px',
-            });
-        }
-    }); 
-</script>
->>>>>>> imadev
 
             const validationError = "{{ $errors->first() }}";
 
@@ -239,7 +203,6 @@
 
             if (succes) {
                 config = {
-                    icon: 'success',
                     title: 'Login Successfully!',
                     text: succes !== 'true' ? succes : '',
                     showConfirmButton: false,
@@ -247,7 +210,6 @@
                 };
             } else if (error || validationError) {
                 config = {
-                    icon: 'error',
                     title: 'Login Failed!',
                     text: (error === 'true' || !error) ? validationError : error,
                     showConfirmButton: true,
@@ -264,5 +226,40 @@
                 });
             }
         });
+    </script>
+
+    {{-- yang dibawah ini dikomen dulu takutnya penting kalo enggak hapus aja --}}
+
+    {{-- const validationError = "{{ $errors->first() }}";
+
+    let config = null;
+
+    if (succes) {
+    config = {
+    icon: 'success',
+    title: 'Login Successfully!',
+    text: succes !== 'true' ? succes : '',
+    showConfirmButton: false,
+    timer: 3000,
+    };
+    } else if (error || validationError) {
+    config = {
+    icon: 'error',
+    title: 'Login Failed!',
+    text: (error === 'true' || !error) ? validationError : error,
+    showConfirmButton: true,
+    confirmButtonColor: '#d33',
+    };
+    }
+
+    if (config) {
+    window.Swal.fire({
+    ...config,
+    width: '350px',
+    padding: '3rem 1rem',
+    borderRadius: '20px',
+    });
+    }
+    }); --}}
     </script>
 @endsection
