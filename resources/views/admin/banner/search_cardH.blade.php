@@ -4,10 +4,7 @@
             <div class="relative h-52 md:h-60 rounded-t-2xl overflow-hidden">
                 <img src="{{ asset($b->banner_image) }}" class="w-full h-full object-cover" alt="Banner">
                 <div class="absolute top-3 left-3">
-                    <span
-                        class="px-3 py-1 text-[10px] uppercase {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
-                        <span
-                            class="px-3 py-1 text-[10px] {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
+                        <span class="px-3 py-1 text-[10px] {{ $b->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }} rounded-full">
                             {{ $b->is_active ? 'Published' : 'Unpublished' }}
                         </span>
                 </div>
@@ -87,10 +84,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-between items-center mt-6 text-gray-600">
-                    <div class="text-xs">By <span
-                            class="font-semibold text-gray-700">{{ $b->user->name ?? 'Admin' }}</span></div>
-                    <div class="text-xs">Created At {{ $b->created_at->format('Y-m-d') }}</div>
+                <div class="flex justify-between items-center mt-3 text-gray-600">
+                    <div class="text-xs">By <span class="font-semibold text-gray-700">{{ $b->creator->name ?? 'User tidak ditemukan' }}</span></div>
+                     <div class="text-xs">Created At {{ $b->created_at->format('Y-m-d') }}</div>
                 </div>
             </div>
         </div>
@@ -107,7 +103,7 @@
             @endif
         </div>
 
-        <script>
+        {{-- <script>
             document.querySelectorAll('.btn-hapus').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -116,7 +112,6 @@
                     Swal.fire({
                         title: 'This banner will be moved to trash. Are you sure??',
                         text: '',
-                        icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
@@ -128,7 +123,7 @@
                     })
                 });
             });
-        </script>
+        </script> --}}
     @endforelse
 </div>
 <div class="mt-6">
