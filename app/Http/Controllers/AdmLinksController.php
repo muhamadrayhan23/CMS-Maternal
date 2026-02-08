@@ -11,6 +11,7 @@ class AdmLinksController extends Controller
     //tampil semua link
     public function index(Request $request)
     {
+
         session(['link_back' => url()->current()]);
         $search = $request->search;
 
@@ -28,7 +29,9 @@ class AdmLinksController extends Controller
             return view('admin.link.tablelink', compact('links'))->render();
         }
 
-        return view('admin.link.index', compact('links', 'announcements'));
+        $type = $request->query('type');
+
+        return view('admin.link.index', compact('links', 'announcements', 'type'));
     }
 
 
@@ -267,7 +270,7 @@ class AdmLinksController extends Controller
     {
         $search = $request->search;
 
-        $announcement = Announcement::onlyTrashed()
+        $announcements = Announcement::onlyTrashed()
             ->when($search, function ($q) use ($search) {
                 $q->where('announcement_name', 'like', "%{$search}%");
             })
@@ -276,10 +279,10 @@ class AdmLinksController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin.link.tableannouncementtrash', compact('announcement'))->render();
+            return view('admin.link.announcementtrash', compact('announcements'))->render();
         }
 
-        return view('admin.link.trash', compact('announcement'));
+        return view('admin.link.trash', compact('announcements'));
     }
 
     public function restoreProsesAnnouncement($id)

@@ -74,13 +74,14 @@
                     </a>
                 </div>
             </div>
-            @empty
-            <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
-                <p>No announcements</p>
-            </div>
-            @endforelse
         </div>
-        <div class="mt-6">
-
+        @empty
+        <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
+            <p>No announcements</p>
         </div>
+        @endforelse
     </div>
+</div>
+<div class="mt-6">
+
+</div>

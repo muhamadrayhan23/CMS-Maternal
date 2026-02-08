@@ -1,4 +1,4 @@
-<div class="bg-white rounded-md border border-gray-200 mt-5 p-5 overflow-visible">
+<div id="linkTableContainer" class="bg-white rounded-md border border-gray-200 mt-5 p-5 overflow-visible">
     <div class="bg-white rounded-md border border-gray-200 overflow-visible">
         <table class="w-full text-sm table-fixed">
             <thead>
@@ -76,6 +76,9 @@
             @endforelse
         </table>
     </div>
+</div>
+<div class="mt-3">
+    {{ $links->withQueryString()->links() }}
 </div>
 
 <script>
