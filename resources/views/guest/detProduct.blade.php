@@ -155,13 +155,17 @@
     <span class="flex-1 h-px bg-gray-300 mx-5"></span>
 </div>
 <div class="mx-auto px-4 md:px-10">
-    <div id="product-cards" class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-16">
+    <div id="product-cards"
+     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+    <div class="transition-all duration-300 hover:scale-[1.03]">
+
         @foreach ($products as $product)
         <div class="aspect-square transition-all duration-300 ease-out hover:scale-105 relative cursor-pointer">
 
             <a href="{{ route('detproduct',  $product['id_product']) }}">
                 <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                    class="w-full h-full object-cover rounded-lg">
+                    class="w-full h-full object-cover rounded-md">
             </a>
 
             @if (!$product->is_available)
