@@ -84,10 +84,6 @@
     </button>
 </div>
 
-
-{{-- =========================
-    PRODUCT SECTION
-========================= --}}
 <div id="product-cards"
     class="relative flex flex-col md:flex-row gap-10 md:gap-20
     px-5 md:px-10 py-14">
@@ -105,7 +101,7 @@
         </p>
 
         <a href="{{ route('products') }}"
-            class="inline-flex items-center px-8 py-3 bg-black text-white rounded-full gap-2 w-fit">
+            class="inline-flex items-center px-8 py-3 bg-black text-white gap-2 w-fit">
             → View More
         </a>
     </div>
@@ -140,7 +136,7 @@
                         <a href="{{ route('detproduct', $product->id_product) }}">
                             <img
                                 src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                                class="w-full h-full object-cover rounded-xl">
+                                class="w-full h-full object-cover">
                         </a>
 
                         @if (!$product->is_available)
@@ -184,7 +180,7 @@
 {{-- =========================
     ABOUT BANNER
 ========================= --}}
-<div class="transition-all duration-700 hover:scale-105">
+<!-- <div class="transition-all duration-700 hover:scale-105">
     <div class="relative w-full overflow-hidden">
         <img src="{{ asset('img/bg_about.png') }}" alt=""
             class="w-full h-[520px] md:h-auto object-cover">
@@ -218,7 +214,40 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="flex flex-col md:flex-row">
+
+    <div class="relative">
+        <img src="{{ asset('img/1.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+
+        <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">
+            <p class="text-white font-sans">
+                Thoughtfully Crafted, Intentionally Made
+            </p>
+            <a href="{{ route('about') }}"
+                class="text-white font-sans underline underline-offset-4">
+                view more
+            </a>
+        </div>
+    </div>
+
+    <div class="relative">
+        <img src="{{ asset('img/2.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+
+        <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">
+            <p class="text-white font-sans">
+                Thoughtfully Crafted, Intentionally Made
+            </p>
+            <a href="{{ route('about') }}"
+                class="text-white font-sans underline underline-offset-4">
+                view more
+            </a>
+        </div>
+    </div>
+
 </div>
+
 
 
 {{-- =========================
