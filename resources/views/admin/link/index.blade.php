@@ -41,7 +41,7 @@
         </div>
 
         <div
-            class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600
+            class="flex-none flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600
                group-hover:bg-blue-600 group-hover:text-white transition">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
                 stroke-width="2">
@@ -66,7 +66,7 @@
         </div>
 
         <div
-            class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-600
+            class="flex-none flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-emerald-600
                group-hover:bg-emerald-600 group-hover:text-white transition">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
                 stroke-width="2">
@@ -148,7 +148,7 @@
 
     </div>
     <div id="linkTableTarget">
-    @include('admin.link.tablelink')
+        @include('admin.link.tablelink')
     </div>
 </div>
 
