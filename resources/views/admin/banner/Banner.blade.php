@@ -61,15 +61,6 @@
                     </svg>
                 </div>
             </div>
-            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" class="text-gray-400">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
-                </svg>
-            </div>
-        </div>
-
             <div class="relative w-28 md:w-72">
                 <select id="filterStatus"
                     class="w-full appearance-none pl-4 pr-10 py-2 text-xs md:text-sm  text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
