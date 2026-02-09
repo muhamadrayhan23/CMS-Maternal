@@ -75,20 +75,20 @@
                     Crafted for Everyday Life
                 </h3>
 
-                <p class="mt-6 text-gray-600 leading-relaxed text-[15.5px]">
+                <p class="mt-6 text-gray-600 leading-relaxed text-[15.5px] text-justify">
                     alttt.craftedgoods was founded in 2026 with a focus on creating thoughtfully crafted bags for modern daily use.
                     We believe a bag should be functional, durable, and visually relevant—designed to support movement without
                     unnecessary complexity. alttt.craftedgoods is committed to crafting dependable goods with purpose—made to last,
                     and made to move with you.
                 </p>
 
-                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px]">
+                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px] text-justify">
                     Every product is shaped through careful design exploration, material selection,
                     and functional refinement. We pay close attention to the details that matter,
                     ensuring each piece delivers reliability and comfort in everyday activities.
                 </p>
 
-                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px]">
+                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px] text-justify">
                         We craft timeless daily wear that prioritizes comfort and sensory connection.
                         Our paracord creations are a tactile sanctuary, a way to reconnect with nature and find calm in a crowded world.
                         Be an Artist, Be You..
