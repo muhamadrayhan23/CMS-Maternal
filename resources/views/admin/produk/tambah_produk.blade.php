@@ -82,7 +82,7 @@
                     <h3 class="font-semibold text-gray-800 mb-4">Variants</h3>
                     <div id="detail-wrapper" class="space-y-4">
                         <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-                            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1500 x 1500 px</p>
+                            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1366 × 768 px</p>
 
                             <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
                                 onchange="previewImage(this)"
@@ -137,7 +137,7 @@
         function addRow() {
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
             <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
-            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1500 x 1500 px</p>
+            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1366 × 768 px</p>
             <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp" onchange="previewImage(this)" class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
             <div class="preview-wrapper hidden relative mt-2">
             <img class="preview-image w-14 md:w-20 rounded-lg object-cover">

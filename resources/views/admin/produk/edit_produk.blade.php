@@ -98,6 +98,8 @@
                             <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
                                 <br>
 
+                                <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1366 × 768 px</p>
+
                                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
 
                                 <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
@@ -167,6 +169,7 @@
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
             <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
             <br>
+            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1366 × 768 px</p>
             <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp" onchange="previewImage(this)" class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
             <div class="preview-wrapper hidden relative mt-2">
             <img class="preview-image w-14 md:w-20 rounded-lg object-cover">
