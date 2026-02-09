@@ -333,7 +333,7 @@
 
                                                 <li>
                                                     <a href="{{ route('produk.edit', $p->id_product) }}"
-                                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -357,7 +357,7 @@
                                                             value="{{ request('page') }}">
 
                                                         <button type="button"
-                                                            class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                                            class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                                 height="18" viewBox="0 0 24 24" fill="none"
                                                                 stroke="currentColor" stroke-width="2"
@@ -377,7 +377,7 @@
 
                                                 <li>
                                                     <a href="{{ route('produk.show', $p->id_product) }}"
-                                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -396,8 +396,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8"
-                                            class="text-center py-10 text-gray-500 bg-white border border-dashed border-gray-300 font-sans ">
+                                        <td colspan="8" class="text-center py-10 text-gray-500 bg-white font-sans ">
                                             @if (request('search'))
                                                 <span class="font-bold">"{{ request('search') }}"</span> not found
                                             @elseif(request()->filled('status'))
