@@ -5,7 +5,7 @@
 <section class="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-10">
     <div class="relative w-full h-[300px] md:h-[500px] overflow-hidden">
         <img
-            src="{{ asset('img/about/about us-4.jpg') }}"
+            src="{{ asset('img/about/about us-3.png') }}"
             alt="Crafted Goods"
             class="w-full h-full object-cover animate-heroZoom"
         >
@@ -119,7 +119,7 @@
 }
 
 .animate-heroZoom {
-    animation: heroZoom 18s ease-in-out forwards;
+    animation: heroZoom 15s ease-in-out forwards;
 }
 </style>
 
