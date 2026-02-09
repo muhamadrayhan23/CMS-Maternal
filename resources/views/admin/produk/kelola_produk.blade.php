@@ -203,8 +203,8 @@
                                                     View Link Produk
                                                 </button>
 
-                                                <ul
-                                                    class=" action-menu hidden fixed absolute w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
+                                                <ul class="action-menu hidden fixed w-40 bg-white rounded-lg shadow-xl z-[9999]"
+                                                    onclick="event.stopPropagation()">
 
                                                     @forelse ($p->links as $link)
                                                         <li>
@@ -258,14 +258,15 @@
                                             </span>
                                         </td>
 
-                                        <td class="p-2 text-xs md:text-sm align-top relative text-center outline-none">
-                                            <button type="button" onclick="toggleMenu(this)"
-                                                class="inline-flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-full hover:bg-gray-100 active:bg-gray-200">
+                                        <td class="relative text-center">
+                                            <button onclick="toggleMenu(this)"
+                                                class="inline-flex w-8 h-8 items-center justify-center rounded-full hover:bg-gray-100">
                                                 &#8942;
                                             </button>
 
-                                            <ul
-                                                class=" action-menu hidden fixed absolute w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
+                                            <ul class="action-menu hidden fixed w-40 bg-white rounded-lg shadow-xl z-[9999]"
+                                                onclick="event.stopPropagation()">
+
                                                 <li>
                                                     <form action="{{ route('produk.toggle', $p->id_product) }}"
                                                         method="POST">
@@ -430,21 +431,45 @@
         }
 
         function toggleMenu(btn) {
+            event.stopPropagation();
 
             const menu = btn.parentElement.querySelector('.action-menu');
-
             document.querySelectorAll('.action-menu').forEach(m => {
                 if (m !== menu) m.classList.add('hidden');
             });
 
-            menu.classList.toggle('hidden');
+            const rect = btn.getBoundingClientRect();
+            menu.classList.remove('hidden');
+
+            const menuWidth = menu.offsetWidth;
+            const menuHeight = menu.offsetHeight;
+            const offsetLeft = 30;
+            const offsetTop = 6;
+
+            let left = rect.left - menuWidth + rect.width - offsetLeft;
+            left = Math.max(8, left);
+            let top;
+
+            const spaceBelow = window.innerHeight - rect.bottom;
+            const spaceAbove = rect.top;
+
+            if (spaceBelow < menuHeight + offsetTop && spaceAbove > menuHeight) {
+                top = rect.top - menuHeight - offsetTop;
+            } else {
+                top = rect.bottom + offsetTop;
+            }
+
+            menu.style.left = left + 'px';
+            menu.style.top = top + 'px';
         }
 
-        document.addEventListener('click', e => {
-            if (!e.target.closest('td')) {
-                document.querySelectorAll('.action-menu').forEach(m => m.classList.add('hidden'));
-            }
+
+
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.action-menu')
+                .forEach(m => m.classList.add('hidden'));
         });
+
         document.querySelectorAll('.btn-hapus').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
