@@ -3,7 +3,6 @@
 @section('content')
     <div class="bg-white overflow-hidden">
 
-        <!-- Carousel Section -->
         <div id="default-carousel" class="relative w-full mb-8 pt-4 px-4 sm:px-10" data-carousel="slide">
             <div class="relative overflow-hidden rounded-1 shadow-lg bg-white">
                 <div class="relative w-full">
@@ -58,7 +57,6 @@
             </div>
         </div>
 
-        <!-- Stay Connected Section -->
         <div class="flex flex-col items-center mb-6 px-4 text-center">
             <h2 class="text-xl md:text-l font-black text-slate-800 tracking-wider uppercase">
                 Stay Connected
@@ -68,8 +66,7 @@
             </p>
         </div>
 
-        <!-- Links Section -->
-        <div class="mx-auto w-full max-w-5xl px-4 sm:px-10 pb-20">
+        <div class="mx-auto w-full max-w-7xl px-4 sm:px-10 pb-20">
             <div class="space-y-4">
                 @foreach ($links as $link)
                     <a href="{{ $link->link_address }}" target="_blank"
