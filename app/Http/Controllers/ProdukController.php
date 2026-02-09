@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
@@ -83,28 +84,54 @@ class ProdukController extends Controller
 
         if ($request->has('atribute_name')) {
 
-            foreach ($request->atribute_name as $i => $name) {
+            foreach ($request->atribute_name as $i => $nameat) {
 
-                if (!$name) continue;
+                $detailId  = $request->detail_id[$i] ?? null;
+                $imageFile = $request->file("image_product.$i");
+                $removeImg = $request->remove_image[$i] ?? 0;
 
-                $imagePath = null;
-                $imageName = null;
-
-                if ($request->hasFile("image_product.$i")) {
-                    $file = $request->file("image_product.$i");
-                    $imageName = $file->getClientOriginalName();
-                    $imagePath = $file->store('produk', 'public');
+                if (!$nameat && !$imageFile) {
+                    continue;
                 }
 
-                ProdukDetail::create([
-                    'id_product' => $product->getKey(),
-                    'atribute_name' => $name,
-                    'image_name' => $imageName,
-                    'image_product' => $imagePath,
-                ]);
+                $data = [
+                    'atribute_name' => $nameat,
+                ];
+
+                if ($detailId && $removeImg == 1) {
+
+                    $detail = ProdukDetail::find($detailId);
+
+                    if ($detail && $detail->image_product) {
+                        Storage::disk('public')->delete($detail->image_product);
+                        $data['image_product'] = null;
+                        $data['image_name'] = null;
+                    }
+                }
+
+                if ($imageFile) {
+                    if ($detailId) {
+                        $detail = ProdukDetail::find($detailId);
+                        if ($detail && $detail->image_product) {
+                            Storage::disk('public')->delete($detail->image_product);
+                        }
+                    }
+
+                    $data['image_name'] = $imageFile->getClientOriginalName();
+                    $data['image_product'] = $imageFile->store('produk', 'public');
+                }
+
+                if ($detailId) {
+
+                    ProdukDetail::where('id', $detailId)->update($data);
+                } else {
+
+                    ProdukDetail::create(array_merge($data, [
+                        'id_product' => $product->id_product,
+                    ]));
+                }
             }
         }
-
         if ($request->filled('link_address')) {
 
             foreach ($request->link_address as $i => $address) {

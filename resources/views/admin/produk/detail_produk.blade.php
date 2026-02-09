@@ -125,6 +125,35 @@
                 document.getElementById('attributeText').textContent = attr;
             }
         }
+
+        function changeImage(el) {
+            document.getElementById('mainImage').src = el.src;
+
+            document.querySelectorAll('.thumb').forEach(img => {
+                img.classList.remove('border-black');
+                img.classList.add('border-gray-300');
+            });
+
+            el.classList.remove('border-gray-300');
+            el.classList.add('border-black');
+
+            const attr = el.dataset.attribute;
+            if (attr) {
+                document.getElementById('attributeText').textContent = attr;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainImg = document.getElementById('mainImage');
+            const thumbs = document.querySelectorAll('.thumb');
+
+            thumbs.forEach(img => {
+                if (img.src === mainImg.src) {
+                    img.classList.remove('border-gray-300');
+                    img.classList.add('border-black');
+                }
+            });
+        });
     </script>
 
     </div>

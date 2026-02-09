@@ -1,15 +1,16 @@
 @extends('layout.admin')
-@section('title', isset($produk) ? 'Edit Product' : 'Add New Product')
+@section('title', 'Edit Product')
 
 @section('content')
     <div class="h-screen" id="wrapp">
-        <div class="p-10">
-            <form action="{{ isset($produk) ? route('produk.update', $produk->id_product) : route('produk.store') }}"
-                method="POST" enctype="multipart/form-data">
+        <div class="p-4 md:p-10">
+            <form action="{{ route('produk.update', $produk) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($produk))
                     @method('PUT')
                 @endif
+
+                <input type="hidden" name="redirect_to" id="redirect_to" value="index">
 
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
@@ -22,88 +23,109 @@
                                 <path d="M19 12H5" />
                             </svg>
                         </a>
-                        <h1 class="text-sm font-bold uppercase">
-                            {{ isset($produk) ? 'Edit Product' : 'Add New Product' }}
+                        <h1 class="text-sm md:text-base font-bold uppercase">
+                            Edit Product
                         </h1>
                     </div>
 
-                    <button class="px-8 py-2 text-white bg-[#2D2D2A] rounded-lg hover:bg-black">
-                        {{ isset($produk) ? 'Update' : 'Save' }}
+                    <button type="submit" onclick="confirmSave()"
+                        class="px-4 py-2 md:px-8 md:py-2 text-sm md:text-base text-white bg-[#2D2D2A] rounded-lg hover:bg-black">
+                        Submit
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-sm space-y-4 mb-8">
+                <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg space-y-3 md:space-y-4 mb-6 md:mb-8">
                     <div class="mb-4">
                         <label class="text-sm font-semibold text-gray-800">
                             Product Overview <span class="text-red-500">*</span>
                         </label>
                     </div>
                     <input name="product_name" value="{{ isset($produk) ? $produk->product_name : '' }}"
-                        placeholder="Product Name" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" required>
+                        placeholder="Product Name"
+                        class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                        required>
 
-                    <textarea name="desc" class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Description" required>{{ isset($produk) ? $produk->desc : '' }}</textarea>
+                    <textarea name="desc"
+                        class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                        placeholder="Description" required>{{ isset($produk) ? $produk->desc : '' }}</textarea>
 
                     <input type="text" id="price" name="price"
-                        class="w-full px-4 py-3 bg-gray-50 border rounded-lg" placeholder="Price"
+                        class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                        placeholder="Price"
                         value="{{ isset($produk) ? 'Rp ' . number_format($produk->price, 0, ',', '.') : '' }}" required
                         oninput="formatRupiah(this)">
 
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-sm mb-8">
+                <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg space-y-3 md:space-y-4 mb-6 md:mb-8">
                     <h3 class="font-semibold text-gray-800 mb-4">Product Links</h3>
                     <div id="links" class="space-y-4">
                         @foreach ($produk->links ?? [null] as $link)
-                            <div class="link-row border rounded-xl p-5 space-y-3 relative">
-
+                            <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
                                 <br>
-                                <hr>
+
                                 @if ($link)
                                     <input type="hidden" name="link_id[]" value="{{ $link->id_link_produk }}">
                                 @endif
 
                                 <input name="link_name[]" value="{{ $link->link_name ?? '' }}" placeholder="Link Name"
-                                    class="w-full px-4 py-2 border rounded-lg" required>
+                                    class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                                    required>
 
                                 <input name="link_address[]" value="{{ $link->link_address ?? '' }}"
-                                    placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
+                                    placeholder="Link Address"
+                                    class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                                    required>
 
                                 <button type="button" onclick="removeLink(this)"
-                                    class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">
+                                    class="absolute top-2 right-2 md:top-3 md:right-3 w-6 h-6 md:w-7 md:h-7 text-xs md:text-sm bg-red-500 text-white rounded-full flex items-center justify-center">
                                     ✖
                                 </button>
                             </div>
                         @endforeach
                     </div>
                     <button type="button" onclick="addLink()"
-                        class="w-full mt-5 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-700">
+                        class="w-full mt-4 md:mt-5 py-2 text-xs md:text-sm bg-gray-400 text-white rounded-lg hover:bg-gray-700">
                         Add More Link
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-sm">
-
-                    <h3 class="font-semibold text-gray-800 mb-4">Attributes</h3>
-
+                <div class="bg-white rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg space-y-3 md:space-y-4 mb-6 md:mb-8">
+                    <h3 class="font-semibold text-gray-800 mb-4">Variants</h3>
                     <div id="detail-wrapper" class="space-y-4">
 
                         @foreach ($produk->details ?? [null] as $detail)
-                            <div class="detail-row border rounded-xl p-5 space-y-3 relative">
+                            <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
+                                <br>
 
                                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
 
                                 <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
-                                    class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
+                                    onchange="previewImage(this)"
+                                    class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
 
                                 @if ($detail && $detail->image_product)
-                                    <img src="{{ asset('storage/' . $detail->image_product) }}" class="w-20">
+                                    <div class="preview-wrapper relative mt-2">
+                                        <img src="{{ asset('storage/' . $detail->image_product) }}"
+                                            class="preview-image w-14 md:w-20 rounded-lg object-cover">
+
+                                        <button type="button" onclick="removePreview(this)"
+                                            class="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">
+                                            ✖
+                                        </button>
+
+                                        <input type="hidden" name="remove_image[]" value="0" class="remove-flag">
+                                    </div>
                                 @endif
 
+
                                 <input name="atribute_name[]" value="{{ $detail->atribute_name ?? '' }}"
-                                    placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
+                                    placeholder="Variant Name"
+                                    class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                                    required>
 
                                 <button type="button" onclick="removeRow(this)"
-                                    class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center"
+                                    class="absolute top-2 right-2 md:top-3 md:right-3 w-6 h-6 md:w-7 md:h-7 text-xs md:text-sm bg-red-500 text-white rounded-full flex items-center justify-center"
                                     @required(true)>
                                     ✖
                                 </button>
@@ -113,24 +135,23 @@
                     </div>
 
                     <button type="button" onclick="addRow()"
-                        class="w-full mt-5 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-700">
-                        Add More Attribute
+                        class="w-full mt-4 md:mt-5 py-2 text-xs md:text-sm bg-gray-400 text-white rounded-lg hover:bg-gray-700">
+                        Add More Variant
                     </button>
 
                 </div>
-
             </form>
         </div>
     </div>
     <script>
         function addLink() {
             document.getElementById('links').insertAdjacentHTML('beforeend', `
-                <div class="link-row border rounded-xl p-5 space-y-3 relative">
-                <input name="link_name[]" placeholder="Link Name" class="w-full px-4 py-2 border rounded-lg" required>
-                <input name="link_address[]" placeholder="Link Address" class="w-full px-4 py-2 border rounded-lg" required>
-                <button type="button" onclick="removeLink(this)"
-                class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
-                </div>`)
+            <div class="link-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
+            <br>
+            <input name="link_name[]" placeholder="Link Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
+            <input name="link_address[]" placeholder="Link Address" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
+            <button type="button" onclick="removeLink(this)" class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">✖</button>
+            </div>`)
         }
 
         function removeLink(btn) {
@@ -139,12 +160,16 @@
 
         function addRow() {
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
-                <div class="detail-row border rounded-xl p-5 space-y-3 relative">
-                <input type="file" name="image_product[]" required class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
-                <input name="atribute_name[]" placeholder="Attribute Name" class="w-full px-4 py-2 border rounded-lg" required>
-                <button type="button" onclick="removeRow(this)"
-                class="absolute top-3 right-3 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center">✖</button>
-                </div>`)
+            <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
+            <br>
+            <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp" onchange="previewImage(this)" class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
+            <div class="preview-wrapper hidden relative mt-2">
+            <img class="preview-image w-14 md:w-20 rounded-lg object-cover">
+            <button type="button" onclick="removePreview(this)" class="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">✖</button>
+            </div>
+            <input name="atribute_name[]" placeholder="Variant Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
+            <button type="button" onclick="removeRow(this)" class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">✖</button>
+            </div>`)
         }
 
         function removeRow(btn) {
@@ -158,30 +183,46 @@
             el.value = angka ? 'Rp ' + format : '';
         }
 
-        // document.addEventListener('change', function(e) {
-        //     if (e.target.type !== 'file') return;
+        function previewImage(input) {
+            const file = input.files[0];
+            if (!file) return;
 
-        //     const file = e.target.files[0];
-        //     if (!file) return;
+            const row = input.closest('.detail-row');
+            let wrapper = row.querySelector('.preview-wrapper');
+            const img = wrapper.querySelector('.preview-image');
 
-        //     const isLink = e.target.name.includes('link_image');
-        //     const requiredWidth = isLink ? 200 : 1200;
-        //     const requiredHeight = isLink ? 200 : 1200;
+            const reader = new FileReader();
+            reader.onload = e => {
+                img.src = e.target.result;
+                wrapper.classList.remove('hidden');
 
-        //     const img = new Image();
-        //     img.src = URL.createObjectURL(file);
+                // reset flag hapus kalau upload ulang
+                const removeFlag = wrapper.querySelector('.remove-flag');
+                if (removeFlag) removeFlag.value = 0;
+            };
 
-        //     img.onload = () => {
-        //         if (img.width !== requiredWidth || img.height !== requiredHeight) {
-        //             alert(
-        //                 isLink ?
-        //                 'Ukuran foto link harus 200 x 200 px' :
-        //                 'Ukuran foto produk harus 1200 × 1200 px'
-        //             );
-        //             e.target.value = '';
-        //         }
-        //         URL.revokeObjectURL(img.src);
-        //     };
-        // });
+            reader.readAsDataURL(file);
+        }
+
+
+        function removePreview(btn) {
+            const row = btn.closest('.detail-row');
+            const wrapper = btn.closest('.preview-wrapper');
+            const img = wrapper.querySelector('.preview-image');
+            const inputFile = row.querySelector('input[type="file"]');
+            const removeFlag = wrapper.querySelector('.remove-flag');
+
+            // reset input file
+            if (inputFile) inputFile.value = '';
+
+            // hapus gambar
+            img.src = '';
+            wrapper.classList.add('hidden');
+
+            // kalau gambar dari DB → tandai mau dihapus
+            if (removeFlag) {
+                removeFlag.value = 1;
+            }
+        }
     </script>
 @endsection
