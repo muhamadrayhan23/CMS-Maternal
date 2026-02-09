@@ -83,6 +83,7 @@
 
 
 
+
 {{-- CARD BANNER --}}
 <div id="bannerContainer" class="mt-5">
     @include('admin.banner.search_cardH')
@@ -171,13 +172,13 @@
                 Swal.fire({
                     title: 'Success!',
                     text: success,
-                    width : '320px',
+                    width: '320px',
                     showConfirmButton: true,
 
-                    customClass:{
-                        popup : 'rounded-3xl p-4 shadow-lg',
-                        title : 'text-xl font-bold',
-                        confirmButton : '!bg-green-800'
+                    customClass: {
+                        popup: 'rounded-3xl p-4 shadow-lg',
+                        title: 'text-xl font-bold',
+                        confirmButton: '!bg-green-800'
                     }
                 });
             })

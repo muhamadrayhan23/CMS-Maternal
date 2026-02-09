@@ -110,7 +110,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'users.*.name' => 'required|string|max:100',
             'users.*.email' => 'required|email|max:255|unique:users,email',
-            'users.*.password' => 'required|string|min:8',
+            'users.*.password' => 'required|string|min:8|confirmed',
         ],
         [
             'users.*.name.required' => 'Name is required',
@@ -122,6 +122,7 @@ class UserController extends Controller
 
             'users.*.password.required' => 'Password is required',
             'users.*.password.min' => 'Password must be at least 8 characters',
+            'users.*.password.confirmed' => 'Password confirmation does not match',
         ]);
 
         foreach ($validated['users'] as $user) {
@@ -150,7 +151,11 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8',
+            'password' => 'nullable|string|min:8|confirmed',
+        ],
+        [
+            'password.confirmed' => 'Password confirmation does not match',
+            'password.min' => 'Password must be at least 8 characters long.'
         ]);
 
         $data = [

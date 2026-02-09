@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 row">
+                    <div class="mb-3 row mt-4">
                         <label for="email" class="text-sm font-medium text-gray-700">Email</label>
                         <div class="col-md-6">
                             <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="email" name="email" value="{{ old('email', $user->email) }}">
@@ -56,16 +56,27 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 row mt-4">
                         <label for="password" class="text-sm font-medium text-gray-700">Password</label>
                         <input
                             type="password"
                             name="password"
+                            id="password"
                             class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
-                            placeholder="Leave blank if you do not want to change the password">
+                            placeholder="Isi jika ingin mengganti password">
                         @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
+                    </div>
+
+                    <div class="mb-3 row mt-4">
+                        <label for="password_confirmation" class="text-sm font-medium text-gray-700">Confirm Password</label>
+                        <input
+                            type="password"
+                            name="password_confirmation"
+                            id="password_confirmation"
+                            class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                            placeholder="Ulangi password baru">
                     </div>
 
                 </div>
