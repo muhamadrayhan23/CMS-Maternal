@@ -81,7 +81,7 @@
                 </div>
             </div>
 
-            <form method="GET" action="{{ route('produk.index') }}" id="filterForm" class="mb-4">
+            <form method="GET" action="{{ route('produk.restore') }}" id="filterForm" class="mb-4">
                 <div class="relative w-full">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search"
                         oninput="submitFilter()"
@@ -168,9 +168,8 @@
                                                 &#8942;
                                             </button>
 
-                                            <ul
-                                                class="action-menu hidden fixed absolute w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
-
+                                            <ul class="action-menu hidden fixed w-40 bg-white rounded-lg shadow-xl z-[9999]"
+                                                onclick="event.stopPropagation()">
                                                 <li>
                                                     <form id="restore-{{ $p->id_product }}"
                                                         action="{{ route('produk.restore.process', $p->id_product) }}"
@@ -259,23 +258,42 @@
             }
 
             function toggleMenu(btn) {
+                event.stopPropagation();
 
                 const menu = btn.parentElement.querySelector('.action-menu');
-
                 document.querySelectorAll('.action-menu').forEach(m => {
                     if (m !== menu) m.classList.add('hidden');
                 });
 
-                menu.classList.toggle('hidden');
-            }
+                const rect = btn.getBoundingClientRect();
+                menu.classList.remove('hidden');
 
-            document.addEventListener('click', e => {
+                const menuWidth = menu.offsetWidth;
+                const menuHeight = menu.offsetHeight;
+                const offsetLeft = 30;
+                const offsetTop = 6;
 
-                if (!e.target.closest('td')) {
-                    document.querySelectorAll('.action-menu')
-                        .forEach(m => m.classList.add('hidden'));
+                let left = rect.left - menuWidth + rect.width - offsetLeft;
+                left = Math.max(8, left);
+                let top;
+
+                const spaceBelow = window.innerHeight - rect.bottom;
+                const spaceAbove = rect.top;
+
+                if (spaceBelow < menuHeight + offsetTop && spaceAbove > menuHeight) {
+                    top = rect.top - menuHeight - offsetTop;
+                } else {
+                    top = rect.bottom + offsetTop;
                 }
 
+                menu.style.left = left + 'px';
+                menu.style.top = top + 'px';
+            }
+
+
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.action-menu')
+                    .forEach(m => m.classList.add('hidden'));
             });
 
             document.querySelectorAll('.btn-restore').forEach(button => {

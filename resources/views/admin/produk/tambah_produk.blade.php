@@ -100,8 +100,9 @@
                                 class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
                                 required>
 
-                            <input type="text" name="variant_price[]" class="..." placeholder="Variant Price"
-                                oninput="formatRupiah(this)">
+                            <input type="text" name="variant_price[]"
+                                class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                                placeholder="Variant Price" oninput="formatRupiah(this)">
 
                             <button type="button" onclick="removeRow(this)"
                                 class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">
@@ -144,7 +145,7 @@
             </div>
             <input name="atribute_name[]" placeholder="Variant Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
             <button type="button" onclick="removeRow(this)" class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">✖</button>
-            <input type="text" name="variant_price[]" class="..." placeholder="Variant Price" oninput="formatRupiah(this)">
+            <input type="text" name="variant_price[]" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" placeholder="Variant Price" oninput="formatRupiah(this)">
             </div>`)
         }
 
