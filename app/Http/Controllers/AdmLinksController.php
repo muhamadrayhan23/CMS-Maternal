@@ -13,22 +13,29 @@ class AdmLinksController extends Controller
     {
         session(['link_back' => url()->current()]);
         $search = $request->search;
-
-        $links = Link::when($search, function ($q) use ($search) {
-            $q->where('link_name', 'like', "%{$search}%");
-        })
-            ->latest()
-            ->paginate(8)
-            ->withQueryString();
-
-        $announcements = Announcement::latest()
-            ->paginate(8);
+        $type = $request->query('type');
 
         if ($request->ajax()) {
+            if ($type == 'announcements') {
+                $announcements = Announcement::when($search, function ($q) use ($search) {
+                    $q->where('announcement_name', 'like', "%{$search}%");
+                })->latest()->paginate(8);
+
+                return view('admin.link.announcement', compact('announcements'))->render();
+            }
+
+            $links = Link::when($search, function ($q) use ($search) {
+                $q->where('link_name', 'like', "%{$search}%");
+            })->latest()->paginate(8);
+
             return view('admin.link.tablelink', compact('links'))->render();
         }
 
-        return view('admin.link.index', compact('links', 'announcements'));
+        // Load data awal untuk tampilan non-AJAX
+        $links = Link::latest()->paginate(8);
+        $announcements = Announcement::latest()->paginate(8);
+
+        return view('admin.link.index', compact('links', 'announcements', 'type'));
     }
 
 
@@ -36,7 +43,6 @@ class AdmLinksController extends Controller
     public function announcement(Request $request)
     {
         $search = $request->search;
-
         $announcements = Announcement::when($search, function ($q) use ($search) {
             $q->where('announcement_name', 'like', "%{$search}%");
         })
@@ -45,11 +51,13 @@ class AdmLinksController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
-            // Gunakan variabel yang sama: announcements
+            // Ini akan mengembalikan potongan HTML tabel saja
             return view('admin.link.announcement', compact('announcements'))->render();
         }
 
-        return view('admin.link.index', compact('announcements'));
+        // Jika bukan AJAX, tampilkan halaman penuh
+        $type = 'announcements';
+        return view('admin.link.index', compact('announcements', 'type'));
     }
 
 
@@ -84,7 +92,7 @@ class AdmLinksController extends Controller
             ]);
         }
 
-        return redirect()->route('homeLink')
+        return redirect()->route('homeLink', ['type' => 'link'])
             ->with('success', 'Links successfully added');
     }
 
@@ -129,8 +137,8 @@ class AdmLinksController extends Controller
             ]);
         }
 
-        return redirect()->route('homeLink')
-            ->with('success', 'Links successfully added');
+        return redirect()->route('homeLink', ['type' => 'announcements'])
+            ->with('success', 'Announcements successfully added');
     }
 
 
@@ -176,7 +184,6 @@ class AdmLinksController extends Controller
         try {
             $request->validate([
                 'announcement_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
-                // PERBAIKAN DISINI: Nama tabel disesuaikan menjadi 'announcement'
                 'announcement_name' => 'required|string|max:100|unique:announcement,announcement_name,' . $announcement->id_announcement . ',id_announcement',
                 'announcement_address' => 'required|string|max:255',
             ]);
@@ -184,7 +191,6 @@ class AdmLinksController extends Controller
             $filename = $announcement->announcement_image;
 
             if ($request->hasFile('announcement_image')) {
-                // Hapus file lama jika ada (opsional tapi disarankan)
                 if ($announcement->announcement_image && file_exists(public_path($announcement->announcement_image))) {
                     unlink(public_path($announcement->announcement_image));
                 }
@@ -195,18 +201,16 @@ class AdmLinksController extends Controller
                 $filename = 'link_pic/' . $newName;
             }
 
-            // Pastikan is_active dikirim dengan benar
             $announcement->update([
                 'announcement_image' => $filename,
                 'announcement_name' => $request->announcement_name,
                 'announcement_address' => $request->announcement_address,
-                'is_active' => $request->is_active, // Ambil langsung dari hidden input
+                'is_active' => $request->is_active, 
             ]);
 
-            return redirect()->route('homeLink')
+            return redirect()->route('homeLink', ['type' => 'announcements'])
                 ->with('success', 'Announcement successfully updated');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Ini untuk menangkap jika validasi gagal
             return back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Error: ' . $e->getMessage()]);
@@ -218,7 +222,7 @@ class AdmLinksController extends Controller
     {
         $link->delete();
 
-        return redirect()->route('homeLink')
+        return redirect()->route('homeLink', ['type' => 'link'])
             ->with('success', 'Link successfully deleted');
     }
 
@@ -227,7 +231,7 @@ class AdmLinksController extends Controller
     {
         $announcement->delete();
 
-        return redirect()->route('homeLink')
+        return redirect()->route('homeLink', ['type' => 'announcements'])
             ->with('success', 'Announcement successfully deleted');
     }
 
@@ -259,7 +263,7 @@ class AdmLinksController extends Controller
         $link->is_active = 0;
 
         $link->restore();
-        return redirect()->route('homeLink')->with('success', 'Link successfully restored');
+        return redirect()->route('homeLink', ['type' => 'link'])->with('success', 'Link successfully restored');
     }
 
     //restore announcement
@@ -267,7 +271,7 @@ class AdmLinksController extends Controller
     {
         $search = $request->search;
 
-        $announcement = Announcement::onlyTrashed()
+        $announcements = Announcement::onlyTrashed()
             ->when($search, function ($q) use ($search) {
                 $q->where('announcement_name', 'like', "%{$search}%");
             })
@@ -276,10 +280,10 @@ class AdmLinksController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin.link.tableannouncementtrash', compact('announcement'))->render();
+            return view('admin.link.announcementtrash', compact('announcements'))->render();
         }
 
-        return view('admin.link.trash', compact('announcement'));
+        return view('admin.link.trash', compact('announcements'));
     }
 
     public function restoreProsesAnnouncement($id)
@@ -289,7 +293,7 @@ class AdmLinksController extends Controller
         $announcement->is_active = 0;
 
         $announcement->restore();
-        return redirect()->route('homeLink')->with('success', 'Announcement successfully restored');
+        return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Announcement successfully restored');
     }
 
 
@@ -298,7 +302,7 @@ class AdmLinksController extends Controller
     {
         Link::withTrashed()->findOrFail($id)->forceDelete();
 
-        return redirect()->route('trashLink')->with('success', 'Link successfully deleted permanently');
+        return redirect()->route('trashLink', ['type' => 'link'])->with('success', 'Link successfully deleted permanently');
     }
 
     //forced delete announcement
@@ -306,7 +310,7 @@ class AdmLinksController extends Controller
     {
         Announcement::withTrashed()->findOrFail($id)->forceDelete();
 
-        return redirect()->route('trashAnnouncement')->with('success', 'Announcement successfully deleted permanently');
+        return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Announcement successfully deleted permanently');
     }
 
     //status banner
@@ -316,7 +320,7 @@ class AdmLinksController extends Controller
         $announcement->is_active = $announcement->is_active ? 0 : 1;
         $announcement->save();
 
-        return back()->with('success', 'Announcement status updated successfully!');
+        return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Announcement status updated successfully!');
     }
 
 
