@@ -3,82 +3,82 @@
 @section('title', 'Product - Grid View')
 
 @section('content')
-    <div class="bg-gray-100 rounded-xl p-5">
+    <div class="bg-gray-100 rounded-xl p-5 ">
         <div class="space-y-4 font-sans">
-            <h2 class="text-lg md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
-                MANAGE PRODUCTS
-            </h2>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
+                    Manage Products
+                </h2>
 
-            <span class="block md:hidden"></span>
+                <div class="flex flex-wrap items-center gap-2">
+                    <a href="{{ route('produk.restore') }}"
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
 
-            <div class="flex items-center gap-2">
-                <a href="{{ route('produk.restore') }}"
-                    class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
-
-                    <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M2.125 4.25002H14.875M13.4583 4.25002V14.1667C13.4583 14.875 12.75 15.5834 12.0417 15.5834H4.95833C4.25 15.5834 3.54167 14.875 3.54167 14.1667V4.25002M5.66667 4.25002V2.83335C5.66667 2.12502 6.375 1.41669 7.08333 1.41669H9.91667C10.625 1.41669 11.3333 2.12502 11.3333 2.83335V4.25002"
-                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-
-                    <span class="hidden md:inline font-sans">Trash</span>
-                </a>
-                <a href="{{ route('produk.index') }}"
-                    class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
-                    <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g opacity="0.87">
+                        <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M9.5 2.375V16.625M2.375 7.125H16.625M2.375 11.875H16.625M3.95833 2.375H15.0417C15.9161 2.375 16.625 3.08388 16.625 3.95833V15.0417C16.625 15.9161 15.9161 16.625 15.0417 16.625H3.95833C3.08388 16.625 2.375 15.9161 2.375 15.0417V3.95833C2.375 3.08388 3.08388 2.375 3.95833 2.375Z"
+                                d="M2.125 4.25002H14.875M13.4583 4.25002V14.1667C13.4583 14.875 12.75 15.5834 12.0417 15.5834H4.95833C4.25 15.5834 3.54167 14.875 3.54167 14.1667V4.25002M5.66667 4.25002V2.83335C5.66667 2.12502 6.375 1.41669 7.08333 1.41669H9.91667C10.625 1.41669 11.3333 2.12502 11.3333 2.83335V4.25002"
                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                        </g>
-                    </svg>
-                    <span class="hidden md:inline font-sans">List View</span>
-                </a>
-                <a href="{{ route('produk.kelola_card') }}"
-                    class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
-                    <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7.03353 2.28335C7.47075 2.28335 7.8252 1.9289 7.8252 1.49168C7.8252 1.05445 7.47075 0.700012 7.03353 0.700012C6.5963 0.700012 6.24186 1.05445 6.24186 1.49168C6.24186 1.9289 6.5963 2.28335 7.03353 2.28335Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M12.5752 2.28335C13.0124 2.28335 13.3669 1.9289 13.3669 1.49168C13.3669 1.05445 13.0124 0.700012 12.5752 0.700012C12.138 0.700012 11.7835 1.05445 11.7835 1.49168C11.7835 1.9289 12.138 2.28335 12.5752 2.28335Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M1.49186 2.28335C1.92909 2.28335 2.28353 1.9289 2.28353 1.49168C2.28353 1.05445 1.92909 0.700012 1.49186 0.700012C1.05464 0.700012 0.700195 1.05445 0.700195 1.49168C0.700195 1.9289 1.05464 2.28335 1.49186 2.28335Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M7.03353 7.82501C7.47075 7.82501 7.8252 7.47057 7.8252 7.03335C7.8252 6.59612 7.47075 6.24168 7.03353 6.24168C6.5963 6.24168 6.24186 6.59612 6.24186 7.03335C6.24186 7.47057 6.5963 7.82501 7.03353 7.82501Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M12.5752 7.82501C13.0124 7.82501 13.3669 7.47057 13.3669 7.03335C13.3669 6.59612 13.0124 6.24168 12.5752 6.24168C12.138 6.24168 11.7835 6.59612 11.7835 7.03335C11.7835 7.47057 12.138 7.82501 12.5752 7.82501Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M1.49186 7.82501C1.92909 7.82501 2.28353 7.47057 2.28353 7.03335C2.28353 6.59612 1.92909 6.24168 1.49186 6.24168C1.05464 6.24168 0.700195 6.59612 0.700195 7.03335C0.700195 7.47057 1.05464 7.82501 1.49186 7.82501Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M7.03353 13.3667C7.47075 13.3667 7.8252 13.0122 7.8252 12.575C7.8252 12.1378 7.47075 11.7833 7.03353 11.7833C6.5963 11.7833 6.24186 12.1378 6.24186 12.575C6.24186 13.0122 6.5963 13.3667 7.03353 13.3667Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M12.5752 13.3667C13.0124 13.3667 13.3669 13.0122 13.3669 12.575C13.3669 12.1378 13.0124 11.7833 12.5752 11.7833C12.138 11.7833 11.7835 12.1378 11.7835 12.575C11.7835 13.0122 12.138 13.3667 12.5752 13.3667Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path
-                            d="M1.49186 13.3667C1.92909 13.3667 2.28353 13.0122 2.28353 12.575C2.28353 12.1378 1.92909 11.7833 1.49186 11.7833C1.05464 11.7833 0.700195 12.1378 0.700195 12.575C0.700195 13.0122 1.05464 13.3667 1.49186 13.3667Z"
-                            stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <span class="hidden md:inline font-sans">Grid View</span>
-                </a>
-                <a href="{{ route('produk.create') }}"
-                    class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
-                    <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
-                            stroke="currentColor" stroke-linejoin="round" />
-                    </svg>
-                    <span class="hidden md:inline font-sans">Add New Product</span>
-                </a>
+                        </svg>
+
+                        <span class="hidden md:inline font-sans">Trash</span>
+                    </a>
+                    <a href="{{ route('produk.index') }}"
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g opacity="0.87">
+                                <path
+                                    d="M9.5 2.375V16.625M2.375 7.125H16.625M2.375 11.875H16.625M3.95833 2.375H15.0417C15.9161 2.375 16.625 3.08388 16.625 3.95833V15.0417C16.625 15.9161 15.9161 16.625 15.0417 16.625H3.95833C3.08388 16.625 2.375 15.9161 2.375 15.0417V3.95833C2.375 3.08388 3.08388 2.375 3.95833 2.375Z"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                        </svg>
+                        <span class="hidden md:inline font-sans">List View</span>
+                    </a>
+                    <a href="{{ route('produk.kelola_card') }}"
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.03353 2.28335C7.47075 2.28335 7.8252 1.9289 7.8252 1.49168C7.8252 1.05445 7.47075 0.700012 7.03353 0.700012C6.5963 0.700012 6.24186 1.05445 6.24186 1.49168C6.24186 1.9289 6.5963 2.28335 7.03353 2.28335Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M12.5752 2.28335C13.0124 2.28335 13.3669 1.9289 13.3669 1.49168C13.3669 1.05445 13.0124 0.700012 12.5752 0.700012C12.138 0.700012 11.7835 1.05445 11.7835 1.49168C11.7835 1.9289 12.138 2.28335 12.5752 2.28335Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M1.49186 2.28335C1.92909 2.28335 2.28353 1.9289 2.28353 1.49168C2.28353 1.05445 1.92909 0.700012 1.49186 0.700012C1.05464 0.700012 0.700195 1.05445 0.700195 1.49168C0.700195 1.9289 1.05464 2.28335 1.49186 2.28335Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M7.03353 7.82501C7.47075 7.82501 7.8252 7.47057 7.8252 7.03335C7.8252 6.59612 7.47075 6.24168 7.03353 6.24168C6.5963 6.24168 6.24186 6.59612 6.24186 7.03335C6.24186 7.47057 6.5963 7.82501 7.03353 7.82501Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M12.5752 7.82501C13.0124 7.82501 13.3669 7.47057 13.3669 7.03335C13.3669 6.59612 13.0124 6.24168 12.5752 6.24168C12.138 6.24168 11.7835 6.59612 11.7835 7.03335C11.7835 7.47057 12.138 7.82501 12.5752 7.82501Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M1.49186 7.82501C1.92909 7.82501 2.28353 7.47057 2.28353 7.03335C2.28353 6.59612 1.92909 6.24168 1.49186 6.24168C1.05464 6.24168 0.700195 6.59612 0.700195 7.03335C0.700195 7.47057 1.05464 7.82501 1.49186 7.82501Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M7.03353 13.3667C7.47075 13.3667 7.8252 13.0122 7.8252 12.575C7.8252 12.1378 7.47075 11.7833 7.03353 11.7833C6.5963 11.7833 6.24186 12.1378 6.24186 12.575C6.24186 13.0122 6.5963 13.3667 7.03353 13.3667Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M12.5752 13.3667C13.0124 13.3667 13.3669 13.0122 13.3669 12.575C13.3669 12.1378 13.0124 11.7833 12.5752 11.7833C12.138 11.7833 11.7835 12.1378 11.7835 12.575C11.7835 13.0122 12.138 13.3667 12.5752 13.3667Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M1.49186 13.3667C1.92909 13.3667 2.28353 13.0122 2.28353 12.575C2.28353 12.1378 1.92909 11.7833 1.49186 11.7833C1.05464 11.7833 0.700195 12.1378 0.700195 12.575C0.700195 13.0122 1.05464 13.3667 1.49186 13.3667Z"
+                                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="hidden md:inline font-sans">Grid View</span>
+                    </a>
+                    <a href="{{ route('produk.create') }}"
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
+                                stroke="currentColor" stroke-linejoin="round" />
+                        </svg>
+                        <span class="hidden md:inline font-sans">Add New Product</span>
+                    </a>
+                </div>
             </div>
 
 
@@ -207,7 +207,7 @@
                                 </button>
 
                                 <div
-                                    class="action-menu hidden absolute right-0 mt-2 w-44 bg-white border overflow-visible rounded-lg shadow-lg z-50 text-left">
+                                    class="action-menu hidden absolute right-0 top-full -mt-12 w-44 bg-white rounded-lg shadow-lg z-[100] text-left">
 
                                     <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
                                         @csrf
@@ -264,7 +264,7 @@
                                     </form>
 
                                     <button onclick="toggleSubMenu(this)"
-                                        class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                        class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -298,7 +298,7 @@
                                     </div>
 
                                     <a href="{{ route('produk.edit', $p->id_product) }}"
-                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
+                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -318,7 +318,7 @@
                                         <input type="hidden" name="page" value="{{ request('page') }}">
 
                                         <button type="button"
-                                            class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                            class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
