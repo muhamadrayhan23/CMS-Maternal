@@ -434,7 +434,6 @@
             event.stopPropagation();
 
             const menu = btn.parentElement.querySelector('.action-menu');
-
             document.querySelectorAll('.action-menu').forEach(m => {
                 if (m !== menu) m.classList.add('hidden');
             });
@@ -443,12 +442,27 @@
             menu.classList.remove('hidden');
 
             const menuWidth = menu.offsetWidth;
+            const menuHeight = menu.offsetHeight;
             const offsetLeft = 30;
+            const offsetTop = 6;
 
-            menu.style.top = rect.bottom + 6 + 'px';
-            menu.style.left = (rect.left - menuWidth + rect.width - offsetLeft) + 'px';
+            let left = rect.left - menuWidth + rect.width - offsetLeft;
+            left = Math.max(8, left);
+            let top;
 
+            const spaceBelow = window.innerHeight - rect.bottom;
+            const spaceAbove = rect.top;
+
+            if (spaceBelow < menuHeight + offsetTop && spaceAbove > menuHeight) {
+                top = rect.top - menuHeight - offsetTop;
+            } else {
+                top = rect.bottom + offsetTop;
+            }
+
+            menu.style.left = left + 'px';
+            menu.style.top = top + 'px';
         }
+
 
 
         document.addEventListener('click', () => {
