@@ -162,7 +162,7 @@
                         </script>
                     @endif
 
-                    <div class="bg-white rounded-xl shadow overflow-visible">
+                    <div class="bg-white rounded-xl overflow-visible">
                         <table class="min-w-[900px] w-full text-sm table-fixed">
                             <thead class="sticky top-0 bg-gray-100 z-10">
                                 <tr class="text-center text-gray-600 font-bold font-sans bg-gray-100">
@@ -258,14 +258,14 @@
                                             </span>
                                         </td>
 
-                                        <td class="p-2 text-xs md:text-sm align-top relative text-center">
-                                            <button type="button" onclick="toggleMenu(this)"
-                                                class="inline-flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-full hover:bg-gray-100 active:bg-gray-200 touch-manipulation">
-                                                &#8942;
-                                            </button>
+                                        <td class="p-2 text-xs md:text-sm align-top relative text-center outline-none">
+                                                <button type="button" onclick="toggleMenu(this)"
+                                                    class="inline-flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-full hover:bg-gray-100 active:bg-gray-200">
+                                                    &#8942;
+                                                </button>
 
-                                            <ul
-                                                class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-40 bg-white border overflow-visible rounded-lg shadow-xl text-left">
+                                                <ul class="action-menu hidden fixed z-[9999] w-40 bg-white border border-none rounded-lg shadow-xl text-left 
+                                                        -translate-x-32 mt-1">
                                                 <li>
                                                     <form action="{{ route('produk.toggle', $p->id_product) }}"
                                                         method="POST">

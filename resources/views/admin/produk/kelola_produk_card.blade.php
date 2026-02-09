@@ -3,7 +3,7 @@
 @section('title', 'Product - Grid View')
 
 @section('content')
-    <div class="bg-gray-100 rounded-xl p-5 ">
+    <div class="bg-gray-100 rounded-xl p-5">
         <div class="space-y-4 font-sans">
             <h2 class="text-lg md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
                 MANAGE PRODUCTS

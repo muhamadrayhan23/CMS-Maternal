@@ -240,44 +240,50 @@
         const viewport = track.parentElement;
         const next = document.getElementById('nextBtn');
         const prev = document.getElementById('prevBtn');
-
         const cards = track.children;
 
-        const cardRect = cards[0].getBoundingClientRect();
-        const cardWidth = cardRect.width;
+        if (cards.length === 0) return;
 
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
+        function updateSlider() {
+            const cardWidth = cards[0].offsetWidth;
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+            const step = cardWidth + gap;
 
-        const viewportWidth = viewport.getBoundingClientRect().width;
-        const visibleCards = Math.floor(viewportWidth / step);
+            const viewportWidth = viewport.offsetWidth;
+            const visibleCards = Math.floor((viewportWidth + gap) / step);
 
-        let index = 0;
-        const totalCards = cards.length;
-        const maxIndex = totalCards - visibleCards;
+            const maxIndex = Math.max(0, cards.length - visibleCards);
 
-        function update() {
-            track.style.transform = `translateX(-${index * step}px)`;
-            prev.classList.toggle('hidden', index === 0);
-            next.classList.toggle('hidden', index >= maxIndex);
+            let currentIndex = parseInt(track.dataset.index || 0);
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+            const move = (newIndex) => {
+                currentIndex = newIndex;
+                track.dataset.index = currentIndex;
+                track.style.transform = `translateX(-${currentIndex * step}px)`;
+                
+                prev.classList.toggle('hidden', currentIndex <= 0);
+                next.classList.toggle('hidden', currentIndex >= maxIndex);
+            };
+
+            if (cards.length <= visibleCards) {
+                prev.classList.add('hidden');
+                next.classList.add('hidden');
+            } else {
+                move(currentIndex);
+            }
+
+            next.onclick = () => { if (currentIndex < maxIndex) move(currentIndex + 1); };
+            prev.onclick = () => { if (currentIndex > 0) move(currentIndex - 1); };
         }
 
-        next.onclick = () => {
-            if (index < maxIndex) {
-                index++;
-                update();
-            }
-        };
+        updateSlider();
 
-        prev.onclick = () => {
-            if (index > 0) {
-                index--;
-                update();
-            }
-        };
-
-        update();
-        window.addEventListener('resize', () => location.reload());
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateSlider, 100);
+        });
     });
 </script>
 
