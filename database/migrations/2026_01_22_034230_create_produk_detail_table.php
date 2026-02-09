@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('image_name');
             $table->string('image_product');
             $table->string('atribute_name');
+            $table->decimal('price', 15, 2);
 
             $table->timestamps();
 

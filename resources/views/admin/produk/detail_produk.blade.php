@@ -6,7 +6,7 @@
     <div class="min-h-screen bg-gray-100">
         <div class="p-4 md:p-10 space-y-6">
             <div class="flex items-center gap-3">
-                <a href="{{ route('produk.index') }}" class="text-gray-800 hover:text-black">
+                <a href="{{ session('produk_back', route('dashboardadmin')) }}" class="text-gray-800 hover:text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m12 19-7-7 7-7" />
@@ -33,7 +33,8 @@
                         @foreach ($produk->details as $detail)
                             @if ($detail->image_product)
                                 <img src="{{ asset('storage/' . $detail->image_product) }}"
-                                    data-attribute="{{ $detail->atribute_name }}" onclick="changeImage(this)"
+                                    data-attribute="{{ $detail->atribute_name }}" data-price="{{ $detail->price }}"
+                                    onclick="changeImage(this)"
                                     class="thumb w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg cursor-pointer border border-gray-300 hover:ring-2 hover:ring-gray-400 transition">
                             @endif
                         @endforeach
@@ -46,7 +47,7 @@
                         <h1 class="text-xl md:text-2xl font-bold">
                             {{ $produk->product_name }}
                         </h1>
-                        <p class="text-lg md:text-xl font-semibold text-gray-800">
+                        <p id="priceText" class="text-lg md:text-xl font-semibold text-gray-800">
                             Rp {{ number_format($produk->price, 0, ',', '.') }}
                         </p>
                     </div>
@@ -110,6 +111,10 @@
     </div>
 
     <script>
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID').format(number);
+        }
+
         function changeImage(el) {
             document.getElementById('mainImage').src = el.src;
             document.querySelectorAll('.thumb').forEach(img => {
@@ -120,28 +125,36 @@
             el.classList.remove('border-gray-300');
             el.classList.add('border-black');
 
-            const attr = el.dataset.attribute;
-            if (attr) {
-                document.getElementById('attributeText').textContent = attr;
+            if (el.dataset.attribute) {
+                document.getElementById('attributeText').textContent = el.dataset.attribute;
+            }
+
+            if (el.dataset.price) {
+                document.getElementById('priceText').textContent =
+                    'Rp ' + formatRupiah(el.dataset.price);
             }
         }
 
-        function changeImage(el) {
-            document.getElementById('mainImage').src = el.src;
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainImg = document.getElementById('mainImage');
+            const thumbs = document.querySelectorAll('.thumb');
 
-            document.querySelectorAll('.thumb').forEach(img => {
-                img.classList.remove('border-black');
-                img.classList.add('border-gray-300');
+            thumbs.forEach(img => {
+                if (img.src === mainImg.src) {
+                    img.classList.remove('border-gray-300');
+                    img.classList.add('border-black');
+
+                    if (img.dataset.attribute) {
+                        document.getElementById('attributeText').textContent = img.dataset.attribute;
+                    }
+
+                    if (img.dataset.price) {
+                        document.getElementById('priceText').textContent =
+                            'Rp ' + formatRupiah(img.dataset.price);
+                    }
+                }
             });
-
-            el.classList.remove('border-gray-300');
-            el.classList.add('border-black');
-
-            const attr = el.dataset.attribute;
-            if (attr) {
-                document.getElementById('attributeText').textContent = attr;
-            }
-        }
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const mainImg = document.getElementById('mainImage');

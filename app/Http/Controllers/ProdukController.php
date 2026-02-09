@@ -84,6 +84,7 @@ class ProdukController extends Controller
 
         if ($request->has('atribute_name')) {
 
+            $variantPrices = $request->variant_price ?? [];
             foreach ($request->atribute_name as $i => $nameat) {
 
                 $detailId  = $request->detail_id[$i] ?? null;
@@ -94,8 +95,13 @@ class ProdukController extends Controller
                     continue;
                 }
 
+                $variantPrice = isset($variantPrices[$i])
+                    ? preg_replace('/[^0-9]/', '', $variantPrices[$i])
+                    : null;
+
                 $data = [
                     'atribute_name' => $nameat,
+                    'price'        => $variantPrice,
                 ];
 
                 if ($detailId && $removeImg == 1) {
@@ -165,7 +171,7 @@ class ProdukController extends Controller
 
         $produk->update([
             'product_name' => $request->product_name,
-            'price' => $price,
+            'price'        => $price,
             'desc' => $request->desc,
             'updated_by'   => auth()->id(),
         ]);
@@ -182,6 +188,7 @@ class ProdukController extends Controller
 
         if ($request->has('atribute_name')) {
 
+            $variantPrices = $request->variant_price ?? [];
             foreach ($request->atribute_name as $i => $nameat) {
 
                 $detailId = $request->detail_id[$i] ?? null;
@@ -191,8 +198,13 @@ class ProdukController extends Controller
                     continue;
                 }
 
+                $variantPrice = isset($variantPrices[$i]) && $variantPrices[$i] !== ''
+                    ? preg_replace('/[^0-9]/', '', $variantPrices[$i])
+                    : $price;
+
                 $data = [
                     'atribute_name' => $nameat,
+                    'price'        => $variantPrice,
                 ];
 
                 if ($imageFile) {
