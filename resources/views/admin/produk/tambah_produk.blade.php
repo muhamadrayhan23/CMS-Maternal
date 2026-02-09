@@ -105,7 +105,6 @@
                                 ✖
                             </button>
                         </div>
-
                     </div>
 
                     <button type="button" onclick="addRow()"
