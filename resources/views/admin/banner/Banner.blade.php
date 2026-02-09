@@ -38,9 +38,9 @@
             <div class="relative flex-[4] md:flex-5">
 
                 <div>
-                    <input id="liveSearch" type="text" placeholder="Search Banners" name="search"
+                    <input id="liveSearch" type="text" placeholder="Search banners" name="search"
                         value="{{ request('search') }}"
-                        class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
+                        class="w-full pl-4 pr-10 py-1 md:py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -53,7 +53,7 @@
 
             <div class="relative w-28 md:w-72">
                 <select id="filterStatus"
-                    class="w-full appearance-none pl-4 pr-10 py-2 text-xs md:text-sm  text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
+                    class="w-full appearance-none pl-4 pr-10 py-1.5 md:py-2 text-xs md:text-sm  text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
                     <option value=""> All status </option>
                     <option value="0">Unpublished</option>
                     <option value="1">Published</option>
@@ -159,7 +159,7 @@
                                 showCancelButton: true,
                                 confirmButtonText: 'Yes',
                                 cancelButtonText: 'Cancel',
-                                showCloseButton: false,
+                                showCloseButton: true,
                                 buttonsStyling: false,
                         
                                 reverseButtons: false, 
