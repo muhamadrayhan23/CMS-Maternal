@@ -80,7 +80,9 @@
             document.querySelectorAll('.action-menu')
                 .forEach(m => m.classList.add('hidden'));
         }
-    });
+    })
+
+
     // search 
     const searchInput = document.getElementById('liveSearch');
     const container = document.getElementById('bannerContainer');
@@ -105,16 +107,14 @@
     //alert info delete berhasil iyes
     document.addEventListener('DOMContentLoaded', function() {
 
-        const successRestore = "{{ session('success') }}"
+        const success = "{{ session('success') }}"
 
         if (success) {
             Swal.fire({
                 title: 'Success!',
                 text: success,
-                width: '320px',
                 showConfirmButton: true,
                 confirmButtonText: 'Close',
-
                 customClass: {
                     popup: 'rounded-3xl p-4 shadow-lg',
                     title: 'text-xl font-bold',
@@ -177,7 +177,7 @@
                 buttonsStyling: false,
 
                 reverseButtons: false,
-
+                
                 customClass: {
                     // Kontainer Utama
                     popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
