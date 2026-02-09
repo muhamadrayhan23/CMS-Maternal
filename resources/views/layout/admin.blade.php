@@ -30,7 +30,8 @@
                     title: 'Success!',
                     text: success,
                     showConfirmButton: true,
-                    confirmButtonText: 'Close',
+                    confirmButtonText : 'Close'
+
 
                     customClass: {
                         popup: 'rounded-[2rem] !p-6 md:!p-10 shadow-2xl border-none w-[250px] md:min-w-[550px]',
@@ -39,7 +40,7 @@
                     }
                 });
             }
-            // alert confirm Logout
+           // ALERT CONFIRM LOG OUT
             document.querySelectorAll('.btn-logout').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
