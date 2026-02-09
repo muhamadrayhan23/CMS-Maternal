@@ -204,7 +204,7 @@
                                                 </button>
 
                                                 <ul
-                                                    class="action-menu hidden absolute z-50 right-0 top-full mt-2 w-64 bg-white border rounded-lg shadow-xl max-h-60 overflow-y-auto">
+                                                    class=" action-menu hidden fixed absolute w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
 
                                                     @forelse ($p->links as $link)
                                                         <li>
@@ -265,7 +265,7 @@
                                             </button>
 
                                             <ul
-                                                class=" action-menu hidden fixed bottom-6 right-35 md:bottom-auto md:top-100 md:right-50 w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
+                                                class=" action-menu hidden fixed absolute w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
                                                 <li>
                                                     <form action="{{ route('produk.toggle', $p->id_product) }}"
                                                         method="POST">

@@ -14,7 +14,7 @@ class ProdukDetail extends Model
         'image_name',
         'image_product',
         'atribute_name',
-        'desc',
+        'price',
     ];
 
 

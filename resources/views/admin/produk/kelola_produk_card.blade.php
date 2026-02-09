@@ -12,7 +12,7 @@
 
                 <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
 
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@
                         <span class="hidden md:inline font-sans">Trash</span>
                     </a>
                     <a href="{{ route('produk.index') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.87">
@@ -36,7 +36,7 @@
                         <span class="hidden md:inline font-sans">List View</span>
                     </a>
                     <a href="{{ route('produk.kelola_card') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
                         <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -70,7 +70,7 @@
                         <span class="hidden md:inline font-sans">Grid View</span>
                     </a>
                     <a href="{{ route('produk.create') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
@@ -207,7 +207,7 @@
                                 </button>
 
                                 <div
-                                    class="action-menu hidden absolute right-0 top-full -mt-12 w-44 bg-white rounded-lg shadow-lg z-[100] text-left">
+                                    class="action-menu hidden absolute right-0 bottom-full -mt-12 w-44 bg-white rounded-lg shadow-lg z-[100] text-left">
 
                                     <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
                                         @csrf
@@ -263,42 +263,47 @@
                                         </button>
                                     </form>
 
-                                    <button onclick="toggleSubMenu(this)"
-                                        class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M5.99967 11.3334H4.66634C3.78229 11.3334 2.93444 10.9822 2.30932 10.3571C1.6842 9.73198 1.33301 8.88414 1.33301 8.00008C1.33301 7.11603 1.6842 6.26818 2.30932 5.64306C2.93444 5.01794 3.78229 4.66675 4.66634 4.66675H5.99967M9.99967 4.66675H11.333C12.2171 4.66675 13.0649 5.01794 13.69 5.64306C14.3152 6.26818 14.6663 7.11603 14.6663 8.00008C14.6663 8.88414 14.3152 9.73198 13.69 10.3571C13.0649 10.9822 12.2171 11.3334 11.333 11.3334H9.99967M5.33301 8.00008H10.6663"
-                                                stroke="#0E0F11" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
-                                        View Links
-                                    </button>
+                                    <div class="relative">
+                                        <button onclick="toggleSubMenu(this)"
+                                            class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M5.99967 11.3334H4.66634C3.78229 11.3334 2.93444 10.9822 2.30932 10.3571C1.6842 9.73198 1.33301 8.88414 1.33301 8.00008C1.33301 7.11603 1.6842 6.26818 2.30932 5.64306C2.93444 5.01794 3.78229 4.66675 4.66634 4.66675H5.99967M9.99967 4.66675H11.333C12.2171 4.66675 13.0649 5.01794 13.69 5.64306C14.3152 6.26818 14.6663 7.11603 14.6663 8.00008C14.6663 8.88414 14.3152 9.73198 13.69 10.3571C13.0649 10.9822 12.2171 11.3334 11.333 11.3334H9.99967M5.33301 8.00008H10.6663"
+                                                    stroke="#0E0F11" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                            View Links
+                                        </button>
 
-                                    <div class="sub-menu hidden border-t">
-                                        @forelse ($p->links as $link)
-                                            <a href="{{ $link->link_address }}" target="_blank"
-                                                class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
+                                        <div
+                                            class="sub-menu hidden absolute top-0 right-full ml-2 w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
+                                            @forelse ($p->links as $link)
+                                                <a href="{{ $link->link_address }}" target="_blank"
+                                                    class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
 
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-                                                    <path d="m21 3-9 9" />
-                                                    <path d="M15 3h6v6" />
-                                                </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path
+                                                            d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                                                        <path d="m21 3-9 9" />
+                                                        <path d="M15 3h6v6" />
+                                                    </svg>
 
-                                                <span class="break-all text-sm">
-                                                    {{ $link->link_name }}
-                                                </span>
-                                            </a>
-                                        @empty
-                                            <li class="px-3 py-2 text-gray-400">Tidak ada link</li>
-                                        @endforelse
+                                                    <span class="break-all text-sm">
+                                                        {{ $link->link_name }}
+                                                    </span>
+                                                </a>
+                                            @empty
+                                                <li class="px-3 py-2 text-gray-400">Tidak ada link</li>
+                                            @endforelse
+                                        </div>
                                     </div>
 
                                     <a href="{{ route('produk.edit', $p->id_product) }}"
-                                        class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
+                                        class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round"
@@ -318,7 +323,7 @@
                                         <input type="hidden" name="page" value="{{ request('page') }}">
 
                                         <button type="button"
-                                            class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
+                                            class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -332,6 +337,19 @@
                                             <span>Delete</span>
                                         </button>
                                     </form>
+
+                                    <a href="{{ route('produk.show', $p->id_product) }}"
+                                        class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-eye-icon lucide-eye">
+                                            <path
+                                                d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
+                                        <span>Detail</span>
+                                    </a>
                                 </div>
                             </div>
 
