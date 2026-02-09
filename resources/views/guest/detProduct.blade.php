@@ -13,7 +13,7 @@
 
         <div class="flex flex-col gap-4">
 
-            <nav class="flex items-center justify-between text-xs md:text-sm text-gray-400 md:mt-6">
+            <nav class="flex items-center justify-between text-xs md:text-sm text-gray-400 md:mt-10">
                 <div>
                     @foreach ($breadcrumbs as $breadcrumb)
                     @if (!$loop->last)
@@ -41,7 +41,7 @@
                         src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                         class="w-full h-full object-cover object-center">
                 </div>
-                <div class="order-2 md:order-1 relative self-center">
+                <div class="order-2 md:order-1 relative self-center px-4">
                     <button id="thumb-prev-desktop"
                         class="hidden md:flex absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -51,16 +51,16 @@
                     </button>
 
                     <button id="thumb-prev-mobile"
-                        class="md:hidden absolute left-0 top-1/2 -translate-y-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
+                        class="md:hidden mx-3 absolute left-0 top-1/2 -translate-y-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="m15 18-6-6 6-6" />
                         </svg>
                     </button>
 
-                    <div id="thumbs"
-                        class="flex flex-row md:flex-col gap-3 w-full md:w-auto max-w-full max-h-[520px]
-                        overflow-x-auto md:overflow-y-auto items-center md:items-start px-5 py-2">
+                    <div id="thumbs" class="flex flex-row md:flex-col gap-3 max-w-[370px] md:max-w-none
+                    max-h-none md:max-h-[520px] overflow-x-auto md:overflow-y-auto items-center md:items-start
+                    px-1 py-2">
 
                         @foreach ($product->details as $index => $detail)
                         <button
@@ -79,7 +79,7 @@
                     </div>
 
                     <button id="thumb-next-mobile"
-                        class="md:hidden absolute right-0 top-1/2 -translate-y-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
+                        class="md:hidden absolute mx-3 right-0 top-1/2 -translate-y-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                             viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="m9 18 6-6-6-6" />
