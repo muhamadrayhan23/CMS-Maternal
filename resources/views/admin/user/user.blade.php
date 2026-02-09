@@ -20,7 +20,7 @@
                         <path d="M3 6h18" />
                         <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                     </svg>
-                    Trash
+                    <span class="hidden md:inline">Trash</span>
                 </a>
                 <a href="{{ route('homeUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] hover:bg-black border border-gray-300 rounded-md transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -35,20 +35,20 @@
                         <circle cx="19" cy="5" r="1" />
                         <circle cx="5" cy="5" r="1" />
                     </svg>
-                    All Users
+                    <span class="hidden md:inline">All Users</span>
                 </a>
                 <a href="{{ route('createUser') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
                     </svg>
-                    Add New User
+                    <span class="hidden md:inline">Add New User</span>
                 </a>
             </div>
         </div>
 
         {{-- search filter --}}
-        <div class="relative flex-1">
+        <div class="relative flex-[4] md:flex-5">
             <div>
                 <input id="liveSearch" type="text" placeholder="Search users" name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
             </div>

@@ -26,7 +26,7 @@ $type = request()->query('type');
                         <path d="M3 6h18" />
                         <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                     </svg>
-                    Trash
+                    <span class="hidden md:inline">Trash</span>
                 </a>
                 <a href="{{ route('homeLink', ['type' => 'link']) }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 hover:bg-gray-50  rounded-md transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -41,14 +41,14 @@ $type = request()->query('type');
                         <circle cx="19" cy="5" r="1" />
                         <circle cx="5" cy="5" r="1" />
                     </svg>
-                    All Links
+                    <span class="hidden md:inline">All Links</span>
                 </a>
                 <a href="{{ route('createLink') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
                     </svg>
-                    Add New Link
+                    <span class="hidden md:inline">Add New Link</span>
                 </a>
             </div>
         </div>
@@ -94,7 +94,7 @@ $type = request()->query('type');
                         <path d="M3 6h18" />
                         <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                     </svg>
-                    Trash
+                    <span class="hidden md:inline">Trash</span>
                 </a>
                 <a href="{{ route('homeLink', ['type' => 'announcements']) }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50  rounded-md transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -109,14 +109,14 @@ $type = request()->query('type');
                         <circle cx="19" cy="5" r="1" />
                         <circle cx="5" cy="5" r="1" />
                     </svg>
-                    All Announcements
+                    <span class="hidden md:inline">All Announcements</span>
                 </a>
                 <a href="{{ route('createAnnouncement') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
                     </svg>
-                    Add New Announcement
+                    <span class="hidden md:inline">Add New Announcement</span>
                 </a>
             </div>
         </div>
@@ -143,7 +143,6 @@ $type = request()->query('type');
 @endif
 
 <script>
-    // Gunakan fungsi setupLiveSearch yang Anda miliki di index
     function setupLiveSearch(inputId, containerId) {
         const input = document.getElementById(inputId);
         const container = document.getElementById(containerId);
@@ -166,7 +165,6 @@ $type = request()->query('type');
         }
     }
 
-    // Jalankan search untuk keduanya
     setupLiveSearch('linkSearch', 'linkTableContainer');
     setupLiveSearch('announcementSearch', 'announcementTableContainer');
 </script>

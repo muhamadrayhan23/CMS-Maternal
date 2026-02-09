@@ -33,10 +33,10 @@
 
         <div class="space-y-2">
             <h3 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition">
-                Management Banner Discount
+                Management Announcements
             </h3>
             <p class="text-sm text-gray-500">
-                Create and manage promotional discount banners
+                Create and manage promotional announcements for special events
             </p>
         </div>
 
@@ -106,7 +106,7 @@
                         <path d="M3 6h18" />
                         <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                     </svg>
-                    Trash
+                    <span class="hidden md:inline">Trash</span>
                 </a>
                 <a href="{{ route('homeLink', ['type' => 'link']) }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] hover:bg-black border border-gray-300 rounded-md transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -121,14 +121,14 @@
                         <circle cx="19" cy="5" r="1" />
                         <circle cx="5" cy="5" r="1" />
                     </svg>
-                    All Links
+                    <span class="hidden md:inline">All Links</span>
                 </a>
                 <a href="{{ route('createLink') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
                     </svg>
-                    Add New Link
+                    <span class="hidden md:inline">Add New Link</span>
                 </a>
             </div>
         </div>
@@ -147,7 +147,9 @@
         </div>
 
     </div>
+    <div id="linkTableTarget">
     @include('admin.link.tablelink')
+    </div>
 </div>
 
 <!-- Announcement Section -->
@@ -165,7 +167,7 @@
                     </svg>
                 </a>
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
-                    MANAGE ANNOUNCEMENTS
+                    MANAGE ANNOUNCEMENT
                 </h2>
             </div>
 
@@ -178,7 +180,7 @@
                         <path d="M3 6h18" />
                         <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                     </svg>
-                    Trash
+                    <span class="hidden md:inline">Trash</span>
                 </a>
                 <a href="{{ route('homeLink', ['type' => 'announcement']) }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] hover:bg-black border border-gray-300 rounded-md transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -193,14 +195,14 @@
                         <circle cx="19" cy="5" r="1" />
                         <circle cx="5" cy="5" r="1" />
                     </svg>
-                    All Announcements
+                    <span class="hidden md:inline">All Announcements</span>
                 </a>
                 <a href="{{ route('createAnnouncement') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
                     </svg>
-                    Add New Announcement
+                    <span class="hidden md:inline">Add New Announcement</span>
                 </a>
             </div>
         </div>
@@ -208,7 +210,7 @@
         {{-- search filter --}}
         <div class="relative flex-1">
             <div>
-                <input id="announcementSearch" type="text" placeholder="Search link name" name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
+                <input id="announcementSearch" type="text" placeholder="Search announcement name" name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400">
@@ -219,7 +221,8 @@
         </div>
 
     </div>
-    @include('admin.link.announcement')
+    <div id="announcementTableTarget">
+        @include('admin.link.announcement')</div>
 </div>
 
 
@@ -263,18 +266,19 @@
         }
     });
 
+    setupLiveSearch('linkSearch', 'linkTableTarget', 'link');
+    setupLiveSearch('announcementSearch', 'announcementTableTarget', 'announcements');
 
-    // Fungsi universal untuk search
-    function setupLiveSearch(inputId, containerId) {
+    function setupLiveSearch(inputId, containerId, type) {
         const input = document.getElementById(inputId);
         const container = document.getElementById(containerId);
 
         if (input && container) {
             input.addEventListener('input', function() {
-                const url = this.dataset.url;
+                const baseUrl = this.getAttribute('data-url') || window.location.pathname;
                 const search = this.value;
 
-                fetch(`${url}?search=${search}`, {
+                fetch(`${baseUrl}?search=${search}&type=${type}`, {
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest'
                         }
@@ -287,8 +291,6 @@
         }
     }
 
-    setupLiveSearch('searchLink', 'linkTableContainer');
-    setupLiveSearch('searchAnnouncement', 'announcementTableContainer');
 
     document.addEventListener('DOMContentLoaded', function() {
 

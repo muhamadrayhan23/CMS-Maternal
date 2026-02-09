@@ -1,27 +1,38 @@
-<div class="bg-white rounded-md border border-gray-200 mt-5 p-5 overflow-visible">
-    <div class="bg-white rounded-xl border border-gray-200 overflow-visible">
-        <table class="w-full text-sm table-fixed">
+<div id="linkTableContainer" class="bg-white rounded-md border border-gray-200 mt-5 p-2 md:p-5 overflow-visible">
+    <div class="bg-white rounded-md border border-gray-200 p-2 md:p-2 overflow-visible">
+        <table class="w-full text-sm text-left">
             <thead>
-                <tr class="text-center text-black font-bold">
-                    <th class="p-3 w-24">Status</th>
-                    <th class="text-left p-3 w-48">Link Name</th>
-                    <th class="p-3 w-64">Link</th>
-                    <th class=" p-3 w-32">Action</th>
+                <tr class="text-center text-black font-bold border-b border-gray-100">
+                    <th class="p-2 whitespace-nowrap">Status</th>
+                    <th class="p-2 whitespace-nowrap">Link Name</th>
+                    <th class="p-2 whitespace-nowrap">Link</th>
+                    <th class="p-2 whitespace-nowrap">Action</th>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody class="text-center divide-y divide-gray-50">
                 @forelse ($links as $link)
                 <tr class="hover:bg-gray-50 transition">
-                    <td class=" text-black text-center">
-                        Published
+                    <td class="p-2 whitespace-nowrap">
+                        <span class="text-green-700 bg-green-100/90 text-[10px] py-1.5 px-3 md:px-5 rounded-full font-medium">
+                            Published
+                        </span>
                     </td>
-                    <td class="text-left text-black">{{ $link->link_name }}</td>
-                    <td class="text-blue-600">
-                        <a href="{{ $link->link_address }}" target="_blank">
-                            Visit Link
-                        </a>
+                    <td class="p-2 text-black truncate max-w-[150px] md:max-w-none">
+                        {{ $link->link_name }}
                     </td>
-                    <td class=" p-2 relative overflow-visible">
+                    <td class="p-2">
+                        <div class="flex justify-center">
+                            <a href="{{ $link->link_address }}" target="_blank" class="flex items-center gap-2 text-black bg-white hover:bg-gray-100 border border-gray-300 rounded-md px-2 py-1.5 md:px-3 md:py-2 transition-all">
+                                <span class="hidden md:inline">Visit Link</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 3h6v6" />
+                                    <path d="M10 14 21 3" />
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                </svg>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="p-2">
                         <div class="relative inline-block">
                             <button onclick="toggleMenu(this)" class="text-gray-400 hover:text-gray-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -37,7 +48,7 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="button" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-100 transition-all text-left">
+                                    <button type="button" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M10 11v6" />
@@ -78,22 +89,34 @@
                     </td>
                 </tr>
                 @empty
-                <td colspan="5">
-                    <span class="text-center text-gray-500">
-                        No Link Found!
-                    </span>
-                </td>
+                <tr>
+                    <td colspan="4" class="p-5 text-center text-gray-500">No Link Found!</td>
+                </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="mt-3">
-    {{ $links->withQueryString()->links() }}
-</div>
-
 <script>
+    function toggleMenu(button) {
+        document.querySelectorAll('.action-menu').forEach(menu => {
+            if (menu !== button.nextElementSibling) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        const menu = button.nextElementSibling;
+        menu.classList.toggle('hidden');
+    }
+
+    window.addEventListener('click', function(e) {
+        if (!e.target.closest('.relative')) {
+            document.querySelectorAll('.action-menu').forEach(menu => {
+                menu.classList.add('hidden');
+            });
+        }
+    });
     // alert confirm Delete permanent
     document.querySelectorAll('.btn-delete').forEach(button => {
         button.addEventListener('click', function(e) {

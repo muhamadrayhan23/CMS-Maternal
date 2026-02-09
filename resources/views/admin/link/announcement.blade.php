@@ -54,7 +54,7 @@
                             </a>
                             <form method="POST" action="{{ route('deleteAnnouncement', $announcement->id_announcement) }}">
                                 @csrf @method('DELETE')
-                                <button type="submit" onclick="return confirm('Yakin mau hapus?')" class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                <button type="submit" class="btn-delete w-full flex gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left border-t border-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2">
                                         <path d="M10 11v6" />
                                         <path d="M14 11v6" />
@@ -83,5 +83,61 @@
     </div>
 </div>
 <div class="mt-6">
-
+    {{ $announcements->withQueryString()->links() }}
 </div>
+
+<script>
+    function toggleMenu(button) {
+        document.querySelectorAll('.action-menu').forEach(menu => {
+            if (menu !== button.nextElementSibling) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        const menu = button.nextElementSibling;
+        menu.classList.toggle('hidden');
+    }
+
+    window.addEventListener('click', function(e) {
+        if (!e.target.closest('.relative')) {
+            document.querySelectorAll('.action-menu').forEach(menu => {
+                menu.classList.add('hidden');
+            });
+        }
+    });
+    // alert confirm Delete permanent
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Delete Announcement?',
+                text: 'This announcement will be deleted. Are you sure?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                showCloseButton: true,
+                buttonsStyling: false,
+
+                reverseButtons: false,
+
+                customClass: {
+                    // Kontainer Utama
+                    popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                    title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                    htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
+
+                    actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+
+                    confirmButton: 'flex-1 !bg-red-600 !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-red-700 transition-all !m-0 !outline-none !shadow-none',
+                    cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-black transition-all !m-0 !outline-gray-600 !shadow-none',
+                    closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.closest('form').submit();
+                }
+            });
+        });
+    });
+</script>

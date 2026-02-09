@@ -1,5 +1,5 @@
-<div id="announcementTableContainer">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
+<div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans mt-5">
         @forelse($announcements as $announcement)
         <div class="bg-white rounded-2xl border border-gray-300 overflow-visible">
             <div class="relative h-48 rounded-t-2xl overflow-hidden">
@@ -23,38 +23,10 @@
                             </svg>
                         </button>
                         <div class="action-menu hidden absolute right-0 mt-2 w-30 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden text-left">
-                            <form method="POST" action="{{ route('statusAnnouncement', $announcement->id_announcement) }}">
-                                @csrf
-                                @method('PATCH')
-                                <button class="w-full px-4 py-3 text-sm hover:bg-gray-200 transition-all flex gap-2.5 text-left">
-                                    @if($announcement->is_active)
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="lucide lucide-circle-minus-icon lucide-circle-minus">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M8 12h8" />
-                                    </svg>
-                                    <span>Unpublish</span>
-                                    @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                        class="lucide lucide-circle-plus-icon lucide-circle-plus">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M8 12h8" />
-                                        <path d="M12 8v8" />
-                                    </svg>
-                                    <span>Publish</span>
-                                    @endif
-                                </button>
-                            </form>
-                            <a href="{{ route('editAnnouncement', $announcement->id_announcement) }}" class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50 text-left">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line">
-                                    <path d="M13 21h8" />
-                                    <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-                                </svg>
-                                <span>Edit </span>
-                            </a>
-                            <form method="POST" action="{{ route('deleteAnnouncement', $announcement->id_announcement) }}">
+
+                            <form method="POST" action="{{ route('forceDeleteAnnouncement', $announcement->id_announcement) }}">
                                 @csrf @method('DELETE')
-                                <button type="submit" onclick="return confirm('Yakin mau hapus?')" class="w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
+                                <button type="submit" class="btn-delete w-full flex gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left border-t border-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2">
                                         <path d="M10 11v6" />
                                         <path d="M14 11v6" />
@@ -65,6 +37,29 @@
                                     <span>Delete</span>
                                 </button>
                             </form>
+                            <form id="restore-form-{{ $announcement->id_announcement }}"
+                                method="POST"
+                                action="{{ route('restoreAnnouncement', $announcement->id_announcement) }}">
+                                @csrf
+
+                                <button type="button" class="btn-restore w-full flex items-center gap-2 px-4 py-3 text-sm hover:bg-green-50 transition-all text-left border-t border-gray-50">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2a10 10 0 0 1 7.38 16.75" />
+                                        <path d="m16 12-4-4-4 4" />
+                                        <path d="M12 16V8" />
+                                        <path d="M2.5 8.875a10 10 0 0 0-.5 3" />
+                                        <path d="M2.83 16a10 10 0 0 0 2.43 3.4" />
+                                        <path d="M4.636 5.235a10 10 0 0 1 .891-.857" />
+                                        <path d="M8.644 21.42a10 10 0 0 0 7.631-.38" />
+                                    </svg>
+
+                                    <span>Restore</span>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -83,5 +78,97 @@
     </div>
 </div>
 <div class="mt-6">
-    {{ $announcements->links() }}
+    {{ $announcements->withQueryString()->links() }}
 </div>
+
+<script>
+    function toggleMenu(button) {
+        document.querySelectorAll('.action-menu').forEach(menu => {
+            if (menu !== button.nextElementSibling) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        const menu = button.nextElementSibling;
+        menu.classList.toggle('hidden');
+    }
+
+    window.addEventListener('click', function(e) {
+        if (!e.target.closest('.relative')) {
+            document.querySelectorAll('.action-menu').forEach(menu => {
+                menu.classList.add('hidden');
+            });
+        }
+    });
+    // alert confirm Delete permanent
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Delete Link?',
+                text: 'This link will be permanently deleted. Are you sure?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                showCloseButton: true,
+                buttonsStyling: false,
+
+                reverseButtons: false,
+
+                customClass: {
+                    // Kontainer Utama
+                    popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                    title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                    htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
+
+                    actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+
+                    confirmButton: 'flex-1 !bg-red-600 !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-red-700 transition-all !m-0 !outline-none !shadow-none',
+                    cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-black transition-all !m-0 !outline-gray-600 !shadow-none',
+                    closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.closest('form').submit();
+                }
+            });
+        });
+    });
+
+    // alert confirm restore
+    document.querySelectorAll('.btn-restore').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Restore Link?',
+                text: 'This link will be restored. Are you sure?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                showCloseButton: true,
+                buttonsStyling: false,
+
+                reverseButtons: false,
+
+                customClass: {
+                    // Kontainer Utama
+                    popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                    title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                    htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
+
+                    actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+
+                    confirmButton: 'flex-1 !bg-white !text-black !px-6 !py-3 !rounded-lg !font-bold !text-base !border !border-gray-900 hover:!bg-gray-200 transition-all !m-0 !outline-none !shadow-none',
+                    cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-gray-700 transition-all !m-0 !outline-none !shadow-none',
+                    closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.closest('form').submit();
+                }
+            });
+        });
+    });
+</script>
