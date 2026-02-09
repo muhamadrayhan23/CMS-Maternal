@@ -259,13 +259,13 @@
                                         </td>
 
                                         <td class="p-2 text-xs md:text-sm align-top relative text-center outline-none">
-                                                <button type="button" onclick="toggleMenu(this)"
-                                                    class="inline-flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-full hover:bg-gray-100 active:bg-gray-200">
-                                                    &#8942;
-                                                </button>
+                                            <button type="button" onclick="toggleMenu(this)"
+                                                class="inline-flex items-center justify-center w-10 h-10 md:w-8 md:h-8 rounded-full hover:bg-gray-100 active:bg-gray-200">
+                                                &#8942;
+                                            </button>
 
-                                                <ul class="action-menu hidden fixed z-[9999] w-40 bg-white border border-none rounded-lg shadow-xl text-left 
-                                                        -translate-x-32 mt-1">
+                                            <ul
+                                                class=" action-menu hidden fixed bottom-6 right-35 md:bottom-auto md:top-100 md:right-50 w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
                                                 <li>
                                                     <form action="{{ route('produk.toggle', $p->id_product) }}"
                                                         method="POST">
