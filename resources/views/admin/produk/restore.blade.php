@@ -169,7 +169,7 @@
                                             </button>
 
                                             <ul
-                                                class=" action-menu hidden fixed bottom-30 right-35 md:bottom-auto md:top-100 md:right-50 w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
+                                                class=" action-menu hidden fixed bottom-30 right-35 md:bottom-auto md:top-90 md:right-50 w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
 
                                                 <li>
                                                     <form id="restore-{{ $p->id_product }}"
