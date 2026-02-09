@@ -40,31 +40,31 @@
                             <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="announcement_name" name="announcements[0][name]"
                                 value="{{ old('announcements.0.name') }}" placeholder="Announcement Title">
                             @error('announcements.*.name')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger text-sm text-red-500">*{{ $message }}</span>
                             @enderror
                         </div>
 
-                        <div class="mb-3 row">
+                        <div class="mb-3 row mt-4">
                             <label for="announcement_address" class="text-sm font-medium text-gray-700">Announcement Link Address</label>
                             <div class="col-md-6">
                                 <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="announcement_address" name="announcements[0][address]"
                                     value="{{ old('announcements.0.address') }}" placeholder="Announcement Link Address">
                                 @error('announcements.*.address')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger text-sm text-red-500">*{{ $message }}</span>
                                 @enderror
                             </div>
 
-                            <div class="mb-3 row">
+                            <div class="mb-3 row mt-4">
                                 <label for="announcement_image" class="text-sm font-medium text-gray-700">Announcement Image</label>
                                 <div class="relative flex items-center">
-                                    <input type="text" placeholder="Announcement Image" readonly
+                                    <input type="text" placeholder="Announcement Image (1920x600)" readonly
                                         class="file-name-display w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
                                     <label class="absolute right-2 px-3 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
                                         Choose File
                                         <input type="file" id="announcement_image" name="announcements[0][image]" value="{{ old('announcements.0.image') }}" class="hidden" onchange="updateFileName(this)">
                                     </label>
                                     @error('announcements.*.image')
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger text-sm text-red-500">*{{ $message }}</span>
                                     @enderror
                                 </div>
 

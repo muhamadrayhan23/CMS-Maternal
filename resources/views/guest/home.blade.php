@@ -26,7 +26,6 @@
                 class="absolute inset-0 w-full h-full object-cover"
                 alt="Banner {{ $index + 1 }}">
 
-            {{-- Button --}}
             <div class="absolute inset-x-0 bottom-10 md:bottom-15 flex justify-center">
                 <a href="{{ route('products')}}"
                     class="px-7 py-2 rounded-full border-2 border-white text-white font-medium text-md font-sans hover:bg-white hover:text-black transition">
@@ -37,7 +36,6 @@
         @endforeach
     </div>
 
-    {{-- Dots --}}
     <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
         @foreach($banners as $index => $banner)
         <button type="button"
@@ -49,7 +47,6 @@
         @endforeach
     </div>
 
-    {{-- Arrow Left --}}
     <button id="leftArrow" type="button" data-carousel-prev
         class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-3 md:px-4
         cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity duration-400">
@@ -66,9 +63,8 @@
         </span>
     </button>
 
-    {{-- Arrow Right --}}
     <button id="rightArrow" type="button" data-carousel-next
-        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-3 md:px-4
+        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-3 md:mr-4
         cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity duration-400">
 
         <span class="inline-flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full border border-white transition
@@ -88,7 +84,6 @@
     class="relative flex flex-col md:flex-row gap-10 md:gap-20
     px-5 md:px-10 py-14">
 
-    {{-- LEFT CONTENT --}}
     <div class="flex flex-col justify-center w-full md:w-[420px] shrink-0">
         <h1 class="font-sans text-3xl md:text-4xl tracking-wide font-bold">
             INTRODUCING, <br> OUR PRODUCTS
@@ -106,10 +101,8 @@
         </a>
     </div>
 
-    {{-- SLIDER WRAPPER --}}
     <div class="relative flex items-center w-full">
 
-        {{-- ARROW LEFT --}}
         <button id="prevBtn"
             class="absolute left-0 md:-left-10 top-1/2 -translate-y-1/2 z-40
             bg-black w-9 h-9 md:w-10 md:h-10 rounded-full shadow
@@ -121,10 +114,8 @@
             </svg>
         </button>
 
-        {{-- VIEWPORT --}}
         <div class="relative w-full md:w-[920px] overflow-hidden py-10 md:py-14">
 
-            {{-- TRACK --}}
             <div id="cardTrack"
                 class="flex gap-6 md:gap-15 transition-transform duration-500 ease-out mx-2 md:mx-3 items-center">
 
@@ -162,7 +153,6 @@
             </div>
         </div>
 
-        {{-- ARROW RIGHT --}}
         <button id="nextBtn"
             class="absolute right-0 md:-right-10 top-1/2 -translate-y-1/2 z-40
             bg-black w-9 h-9 md:w-10 md:h-10 rounded-full shadow
@@ -176,10 +166,6 @@
     </div>
 </div>
 
-
-{{-- =========================
-    ABOUT BANNER
-========================= --}}
 <!-- <div class="transition-all duration-700 hover:scale-105">
     <div class="relative w-full overflow-hidden">
         <img src="{{ asset('img/bg_about.png') }}" alt=""
@@ -248,55 +234,56 @@
 
 </div>
 
-
-
-{{-- =========================
-    SLIDER SCRIPT (same logic)
-========================= --}}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const track = document.getElementById('cardTrack');
         const viewport = track.parentElement;
         const next = document.getElementById('nextBtn');
         const prev = document.getElementById('prevBtn');
-
         const cards = track.children;
 
-        const cardRect = cards[0].getBoundingClientRect();
-        const cardWidth = cardRect.width;
+        if (cards.length === 0) return;
 
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
+        function updateSlider() {
+            const cardWidth = cards[0].offsetWidth;
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+            const step = cardWidth + gap;
 
-        const viewportWidth = viewport.getBoundingClientRect().width;
-        const visibleCards = Math.floor(viewportWidth / step);
+            const viewportWidth = viewport.offsetWidth;
+            const visibleCards = Math.floor((viewportWidth + gap) / step);
 
-        let index = 0;
-        const totalCards = cards.length;
-        const maxIndex = totalCards - visibleCards;
+            const maxIndex = Math.max(0, cards.length - visibleCards);
 
-        function update() {
-            track.style.transform = `translateX(-${index * step}px)`;
-            prev.classList.toggle('hidden', index === 0);
-            next.classList.toggle('hidden', index >= maxIndex);
+            let currentIndex = parseInt(track.dataset.index || 0);
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+            const move = (newIndex) => {
+                currentIndex = newIndex;
+                track.dataset.index = currentIndex;
+                track.style.transform = `translateX(-${currentIndex * step}px)`;
+                
+                prev.classList.toggle('hidden', currentIndex <= 0);
+                next.classList.toggle('hidden', currentIndex >= maxIndex);
+            };
+
+            if (cards.length <= visibleCards) {
+                prev.classList.add('hidden');
+                next.classList.add('hidden');
+            } else {
+                move(currentIndex);
+            }
+
+            next.onclick = () => { if (currentIndex < maxIndex) move(currentIndex + 1); };
+            prev.onclick = () => { if (currentIndex > 0) move(currentIndex - 1); };
         }
 
-        next.onclick = () => {
-            if (index < maxIndex) {
-                index++;
-                update();
-            }
-        };
+        updateSlider();
 
-        prev.onclick = () => {
-            if (index > 0) {
-                index--;
-                update();
-            }
-        };
-
-        update();
-        window.addEventListener('resize', () => location.reload());
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateSlider, 100);
+        });
     });
 </script>
 

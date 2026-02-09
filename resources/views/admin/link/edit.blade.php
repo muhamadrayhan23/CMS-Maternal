@@ -19,7 +19,7 @@
                         <path d="M19 12H5" />
                     </svg>
                 </a>
-                <h1 class="text-sm font-bold tracking-wider text-gray-800 uppercase">Add New Link</h1>
+                <h1 class="text-sm font-bold tracking-wider text-gray-800 uppercase">Edit Link</h1>
             </div>
             <button type="button" onclick="confirmEdit()" class="px-8 py-2 text-sm font-medium text-white bg-[#2D2D2A] rounded-lg hover:bg-black transition-colors">
                 Submit
@@ -42,17 +42,17 @@
                         <div class="col-md-6">
                             <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="link_name" name="link_name" value="{{ old('link_name', $link->link_name) }}">
                             @error('link_name')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger text-sm text-red-500">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="mb-3 row">
+                    <div class="mb-3 row mt-4">
                         <label for="link_address" class="text-sm font-medium text-gray-700">Link Address</label>
                         <div class="col-md-6">
                             <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="link_address" name="link_address" value="{{ old('link_address', $link->link_address) }}">
                             @error('link_address')
-                            <span class="text-danger">{{ $message }}</span>
+                            <span class="text-danger text-sm text-red-500">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -62,12 +62,9 @@
 </div>
 
 <script>
-
     window.routes = {
         homeLink: "{{ route('homeLink') }}"
     }
-
-    
 </script>
 
 
