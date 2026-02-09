@@ -30,7 +30,7 @@
                     title: 'Success!',
                     text: success,
                     showConfirmButton: true,
-
+                    confirmButtonText: 'Close',
 
                     customClass: {
                         popup: 'rounded-[2rem] !p-6 md:!p-10 shadow-2xl border-none w-[250px] md:min-w-[550px]',
