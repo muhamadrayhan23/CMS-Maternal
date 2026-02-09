@@ -4,7 +4,6 @@
 
 <div class="flex flex-row items-center gap-2 w-full mx-auto px-4 md:px-10 py-5">
     <div class="relative flex-4 md:flex-5">
-
         <div>
             <input id="liveSearch" type="text" placeholder="Search Products Here..." name="search" value="{{ request('search') }}" class="w-full pl-4 pr-10 py-1 md:py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all placeholder:text-gray-400">
         </div>
@@ -16,17 +15,34 @@
         </div>
     </div>
 
-    <div class="relative w-28 md:w-72">
-        <select id="filterStatus" name="sort" class="w-full appearance-none pl-4 pr-10 py-1.5 md:py-2 text-xs md:text-sm  text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
-            <option value="">Sort by Price</option>
-            <option value="price_desc" @selected(request('sort')=='price_desc' )>
-                High to low
-            </option>
-            <option value="price_asc" @selected(request('sort')=='price_asc' )>
-                Low to high
-            </option>
+    <div class="relative w-8 md:w-10 flex items-center justify-center">
+
+        <button id="sortToggle" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                width="18" height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-gray-600">
+                <path d="m3 16 4 4 4-4" />
+                <path d="M7 20V4" />
+                <path d="m21 8-4-4-4 4" />
+                <path d="M17 4v16" />
+            </svg>
+        </button>
+
+        <select id="filterStatus"
+            class="absolute inset-0 opacity-0 cursor-pointer">
+            <option value="latest">Newest</option>
+            <option value="price_asc">Price: High to low</option>
+            <option value="price_desc">Price: Low to high</option>
         </select>
+
     </div>
+
 </div>
 
 <div class="hidden md:block md:px-10">

@@ -23,9 +23,10 @@ class ProductController extends Controller
             $query->orderBy('price', 'desc');
         } elseif ($request->sort === 'price_asc') {
             $query->orderBy('price', 'asc');
-        } else {
-            $query->latest();
+        } elseif ($request->sort == 'latest') {
+            $query->latest(); 
         }
+
 
         $products = $query->paginate(8)->withQueryString();
 

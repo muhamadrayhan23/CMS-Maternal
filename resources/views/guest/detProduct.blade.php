@@ -179,8 +179,6 @@
                 </div>
             </div>
             @endif
-
-
         </div>
 
     </div>
@@ -198,22 +196,21 @@
 
 <div class="mx-auto px-4 md:px-10 mb-10">
     <div id="product-cards"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        class="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-row lg:flex-wrap gap-10">
 
-        <div class="transition-all duration-300 hover:scale-[1.03]">
+        @foreach ($products as $product)
+        <div class="w-full sm:w-auto lg:w-[23%] transition-all duration-300 hover:scale-[1.03]">
 
-            @foreach ($products as $product)
             <div class="aspect-square transition-all duration-300 ease-out hover:scale-105 relative cursor-pointer">
 
-                <a href="{{ route('detproduct',  $product['id_product']) }}">
+                <a href="{{ route('detproduct', $product['id_product']) }}">
                     <img src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                         class="w-full h-full object-cover rounded-md">
                 </a>
 
                 @if (!$product->is_available)
-                <div class="absolute inset-0 flex items-center justify-center  pointer-events-none">
-                    <span class="bg-red-700/70 text-white w-90 h-20 flex items-center justify-center
-                 text-sm">
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <span class="bg-red-700/70 text-white w-90 h-20 flex items-center justify-center text-sm">
                         SOLD OUT
                     </span>
                 </div>
@@ -226,92 +223,95 @@
                 <p class="mt-2 font-bold text-center">
                     Rp {{ number_format($product->price) }}
                 </p>
+
             </div>
-            @endforeach
         </div>
+        @endforeach
+
     </div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mainImage = document.getElementById('main-image');
-            const variantName = document.getElementById('variant-name');
-            const variantNameMobile = document.getElementById('variant-name-mobile');
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainImage = document.getElementById('main-image');
+        const variantName = document.getElementById('variant-name');
+        const variantNameMobile = document.getElementById('variant-name-mobile');
 
-            const thumbs = document.querySelectorAll('.thumb');
-            const variants = document.querySelectorAll('.variant-item');
+        const thumbs = document.querySelectorAll('.thumb');
+        const variants = document.querySelectorAll('.variant-item');
 
-            function clearActive() {
-                thumbs.forEach(t => t.classList.remove('ring-2', 'ring-[#ff5e00]'));
-                variants.forEach(v => v.classList.remove('border-black', 'bg-[#dddddd]', 'text-white'));
+        function clearActive() {
+            thumbs.forEach(t => t.classList.remove('ring-2', 'ring-[#ff5e00]'));
+            variants.forEach(v => v.classList.remove('border-black', 'bg-[#dddddd]', 'text-white'));
+        }
+
+        function setActiveByKey(key) {
+            const thumb = document.querySelector(`.thumb[data-key="${key}"]`);
+            const variant = document.querySelector(`.variant-item[data-key="${key}"]`);
+
+            if (!thumb || !variant) return;
+
+            clearActive();
+
+            mainImage.src = thumb.dataset.src;
+
+            if (variantName) {
+                variantName.innerText = thumb.dataset.name;
             }
 
-            function setActiveByKey(key) {
-                const thumb = document.querySelector(`.thumb[data-key="${key}"]`);
-                const variant = document.querySelector(`.variant-item[data-key="${key}"]`);
-
-                if (!thumb || !variant) return;
-
-                clearActive();
-
-                mainImage.src = thumb.dataset.src;
-
-                if (variantName) {
-                    variantName.innerText = thumb.dataset.name;
-                }
-
-                if (variantNameMobile) {
-                    variantNameMobile.innerText = thumb.dataset.name;
-                }
-
-
-                thumb.classList.add('ring-2', 'ring-[#ff5e00]');
-                variant.classList.add('border-black', 'bg-[#dddddd]', 'text-');
+            if (variantNameMobile) {
+                variantNameMobile.innerText = thumb.dataset.name;
             }
 
-            thumbs.forEach(thumb => {
-                thumb.addEventListener('click', () => {
-                    setActiveByKey(thumb.dataset.key);
-                });
-            });
 
-            variants.forEach(variant => {
-                variant.addEventListener('click', () => {
-                    setActiveByKey(variant.dataset.key);
-                });
+            thumb.classList.add('ring-2', 'ring-[#ff5e00]');
+            variant.classList.add('border-black', 'bg-[#dddddd]', 'text-');
+        }
+
+        thumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                setActiveByKey(thumb.dataset.key);
             });
         });
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const thumbs = document.getElementById('thumbs');
-
-            const buttons = {
-                prevMobile: document.getElementById('thumb-prev-mobile'),
-                nextMobile: document.getElementById('thumb-next-mobile'),
-                prevDesktop: document.getElementById('thumb-prev-desktop'),
-                nextDesktop: document.getElementById('thumb-next-desktop'),
-            };
-
-            const scrollAmount = 120;
-
-            buttons.prevMobile?.addEventListener('click', () => {
-                thumbs.scrollLeft -= scrollAmount;
-            });
-
-            buttons.nextMobile?.addEventListener('click', () => {
-                thumbs.scrollLeft += scrollAmount;
-            });
-
-            buttons.prevDesktop?.addEventListener('click', () => {
-                thumbs.scrollTop -= scrollAmount;
-            });
-
-            buttons.nextDesktop?.addEventListener('click', () => {
-                thumbs.scrollTop += scrollAmount;
+        variants.forEach(variant => {
+            variant.addEventListener('click', () => {
+                setActiveByKey(variant.dataset.key);
             });
         });
-    </script>
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const thumbs = document.getElementById('thumbs');
+
+        const buttons = {
+            prevMobile: document.getElementById('thumb-prev-mobile'),
+            nextMobile: document.getElementById('thumb-next-mobile'),
+            prevDesktop: document.getElementById('thumb-prev-desktop'),
+            nextDesktop: document.getElementById('thumb-next-desktop'),
+        };
+
+        const scrollAmount = 120;
+
+        buttons.prevMobile?.addEventListener('click', () => {
+            thumbs.scrollLeft -= scrollAmount;
+        });
+
+        buttons.nextMobile?.addEventListener('click', () => {
+            thumbs.scrollLeft += scrollAmount;
+        });
+
+        buttons.prevDesktop?.addEventListener('click', () => {
+            thumbs.scrollTop -= scrollAmount;
+        });
+
+        buttons.nextDesktop?.addEventListener('click', () => {
+            thumbs.scrollTop += scrollAmount;
+        });
+    });
+</script>
 
 
 
@@ -319,4 +319,4 @@
 
 
 
-    @endsection
+@endsection

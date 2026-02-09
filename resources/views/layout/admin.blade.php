@@ -30,6 +30,7 @@
                     title: 'Success!',
                     text: success,
                     showConfirmButton: true,
+                    confirmButtonText : 'Close',
 
 
                     customClass: {
@@ -39,7 +40,7 @@
                     }
                 });
             }
-            // alert confirm Logout
+           // ALERT CONFIRM LOG OUT
             document.querySelectorAll('.btn-logout').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();

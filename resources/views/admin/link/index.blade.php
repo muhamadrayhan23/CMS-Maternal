@@ -294,15 +294,20 @@
 
     document.addEventListener('DOMContentLoaded', function() {
 
-        const successMessage = "{{ session('success') }}";
+        const success = "{{ session('success') }}";
 
-        if (successMessage) {
+        if (success) {
             Swal.fire({
-                icon: 'success',
                 title: 'Success!',
-                text: successMessage,
-                showConfirmButton: false,
-                timer: 3000
+                text: success,
+                width: '320px',
+                confirmButtonText: 'Close',
+
+                customClass: {
+                    popup: 'rounded-3xl p-4 shadow-lg',
+                    title: 'text-xl font-bold',
+                    confirmButton: '!bg-green-800'
+                }
             });
         }
     });

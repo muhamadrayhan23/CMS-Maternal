@@ -66,7 +66,7 @@
             </p>
         </div>
 
-        <div class="mx-auto w-full max-w-7xl px-4 sm:px-10 pb-20">
+        <div class="mx-auto w-full max-w-9xl px-4 sm:px-10 pb-20">
             <div class="space-y-4">
                 @foreach ($links as $link)
                     <a href="{{ $link->link_address }}" target="_blank"
