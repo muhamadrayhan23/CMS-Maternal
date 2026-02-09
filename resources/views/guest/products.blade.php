@@ -18,7 +18,10 @@
 
     <div class="relative w-28 md:w-72">
         <select id="filterStatus" name="sort" class="w-full appearance-none pl-4 pr-10 py-1.5 md:py-2 text-xs md:text-sm  text-gray-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all bg-white cursor-pointer">
-            <option value="">Sort by Price</option>
+            <option value="">Sort</option>
+            <option value="price_desc" @selected(request('sort')=='latest' )>
+                Newest
+            </option>
             <option value="price_desc" @selected(request('sort')=='price_desc' )>
                 High to low
             </option>

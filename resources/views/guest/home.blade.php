@@ -156,7 +156,7 @@
         <button id="nextBtn"
             class="absolute right-0 md:-right-10 top-1/2 -translate-y-1/2 z-40
             bg-black w-9 h-9 md:w-10 md:h-10 rounded-full shadow
-            flex items-center justify-center">
+            flex items-center justify-center mr-5">
             <svg class="w-5 h-5 text-white"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-width="2"
@@ -205,7 +205,9 @@
 <div class="flex flex-col md:flex-row">
 
     <div class="relative">
+        <a href="{{ route('about') }}">
         <img src="{{ asset('img/1.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+        </a>
 
         <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">
             <p class="text-white font-sans">
@@ -219,13 +221,15 @@
     </div>
 
     <div class="relative">
+        <a href="{{ route('products') }}">
         <img src="{{ asset('img/2.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+        </a>
 
         <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">
             <p class="text-white font-sans">
-                Thoughtfully Crafted, Intentionally Made
+                Made to Move, Made to Last
             </p>
-            <a href="{{ route('about') }}"
+            <a href="{{ route('products') }}"
                 class="text-white font-sans underline underline-offset-4">
                 view more
             </a>

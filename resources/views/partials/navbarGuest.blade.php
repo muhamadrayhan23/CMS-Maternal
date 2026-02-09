@@ -69,9 +69,19 @@
                 </span>
             </a>
 
-            <a href="{{ route('login') }}" class="group relative inline-flex items-center gap-2 py-2">
+            <!-- <a href="{{ route('login') }}" class="group relative inline-flex items-center gap-2 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in-icon lucide-log-in">
+                    <path d="m10 17 5-5-5-5" />
+                    <path d="M15 12H3" />
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                </svg>
                 <span>Login</span>
-            </a>
+                <span
+                    class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
+                    {{ request()->routeIs('login') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
+                    origin-center">
+                </span>
+            </a> -->
         </div>
     </div>
 

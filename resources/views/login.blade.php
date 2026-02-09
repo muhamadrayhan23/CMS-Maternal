@@ -76,6 +76,8 @@
                 width: '500px',
                 padding: '3rem 1rem',
                 borderRadius: '20px',
+                
+                item: 'start'
             });
         }
     }); 
