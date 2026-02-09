@@ -41,6 +41,26 @@
                 <div class="space-y-6 border border-gray-100 rounded-xl p-6 bg-white relative">
 
                     <div class="mb-3 row">
+                        <label for="announcement_name" class="text-sm font-medium text-gray-700">Announcement Name</label>
+                        <div class="col-md-6">
+                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="announcement_name" name="announcement_name" value="{{ old('announcement_name', $announcement->announcement_name) }}">
+                            @error('announcement_name')
+                            <span class="text-danger text-sm text-red-500">*{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row mt-4">
+                        <label for="announcement_address" class="text-sm font-medium text-gray-700">Announcement Address</label>
+                        <div class="col-md-6">
+                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="announcement_address" name="announcement_address" value="{{ old('announcement_address', $announcement->announcement_address) }}">
+                            @error('announcement_address')
+                            <span class="text-danger text-sm text-red-500">*{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row mt-4">
                         <label for="announcement_image" class="text-sm font-medium text-gray-700">
                             Announcement Image
                         </label>
@@ -67,27 +87,6 @@
                         </div>
 
                     </div>
-
-                    <div class="mb-3 row">
-                        <label for="announcement_name" class="text-sm font-medium text-gray-700">Announcement Name</label>
-                        <div class="col-md-6">
-                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="announcement_name" name="announcement_name" value="{{ old('announcement_name', $announcement->announcement_name) }}">
-                            @error('announcement_name')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="announcement_address" class="text-sm font-medium text-gray-700">Announcement Address</label>
-                        <div class="col-md-6">
-                            <input type="text" class="w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" id="announcement_address" name="announcement_address" value="{{ old('announcement_address', $announcement->announcement_address) }}">
-                            @error('announcement_address')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
 
                 </div>
             </div>
