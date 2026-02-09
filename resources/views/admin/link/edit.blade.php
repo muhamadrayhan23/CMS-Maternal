@@ -19,7 +19,7 @@
                         <path d="M19 12H5" />
                     </svg>
                 </a>
-                <h1 class="text-sm font-bold tracking-wider text-gray-800 uppercase">Add New Link</h1>
+                <h1 class="text-sm font-bold tracking-wider text-gray-800 uppercase">Edit Link</h1>
             </div>
             <button type="button" onclick="confirmEdit()" class="px-8 py-2 text-sm font-medium text-white bg-[#2D2D2A] rounded-lg hover:bg-black transition-colors">
                 Submit
