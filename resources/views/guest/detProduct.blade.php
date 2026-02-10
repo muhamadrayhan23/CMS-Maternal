@@ -11,7 +11,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-16">
 
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 md:sticky md:top-24 self-start">
 
             <nav class="flex items-center justify-between text-xs md:text-sm text-gray-400 md:mt-10">
                 <div>
@@ -112,9 +112,19 @@
             </div>
 
 
-            <p class="mt-2 text-gray-600 text-xs p-3 text-justify md:text-base leading-relaxed bg-gray-100 rounded-md md:p-5">
-                {{ $product->desc }}
-            </p>
+            <div class="relative">
+                <p id="product-desc"
+                    class="mt-2 text-gray-600 text-xs p-3 text-justify md:text-base leading-relaxed bg-gray-100 rounded-md md:p-5 
+                    max-h-[200px] overflow-hidden transition-all duration-300">
+                    {!! nl2br(e($product->desc)) !!}
+                </p>
+
+                <button id="read-more-btn"
+                    class="mt-2 text-xs md:text-sm font-medium text-black underline">
+                    Read more
+                </button>
+            </div>
+
 
             <div class="flex flex-col gap-5 mt-8 mb-8">
                 <h2 class="text-sm md:text-base font-sans">Variant :</h2>
@@ -265,13 +275,13 @@
         }
 
 
-            thumbs.forEach(thumb => {
+        thumbs.forEach(thumb => {
             thumb.addEventListener('click', () => {
                 setActiveByKey(thumb.dataset.key);
             });
         });
 
-            variants.forEach(variant => {
+        variants.forEach(variant => {
             variant.addEventListener('click', () => {
                 setActiveByKey(variant.dataset.key);
             });
@@ -309,4 +319,31 @@
         });
     });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const desc = document.getElementById('product-desc');
+    const btn = document.getElementById('read-more-btn');
+
+    if (!desc || desc.scrollHeight <= desc.clientHeight) {
+        btn.style.display = 'none';
+        return;
+    }
+
+    let expanded = false;
+
+    btn.addEventListener('click', () => {
+        expanded = !expanded;
+
+        if (expanded) {
+            desc.classList.remove('max-h-[200px]');
+            btn.innerText = 'Read less';
+        } else {
+            desc.classList.add('max-h-[200px]');
+            btn.innerText = 'Read more';
+        }
+    });
+});
+</script>
+
 @endsection
