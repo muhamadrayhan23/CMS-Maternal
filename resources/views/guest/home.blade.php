@@ -206,7 +206,7 @@
 
     <div class="relative">
         <a href="{{ route('about') }}">
-            <img src="{{ asset('img/1.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+            <img src="{{ asset('partials/1.png') }}" alt="" class="w-full hover:scale-110 duration-500">
         </a>
 
         <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">
@@ -222,7 +222,7 @@
 
     <div class="relative">
         <a href="{{ route('products') }}">
-            <img src="{{ asset('img/2.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+            <img src="{{ asset('partials/2.png') }}" alt="" class="w-full hover:scale-110 duration-500">
         </a>
 
         <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">

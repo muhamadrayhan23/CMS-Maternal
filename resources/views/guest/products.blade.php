@@ -47,7 +47,7 @@
 </div>
 
 <div class="hidden md:block md:px-10">
-    <img src="{{ asset('img/banner.png') }}" alt="" class="w-full">
+    <img src="{{ asset('partials/banner.png') }}" alt="" class="w-full">
 </div>
 
 

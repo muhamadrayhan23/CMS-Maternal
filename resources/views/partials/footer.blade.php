@@ -42,19 +42,19 @@
             <!-- social icons -->
             <div class="flex flex-wrap gap-2 md:justify-end">
                 <a href="#" class="rounded-full p-2 hover:scale-110 transition-transform">
-                    <img src="{{ asset('img/logo wa.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="WA">
+                    <img src="{{ asset('partials/logo wa.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="WA">
                 </a>
                 <a href="https://tk.tokopedia.com/ZSa9yLVvv/" class="rounded-full p-2 hover:scale-110 transition-transform">
-                    <img src="{{ asset('img/logo tokped.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="Tokped">
+                    <img src="{{ asset('partials/logo tokped.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="Tokped">
                 </a>
                 <a href="https://www.instagram.com/alttt.craftedgoods_?igsh=cnJzbjIwaDMzbDkw" class="rounded-full p-2 hover:scale-110 transition-transform">
-                    <img src="{{ asset('img/logo ig.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="IG">
+                    <img src="{{ asset('partials/logo ig.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="IG">
                 </a>
                 <a href="https://id.shp.ee/sNCqbJU" class="rounded-full p-2 hover:scale-110 transition-transform">
-                    <img src="{{ asset('img/logo shopee.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="Shopee">
+                    <img src="{{ asset('partials/logo shopee.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="Shopee">
                 </a>
                 <a href="https://www.tiktok.com/@altttcrafted_?_r=1&_t=ZS-93T0ryF30tN" class="rounded-full p-2 hover:scale-110 transition-transform">
-                    <img src="{{ asset('img/logo tiktok.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="TikTok">
+                    <img src="{{ asset('partials/logo tiktok.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="TikTok">
                 </a>
             </div>
 
