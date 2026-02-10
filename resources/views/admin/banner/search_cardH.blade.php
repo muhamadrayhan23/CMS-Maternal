@@ -103,27 +103,6 @@
             @endif
         </div>
 
-        {{-- <script>
-            document.querySelectorAll('.btn-hapus').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    // Munculin alert buat nanya
-                    Swal.fire({
-                        title: 'This banner will be moved to trash. Are you sure??',
-                        text: '',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.closest('form').submit();
-                        }
-                    })
-                });
-            });
-        </script> --}}
     @endforelse
 </div>
 <div class="mt-6">

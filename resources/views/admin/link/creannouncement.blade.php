@@ -108,7 +108,7 @@
             <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700">Announcement Image</label>
                 <div class="relative flex items-center">
-                    <input type="text" placeholder="Announcement Image" readonly
+                    <input type="text" placeholder="Announcement Image (1920x600)" readonly
                         class="file-name-display w-full px-4 py-3 text-sm bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-400 cursor-default">
                     <label class="absolute right-2 px-3 py-1.5 text-xs font-medium text-gray-600 bg-[#E5E7EB] border border-gray-300 rounded cursor-pointer hover:bg-gray-300 transition-colors italic">
                         Choose File

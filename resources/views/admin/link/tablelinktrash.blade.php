@@ -48,7 +48,7 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="button" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left">
+                                    <button type="button" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M10 11v6" />
@@ -66,7 +66,7 @@
                                     action="{{ route('trashLink.restore', $link->id_link) }}">
                                     @csrf
 
-                                    <button type="button" class="btn-restore w-full flex items-center gap-2 px-4 py-3 text-sm hover:bg-green-50 transition-all text-left border-t border-gray-50">
+                                    <button type="button" class="btn-restore w-full flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left border-t border-gray-50">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -128,7 +128,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
-                showCloseButton: true,
+                showCloseButton: false,
                 buttonsStyling: false,
 
                 reverseButtons: false,
@@ -164,7 +164,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
-                showCloseButton: true,
+                showCloseButton: false,
                 buttonsStyling: false,
 
                 reverseButtons: false,

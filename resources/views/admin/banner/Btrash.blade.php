@@ -71,16 +71,16 @@
         document.querySelectorAll('.action-menu').forEach(m => {
             if (m !== menu) m.classList.add('hidden')
         })
-
+    
         menu.classList.toggle('hidden');
-    }
-
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.relative')) {
-            document.querySelectorAll('.action-menu')
-                .forEach(m => m.classList.add('hidden'));
         }
-    })
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.relative')) {
+                document.querySelectorAll('.action-menu')
+                    .forEach(m => m.classList.add('hidden'));
+                }
+            })
 
 
     // search 
@@ -89,6 +89,7 @@
 
     searchInput.addEventListener('input', function() {
         const query = this.value;
+        // fetch fungsi js request HTTP versi ajax 
         fetch(`{{ route('Btrash') }}?search=${query}`, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -102,10 +103,10 @@
 
 
 
-    //ALERT RESTORE YA ENIH
+        //ALERT RESTORE YA ENIH
 
-    //alert info delete berhasil iyes
-    document.addEventListener('DOMContentLoaded', function() {
+        //alert info delete berhasil iyes
+        document.addEventListener('DOMContentLoaded', function() {
 
         const success = "{{ session('success') }}"
 
@@ -135,7 +136,7 @@
                     showCancelButton: true,
                     confirmButtonText: 'Yes',
                     cancelButtonText: 'Cancel',
-                    showCloseButton: true,
+                    showCloseButton: false,
                     buttonsStyling: false,
 
                     reverseButtons: false,
@@ -156,11 +157,11 @@
                     if (result.isConfirmed) {
                         this.closest('form').submit();
                     }
-                });
-            });
-        });
+                })
+            })
+        })
 
-    });
+    })
 
     // alert confirm restore
     document.querySelectorAll('.btn-restore').forEach(button => {
@@ -173,7 +174,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
-                showCloseButton: true,
+                showCloseButton: false,
                 buttonsStyling: false,
 
                 reverseButtons: false,
@@ -194,8 +195,8 @@
                 if (result.isConfirmed) {
                     this.closest('form').submit();
                 }
-            });
-        });
-    });
+            })
+        })
+    })
 </script>
 @endsection
