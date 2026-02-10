@@ -26,7 +26,6 @@
                     @endif
                     @endforeach
                 </div>
-
                 <div
                     id="variant-name"
                     class="hidden md:block text-black text-xs md:text-sm font-medium tracking-wide">
@@ -49,7 +48,6 @@
                             <path d="m18 15-6-6-6 6" />
                         </svg>
                     </button>
-
                     <button id="thumb-prev-mobile"
                         class="md:hidden mx-3 absolute left-0 top-1/2 -translate-y-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -85,7 +83,6 @@
                             <path d="m9 18 6-6-6-6" />
                         </svg>
                     </button>
-
                     <button id="thumb-next-desktop"
                         class="hidden md:flex absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -93,10 +90,7 @@
                             <path d="m6 9 6 6 6-6" />
                         </svg>
                     </button>
-
                 </div>
-
-
             </div>
         </div>
         <div
@@ -241,7 +235,6 @@
         const thumbs = document.querySelectorAll('.thumb');
         const variants = document.querySelectorAll('.variant-item');
 
-        // const productTitle = document.getElementById('product-title');
         const productPrice = document.getElementById('product-price');
 
         function clearActive() {
@@ -257,38 +250,28 @@
 
             clearActive();
 
-            // update image
             mainImage.src = thumb.dataset.src;
 
-            // update variant name
             if (variantName) variantName.innerText = thumb.dataset.name;
             if (variantNameMobile) variantNameMobile.innerText = thumb.dataset.name;
 
-            // update title
-            // if (productTitle) {
-            //     productTitle.innerText =
-            //         "{{ Str::upper($product->product_name) }} - " + thumb.dataset.name;
-            // }
-
-            // update price
             if (productPrice && variant.dataset.price) {
                 const price = parseInt(variant.dataset.price);
                 productPrice.innerText = 'Rp ' + price.toLocaleString('id-ID');
             }
 
-            // active state
             thumb.classList.add('ring-2', 'ring-[#ff5e00]');
             variant.classList.add('border-black', 'bg-[#dddddd]');
         }
 
 
-        thumbs.forEach(thumb => {
+            thumbs.forEach(thumb => {
             thumb.addEventListener('click', () => {
                 setActiveByKey(thumb.dataset.key);
             });
         });
 
-        variants.forEach(variant => {
+            variants.forEach(variant => {
             variant.addEventListener('click', () => {
                 setActiveByKey(variant.dataset.key);
             });
@@ -326,11 +309,4 @@
         });
     });
 </script>
-
-
-
-
-
-
-
 @endsection

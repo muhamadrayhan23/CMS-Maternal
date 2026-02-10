@@ -15,6 +15,7 @@
     }
 </style>
 
+<!-- Hero section (big banner) -->
 <div id="default-carousel" data-carousel="slide" class="group relative">
 
     <div class="relative w-full h-screen md:h-screen font-sans -mt-22 overflow-hidden">
@@ -50,7 +51,6 @@
     <button id="leftArrow" type="button" data-carousel-prev
         class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-3 md:px-4
         cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-
         <span class="inline-flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full border border-white transition
             hover:bg-white/5 dark:hover:bg-black/70 hover:border-gray-800/50">
             <svg class="w-5 h-5 text-white rtl:rotate-180"
@@ -66,7 +66,6 @@
     <button id="rightArrow" type="button" data-carousel-next
         class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-3 md:mr-4
         cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-
         <span class="inline-flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full border border-white transition
             hover:bg-white/50 dark:hover:bg-black/70 hover:border-gray-800/50">
             <svg class="w-5 h-5 text-white rtl:rotate-180"
@@ -80,6 +79,7 @@
     </button>
 </div>
 
+<!-- Preview of products section -->
 <div id="product-cards"
     class="relative flex flex-col md:flex-row gap-10 md:gap-20
     px-5 md:px-10 py-14">
@@ -166,42 +166,7 @@
     </div>
 </div>
 
-<!-- <div class="transition-all duration-700 hover:scale-105">
-    <div class="relative w-full overflow-hidden">
-        <img src="{{ asset('img/bg_about.png') }}" alt=""
-            class="w-full h-[520px] md:h-auto object-cover">
-
-        <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center px-5 md:px-10 max-w-5xl">
-
-                <span class="block text-[10px] tracking-[0.3em] uppercase text-gray-200 mb-3">
-                    About Us
-                </span>
-
-                <h2 class="text-2xl sm:text-4xl md:text-6xl font-normal leading-[1.15] tracking-tight text-white">
-                    <span class="text-gray-200 italic font-bold">Born from Curiosity,</span> crafted with Care.
-                </h2>
-
-                <div class="font-sans text-sm sm:text-base md:text-xl text-white mt-5 leading-relaxed">
-                    We craft timeless daily wear that prioritizes comfort and sensory connection. Our paracord creations are a tactile sanctuary, a way to reconnect with nature and find calm in a crowded world.
-                </div>
-
-                <div class="flex justify-center mt-8 md:mt-10">
-                    <a href="{{ route('about') }}"
-                        class="flex px-7 md:px-8 py-3 border rounded-full border-white text-white hover:bg-white hover:text-black transition gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 8L22 12L18 16" />
-                            <path d="M2 12H22" />
-                        </svg>
-                        Explore Our Journey
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div> -->
-
+<!-- About us preview section -->
 <div class="flex flex-col md:flex-row">
 
     <div class="relative">
