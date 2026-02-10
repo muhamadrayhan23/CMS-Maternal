@@ -5,6 +5,16 @@
     #thumbs::-webkit-scrollbar {
         display: none;
     }
+
+    #modal-image {
+        cursor: zoom-in;
+        transition: transform .2s ease;
+    }
+
+    #modal-image.zoom {
+        transform: scale(3);
+        cursor: zoom-out;
+    }
 </style>
 
 <div class="mx-auto px-4 md:px-10">
@@ -38,7 +48,7 @@
                     <img
                         id="main-image"
                         src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                        class="w-full h-full object-cover object-center">
+                        class="w-full h-full object-cover object-center cursor-pointer">
                 </div>
                 <div class="order-2 md:order-1 relative self-center px-4">
                     <button id="thumb-prev-desktop"
@@ -71,7 +81,7 @@
 
                             <img
                                 src="{{ asset('storage/' . $detail->image_product) }}"
-                                class="w-full h-full object-cover">
+                                class="w-full h-full object-cover cursor-pointer">
                         </button>
                         @endforeach
                     </div>
@@ -236,6 +246,99 @@
     </div>
 </div>
 
+@endsection
+<div id="image-modal"
+    class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[9999]">
+
+    <button id="modal-prev"
+        class="absolute left-5 md:left-10 text-white text-4xl md:text-5xl cursor-pointer select-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left">
+            <path d="m15 18-6-6 6-6" />
+        </svg>
+    </button>
+
+    <img
+        id="modal-image"
+        class="max-w-[90vw] max-h-[90vh] object-contain cursor-zoom-out">
+
+    <button id="modal-next"
+        class="absolute right-5 md:right-10 text-white text-4xl md:text-5xl cursor-pointer select-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+            <path d="m9 18 6-6-6-6" />
+        </svg>
+    </button>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainImage = document.getElementById('main-image');
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const prevBtn = document.getElementById('modal-prev');
+        const nextBtn = document.getElementById('modal-next');
+
+        const thumbs = Array.from(document.querySelectorAll('.thumb'));
+        let currentIndex = 0;
+
+        function showImage(index) {
+            if (index < 0) index = thumbs.length - 1;
+            if (index >= thumbs.length) index = 0;
+
+            currentIndex = index;
+            modalImage.src = thumbs[currentIndex].dataset.src;
+        }
+
+        mainImage.addEventListener('click', () => {
+            currentIndex = thumbs.findIndex(
+                t => t.dataset.src === mainImage.src
+            );
+            showImage(currentIndex);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        });
+
+        prevBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            showImage(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            showImage(currentIndex + 1);
+        });
+
+        modal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('hidden')) return;
+
+            if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+            if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+            if (e.key === 'Home') showImage(0);
+            if (e.key === 'End') showImage(thumbs.length - 1);
+
+            if (e.key === 'Escape') {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        });
+
+        modalImage.addEventListener('click', (e) => {
+            e.stopPropagation();
+            modalImage.classList.toggle('zoom');
+        });
+
+    });
+</script>
+
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const mainImage = document.getElementById('main-image');
@@ -292,6 +395,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const thumbs = document.getElementById('thumbs');
+        const thumbItems = thumbs.querySelectorAll('.thumb');
 
         const buttons = {
             prevMobile: document.getElementById('thumb-prev-mobile'),
@@ -301,6 +405,14 @@
         };
 
         const scrollAmount = 120;
+
+        if (thumbItems.length < 5) {
+            Object.values(buttons).forEach(btn => {
+                if (btn) btn.style.display = 'none';
+            });
+            return;
+        }
+
 
         buttons.prevMobile?.addEventListener('click', () => {
             thumbs.scrollLeft -= scrollAmount;
@@ -320,30 +432,29 @@
     });
 </script>
 
+
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const desc = document.getElementById('product-desc');
-    const btn = document.getElementById('read-more-btn');
+    document.addEventListener('DOMContentLoaded', () => {
+        const desc = document.getElementById('product-desc');
+        const btn = document.getElementById('read-more-btn');
 
-    if (!desc || desc.scrollHeight <= desc.clientHeight) {
-        btn.style.display = 'none';
-        return;
-    }
-
-    let expanded = false;
-
-    btn.addEventListener('click', () => {
-        expanded = !expanded;
-
-        if (expanded) {
-            desc.classList.remove('max-h-[200px]');
-            btn.innerText = 'Read less';
-        } else {
-            desc.classList.add('max-h-[200px]');
-            btn.innerText = 'Read more';
+        if (!desc || desc.scrollHeight <= desc.clientHeight) {
+            btn.style.display = 'none';
+            return;
         }
-    });
-});
-</script>
 
-@endsection
+        let expanded = false;
+
+        btn.addEventListener('click', () => {
+            expanded = !expanded;
+
+            if (expanded) {
+                desc.classList.remove('max-h-[200px]');
+                btn.innerText = 'Read less';
+            } else {
+                desc.classList.add('max-h-[200px]');
+                btn.innerText = 'Read more';
+            }
+        });
+    });
+</script>
