@@ -31,7 +31,7 @@
                             <div class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
 
 
-                                <a href="{{ route('editUser', $user->id) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-100 transition-all border-t border-gray-50">
+                                <a href="{{ route('editUser', $user->id) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line">
                                         <path d="M13 21h8" />
                                         <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
@@ -44,7 +44,7 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="button" data-id="{{ $user->id }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left">
+                                    <button type="button" data-id="{{ $user->id }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M10 11v6" />
@@ -95,7 +95,7 @@
                     <div class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
 
 
-                        <a href="{{ route('editUser', $user->id) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-100 transition-all border-t border-gray-50">
+                        <a href="{{ route('editUser', $user->id) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line">
                                 <path d="M13 21h8" />
                                 <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
@@ -108,7 +108,7 @@
                             @csrf
                             @method('DELETE')
 
-                            <button type="button" data-id="{{ $user->id }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left">
+                            <button type="button" data-id="{{ $user->id }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M10 11v6" />
@@ -176,7 +176,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
-                showCloseButton: true,
+                showCloseButton: false,
                 buttonsStyling: false,
 
                 reverseButtons: false,
@@ -200,5 +200,4 @@
             });
         });
     });
-
 </script>

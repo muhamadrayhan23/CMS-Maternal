@@ -54,7 +54,7 @@
                             </a>
                             <form method="POST" action="{{ route('deleteAnnouncement', $announcement->id_announcement) }}">
                                 @csrf @method('DELETE')
-                                <button type="submit" class="btn-delete w-full flex gap-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left border-t border-gray-50">
+                                <button type="submit" class="btn-delete w-full flex gap-3 px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left border-t border-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2">
                                         <path d="M10 11v6" />
                                         <path d="M14 11v6" />
@@ -116,7 +116,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
-                showCloseButton: true,
+                showCloseButton: false,
                 buttonsStyling: false,
 
                 reverseButtons: false,

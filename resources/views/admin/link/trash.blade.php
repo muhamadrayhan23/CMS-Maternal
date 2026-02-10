@@ -168,26 +168,6 @@ $type = request()->query('type');
     setupLiveSearch('linkSearch', 'linkTableContainer');
     setupLiveSearch('announcementSearch', 'announcementTableContainer');
 
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const success = "{{ session('success') }}";
-
-        if (success) {
-            Swal.fire({
-                title: 'Success!',
-                text: success,
-                width: '320px',
-                confirmButtonText: 'Close',
-                showConfirmButton: true,
-
-                customClass: {
-                    popup: 'rounded-3xl p-4 shadow-lg',
-                    title: 'text-xl font-bold',
-                    confirmButton: '!bg-green-800'
-                }
-            });
-        }
-    });
 </script>
 
 @endsection
