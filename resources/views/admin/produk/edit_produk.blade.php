@@ -98,6 +98,8 @@
                             <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
                                 <br>
 
+                                <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1366 × 768 px</p>
+
                                 <input type="hidden" name="detail_id[]" value="{{ $detail->id ?? '' }}" required>
 
                                 <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp"
@@ -124,8 +126,10 @@
                                     class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
                                     required>
 
-                                <input type="text" name="variant_price[]" class="..." placeholder="Variant Price"
-                                    oninput="formatRupiah(this)">
+                                <input type="text" name="variant_price[]"
+                                    value="{{ old('variant_price.' . $loop->index, isset($detail->price) ? 'Rp ' . number_format($detail->price, 0, ',', '.') : '') }}"
+                                    class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                                    placeholder="Variant Price" oninput="formatRupiah(this)">
 
                                 <button type="button" onclick="removeRow(this)"
                                     class="absolute top-2 right-2 md:top-3 md:right-3 w-6 h-6 md:w-7 md:h-7 text-xs md:text-sm bg-red-500 text-white rounded-full flex items-center justify-center"
@@ -165,13 +169,14 @@
             document.getElementById('detail-wrapper').insertAdjacentHTML('beforeend', `
             <div class="detail-row border border-gray-200 rounded-xl p-5 space-y-3 relative">
             <br>
+            <p class="text-[10px] text-red-600 font-medium italic">* Resolution: 1366 × 768 px</p>
             <input type="file" name="image_product[]" accept="image/png,image/jpeg,image/webp" onchange="previewImage(this)" class="block w-full text-xs md:text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-gray-500 file:text-white hover:file:bg-gray-600">
             <div class="preview-wrapper hidden relative mt-2">
             <img class="preview-image w-14 md:w-20 rounded-lg object-cover">
             <button type="button" onclick="removePreview(this)" class="absolute -top-2 -right-2 w-5 h-5 bg-blue-600 text-white text-xs rounded-full flex items-center justify-center">✖</button>
             </div>
             <input name="atribute_name[]" placeholder="Variant Name" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" required>
-            <input type="text" name="variant_price[]" class="..." placeholder="Variant Price" oninput="formatRupiah(this)">
+            <input type="text" name="variant_price[]" class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400" placeholder="Variant Price" oninput="formatRupiah(this)">
             <button type="button" onclick="removeRow(this)" class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center">✖</button>
             </div>`)
         }
