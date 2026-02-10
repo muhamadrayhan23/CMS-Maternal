@@ -27,7 +27,7 @@
 
                     <img id="mainImage"
                         src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/400' }}"
-                        class="w-full h-64 md:h-[380px] object-cover rounded-xl shadow-lg">
+                        class="w-full h-auto object-contain rounded-xl shadow-lg">
 
                     <div class="flex gap-3 mt-4 overflow-x-auto">
                         @foreach ($produk->details as $detail)
