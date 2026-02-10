@@ -7,7 +7,7 @@
         <img
             src="{{ asset('img/about/about us-5.png') }}"
             alt="Crafted Goods"
-            class="w-full h-full object-cover animate-heroZoom"
+            class="w-full h-full object-cover hero-img"
         >
 
         <div class="absolute inset-0 bg-black/20"></div>
@@ -122,5 +122,26 @@
     animation: heroZoom 15s ease-in-out forwards;
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const heroImg = document.querySelector('.hero-img');
+
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                heroImg.classList.remove('animate-heroZoom');
+                void heroImg.offsetWidth;
+                heroImg.classList.add('animate-heroZoom');
+            }
+        },
+        {
+            threshold: 0.4
+        }
+    );
+
+    observer.observe(heroImg);
+});
+</script>
 
 @endsection

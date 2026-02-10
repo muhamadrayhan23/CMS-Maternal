@@ -43,7 +43,7 @@
                             </button>
 
                             <div class="action-menu hidden absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-xl shadow-xl z-[100]">
-                                <a href="{{ route('editLink', $link->id_link) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-50 transition-all">
+                                <a href="{{ route('editLink', $link->id_link) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M13 21h8" />
                                         <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
@@ -52,7 +52,7 @@
                                 </a>
                                 <form id="delete-form-{{ $link->id_link }}" method="POST" action="{{ route('deleteLink', $link) }}">
                                     @csrf @method('DELETE')
-                                    <button type="button" data-id="{{ $link->id_link }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all text-left border-t border-gray-50">
+                                    <button type="button" data-id="{{ $link->id_link }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left border-t border-gray-50">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M10 11v6" />
                                             <path d="M14 11v6" />
@@ -107,7 +107,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
-                showCloseButton: true,
+                showCloseButton: false,
                 buttonsStyling: false,
 
                 reverseButtons: false,
@@ -143,7 +143,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
-                showCloseButton: true,
+                showCloseButton: false,
                 buttonsStyling: false,
 
                 reverseButtons: false,
