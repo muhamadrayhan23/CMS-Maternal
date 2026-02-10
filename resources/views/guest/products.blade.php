@@ -36,6 +36,7 @@
 
         <select id="filterStatus"
             class="absolute inset-0 opacity-0 cursor-pointer">
+             <option></option>
             <option value="latest">Newest</option>
             <option value="price_asc">Price: High to low</option>
             <option value="price_desc">Price: Low to high</option>

@@ -40,7 +40,7 @@
             @if ($request->search)
             <span class="font-bold">"{{ $request->search }}"</span> not found.
             @else
-            Empty trash
+            Crafted pieces are coming soon
             @endif
         </div>
     @endforelse

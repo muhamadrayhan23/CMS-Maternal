@@ -108,11 +108,11 @@
 
         <div class="justify items-center md:mt-10">
             <div class="flex items-start justify-between gap-4 md:block w-full">
-                <h1 class="text-xl md:text-3xl font-semibold uppercase">
+                <h1 id="product-title" class="text-xl md:text-3xl font-semibold uppercase">
                     {{ $product->product_name }}
                 </h1>
 
-                <p class="text-md md:text-2xl font-semibold mt-0 md:mt-2 whitespace-nowrap">
+                <p id="product-price" class="text-md md:text-2xl font-semibold mt-0 md:mt-2 whitespace-nowrap">
                     Rp {{ number_format($product->price) }}
                 </p>
             </div>
@@ -135,7 +135,8 @@
                         border border-black text-black md:rounded-sm"
                         data-key="{{ $index }}"
                         data-src="{{ asset('storage/' . $p->image_product) }}"
-                        data-name="{{ $p->atribute_name }}">
+                        data-name="{{ $p->atribute_name }}"
+                        data-price="{{ $p->price ?? $product->price }}">
 
 
                         <img src="{{ asset('storage/' . $p->image_product) }}" alt="" class="w-5 h-5 md:w-8 md:h-8">
@@ -240,6 +241,9 @@
         const thumbs = document.querySelectorAll('.thumb');
         const variants = document.querySelectorAll('.variant-item');
 
+        // const productTitle = document.getElementById('product-title');
+        const productPrice = document.getElementById('product-price');
+
         function clearActive() {
             thumbs.forEach(t => t.classList.remove('ring-2', 'ring-[#ff5e00]'));
             variants.forEach(v => v.classList.remove('border-black', 'bg-[#dddddd]', 'text-white'));
@@ -253,20 +257,30 @@
 
             clearActive();
 
+            // update image
             mainImage.src = thumb.dataset.src;
 
-            if (variantName) {
-                variantName.innerText = thumb.dataset.name;
+            // update variant name
+            if (variantName) variantName.innerText = thumb.dataset.name;
+            if (variantNameMobile) variantNameMobile.innerText = thumb.dataset.name;
+
+            // update title
+            // if (productTitle) {
+            //     productTitle.innerText =
+            //         "{{ Str::upper($product->product_name) }} - " + thumb.dataset.name;
+            // }
+
+            // update price
+            if (productPrice && variant.dataset.price) {
+                const price = parseInt(variant.dataset.price);
+                productPrice.innerText = 'Rp ' + price.toLocaleString('id-ID');
             }
 
-            if (variantNameMobile) {
-                variantNameMobile.innerText = thumb.dataset.name;
-            }
-
-
+            // active state
             thumb.classList.add('ring-2', 'ring-[#ff5e00]');
-            variant.classList.add('border-black', 'bg-[#dddddd]', 'text-');
+            variant.classList.add('border-black', 'bg-[#dddddd]');
         }
+
 
         thumbs.forEach(thumb => {
             thumb.addEventListener('click', () => {

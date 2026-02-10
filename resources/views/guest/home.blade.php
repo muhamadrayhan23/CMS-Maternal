@@ -206,7 +206,7 @@
 
     <div class="relative">
         <a href="{{ route('about') }}">
-        <img src="{{ asset('img/1.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+            <img src="{{ asset('img/1.png') }}" alt="" class="w-full hover:scale-110 duration-500">
         </a>
 
         <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">
@@ -222,7 +222,7 @@
 
     <div class="relative">
         <a href="{{ route('products') }}">
-        <img src="{{ asset('img/2.png') }}" alt="" class="w-full hover:scale-110 duration-500">
+            <img src="{{ asset('img/2.png') }}" alt="" class="w-full hover:scale-110 duration-500">
         </a>
 
         <div class="absolute bottom-6 left-6 flex flex-col gap-1 px-5">
@@ -246,7 +246,11 @@
         const prev = document.getElementById('prevBtn');
         const cards = track.children;
 
-        if (cards.length === 0) return;
+        if (cards.length === 0) {
+            prev.classList.add('hidden');
+            next.classList.add('hidden');
+            return;
+        }
 
         function updateSlider() {
             const cardWidth = cards[0].offsetWidth;
@@ -265,7 +269,7 @@
                 currentIndex = newIndex;
                 track.dataset.index = currentIndex;
                 track.style.transform = `translateX(-${currentIndex * step}px)`;
-                
+
                 prev.classList.toggle('hidden', currentIndex <= 0);
                 next.classList.toggle('hidden', currentIndex >= maxIndex);
             };
@@ -277,8 +281,12 @@
                 move(currentIndex);
             }
 
-            next.onclick = () => { if (currentIndex < maxIndex) move(currentIndex + 1); };
-            prev.onclick = () => { if (currentIndex > 0) move(currentIndex - 1); };
+            next.onclick = () => {
+                if (currentIndex < maxIndex) move(currentIndex + 1);
+            };
+            prev.onclick = () => {
+                if (currentIndex > 0) move(currentIndex - 1);
+            };
         }
 
         updateSlider();
