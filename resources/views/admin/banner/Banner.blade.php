@@ -4,6 +4,7 @@
 @section('content')
 {{-- NAV MANAGE --}}
 <div class="space-y-4 font-sans">
+
     <div class="flex items-center justify-between">
         <h2 class="text-md md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
             Manage Banners
@@ -17,7 +18,7 @@
                     <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                 </svg>
                 <span class="hidden md:inline">Trash</span>
-            </a>
+            </a>           
             <a href="{{ route ('Bhome') }}" class="flex items-center gap-2 px-2 md:px-3 py-2 text-sm font-medium text-white bg-[#333333] border border-[#333333] rounded-md transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="1" />
@@ -40,13 +41,14 @@
                 <span class="hidden md:inline">Add New Banner</span>
             </a>
         </div>
-    </div>
+
+   </div>
 
 
 
-    {{-- SEARCH & FILTER --}}
-    <div class="flex flex-row items-center gap-2 w-full">
-        <div class="relative flex-[4] md:flex-5">
+        {{-- SEARCH & FILTER --}}
+        <div class="flex flex-row items-center gap-2 w-full">
+            <div class="relative flex-[4] md:flex-5">
 
                 <div>
                     <input id="liveSearch" type="text" placeholder="Search Banners" name="search"
@@ -79,6 +81,7 @@
                 </div>
             </div>
         </div>
+</div>
 
 
 
@@ -128,19 +131,18 @@
                 container.innerHTML = data
             })
             .catch(error => console.error('Error nih, Bre:', error));
-    }
+        }
 
-    searchInput.addEventListener('input', fetchFilter)
-    filterBanner.addEventListener('change', function(e) {
-        // console.log('event ke trigger ga?')
-        e.preventDefault(); //menghentikan behavior form 
-        fetchFilter();
-    })
+        searchInput.addEventListener('input', fetchFilter)
+        filterBanner.addEventListener('change', function(e) {
+            // console.log('event ke trigger ga?')
+            e.preventDefault(); //menghentikan behavior form 
+            fetchFilter();
+        })
 
- 
 
-    //alert Succes
-    document.addEventListener('DOMContentLoaded', function() {
+        //alert Succes
+        document.addEventListener('DOMContentLoaded', function() {
 
         const success = "{{ session('success') }}";
 
@@ -157,31 +159,6 @@
                 }
             });
         }
-
-        searchInput.addEventListener('input', fetchFilter)
-        filterBanner.addEventListener('change', function(e) {
-            // console.log('event ke trigger ga?')
-            e.preventDefault(); //menghentikan behavior form 
-            fetchFilter();
-        })
-
-
-        //alert Succes
-        document.addEventListener('DOMContentLoaded', function() {
-
-                Swal.fire({
-                    title: 'Success!',
-                    text: success,
-                    width: '320px',
-                    showConfirmButton: true,
-
-                    customClass: {
-                        popup: 'rounded-3xl p-4 shadow-lg',
-                        title: 'text-xl font-bold',
-                        confirmButton: '!bg-green-800'
-                    }
-                });
-            })
 
                     // alert confirm Delete
                         document.querySelectorAll('.btn-hapus').forEach(button => {
