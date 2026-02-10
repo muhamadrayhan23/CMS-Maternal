@@ -130,7 +130,7 @@
                     <button
                         type="button"
                         class="variant-item flex items-center gap-2
-                        px-2 py-2 text-[11px] rounded-[2px]
+                        px-2 py-2 text-[11px] rounded-xs
                         md:gap-3 md:px-3 md:py-2 md:text-sm 
                         border border-black text-black md:rounded-sm"
                         data-key="{{ $index }}"
@@ -241,7 +241,6 @@
         const thumbs = document.querySelectorAll('.thumb');
         const variants = document.querySelectorAll('.variant-item');
 
-        // const productTitle = document.getElementById('product-title');
         const productPrice = document.getElementById('product-price');
 
         function clearActive() {
@@ -257,7 +256,6 @@
 
             clearActive();
 
-            // update image
             mainImage.src = thumb.dataset.src;
 
             // update variant name
