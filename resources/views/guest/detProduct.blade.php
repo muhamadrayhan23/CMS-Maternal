@@ -11,7 +11,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-16">
 
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 md:sticky md:top-24 self-start">
 
             <nav class="flex items-center justify-between text-xs md:text-sm text-gray-400 md:mt-10">
                 <div>
@@ -26,7 +26,6 @@
                     @endif
                     @endforeach
                 </div>
-
                 <div
                     id="variant-name"
                     class="hidden md:block text-black text-xs md:text-sm font-medium tracking-wide">
@@ -49,7 +48,6 @@
                             <path d="m18 15-6-6-6 6" />
                         </svg>
                     </button>
-
                     <button id="thumb-prev-mobile"
                         class="md:hidden mx-3 absolute left-0 top-1/2 -translate-y-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -85,7 +83,6 @@
                             <path d="m9 18 6-6-6-6" />
                         </svg>
                     </button>
-
                     <button id="thumb-next-desktop"
                         class="hidden md:flex absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gray-600/70 shadow rounded-full p-1 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -93,10 +90,7 @@
                             <path d="m6 9 6 6 6-6" />
                         </svg>
                     </button>
-
                 </div>
-
-
             </div>
         </div>
         <div
@@ -118,9 +112,19 @@
             </div>
 
 
-            <p class="mt-2 text-gray-600 text-xs p-3 text-justify md:text-base leading-relaxed bg-gray-100 rounded-md md:p-5">
-                {{ $product->desc }}
-            </p>
+            <div class="relative">
+                <p id="product-desc"
+                    class="mt-2 text-gray-600 text-xs p-3 text-justify md:text-base leading-relaxed bg-gray-100 rounded-md md:p-5 
+                    max-h-[200px] overflow-hidden transition-all duration-300">
+                    {!! nl2br(e($product->desc)) !!}
+                </p>
+
+                <button id="read-more-btn"
+                    class="mt-2 text-xs md:text-sm font-medium text-black underline">
+                    Read more
+                </button>
+            </div>
+
 
             <div class="flex flex-col gap-5 mt-8 mb-8">
                 <h2 class="text-sm md:text-base font-sans">Variant :</h2>
@@ -130,7 +134,7 @@
                     <button
                         type="button"
                         class="variant-item flex items-center gap-2
-                        px-2 py-2 text-[11px] rounded-[2px]
+                        px-2 py-2 text-[11px] rounded-xs
                         md:gap-3 md:px-3 md:py-2 md:text-sm 
                         border border-black text-black md:rounded-sm"
                         data-key="{{ $index }}"
@@ -241,7 +245,6 @@
         const thumbs = document.querySelectorAll('.thumb');
         const variants = document.querySelectorAll('.variant-item');
 
-        // const productTitle = document.getElementById('product-title');
         const productPrice = document.getElementById('product-price');
 
         function clearActive() {
@@ -257,26 +260,16 @@
 
             clearActive();
 
-            // update image
             mainImage.src = thumb.dataset.src;
 
-            // update variant name
             if (variantName) variantName.innerText = thumb.dataset.name;
             if (variantNameMobile) variantNameMobile.innerText = thumb.dataset.name;
 
-            // update title
-            // if (productTitle) {
-            //     productTitle.innerText =
-            //         "{{ Str::upper($product->product_name) }} - " + thumb.dataset.name;
-            // }
-
-            // update price
             if (productPrice && variant.dataset.price) {
                 const price = parseInt(variant.dataset.price);
                 productPrice.innerText = 'Rp ' + price.toLocaleString('id-ID');
             }
 
-            // active state
             thumb.classList.add('ring-2', 'ring-[#ff5e00]');
             variant.classList.add('border-black', 'bg-[#dddddd]');
         }
@@ -327,10 +320,30 @@
     });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const desc = document.getElementById('product-desc');
+    const btn = document.getElementById('read-more-btn');
 
+    if (!desc || desc.scrollHeight <= desc.clientHeight) {
+        btn.style.display = 'none';
+        return;
+    }
 
+    let expanded = false;
 
+    btn.addEventListener('click', () => {
+        expanded = !expanded;
 
-
+        if (expanded) {
+            desc.classList.remove('max-h-[200px]');
+            btn.innerText = 'Read less';
+        } else {
+            desc.classList.add('max-h-[200px]');
+            btn.innerText = 'Read more';
+        }
+    });
+});
+</script>
 
 @endsection
