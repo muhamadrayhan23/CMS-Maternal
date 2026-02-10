@@ -103,18 +103,6 @@
         }
     }
 
-    function confirmEdit() {
-        if (confirm('Are you sure you want to update this announcement?')) {
-            document.getElementById('edit-form').submit();
-        }
-    }
-
-    function confirmBack() {
-        if (confirm('Discard changes and go back?')) {
-            window.location.href = "{{ route('homeLink') }}";
-        }
-    }
-
     window.routes = {
         homeLink: "{{ route('homeLink') }}"
     }
