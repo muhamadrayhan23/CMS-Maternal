@@ -12,7 +12,7 @@
 
                 <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
 
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@
                         <span class="hidden md:inline font-sans">Trash</span>
                     </a>
                     <a href="{{ route('produk.index') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.87">
@@ -36,7 +36,7 @@
                         <span class="hidden md:inline font-sans">List View</span>
                     </a>
                     <a href="{{ route('produk.kelola_card') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
                         <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -70,7 +70,7 @@
                         <span class="hidden md:inline font-sans">Grid View</span>
                     </a>
                     <a href="{{ route('produk.create') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
@@ -188,6 +188,10 @@
                             <span
                                 class="px-4 py-2 text-white text-sm font-bold tracking-widest bg-red-600/90 rounded-full">
                                 SOLD OUT
+                            </span>
+                            <span
+                                class="absolute top-3 left-3 px-3 py-1 text-xs rounded-full {{ $p->is_active ? 'text-green-700 bg-green-100/90' : 'text-red-700 bg-red-100/90' }}">
+                                {{ $p->is_active ? 'Published' : 'Unpublished' }}
                             </span>
                         </div>
                     @endif
@@ -323,7 +327,7 @@
                                         <input type="hidden" name="page" value="{{ request('page') }}">
 
                                         <button type="button"
-                                            class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
+                                            class="btn-hapus w-full flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -446,7 +450,7 @@
                     showCancelButton: true,
                     confirmButtonText: 'Yes',
                     cancelButtonText: 'Cancel',
-                    showCloseButton: true,
+                    showCloseButton: false,
                     buttonsStyling: false,
 
                     reverseButtons: false,
