@@ -36,13 +36,12 @@
         </p>
     </div>
     @empty
-        <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
-            @if ($request->search)
-            <span class="font-bold">"{{ $request->search }}"</span> not found.
-            @else
-            Crafted pieces are coming soon
-            @endif
-        </div>
+    <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
+        @if ($request->search)
+        <span class="font-bold">"{{ $request->search }}"</span> not found.
+        @else
+        Crafted pieces are coming soon
+        @endif
+    </div>
     @endforelse
 </div>
-
