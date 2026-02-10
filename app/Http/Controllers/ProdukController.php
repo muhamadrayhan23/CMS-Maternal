@@ -62,7 +62,7 @@ class ProdukController extends Controller
             $query->where('is_available', $request->stok);
         }
 
-        $produk = $query->paginate(8);
+        $produk = $query->paginate(9);
         return view('admin.produk.kelola_produk_card', compact('produk'));
     }
 
