@@ -7,12 +7,12 @@
 
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
-                    Manage Products
+                    Recently Deleted Products
                 </h2>
 
                 <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
 
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@
                         <span class="hidden md:inline font-sans">Trash</span>
                     </a>
                     <a href="{{ route('produk.index') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.87">
@@ -36,7 +36,7 @@
                         <span class="hidden md:inline font-sans">List View</span>
                     </a>
                     <a href="{{ route('produk.kelola_card') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
                         <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -70,7 +70,7 @@
                         <span class="hidden md:inline font-sans">Grid View</span>
                     </a>
                     <a href="{{ route('produk.create') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
@@ -248,121 +248,122 @@
             </div>
 
         </div>
+    </div>
 
-        <script>
-            let timeout;
+    <script>
+        let timeout;
 
-            function submitFilter() {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => filterForm.submit(), 500);
+        function submitFilter() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => filterForm.submit(), 500);
+        }
+
+        function toggleMenu(btn) {
+            event.stopPropagation();
+
+            const menu = btn.parentElement.querySelector('.action-menu');
+            document.querySelectorAll('.action-menu').forEach(m => {
+                if (m !== menu) m.classList.add('hidden');
+            });
+
+            const rect = btn.getBoundingClientRect();
+            menu.classList.remove('hidden');
+
+            const menuWidth = menu.offsetWidth;
+            const menuHeight = menu.offsetHeight;
+            const offsetLeft = 30;
+            const offsetTop = 6;
+
+            let left = rect.left - menuWidth + rect.width - offsetLeft;
+            left = Math.max(8, left);
+            let top;
+
+            const spaceBelow = window.innerHeight - rect.bottom;
+            const spaceAbove = rect.top;
+
+            if (spaceBelow < menuHeight + offsetTop && spaceAbove > menuHeight) {
+                top = rect.top - menuHeight - offsetTop;
+            } else {
+                top = rect.bottom + offsetTop;
             }
 
-            function toggleMenu(btn) {
-                event.stopPropagation();
-
-                const menu = btn.parentElement.querySelector('.action-menu');
-                document.querySelectorAll('.action-menu').forEach(m => {
-                    if (m !== menu) m.classList.add('hidden');
-                });
-
-                const rect = btn.getBoundingClientRect();
-                menu.classList.remove('hidden');
-
-                const menuWidth = menu.offsetWidth;
-                const menuHeight = menu.offsetHeight;
-                const offsetLeft = 30;
-                const offsetTop = 6;
-
-                let left = rect.left - menuWidth + rect.width - offsetLeft;
-                left = Math.max(8, left);
-                let top;
-
-                const spaceBelow = window.innerHeight - rect.bottom;
-                const spaceAbove = rect.top;
-
-                if (spaceBelow < menuHeight + offsetTop && spaceAbove > menuHeight) {
-                    top = rect.top - menuHeight - offsetTop;
-                } else {
-                    top = rect.bottom + offsetTop;
-                }
-
-                menu.style.left = left + 'px';
-                menu.style.top = top + 'px';
-            }
+            menu.style.left = left + 'px';
+            menu.style.top = top + 'px';
+        }
 
 
-            document.addEventListener('click', () => {
-                document.querySelectorAll('.action-menu')
-                    .forEach(m => m.classList.add('hidden'));
-            });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.action-menu')
+                .forEach(m => m.classList.add('hidden'));
+        });
 
-            document.querySelectorAll('.btn-restore').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
+        document.querySelectorAll('.btn-restore').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
 
-                    Swal.fire({
-                        title: 'Restore Product?',
-                        text: 'This product will be restored. Are you sure?',
-                        showCancelButton: true,
-                        confirmButtonText: 'Yes',
-                        cancelButtonText: 'Cancel',
-                        showCloseButton: true,
-                        buttonsStyling: false,
+                Swal.fire({
+                    title: 'Restore Product?',
+                    text: 'This product will be restored. Are you sure?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel',
+                    showCloseButton: false,
+                    buttonsStyling: false,
 
-                        reverseButtons: false,
+                    reverseButtons: false,
 
-                        customClass: {
-                            popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
-                            title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
-                            htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
+                    customClass: {
+                        popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                        title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                        htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
 
-                            actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+                        actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
 
-                            confirmButton: 'flex-1 !bg-white !text-black !px-6 !py-3 !rounded-lg !font-bold !text-base !border !border-gray-900 hover:!bg-gray-200 transition-all !m-0 !outline-none !shadow-none',
-                            cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-gray-700 transition-all !m-0 !outline-none !shadow-none',
-                            closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
-                        },
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.closest('form').submit();
-                        }
-                    });
+                        confirmButton: 'flex-1 !bg-white !text-black !px-6 !py-3 !rounded-lg !font-bold !text-base !border !border-gray-900 hover:!bg-gray-200 transition-all !m-0 !outline-none !shadow-none',
+                        cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-gray-700 transition-all !m-0 !outline-none !shadow-none',
+                        closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit();
+                    }
                 });
             });
+        });
 
-            document.querySelectorAll('.btn-hapus-permanent').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
+        document.querySelectorAll('.btn-hapus-permanent').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
 
-                    Swal.fire({
-                        title: 'Delete Product?',
-                        text: 'This product will be permanently deleted. Are you sure?',
-                        showCancelButton: true,
-                        confirmButtonText: 'Yes',
-                        cancelButtonText: 'Cancel',
-                        showCloseButton: true,
-                        buttonsStyling: false,
+                Swal.fire({
+                    title: 'Delete Product?',
+                    text: 'This product will be permanently deleted. Are you sure?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel',
+                    showCloseButton: false,
+                    buttonsStyling: false,
 
-                        reverseButtons: false,
+                    reverseButtons: false,
 
-                        customClass: {
-                            popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
-                            title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
-                            htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
+                    customClass: {
+                        popup: 'rounded-[8rem] !p-10 shadow-2xl border-none min-w-[90%] md:min-w-[550px] !items-start',
+                        title: '!text-left !text-3xl font-bold text-gray-900 w-full !justify-start !flex !p-0 !m-0 !mb-5',
+                        htmlContainer: '!text-left !text-gray-500 !text-lg w-full !m-0 !mb-10 !justify-start !flex !p-0',
 
-                            actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
+                        actions: 'flex w-full !justify-between gap-4 px-4 w-full !m-0 !p-0',
 
-                            confirmButton: 'flex-1 !bg-red-600 !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-red-700 transition-all !m-0 !outline-none !shadow-none',
-                            cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-black transition-all !m-0 !outline-gray-600 !shadow-none',
-                            closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
-                        },
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.closest('form').submit();
-                        }
-                    });
+                        confirmButton: 'flex-1 !bg-red-600 !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-red-700 transition-all !m-0 !outline-none !shadow-none',
+                        cancelButton: 'flex-1 bg-[#111111] !text-white !px-6 !py-3 !rounded-lg !font-bold !text-base hover:!bg-black transition-all !m-0 !outline-gray-600 !shadow-none',
+                        closeButton: 'focus:!outline-none focus:!ring-0 !border-none !text-gray-400'
+                    },
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.closest('form').submit();
+                    }
                 });
             });
-        </script>
+        });
+    </script>
 
-    @endsection
+@endsection
