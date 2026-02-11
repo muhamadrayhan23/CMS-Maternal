@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Link;
-use App\Models\Announcement;
+use App\Models\announcement;
 use Illuminate\Http\Request;
 
 class AdmLinksController extends Controller
@@ -17,7 +17,7 @@ class AdmLinksController extends Controller
 
         if ($request->ajax()) {
             if ($type == 'announcements') {
-                $announcements = Announcement::when($search, function ($q) use ($search) {
+                $announcements = announcement::when($search, function ($q) use ($search) {
                     $q->where('announcement_name', 'like', "%{$search}%");
                 })->latest()->paginate(8);
 
@@ -33,7 +33,7 @@ class AdmLinksController extends Controller
 
         // Load data awal untuk tampilan non-AJAX
         $links = Link::latest()->paginate(8);
-        $announcements = Announcement::latest()->paginate(8);
+        $announcements = announcement::latest()->paginate(8);
 
         return view('admin.link.index', compact('links', 'announcements', 'type'));
     }
@@ -43,7 +43,7 @@ class AdmLinksController extends Controller
     public function announcement(Request $request)
     {
         $search = $request->search;
-        $announcements = Announcement::when($search, function ($q) use ($search) {
+        $announcements = announcement::when($search, function ($q) use ($search) {
             $q->where('announcement_name', 'like', "%{$search}%");
         })
             ->latest()
@@ -129,7 +129,7 @@ class AdmLinksController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('link_pic'), $filename);
 
-            Announcement::create([
+            announcement::create([
                 'announcement_image'    => 'link_pic/' . $filename,
                 'announcement_name'    => $announcement['name'],
                 'announcement_address' => $announcement['address'],
@@ -172,14 +172,14 @@ class AdmLinksController extends Controller
     }
 
     //edit announcement
-    public function editAnnouncement(Announcement $announcement)
+    public function editAnnouncement(announcement $announcement)
     {
-        $announcements = Announcement::all();
+        $announcements = announcement::all();
         return view('admin.link.edannouncement', compact('announcement', 'announcements'));
     }
 
     //update announcement
-    public function updateAnnouncement(Request $request, Announcement $announcement)
+    public function updateAnnouncement(Request $request, announcement $announcement)
     {
         try {
             $request->validate([
@@ -227,7 +227,7 @@ class AdmLinksController extends Controller
     }
 
     //delete announcement
-    public function destroyAnnouncement(Announcement $announcement)
+    public function destroyAnnouncement(announcement $announcement)
     {
         $announcement->delete();
 
@@ -271,7 +271,7 @@ class AdmLinksController extends Controller
     {
         $search = $request->search;
 
-        $announcements = Announcement::onlyTrashed()
+        $announcements = announcement::onlyTrashed()
             ->when($search, function ($q) use ($search) {
                 $q->where('announcement_name', 'like', "%{$search}%");
             })
@@ -288,7 +288,7 @@ class AdmLinksController extends Controller
 
     public function restoreProsesAnnouncement($id)
     {
-        $announcement = Announcement::withTrashed()->findOrFail($id);
+        $announcement = announcement::withTrashed()->findOrFail($id);
 
         $announcement->is_active = 0;
 
@@ -308,13 +308,13 @@ class AdmLinksController extends Controller
     //forced delete announcement
     public function forceDeleteAnnouncement($id)
     {
-        Announcement::withTrashed()->findOrFail($id)->forceDelete();
+        announcement::withTrashed()->findOrFail($id)->forceDelete();
 
         return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Announcement successfully deleted permanently');
     }
 
     //status banner
-    public function status(Announcement $announcement)
+    public function status(announcement $announcement)
     {
         // Cara yang lebih aman untuk toggle boolean
         $announcement->is_active = $announcement->is_active ? 0 : 1;
