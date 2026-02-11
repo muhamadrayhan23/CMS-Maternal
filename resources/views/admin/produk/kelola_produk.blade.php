@@ -86,7 +86,7 @@
                     <div class="md:col-span-9 relative bg-gray-100">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
                             oninput="submitFilter()"
-                            class="w-full px-4 py-2 pr-10 rounded bg-white text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
+                            class="w-full px-4 py-2 pr-10 rounded bg-gray-100 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
                         <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
@@ -99,7 +99,7 @@
                     <div class="md:col-span-3 flex gap-2">
                         <div class="relative flex-1">
                             <select name="status" onchange="filterForm.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
                                 <option value="">Status</option>
                                 <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
                                     Published
@@ -120,7 +120,7 @@
                         </div>
                         <div class="relative flex-1">
                             <select name="stok" onchange="this.form.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
                                 <option value="">Stok</option>
                                 <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>
                                     Available
