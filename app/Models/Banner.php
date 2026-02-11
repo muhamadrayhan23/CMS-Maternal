@@ -9,7 +9,7 @@ class Banner extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'Banner';
+    protected $table = 'banner';
 
     protected $primaryKey = 'id_banner';
 
