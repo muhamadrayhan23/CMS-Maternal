@@ -163,7 +163,7 @@ class AdmLinksController extends Controller
                 'is_active' => $request->boolean('is_active'),
             ]);
 
-            return redirect()->route('homeLink')
+            return redirect()->route('homeLink', ['type' => 'link'])
                 ->with('success', 'Link successfully updated');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'An error occurred while updating the link: ' . $e->getMessage()]);
