@@ -18,7 +18,7 @@
 <!-- Hero section (big banner) -->
 <div id="default-carousel" data-carousel="slide" class="group relative">
 
-    <div class="relative w-full h-screen md:h-screen font-sans -mt-22 overflow-hidden">
+    <div class="relative w-full h-[50vh] md:h-screen font-sans -mt-22 overflow-hidden">
         @foreach($banners as $index => $banner)
         <div class="{{ $index === 0 ? '' : 'hidden' }} duration-700 ease-in-out"
             data-carousel-item="{{ $index === 0 ? 'active' : '' }}">
@@ -29,7 +29,7 @@
 
             <div class="absolute inset-x-0 bottom-10 md:bottom-15 flex justify-center">
                 <a href="{{ route('products')}}"
-                    class="px-7 py-2 rounded-full border-2 border-white text-white font-medium text-md font-sans hover:bg-white hover:text-black transition">
+                    class="px-4 md:px-7 py-1 md:py-2 rounded-full border-2 border-white text-white font-medium text-md font-sans hover:bg-white hover:text-black transition">
                     Shop Now
                 </a>
             </div>
