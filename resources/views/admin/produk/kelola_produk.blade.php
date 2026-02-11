@@ -81,15 +81,14 @@
                 </div>
             </div>
 
-            <form method="GET" action="{{ route('produk.index') }}" id="filterForm" class="mb-4">
-                <div class="grid grid-cols-12 gap-2">
-                    <div class="col-span-6 sm:col-span-7 relative">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search"
+            <form method="GET" action="{{ route('produk.kelola_card') }}" id="filterForm" class="mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                    <div class="md:col-span-9 relative bg-gray-100">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
                             oninput="submitFilter()"
-                            class="w-full px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none" />
-                        <div
-                            class="absolute inset-y-0 right-2 sm:right-3 flex items-center pointer-events-none text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                            class="w-full px-4 py-2 pr-10 rounded bg-white text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
+                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="11" cy="11" r="8" />
                                 <path d="m21 21-4.3-4.3" />
@@ -97,45 +96,47 @@
                         </div>
                     </div>
 
-                    <div class="col-span-3 relative">
-                        <select name="status" onchange="this.form.submit()"
-                            class="w-full appearance-none px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none">
-                            <option value="">Status</option>
-                            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Published
-                            </option>
-                            <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Unpublished
-                            </option>
-                        </select>
+                    <div class="md:col-span-3 flex gap-2">
+                        <div class="relative flex-1">
+                            <select name="status" onchange="filterForm.submit()"
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                <option value="">Status</option>
+                                <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
+                                    Published
+                                </option>
+                                <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>
+                                    Unpublished
+                                </option>
+                            </select>
 
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-2 sm:right-3 flex items-center text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                fill="none" stroke="black" stroke-width="2">
-                                <path
-                                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
-                                <path d="m9 12 2 2 4-4" />
-                            </svg>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                    <path
+                                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                    <path d="m9 12 2 2 4-4" />
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-span-3 sm:col-span-2 relative">
-                        <select name="stok" onchange="this.form.submit()"
-                            class="w-full appearance-none px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none">
-                            <option value="">Stok</option>
-                            <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>Available
-                            </option>
-                            <option value="0" {{ request('stok') === '0' ? 'selected' : '' }}>Unavailable
-                            </option>
-                        </select>
-
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-2 sm:right-3 flex items-center text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                fill="none" stroke="black" stroke-width="2">
-                                <path
-                                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
-                                <path d="m9 12 2 2 4-4" />
-                            </svg>
+                        <div class="relative flex-1">
+                            <select name="stok" onchange="this.form.submit()"
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                <option value="">Stok</option>
+                                <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>
+                                    Available
+                                </option>
+                                <option value="0" {{ request('stok') === '0' ? 'selected' : '' }}>
+                                    Unavailable
+                                </option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                                    <path
+                                        d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                                    <path d="m9 12 2 2 4-4" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
