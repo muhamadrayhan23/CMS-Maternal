@@ -25,7 +25,7 @@
                         $mainImage = optional($produk->details->first())->image_product;
                     @endphp
 
-                    <div class="w-full h-[400px] rounded-xl shadow-lg overflow-hidden bg-gray-100">
+                    <div class="w-full aspect-square bg-gray-100 rounded-xl shadow-lg overflow-hidden">
                         <img id="mainImage"
                             src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/400' }}"
                             class="w-full h-full object-contain">
