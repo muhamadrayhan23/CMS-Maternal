@@ -93,14 +93,14 @@
                     </svg>
                 </a>
 
-                <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
+                <h2 class="text-xs md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
                     MANAGE LINKS
                 </h2>
             </div>
 
             <div class="flex items-center gap-2">
                 <a href="{{ route('trashLink', ['type' => 'link']) }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-icon lucide-trash">
                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
                         <path d="M3 6h18" />
@@ -109,7 +109,7 @@
                     <span class="hidden md:inline">Trash</span>
                 </a>
                 <a href="{{ route('homeLink', ['type' => 'link']) }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-[#333333] hover:bg-black border border-gray-300 rounded-md transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="1" />
                         <circle cx="19"
                             cy="12" r="1" />
@@ -166,7 +166,7 @@
                         <path d="M19 12H5" />
                     </svg>
                 </a>
-                <h2 class="text-sm font-bold tracking-wider text-[#0F172A] uppercase">
+                <h2 class="text-xs md:text-sm font-bold tracking-wider text-[#0F172A] uppercase">
                     MANAGE ANNOUNCEMENT
                 </h2>
             </div>
@@ -174,7 +174,7 @@
 
             <div class="flex items-center gap-2">
                 <a href="{{ route('trashAnnouncement', ['type' => 'announcement']) }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-icon lucide-trash">
                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
                         <path d="M3 6h18" />
@@ -198,7 +198,7 @@
                     <span class="hidden md:inline">All Announcements</span>
                 </a>
                 <a href="{{ route('createAnnouncement') }}" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-all">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14" />
                         <path d="M12 5v14" />
                     </svg>

@@ -6,7 +6,7 @@
                     <th class="p-2 whitespace-nowrap">Status</th>
                     <th class="p-2 whitespace-nowrap">Link Name</th>
                     <th class="p-2 whitespace-nowrap">Link</th>
-                    <th class="p-2 whitespace-nowrap">Action</th>
+                    <th class="p-3 whitespace-nowrap">Action</th>
                 </tr>
             </thead>
             <tbody class="text-center divide-y divide-gray-50">
