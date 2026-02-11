@@ -25,9 +25,11 @@
                         $mainImage = optional($produk->details->first())->image_product;
                     @endphp
 
-                    <img id="mainImage"
-                        src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/400' }}"
-                        class="w-full h-auto object-contain rounded-xl shadow-lg">
+                    <div class="w-full h-[400px] rounded-xl shadow-lg overflow-hidden bg-gray-100">
+                        <img id="mainImage"
+                            src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/400' }}"
+                            class="w-full h-full object-contain">
+                    </div>
 
                     <div class="flex gap-3 mt-4 overflow-x-auto">
                         @foreach ($produk->details as $detail)

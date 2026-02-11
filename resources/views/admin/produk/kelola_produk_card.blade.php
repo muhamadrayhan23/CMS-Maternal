@@ -211,7 +211,7 @@
                                 </button>
 
                                 <div
-                                    class="action-menu hidden absolute right-15 -mt-17 w-44 bg-white rounded-lg shadow-lg z-[9999] text-left">
+                                    class="action-menu hidden absolute right-15 -mt-17 w-44 bg-white rounded-lg shadow-lg z-20 text-left">
 
                                     <form action="{{ route('produk.toggle', $p->id_product) }}" method="POST">
                                         @csrf
