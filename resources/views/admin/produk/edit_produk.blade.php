@@ -45,15 +45,15 @@
                         class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
                         required>
 
-                    <textarea name="desc"
-                        class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
-                        placeholder="Description" required>{{ isset($produk) ? $produk->desc : '' }}</textarea>
-
                     <input type="text" id="price" name="price"
                         class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
                         placeholder="Price"
                         value="{{ isset($produk) ? 'Rp ' . number_format($produk->price, 0, ',', '.') : '' }}" required
                         oninput="formatRupiah(this)">
+
+                    <textarea name="desc"
+                        class="w-full px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm mt-1 bg-[#F9FAFB] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300 transition-all placeholder:text-gray-400"
+                        placeholder="Description" required>{{ isset($produk) ? $produk->desc : '' }}</textarea>
 
                 </div>
 
