@@ -25,9 +25,11 @@
                         $mainImage = optional($produk->details->first())->image_product;
                     @endphp
 
-                    <img id="mainImage"
-                        src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/400' }}"
-                        class="w-full h-auto object-contain rounded-xl shadow-lg">
+                    <div class="w-full aspect-square bg-gray-100 rounded-xl shadow-lg overflow-hidden">
+                        <img id="mainImage"
+                            src="{{ $mainImage ? asset('storage/' . $mainImage) : 'https://via.placeholder.com/400' }}"
+                            class="w-full h-full object-contain">
+                    </div>
 
                     <div class="flex gap-3 mt-4 overflow-x-auto">
                         @foreach ($produk->details as $detail)
@@ -58,7 +60,7 @@
                     </p>
 
                     <div class="bg-white rounded-xl shadow p-6 gap-8">
-                        <h3 class="font-semibold mb-2">Attribute Name:</h3>
+                        <h3 class="font-semibold mb-2">Variants:</h3>
                         <p id="attributeText" class="text-gray-700 font-semibold">
                             {{ $produk->details->first()?->atribute_name ?? '-' }}
                         </p>

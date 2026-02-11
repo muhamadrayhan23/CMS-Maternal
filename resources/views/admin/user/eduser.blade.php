@@ -20,7 +20,7 @@
                 </a>
                 <h1 class="text-sm font-bold tracking-wider text-gray-800 uppercase">Edit User</h1>
             </div>
-            <button type="button" class="px-8 py-2 text-sm font-medium text-white bg-[#2D2D2A] rounded-lg hover:bg-black transition-colors">
+            <button type="submit" class="px-8 py-2 text-sm font-medium text-white bg-[#2D2D2A] rounded-lg hover:bg-black transition-colors">
                 Submit
             </button>
 

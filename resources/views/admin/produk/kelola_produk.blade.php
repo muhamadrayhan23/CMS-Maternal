@@ -82,8 +82,8 @@
             </div>
 
             <form method="GET" action="{{ route('produk.index') }}" id="filterForm" class="mb-4">
-                <div class="grid grid-cols-12 gap-2">
-                    <div class="col-span-6 sm:col-span-7 relative">
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                    <div class="col-span-2 sm:col-span-7 relative">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search"
                             oninput="submitFilter()"
                             class="w-full px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none" />
@@ -97,7 +97,7 @@
                         </div>
                     </div>
 
-                    <div class="col-span-3 relative">
+                    <div class="col-span-1 sm:col-span-3 relative">
                         <select name="status" onchange="this.form.submit()"
                             class="w-full appearance-none px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none">
                             <option value="">Status</option>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="col-span-3 sm:col-span-2 relative">
+                    <div class="col-span-1 sm:col-span-2 relative">
                         <select name="stok" onchange="this.form.submit()"
                             class="w-full appearance-none px-2 sm:px-4 py-2 pr-8 sm:pr-10 text-xs sm:text-sm rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none">
                             <option value="">Stok</option>
@@ -308,8 +308,8 @@
                                                         <button
                                                             class="w-full px-4 py-3 text-sm hover:bg-gray-100 transition-all flex gap-2.5 text-left">
                                                             @if ($p->is_available)
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                    height="18" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
                                                                     stroke-linecap="round" stroke-linejoin="round"
                                                                     class="lucide lucide-x-icon lucide-x">
@@ -318,8 +318,8 @@
                                                                 </svg>
                                                                 <span>Unavailable</span>
                                                             @else
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                    height="18" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
                                                                     stroke-linecap="round" stroke-linejoin="round"
                                                                     class="lucide lucide-check-icon lucide-check">
@@ -334,8 +334,8 @@
                                                 <li>
                                                     <a href="{{ route('produk.edit', $p->id_product) }}"
                                                         class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" viewBox="0 0 24 24" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                            height="18" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                             stroke-linejoin="round"
                                                             class="lucide lucide-pen-line-icon lucide-pen-line">
@@ -378,8 +378,8 @@
                                                 <li>
                                                     <a href="{{ route('produk.show', $p->id_product) }}"
                                                         class="flex gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all text-left">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                            height="18" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                             stroke-linejoin="round"
                                                             class="lucide lucide-eye-icon lucide-eye">
