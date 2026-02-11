@@ -18,7 +18,7 @@
 <!-- Hero section (big banner) -->
 <div id="default-carousel" data-carousel="slide" class="group relative">
 
-    <div class="relative w-full h-[50vh] md:h-screen font-sans -mt-22 overflow-hidden">
+    <div class="relative w-full h-screen md:h-screen font-sans -mt-22 overflow-hidden">
         @foreach($banners as $index => $banner)
         <div class="{{ $index === 0 ? '' : 'hidden' }} duration-700 ease-in-out"
             data-carousel-item="{{ $index === 0 ? 'active' : '' }}">
