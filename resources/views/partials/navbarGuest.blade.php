@@ -114,12 +114,6 @@
             {{ request()->routeIs('linktree') ? 'bg-black/10 text-black font-medium' : 'text-black/70 hover:bg-black/5' }}">
             Links
         </a>
-
-        <a href="{{ route('login') }}"
-            class="block w-full px-4 py-3 rounded-lg transition
-            {{ request()->routeIs('login') ? 'bg-black/10 text-black font-medium' : 'text-black/70 hover:bg-black/5' }}">
-            Login
-        </a>
     </div>
 </nav>
 <script>
