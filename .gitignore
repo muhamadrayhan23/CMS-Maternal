@@ -23,3 +23,5 @@ Homestead.yaml
 Thumbs.db
 /public/storage/produk/*
 !/public/storage/produk/.gitkeep
+/public/storage/
+
