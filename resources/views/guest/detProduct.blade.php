@@ -17,7 +17,7 @@
     }
 </style>
 
-<div class="mx-auto px-4 md:px-10 overflow-x-hidden">
+<div class="mx-auto px-4 md:px-10">
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-16">
 
@@ -110,7 +110,7 @@
         </div>
 
 
-        <div class="justify items-center md:mt-10">
+        <div class="self-start md:mt-10">
             <div class="flex items-start justify-between gap-4 md:block w-full">
                 <h1 id="product-title" class="text-xl md:text-3xl font-semibold uppercase">
                     {{ $product->product_name }}
@@ -169,7 +169,7 @@
                     <line x1="12" x2="12" y1="8" y2="12" />
                     <line x1="12" x2="12.01" y1="16" y2="16" />
                 </svg>
-                <h2 class="font-san">Unvailable — Restocking Soon</h2>
+                <h2 class="font-san">Unavailable — Restocking Soon</h2>
             </div>
             @else
             <div class="flex flex-col gap-4 md:mt-8 mb-8">
