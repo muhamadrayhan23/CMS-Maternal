@@ -2,38 +2,35 @@
     data-has-more="{{ $products->hasMorePages() ? '1' : '0' }}">
 
     @forelse ($products as $product)
-    <div class="relative aspect-square transition-all duration-300 hover:scale-105 cursor-pointer">
+    <div class="group cursor-pointer">
 
         @if ($product->details->count())
-        <div class="relative">
+        <a href="{{ route('detproduct', $product->id_product) }}"
+           class="block relative w-full aspect-square overflow-hidden transition-transform duration-300 group-hover:scale-105">
 
-            <a href="{{ route('detproduct', $product->id_product) }}">
-                <img
-                    src="{{ asset('storage/' . $product->details->first()->image_product) }}"
-                    class="w-full h-full object-cover">
-            </a>
-
+            <img
+                src="{{ asset('storage/' . $product->details->first()->image_product) }}"
+                class="w-full h-full object-cover">
 
             @if (!$product->is_available)
-            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span class="bg-red-700/70 text-white w-90 h-20 flex items-center justify-center
-                 text-sm">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+                <span class="bg-red-600 text-white px-6 py-2 text-sm tracking-widest">
                     SOLD OUT
                 </span>
             </div>
             @endif
 
-
-        </div>
+        </a>
         @endif
 
-        <h3 class="mt-3 font-semibold text-lg text-center">
+        <h3 class="mt-4 font-semibold text-lg text-center">
             {{ Str::upper($product->product_name) }}
         </h3>
 
         <p class="mt-2 font-bold text-center">
             Rp {{ number_format($product->price) }}
         </p>
+
     </div>
     @empty
     <div class="col-span-full text-center py-10 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
@@ -44,4 +41,5 @@
         @endif
     </div>
     @endforelse
+
 </div>
