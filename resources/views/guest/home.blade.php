@@ -15,7 +15,6 @@
     }
 </style>
 
-<!-- Hero section (big banner) -->
 <div id="default-carousel" data-carousel="slide" class="group relative">
 
     <div class="relative w-full h-screen md:h-screen font-sans -mt-22 overflow-hidden">
@@ -79,7 +78,6 @@
     </button>
 </div>
 
-<!-- Preview of products section -->
 <div id="product-cards"
     class="relative flex flex-col md:flex-row gap-10 md:gap-20
     px-5 md:px-10 py-14">
@@ -166,7 +164,6 @@
     </div>
 </div>
 
-<!-- About us preview section -->
 <div class="flex flex-col md:flex-row">
 
     <div class="relative">

@@ -37,7 +37,7 @@
 
         
         <ul class="list-none px-6 m-4 space-y-1 flex-1 overflow-y-auto">
-            {{-- Dashboard --}}
+
             <li class="mb-2">
                 <a href="{{ route('dashboardadmin') }}"
                     class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('dashboardadmin') ? $active : $default }}">
@@ -60,7 +60,6 @@
                 </a>
             </li>
 
-            {{-- Product --}}
             <li class="mb-2">
                 <a href="{{ route('produk.index') }}"
                     class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index', 'produk.create','produk.edit','produk.restore','produk.kelola_card','produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
@@ -76,7 +75,6 @@
                 </a>
             </li>
 
-            {{-- Banner --}}
             <li class="mb-2">
                 <a href="{{ route('Bhome') }}"
                     class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('Bhome', 'addB', 'editB', 'dBanner', 'Btrash') ? $active : $default }}">
@@ -92,7 +90,6 @@
                 </a>
             </li>
 
-            {{-- Link --}}
             <li class="mb-2">
                 <a href="{{ route('homeLink') }}"
                     class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink', 'createLink', 'editLink', 'deleteLink') ? $active : $default }}">
@@ -107,7 +104,6 @@
                 </a>
             </li>
 
-            {{-- User --}}
             <li class="mb-2">
                 <a href="{{ route('homeUser') }}"
                     class="flex items-center gap-3 p-2  rounded-lg {{ Route::is('homeUser', 'createUser', 'editUser', 'deleteUser') ? $active : $default }}">
@@ -126,7 +122,7 @@
 
         {{-- bagian bawah kecilin yah kata sipa --}}
         <div class="p-6 space-y-4 pb-20">
-            {{-- QUICK ACCES CARD --}}
+            
             <div class="border border-[#D9DEE3] rounded-xl p-3 bg-gray-50 justify-between p-2 group">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="font-semibold text-sm">Quick access</h3>
@@ -144,7 +140,7 @@
                 </a>
             </div>
 
-            {{-- USER & LOGOUT --}}
+            {{-- LOGOUT --}}
             <div
                 class="border border-[#D9DEE3] rounded-xl p-2 flex items-center justify-between hover:text-red-400 transition-all duration-300 group">
                 <form action="{{ route('logout') }}" method="POST" class="flex items-center">
