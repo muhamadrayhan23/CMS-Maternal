@@ -6,15 +6,15 @@
 
         @if ($product->details->count())
         <a href="{{ route('detproduct', $product->id_product) }}"
-           class="block relative w-full aspect-square overflow-hidden transition-transform duration-300 group-hover:scale-105">
+            class="block relative w-full aspect-square overflow-hidden transition-transform duration-300 group-hover:scale-105">
 
             <img
                 src="{{ asset('storage/' . $product->details->first()->image_product) }}"
                 class="w-full h-full object-cover">
 
             @if (!$product->is_available)
-            <div class="absolute inset-0 flex items-center justify-center bg-black/40">
-                <span class="bg-red-600 text-white px-6 py-2 text-sm tracking-widest">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <span class="bg-red-700/70 text-white w-90 h-20 flex items-center justify-center text-sm">
                     SOLD OUT
                 </span>
             </div>
