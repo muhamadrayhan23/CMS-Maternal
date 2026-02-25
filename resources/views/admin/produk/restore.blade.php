@@ -156,7 +156,7 @@
                                             {{ number_format($p->price, 0, ',', '.') }}</td>
                                         <td class="p-2 text-xs md:text-sm break-words align-top">
                                             @if (optional($p->details->first())->image_product)
-                                                <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
+                                                <img src="{{ asset($p->details->first()->image_product) }}"
                                                     class="w-10 h-10 object-cover rounded-lg mx-auto">
                                             @else
                                                 -
@@ -213,7 +213,7 @@
                                                                 <path d="M3 6h18" />
                                                                 <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                                                             </svg>
-                                                            <span>Delete Permanen</span>
+                                                            <span>Delete Permanenty</span>
                                                         </button>
                                                     </form>
                                                 </li>
@@ -232,7 +232,7 @@
                                                     {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
                                                 </span>
                                             @else
-                                                There are no Product available yet
+                                                Product Not Available
                                             @endif
                                         </td>
                                     </tr>

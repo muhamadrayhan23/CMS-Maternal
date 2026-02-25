@@ -1,147 +1,94 @@
 @extends('layout.guest')
 
+@section('title', 'About Us')
 @section('content')
 
-<section class="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-10">
-    <div class="relative w-full h-[300px] md:h-[500px] overflow-hidden">
-        <img
-            src="{{ asset('img/about/about us-5.png') }}"
-            alt="Crafted Goods"
-            class="w-full h-full object-cover hero-img"
-        >
+    <section class="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-10">
+        <div class="relative w-full h-[300px] md:h-[500px] overflow-hidden">
+            <img src="{{ asset('img/about/about3.jpg') }}" alt="Crafted Goods" class="w-full h-full object-cover hero-img">
 
-        <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute inset-0 bg-black/20"></div>
 
-        <div class="absolute bottom-8 left-8 text-white">
-            <p class="tracking-[0.35em] uppercase text-xs opacity-80">
-                alttt.craftedgoods
-            </p>
+            <div class="absolute bottom-8 left-8 text-white">
+                <p class="tracking-[0.35em] uppercase text-xs opacity-80">
+                    Maternal Disaster
+                </p>
+            </div>
         </div>
-    </div>
-</section>
-
-<div class="max-w-7xl mx-auto px-6">
-
-    <section class="pt-6 pb-16 text-center max-w-4xl mx-auto">
-        <span class="block text-[14px] tracking-[0.35em] uppercase text-gray-500 mb-4">
-            Our Essence
-        </span>
-
-        <h2 class="text-4xl md:text-6xl font-normal leading-[1.15] tracking-tight">
-            Elevating the everyday through <br>
-            <span class="text-gray-400 italic">intentional design</span> and honest craft.
-        </h2>
     </section>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-20 items-start pb-32">
+    <div class="max-w-7xl mx-auto px-6">
 
-        <div class="space-y-12">
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start pb-20">
 
-            <div class="w-full h-[420px] overflow-hidden bg-gray-100 rounded-2xl shadow-sm group">
-                <img
-                    src="{{ asset('img/about/about-flat.jpeg') }}"
-                    alt="Bag Flatlay"
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                >
-            </div>
-
-            <div>
+            <div class="flex flex-col justify-start order-2 md:order-2">
                 <h3 class="text-3xl font-medium leading-snug tracking-tight">
-                    A Bag Made for Everyday Activities
+                    A Brand Born from the Music and Passion
                 </h3>
 
-                <p class="mt-6 text-gray-600 leading-relaxed text-[15.5px] text-justify">
-                    Each bag from alttt.craftedgoods is carefully crafted with purpose—balancing function,
-                    comfort, and a clean, timeless design. We use durable materials and thoughtful construction
-                    to ensure every bag can be relied on for everyday movement without losing its aesthetic value.
-                </p>
-
-                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px] text-justify">
-                    Designed to support daily needs, our bags feature a spacious main compartment and
-                    well-considered functional pockets to keep essentials organized and easy to access.
-                </p>
-
-                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px] text-justify">
-                    For us, a bag is more than an accessory. It is a crafted good—built to move with the user,
-                    support productivity, and adapt to everyday routines with reliability and intention.
+                <p class="mt-6 text-gray-600 leading-relaxed text-sm text-justify">
+                    Maternal Disaster is a gripping and unconventional clothing brand based in Bandung since 2003.
+                    Represents not only a more refined and forward-thinking brand, we reflect our each issues like a
+                    musical albums and every articles is like a song we write.
+                    Driven by the dream-quest of demon force that bore black mass hysteria, a carnal beast, living in a
+                    cosmos that is indifferent to our existence. Maternal Disaster is dangerous flame of brand that
+                    seemed lost for many years and that now once again has been set loose upon everyday society & to
+                    decipher the world objectively.
+                    Four young devils were brought together by our passion for music. Our first love has always been and
+                    will always be music, we try to give back to our roots through the products and opportunities we
+                    provide through the company. We remains extremely involved in the production and direction of
+                    Maternal Disaster, maintaining the respect over communities we continue to support our friends,
+                    which helps us fuel and inspire our original vision. Our goal for Maternal Disaster is to evoke
+                    emotions then create topics of discussion through our designs and boldly stated our idea at the hand
+                    of youth culture.
                 </p>
             </div>
-        </div>
 
-        <div class="space-y-12">
-
-            <div>
-                <h3 class="text-3xl font-medium tracking-tight">
-                    Crafted for Everyday Life
-                </h3>
-
-                <p class="mt-6 text-gray-600 leading-relaxed text-[15.5px] text-justify">
-                    alttt.craftedgoods was founded in 2026 with a focus on creating thoughtfully crafted bags for modern daily use.
-                    We believe a bag should be functional, durable, and visually relevant—designed to support movement without
-                    unnecessary complexity. alttt.craftedgoods is committed to crafting dependable goods with purpose—made to last,
-                    and made to move with you.
-                </p>
-
-                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px] text-justify">
-                    Every product is shaped through careful design exploration, material selection,
-                    and functional refinement. We pay close attention to the details that matter,
-                    ensuring each piece delivers reliability and comfort in everyday activities.
-                </p>
-
-                <p class="mt-4 text-gray-600 leading-relaxed text-[15.5px] text-justify">
-                        We craft timeless daily wear that prioritizes comfort and sensory connection.
-                        Our paracord creations are a tactile sanctuary, a way to reconnect with nature and find calm in a crowded world.
-                        Be an Artist, Be You..
-                 </p>
+            <div class="space-y-12 order-1 md:order-1">
+                <div class="w-full h-105 overflow-hidden bg-gray-100 rounded-2xl shadow-sm group">
+                    <img src="{{ asset('img/about/about1.jpg') }}" alt="Bag Flatlay"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
             </div>
 
-            <div class="w-full h-[420px] overflow-hidden bg-gray-100 rounded-2xl shadow-sm group">
-                <img
-                    src="{{ asset('img/about/about-wear.jpeg') }}"
-                    alt="Bag Usage"
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                >
-            </div>
-        </div>
+        </section>
 
-    </section>
+    </div>
 
-</div>
-
-<style>
-@keyframes heroZoom {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.12);
-    }
-}
-
-.animate-heroZoom {
-    animation: heroZoom 15s ease-in-out forwards;
-}
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const heroImg = document.querySelector('.hero-img');
-
-    const observer = new IntersectionObserver(
-        ([entry]) => {
-            if (entry.isIntersecting) {
-                heroImg.classList.remove('animate-heroZoom');
-                void heroImg.offsetWidth;
-                heroImg.classList.add('animate-heroZoom');
+    <style>
+        @keyframes heroZoom {
+            from {
+                transform: scale(1);
             }
-        },
-        {
-            threshold: 0.4
-        }
-    );
 
-    observer.observe(heroImg);
-});
-</script>
+            to {
+                transform: scale(1.12);
+            }
+        }
+
+        .animate-heroZoom {
+            animation: heroZoom 15s ease-in-out forwards;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroImg = document.querySelector('.hero-img');
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        heroImg.classList.remove('animate-heroZoom');
+                        void heroImg.offsetWidth;
+                        heroImg.classList.add('animate-heroZoom');
+                    }
+                }, {
+                    threshold: 0.4
+                }
+            );
+
+            observer.observe(heroImg);
+        });
+    </script>
 
 @endsection

@@ -6,9 +6,9 @@
             <h3 class="text-xl font-bold">Let us know!</h3>
 
             <div class="text-base leading-relaxed opacity-90">
-                <p class="mb-4">Call :<br>+62 87789765</p>
-                <p class="mb-4">Location :<br>Jl. Nataendah No.55</p>
-                <p>Email :<br>alttt.@craftedgoods_</p>
+                <p class="mb-4">Call :<br>+62 87824157666</p>
+                <p class="mb-4">Location :<br>Jl Wira Angun Angun no 4B, Bandung.</p>
+                <p>Email :<br>order@maternaldisaster.com</p>
             </div>
         </div>
 
@@ -25,17 +25,14 @@
         </div>
 
         <!-- BRAND + SOSMED -->
-        <div class="flex flex-col gap-8 md:items-end">
+        <div class="flex flex-col gap-6 md:items-end">
 
             <!-- logo + tagline -->
-            <div class="flex items-center gap-4">
-                <img src="{{ asset('img/logo/Craft_Logo White.png') }}"
-                    class="w-14 h-14 object-contain"
-                    alt="Logo">
+            <div class="flex flex-col items-center gap-2">
+                <img src="{{ asset('img/logo/logo4white.png') }}" class="w-20 h-20 object-contain" alt="Logo">
 
-                <p class="text-xl md:text-2xl font-medium leading-tight">
-                    Alttt Craftedgoods<br>
-                    <span class="opacity-90">Be an Artist, Be You.</span>
+                <p class="text-xl md:text-2xl font-medium leading-tight text-center">
+                    Find Us On
                 </p>
             </div>
 
@@ -44,16 +41,16 @@
                 <a href="#" class="rounded-full p-2 hover:scale-110 transition-transform">
                     <img src="{{ asset('partials/logo wa.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="WA">
                 </a>
-                <a href="https://tk.tokopedia.com/ZSa9yLVvv/" class="rounded-full p-2 hover:scale-110 transition-transform">
-                    <img src="{{ asset('partials/logo tokped.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="Tokped">
-                </a>
-                <a href="https://www.instagram.com/alttt.craftedgoods_?igsh=cnJzbjIwaDMzbDkw" class="rounded-full p-2 hover:scale-110 transition-transform">
+                <a href="https://www.instagram.com/maternal_disaster/"
+                    class="rounded-full p-2 hover:scale-110 transition-transform">
                     <img src="{{ asset('partials/logo ig.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="IG">
                 </a>
-                <a href="https://id.shp.ee/sNCqbJU" class="rounded-full p-2 hover:scale-110 transition-transform">
+                <a href="https://shopee.co.id/maternaldisasterofficial"
+                    class="rounded-full p-2 hover:scale-110 transition-transform">
                     <img src="{{ asset('partials/logo shopee.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="Shopee">
                 </a>
-                <a href="https://www.tiktok.com/@altttcrafted_?_r=1&_t=ZS-93T0ryF30tN" class="rounded-full p-2 hover:scale-110 transition-transform">
+                <a href="https://www.tiktok.com/@maternaldisasterofficial"
+                    class="rounded-full p-2 hover:scale-110 transition-transform">
                     <img src="{{ asset('partials/logo tiktok.png') }}" class="w-10 h-10 md:w-12 md:h-12" alt="TikTok">
                 </a>
             </div>
@@ -65,7 +62,7 @@
 
     <div class="text-center">
         <p class="text-xs md:text-sm opacity-80 leading-relaxed">
-            All Rights Reserved ©2026 ALTTT. CRAFTEDGOODS | sigeulises
+            All Rights Reserved ©{{ now()->year }} Maternal Disaster.
         </p>
     </div>
 </div>

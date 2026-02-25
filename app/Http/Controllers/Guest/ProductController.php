@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::with(['details', 'links']);
+        $query = Product::with(['details', 'links'])->where('is_active', true);
 
         if ($request->filled('search')) {
             $query->where('product_name', 'like', '%' . $request->search . '%');
@@ -24,7 +24,7 @@ class ProductController extends Controller
         } elseif ($request->sort === 'price_asc') {
             $query->orderBy('price', 'asc');
         } elseif ($request->sort == 'latest') {
-            $query->latest(); 
+            $query->latest();
         }
 
 

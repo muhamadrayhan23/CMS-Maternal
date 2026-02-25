@@ -12,62 +12,76 @@
             </thead>
             <tbody class="text-center mt-3">
                 @forelse ($users as $user)
-                <tr class="hover:bg-gray-50 transition mt-3 p-5">
-                    <td class="p-2">{{ $loop->iteration }}.</td>
-                    <td class="text-left p-2">{{ $user->name }}</td>
-                    <td class="text-left p-2">{{ $user->email }}</td>
-                    <td class="p-2"><span class="px-2 py-1 text-xs font-medium bg-blue-50 text-blue-600 rounded-md">Admin</span></td>
-                    <td class="text-center relative overflow-visible">
-                        <div class="relative inline-block">
-                            <button onclick="toggleMenu(this)" class="text-gray-400 hover:text-gray-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="1" />
-                                    <circle cx="12" cy="5" r="1" />
-                                    <circle cx="12" cy="19" r="1" />
-                                </svg>
-                            </button>
-
-                            {{-- TOOLTIP --}}
-                            <div class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
-
-
-                                <a href="{{ route('editUser', $user->id) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line">
-                                        <path d="M13 21h8" />
-                                        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                    <tr class="hover:bg-gray-50 transition mt-3 p-5">
+                        <td class="p-2">{{ $loop->iteration }}</td>
+                        <td class="text-left p-2">{{ $user->name }}</td>
+                        <td class="text-left p-2">{{ $user->email }}</td>
+                        <td class="p-2"><span
+                                class="px-2 py-1 text-xs font-medium bg-blue-50 text-blue-500 rounded-md">Admin</span>
+                        </td>
+                        <td class="text-center relative overflow-visible">
+                            <div class="relative inline-block">
+                                <button onclick="toggleMenu(this)" class="text-gray-400 hover:text-gray-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="1" />
+                                        <circle cx="12" cy="5" r="1" />
+                                        <circle cx="12" cy="19" r="1" />
                                     </svg>
-                                    <span>Edit</span>
-                                </a>
+                                </button>
+
+                                {{-- TOOLTIP --}}
+                                <div
+                                    class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
 
 
-                                <form id="delete-form-{{ $user->id }}" method="POST" action="{{ route('deleteUser', $user) }}">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="button" data-id="{{ $user->id }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M10 11v6" />
-                                            <path d="M14 11v6" />
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                            <path d="M3 6h18" />
-                                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                    <a href="{{ route('editUser', $user->id) }}"
+                                        class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-pen-line-icon lucide-pen-line">
+                                            <path d="M13 21h8" />
+                                            <path
+                                                d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
                                         </svg>
+                                        <span>Edit</span>
+                                    </a>
 
-                                        <span>Delete</span>
-                                    </button>
-                                </form>
 
+                                    <form id="delete-form-{{ $user->id }}" method="POST"
+                                        action="{{ route('deleteUser', $user) }}">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="button" data-id="{{ $user->id }}"
+                                            class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M10 11v6" />
+                                                <path d="M14 11v6" />
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                <path d="M3 6h18" />
+                                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                            </svg>
+
+                                            <span>Delete</span>
+                                        </button>
+                                    </form>
+
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 @empty
-                <td colspan="5">
-                    <span class="flex justify-center text-center text-gray-500">
-                        No User Found!
-                    </span>
-                </td>
+                    <td colspan="5">
+                        <span class="flex justify-center text-center text-gray-500">
+                            No User Found!
+                        </span>
+                    </td>
                 @endforelse
             </tbody>
         </table>
@@ -75,69 +89,81 @@
 
     <div class="md:hidden space-y-4">
         @forelse ($users as $user)
-        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm relative">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Name</p>
-                    <p class="text-sm font-semibold text-gray-900">{{ $user->name }}</p>
-                </div>
+            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm relative">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Name</p>
+                        <p class="text-sm font-semibold text-gray-900">{{ $user->name }}</p>
+                    </div>
 
-                <div class="relative">
-                    <button onclick="toggleMenu(this)" class="p-1 text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="1" />
-                            <circle cx="12" cy="5" r="1" />
-                            <circle cx="12" cy="19" r="1" />
-                        </svg>
-                    </button>
-
-                    {{-- TOOLTIP --}}
-                    <div class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
-
-
-                        <a href="{{ route('editUser', $user->id) }}" class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line">
-                                <path d="M13 21h8" />
-                                <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                    <div class="relative">
+                        <button onclick="toggleMenu(this)" class="p-1 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="1" />
+                                <circle cx="12" cy="5" r="1" />
+                                <circle cx="12" cy="19" r="1" />
                             </svg>
-                            <span>Edit</span>
-                        </a>
+                        </button>
+
+                        {{-- TOOLTIP --}}
+                        <div
+                            class="action-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden">
 
 
-                        <form id="delete-form-{{ $user->id }}" method="POST" action="{{ route('deleteUser', $user) }}">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="button" data-id="{{ $user->id }}" class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M10 11v6" />
-                                    <path d="M14 11v6" />
-                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                    <path d="M3 6h18" />
-                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                            <a href="{{ route('editUser', $user->id) }}"
+                                class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-200 transition-all border-t border-gray-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-pen-line-icon lucide-pen-line">
+                                    <path d="M13 21h8" />
+                                    <path
+                                        d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
                                 </svg>
+                                <span>Edit</span>
+                            </a>
 
-                                <span>Delete</span>
-                            </button>
-                        </form>
 
+                            <form id="delete-form-{{ $user->id }}" method="POST"
+                                action="{{ route('deleteUser', $user) }}">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="button" data-id="{{ $user->id }}"
+                                    class="btn-delete flex items-center gap-3 w-full px-4 py-3 text-sm text-black hover:bg-gray-200 transition-all text-left">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M10 11v6" />
+                                        <path d="M14 11v6" />
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                        <path d="M3 6h18" />
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                    </svg>
+
+                                    <span>Delete</span>
+                                </button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="">
-                <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Email</p>
-                <p class="text-sm text-gray-600">{{ $user->email }}</p>
-            </div>
+                <div class="">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-tighter">Email</p>
+                    <p class="text-sm text-gray-600">{{ $user->email }}</p>
+                </div>
 
-            <div class="mt-3 flex justify-between items-center">
-                <span class="px-2 py-1 text-xs font-medium bg-blue-50 text-blue-600 rounded-md">Admin</span>
-                <span class="text-xs text-gray-400">#{{ $loop->iteration }}</span>
+                <div class="mt-3 flex justify-between items-center">
+                    <span class="px-2 py-1 text-xs font-medium bg-blue-50 text-blue-600 rounded-md">Admin</span>
+                    <span class="text-xs text-gray-400">#{{ $loop->iteration }}</span>
+                </div>
             </div>
-        </div>
         @empty
-        <div class="text-center p-5 bg-white rounded-xl border text-gray-500">No User Found!</div>
+            <div class="text-center p-5 bg-white rounded-xl border text-gray-500">No User Found!</div>
         @endforelse
     </div>
 </div>

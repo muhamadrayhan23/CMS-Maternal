@@ -1,41 +1,47 @@
-
-
 <body class="bg-[#f4f4f4] font-sans ">
 
     @php
         $active = ' bg-[#333333] text-white shadow-sm';
-        $default = 'text-gray-600 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200'
+        $default = 'text-gray-600 border-transparent hover:bg-gray-100 hover:text-black transition-all duration-200';
     @endphp
 
-
-    {{-- buat responsive yah hambeger di atas enih--}}
-    <div class=" md:hidden flex items-center justify-between p-2 bg-[#f4f4f4] border-b border-gray-200 sticky top-0 z-40 shadow">
-            <button id="openSidebar" class="p-2 text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
-                <path d="M3 5h18"/><path d="M3 12h18"/>
-                <path d="M3 19h18"/>
-                </svg>
-            </button>
-        <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="h-8 w-auto px-5">
-    </div> 
-    
-
-<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden md:hidden transition-opacity duration-300" ></div>
-
-    <div id="sidebar" class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
-        
-        {{-- LOGO --}}
-    <div class="flex flex-row items-center px-6 h-16 w-full ">
-    <img src="{{ asset('img/logo/logo.png') }}" alt="Logo" class="ml-4 md:ml-5 md:mt-4 h-8 w-auto">
-    <button id="closeSidebar" class="ml-7 p-2 text-gray-400 hover:text-black md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-        </svg>
-    </button>
+    <div
+        class=" md:hidden flex items-center justify-between p-2 bg-[#f4f4f4] border-b border-gray-200 sticky top-0 z-40 shadow">
+        <button id="openSidebar" class="p-2 text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-text-align-justify-icon lucide-text-align-justify">
+                <path d="M3 5h18" />
+                <path d="M3 12h18" />
+                <path d="M3 19h18" />
+            </svg>
+        </button>
+        <img src="{{ asset('img/logo/logo1.png') }}" alt="Logo" class="h-20 w-auto px-5">
     </div>
 
-        
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden md:hidden transition-opacity duration-300">
+    </div>
+
+    <div id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 h-screen w-64 bg-white flex flex-col -translate-x-full md:translate-x-0 transition-transform duration-300 border-r border-gray-200">
+
+        {{-- LOGO --}}
+        <div class="flex flex-row items-center px-6 h-16 w-full ">
+            <p class="text-black text-2xl font-semibold flex-1 text-center"
+                style="font-family: 'Old English Text MT', serif;">
+                Maternal Disaster
+            </p>
+            <button id="closeSidebar" class="ml-7 p-2 text-gray-400 hover:text-black md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
+            </button>
+        </div>
+
+
         <ul class="list-none px-6 m-4 space-y-1 flex-1 overflow-y-auto">
 
             <li class="mb-2">
@@ -60,18 +66,19 @@
                 </a>
             </li>
 
+
             <li class="mb-2">
-                <a href="{{ route('produk.index') }}"
-                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is ('produk.index', 'produk.create','produk.edit','produk.restore','produk.kelola_card','produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
+                <a href="{{ route('homeUser') }}"
+                    class="flex items-center gap-3 p-2  rounded-lg {{ Route::is('homeUser', 'createUser', 'editUser', 'deleteUser', 'trashUser') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <path d="M12 12h.01" />
-                        <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-                        <path d="M22 13a18.15 18.15 0 0 1-20 0" />
-                        <rect width="20" height="14" x="2" y="6" rx="2" />
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <circle cx="9" cy="7" r="4" />
                     </svg>
-                    <span>Products</span>
+                    <span>Users</span>
                 </a>
             </li>
 
@@ -91,8 +98,23 @@
             </li>
 
             <li class="mb-2">
+                <a href="{{ route('produk.index') }}"
+                    class="flex items-center gap-3 p-2 pb-3 rounded-lg {{ Route::is('produk.index', 'produk.create', 'produk.edit', 'produk.restore', 'produk.kelola_card', 'produk.show', 'produk_restore', 'produk_detail_trash') ? $active : $default }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 12h.01" />
+                        <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                        <path d="M22 13a18.15 18.15 0 0 1-20 0" />
+                        <rect width="20" height="14" x="2" y="6" rx="2" />
+                    </svg>
+                    <span>Products</span>
+                </a>
+            </li>
+
+            <li class="mb-2">
                 <a href="{{ route('homeLink') }}"
-                    class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink', 'createLink', 'editLink', 'deleteLink') ? $active : $default }}">
+                    class="flex items-center gap-3 p-2 pb-3  rounded-lg {{ Route::is('homeLink', 'createLink', 'editLink', 'deleteLink', 'trashLink', 'trashAnnouncement') ? $active : $default }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -103,26 +125,11 @@
                     <span>Links</span>
                 </a>
             </li>
-
-            <li class="mb-2">
-                <a href="{{ route('homeUser') }}"
-                    class="flex items-center gap-3 p-2  rounded-lg {{ Route::is('homeUser', 'createUser', 'editUser', 'deleteUser') ? $active : $default }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                        <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                        <circle cx="9" cy="7" r="4" />
-                    </svg>
-                    <span>Users</span>
-                </a>
-            </li>
         </ul>
 
         {{-- bagian bawah kecilin yah kata sipa --}}
         <div class="p-6 space-y-4 pb-20">
-            
+
             <div class="border border-[#D9DEE3] rounded-xl p-3 bg-gray-50 justify-between p-2 group">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="font-semibold text-sm">Quick access</h3>
@@ -165,29 +172,28 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function (){
+        document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar')
             const overlay = document.getElementById('sidebarOverlay')
             const openBtn = document.getElementById('openSidebar')
             const closeBtn = document.getElementById('closeSidebar')
-            
 
 
-            function toggleSidebar(isOpen){
-                if(isOpen){
+
+            function toggleSidebar(isOpen) {
+                if (isOpen) {
                     //buat geser sidebar nya yakk
-                sidebar.classList.remove('-translate-x-full')
-                overlay.classList.remove('hidden')
-                document.body.style.overflow = 'hidden'
-                }
-                else {
-                    //overlay 
-                sidebar.classList.add('-translate-x-full')
-                overlay.classList.add('hidden')
-                document.body.style.overflow = 'auto'
+                    sidebar.classList.remove('-translate-x-full')
+                    overlay.classList.remove('hidden')
+                    document.body.style.overflow = 'hidden'
+                } else {
+                    //overlay
+                    sidebar.classList.add('-translate-x-full')
+                    overlay.classList.add('hidden')
+                    document.body.style.overflow = 'auto'
                 }
 
-                
+
             }
 
             openBtn.addEventListener('click', () => toggleSidebar(true))

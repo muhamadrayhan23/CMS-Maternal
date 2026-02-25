@@ -1,5 +1,5 @@
 @extends('layout.admin')
-@section('title', 'Product - List View')
+@section('title', 'Products')
 
 @section('content')
     <div class="bg-white rounded-xl p-5 ">
@@ -12,7 +12,7 @@
 
                 <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-200' }}">
 
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@
                         <span class="hidden md:inline font-sans">Trash</span>
                     </a>
                     <a href="{{ route('produk.index') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-200' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.87">
@@ -36,7 +36,7 @@
                         <span class="hidden md:inline font-sans">List View</span>
                     </a>
                     <a href="{{ route('produk.kelola_card') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-200' }}">
                         <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -70,7 +70,7 @@
                         <span class="hidden md:inline font-sans">Grid View</span>
                     </a>
                     <a href="{{ route('produk.create') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-gray-100 text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-200' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
@@ -83,10 +83,10 @@
 
             <form method="GET" action="{{ route('produk.kelola_card') }}" id="filterForm" class="mb-6">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-                    <div class="md:col-span-9 relative bg-gray-100">
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
-                            oninput="submitFilter()"
-                            class="w-full px-4 py-2 pr-10 rounded bg-gray-100 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
+                    <div class="md:col-span-9 relative bg-white">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Search products..." oninput="submitFilter()"
+                            class="w-full px-4 py-2 pr-10 rounded bg-white text-gray-800 border border-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
                         <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
@@ -99,7 +99,7 @@
                     <div class="md:col-span-3 flex gap-2">
                         <div class="relative flex-1">
                             <select name="status" onchange="filterForm.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
                                 <option value="">Status</option>
                                 <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
                                     Published
@@ -120,7 +120,7 @@
                         </div>
                         <div class="relative flex-1">
                             <select name="stok" onchange="this.form.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-gray-100 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
                                 <option value="">Stok</option>
                                 <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>
                                     Available
@@ -165,7 +165,7 @@
 
                     <div class="bg-white rounded-xl overflow-visible">
                         <table class="min-w-[900px] w-full text-sm table-fixed">
-                            <thead class="sticky top-0 bg-gray-100 z-10">
+                            <thead class="sticky top-0 bg-white z-10">
                                 <tr class="text-center text-gray-600 font-bold font-sans bg-gray-100">
                                     <th class="p-2 text-xs md:text-sm w-28 md:w-40">Product</th>
                                     <th class="p-2 text-xs md:text-sm w-28 md:w-40">Description</th>
@@ -201,7 +201,7 @@
                                                 <button type="button"
                                                     class="px-3 py-1 border rounded hover:bg-gray-100 whitespace-nowrap"
                                                     onclick="toggleMenu(this)">
-                                                    View Link Produk
+                                                    View Link Product
                                                 </button>
 
                                                 <ul class="action-menu hidden fixed w-40 bg-white rounded-lg shadow-xl z-[9999]"
@@ -228,7 +228,7 @@
                                                                 </span>
                                                             </a>
                                                         @empty
-                                                        <li class="px-3 py-2 text-gray-400">Tidak ada link</li>
+                                                        <li class="px-3 py-2 text-gray-400">Link Not Avaibale</li>
                                                     @endforelse
                                                 </ul>
                                             </div>
@@ -237,11 +237,11 @@
                                         <td class="p-2 text-xs md:text-sm break-words align-top">
                                             @if (optional($p->details->first())->image_product)
                                                 <div class="flex justify-center">
-                                                    <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
-                                                        class="w-10 h-10 object-cover rounded-lg">
+                                                    <img src="{{ asset($p->details->first()->image_product) }}"
+                                                        class="w-10 h-10 object-cover rounded-lg" alt="Gambar Produk">
                                                 </div>
                                             @else
-                                                -
+                                                <div class="text-center">-</div>
                                             @endif
                                         </td>
 
@@ -399,14 +399,14 @@
                                     <tr>
                                         <td colspan="8" class="text-center py-10 text-gray-500 bg-white font-sans ">
                                             @if (request('search'))
-                                                <span class="font-bold">"{{ request('search') }}"</span> not found
+                                                <span class="font-bold">"{{ request('search') }}"</span> Product Not Found
                                             @elseif(request()->filled('status'))
                                                 There is no Product with status
                                                 <span class="font-bold">
                                                     {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
                                                 </span>
                                             @else
-                                                There are no Product available yet
+                                                Product Not Available
                                             @endif
                                         </td>
                                     </tr>

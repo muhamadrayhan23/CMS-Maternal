@@ -9,15 +9,16 @@ use App\Http\Controllers\Guest\ProductController;
 use App\Http\Controllers\Guest\LinkController;
 use Illuminate\Support\Facades\Route;
 
+// Login
 Route::post('/login', [UserController::class, 'loginForm'])->name('loginForm');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 
 
 Route::middleware(['auth'])->group(function () {
-    //dashboard admin
+    // Dashboard Admin
     Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('dashboardadmin');
 
-    //manajemen banner
+    // Manajemen Banner
     Route::get('/banner', [BannerController::class, 'index'])->name('Bhome');
     Route::get('/addBanner', [BannerController::class, 'create'])->name('addB');
     Route::post('/addBanner', [BannerController::class, 'store'])->name('addBanner');
@@ -30,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/banner/force-delete/{id}', [BannerController::class, 'forceDelete'])->name('Btrash.permanent');
 
 
-    //manajemen produk
+    // Manajemen Product
     Route::resource('produk', ProdukController::class);
     Route::get('/produk-kelola_produk_card', [ProdukController::class, 'kelola_card'])->name('produk.kelola_card');
     Route::get('/produk-restore', [ProdukController::class, 'restore'])->name('produk.restore');
@@ -43,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('produk.toggleLagi');
 
 
-    //manajemen link
+    // Manajemen Link
     Route::get('/link', [AdmLinksController::class, 'index'])->name('homeLink');
     Route::get('/link/create', [AdmLinksController::class, 'create'])->name('createLink');
     Route::post('/link', [AdmLinksController::class, 'store'])->name('storeLink');
@@ -55,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/link/trash/{id}', [AdmLinksController::class, 'restoreProses'])->name('trashLink.restore');
     Route::delete('/link/force-delete/{id}', [AdmLinksController::class, 'forceDelete'])->name('forceDeleteLink');
 
-    // manajemen announcement
+    // Manajemen Announcement
     Route::get('/announcement/create', [AdmLinksController::class, 'createAnnouncement'])->name('createAnnouncement');
     Route::post('/announcement', [AdmLinksController::class, 'storeAnnouncement'])->name('storeAnnouncement');
     Route::get('/announcement/{announcement}/edit', [AdmLinksController::class, 'editAnnouncement'])->name('editAnnouncement');
@@ -67,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/announcement/force-delete/{id}', [AdmLinksController::class, 'forceDeleteAnnouncement'])->name('forceDeleteAnnouncement');
 
 
-    //manajemen user 
+    // Manajemen user
     Route::get('/user', [UserController::class, 'index'])->name('homeUser');
     Route::get('/user/create', [UserController::class, 'create'])->name('createUser');
     Route::post('/user', [UserController::class, 'store'])->name('storeUser');
@@ -84,18 +85,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
-Route::get('/about', function () { return view('guest.about');})->name('about');
+// About
+Route::get('/about', function () {
+    return view('guest.about');
+})->name('about');
 Route::get('/linktree', [LinkController::class, 'index'])->name('linktree');
 
-//landing page
+// Landing Page
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//products
+// Products
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'detail'])->name('detproduct');
 
-//home
+// Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//products
+// Product
 Route::get('/products', [ProductController::class, 'index'])->name('products');

@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $banners = Banner::where('is_active', true)->get();
-        $query = Product::with(['details', 'links']);
+        $query = Product::with(['details', 'links'])->where('is_active', true);
         $products = $query->take(12)->get();
-        return view ('guest.home', compact('banners', 'products'));
+        return view('guest.home', compact('banners', 'products'));
     }
 }

@@ -12,7 +12,7 @@
 
                 <div class="flex flex-wrap items-center gap-2">
                     <a href="{{ route('produk.restore') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-200 rounded {{ request()->routeIs('produk.restore') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-200' }}">
 
                         <svg class="w-5 h-5" width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@
                         <span class="hidden md:inline font-sans">Trash</span>
                     </a>
                     <a href="{{ route('produk.index') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-200 rounded {{ request()->routeIs('produk.index') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-200' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.87">
@@ -36,7 +36,7 @@
                         <span class="hidden md:inline font-sans">List View</span>
                     </a>
                     <a href="{{ route('produk.kelola_card') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-200 rounded {{ request()->routeIs('produk.kelola_card') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-200' }}">
                         <svg class="w-5 h-5" width="15" height="15" viewBox="0 0 15 15" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -70,7 +70,7 @@
                         <span class="hidden md:inline font-sans">Grid View</span>
                     </a>
                     <a href="{{ route('produk.create') }}"
-                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-300' }}">
+                        class="inline-flex items-center gap-2 px-3 py-2 border border-gray-200 rounded {{ request()->routeIs('produk.create') ? 'bg-[#333333] text-white' : 'bg-white text-gray-800 border border-gray-200' }}">
                         <svg class="w-5 h-5" width="19" height="19" viewBox="0 0 19 19" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.95801 9.49998H15.0413M9.49967 3.95831V15.0416" stroke="#373737" stroke-width="1.7"
@@ -87,7 +87,7 @@
                     <div class="md:col-span-9 relative bg-gray-100">
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search products"
                             oninput="submitFilter()"
-                            class="w-full px-4 py-2 pr-10 rounded bg-white text-gray-800 border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
+                            class="w-full px-4 py-2 pr-10 rounded bg-white text-gray-800 border border-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans" />
                         <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
@@ -100,7 +100,7 @@
                     <div class="md:col-span-3 flex gap-2">
                         <div class="relative flex-1">
                             <select name="status" onchange="filterForm.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
                                 <option value="">Status</option>
                                 <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
                                     Published
@@ -121,7 +121,7 @@
                         </div>
                         <div class="relative flex-1">
                             <select name="stok" onchange="this.form.submit()"
-                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
+                                class="w-full appearance-none px-4 py-2 pr-10 rounded bg-white border border-gray-200 focus:ring-2 focus:ring-gray-400 focus:outline-none font-sans">
                                 <option value="">Stok</option>
                                 <option value="1" {{ request('stok') === '1' ? 'selected' : '' }}>
                                     Available
@@ -173,13 +173,19 @@
                         {{ $p->is_active ? 'Published' : 'Unpublished' }}
                     </span>
 
-                    @if (optional($p->details->first())->image_product)
-                        <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
-                            class="w-full h-40 md:h-48 object-cover rounded-2xl transition {{ !$p->is_available ? 'blur-sm scale-100' : 'group-hover:scale-105' }}">
+                    @if (optional($p->details->first())->image_product && file_exists(public_path($p->details->first()->image_product)))
+                        <img src="{{ asset($p->details->first()->image_product) }}"
+                            class="w-full h-40 md:h-48 object-cover rounded-2xl transition duration-300 {{ !$p->is_available ? 'blur-[2px] grayscale' : 'group-hover:scale-105' }}"
+                            alt="{{ $p->product_name }}">
                     @else
                         <div
-                            class="h-48 flex items-center justify-center bg-gray-100 text-gray-400 {{ !$p->is_available ? 'blur-sm' : '' }}">
-                            No Image
+                            class="h-40 md:h-48 flex flex-col items-center justify-center bg-gray-100 text-gray-400 rounded-2xl {{ !$p->is_available ? 'blur-sm' : '' }}">
+                            <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span class="text-xs">No Image</span>
                         </div>
                     @endif
 
@@ -281,7 +287,7 @@
                                         </button>
 
                                         <div
-                                            class="sub-menu hidden absolute top-0 right-full ml-2 w-40 bg-white rounded-lg shadow-xl text-left z-[9999]">
+                                            class="sub-menu hidden absolute top-0 right-full ml-2 w-40 bg-white rounded-lg shadow-xl text-left z-9999">
                                             @forelse ($p->links as $link)
                                                 <a href="{{ $link->link_address }}" target="_blank"
                                                     class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded">
@@ -396,12 +402,12 @@
                         @if (request('search'))
                             <span class="font-bold">"{{ request('search') }}"</span> not found
                         @elseif(request()->filled('status'))
-                            There is no Product with status
+                            Product Not Found
                             <span class="font-bold">
                                 {{ request('status') == 1 ? 'Published' : 'Unpublished' }}
                             </span>
                         @else
-                            There are no Product available yet
+                            Product Not Found.
                         @endif
                     </div>
                 </div>

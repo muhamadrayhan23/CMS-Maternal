@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="icon" type="image/png" href="img/logo/Craft_Logo White.png">
+    <link rel="icon" type="image/png" href="img/logo/logo1.png">
 </head>
 
 <body class="bg-[#f4f4f4]">
@@ -30,7 +30,7 @@
                     title: 'Success!',
                     text: success,
                     showConfirmButton: true,
-                    confirmButtonText : 'Close',
+                    confirmButtonText: 'Close',
 
 
                     customClass: {
@@ -40,7 +40,7 @@
                     }
                 });
             }
-           // ALERT CONFIRM LOG OUT
+            // ALERT CONFIRM LOG OUT
             document.querySelectorAll('.btn-logout').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();

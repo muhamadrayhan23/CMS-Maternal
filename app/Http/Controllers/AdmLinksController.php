@@ -70,17 +70,18 @@ class AdmLinksController extends Controller
     //simpan link baru
     public function store(Request $request)
     {
-        $request->validate([
-            'links.*.name' => 'required|string|max:100',
-            'links.*.address' => 'required|string|max:255',
-        ],
-        [
-            'links.*.name.required' => 'Link Name is required',
-            'links.*.name.max' => 'Link Name may not be greater than 100 characters',
+        $request->validate(
+            [
+                'links.*.name' => 'required|string|max:100',
+                'links.*.address' => 'required|string|max:255',
+            ],
+            [
+                'links.*.name.required' => 'Link Name is required',
+                'links.*.name.max' => 'Link Name may not be greater than 100 characters',
 
-            'links.*.address.required' => 'Link Address is required',
-            'links.*.address.max' => 'Link Address may not be greater than 255 characters',
-        ]
+                'links.*.address.required' => 'Link Address is required',
+                'links.*.address.max' => 'Link Address may not be greater than 255 characters',
+            ]
         );
 
         foreach ($request->links as $i => $link) {
@@ -138,7 +139,7 @@ class AdmLinksController extends Controller
         }
 
         return redirect()->route('homeLink', ['type' => 'announcements'])
-            ->with('success', 'Announcements successfully added');
+            ->with('success', 'Link successfully added');
     }
 
 
@@ -151,7 +152,7 @@ class AdmLinksController extends Controller
     //update link
     public function update(Request $request, Link $link)
     {
-        try{
+        try {
             $request->validate([
                 'link_name' => 'required|string|max:100|unique:link,link_name,' . $link->id_link . ',id_link',
                 'link_address' => 'required|string|max:255',
@@ -168,7 +169,6 @@ class AdmLinksController extends Controller
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'An error occurred while updating the link: ' . $e->getMessage()]);
         }
-        
     }
 
     //edit announcement
@@ -205,11 +205,11 @@ class AdmLinksController extends Controller
                 'announcement_image' => $filename,
                 'announcement_name' => $request->announcement_name,
                 'announcement_address' => $request->announcement_address,
-                'is_active' => $request->is_active, 
+                'is_active' => $request->is_active,
             ]);
 
             return redirect()->route('homeLink', ['type' => 'announcements'])
-                ->with('success', 'Announcement successfully updated');
+                ->with('success', 'Link successfully updated');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
@@ -232,7 +232,7 @@ class AdmLinksController extends Controller
         $announcement->delete();
 
         return redirect()->route('homeLink', ['type' => 'announcements'])
-            ->with('success', 'Announcement successfully deleted');
+            ->with('success', 'Link has been move to trash');
     }
 
     //restore
@@ -310,7 +310,7 @@ class AdmLinksController extends Controller
     {
         announcement::withTrashed()->findOrFail($id)->forceDelete();
 
-        return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Announcement successfully deleted permanently');
+        return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Link successfully deleted permanently');
     }
 
     //status banner
@@ -320,7 +320,7 @@ class AdmLinksController extends Controller
         $announcement->is_active = $announcement->is_active ? 0 : 1;
         $announcement->save();
 
-        return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Announcement status updated successfully!');
+        return redirect()->route('homeLink', ['type' => 'announcements'])->with('success', 'Link status updated successfully!');
     }
 
 

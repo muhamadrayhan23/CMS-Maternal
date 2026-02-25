@@ -30,7 +30,7 @@ class BannerController extends Controller
             ->withQueryString();
 
         if ($request->ajax()) {
-            return view('admin.banner.search_cardH', compact('banner','search','status'))->render();
+            return view('admin.banner.search_cardH', compact('banner', 'search', 'status'))->render();
         }
         return view('admin.banner.Banner', compact('banner', 'status', 'search'));
     }
@@ -56,7 +56,7 @@ class BannerController extends Controller
         ]);
 
 
-        // looping ini insert data ke database 
+        // looping ini insert data ke database
         foreach ($request->banners as $item) {
             $file = $item['image'];
             $filename = time() . '_' . uniqid() . '_' . $file->getClientOriginalName();
@@ -81,7 +81,7 @@ class BannerController extends Controller
             'is_active' => ! $banner->is_active
         ]);
         return back()
-        ->with('success', 'Banner status updated succesfully!');
+            ->with('success', 'Banner status updated succesfully!');
     }
 
 
@@ -108,35 +108,35 @@ class BannerController extends Controller
     public function update(Request $request, string $id)
     {
 
-    // Cari data, pastiin dapet
-    $banner = Banner::where('id_banner', $id)->firstOrFail();
+        // Cari data, pastiin dapet
+        $banner = Banner::where('id_banner', $id)->firstOrFail();
 
-    $request->validate([
-        'banner_name' => 'required',
-        'banner_image' => 'nullable|image|mimes:jpg,png,jpeg,webp'
-    ]);
+        $request->validate([
+            'banner_name' => 'required',
+            'banner_image' => 'nullable|image|mimes:jpg,png,jpeg,webp'
+        ]);
 
-    $data = $request->only(['banner_name']);
+        $data = $request->only(['banner_name']);
 
-    if($request->hasFile('banner_image')){
-        //hapus foto lama
-        if($banner->banner_image && file_exists(public_path($banner->banner_image))) {
-            unlink(public_path($banner->banner_image));
+        if ($request->hasFile('banner_image')) {
+            //hapus foto lama
+            if ($banner->banner_image && file_exists(public_path($banner->banner_image))) {
+                unlink(public_path($banner->banner_image));
+            }
+
+
+            $file = $request->file('banner_image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('img'), $filename);
+
+            $data['banner_image'] = 'img/' . $filename;
         }
-    
 
-    $file = $request->file('banner_image');
-    $filename = time(). '_' . $file->getClientOriginalName();
-    $file->move(public_path('img'), $filename);
+        $banner->update($data);
 
-    $data['banner_image'] = 'img/' . $filename;
+        return redirect()->route('Bhome')->with('success', 'Banner succesfully updated!');
     }
 
-    $banner->update($data);
-
-    return redirect()->route('Bhome')->with('success', 'Banner succesfully updated!');
-    }
-       
 
     /**
      * Remove the specified resource from storage.
@@ -181,14 +181,21 @@ class BannerController extends Controller
         $banner->restore();
 
         return redirect()->route('Btrash')
-        ->with('success', 'Banner successfully restored');
+            ->with('success', 'Banner successfully restored');
     }
 
     public function forceDelete($id)
     {
-        Banner::withTrashed()->findOrFail($id)->forceDelete();
+        $banner = Banner::withTrashed()->findOrFail($id);
 
-        return redirect()->route('Btrash')->with('success', 'This banner deleted permanently !');
+        // Delete image file from public/img folder
+        if ($banner->banner_image && file_exists(public_path($banner->banner_image))) {
+            unlink(public_path($banner->banner_image));
+        }
+
+        $banner->forceDelete();
+
+        return redirect()->route('Btrash')->with('success', 'Banner successfully deleted permanently');
     }
 
     public function tooggle($id)
@@ -200,6 +207,6 @@ class BannerController extends Controller
             'updated_by' => auth()->id()
         ]);
 
-        return back()->with('success', 'Status produk diperbarui');
+        return back()->with('success', 'Banner status updated successfully');
     }
 }

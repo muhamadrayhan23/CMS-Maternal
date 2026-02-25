@@ -1,7 +1,5 @@
-<nav id="main-navbar"
-    data-product="{{ request()->is('products*') ? '1' : '0' }}"
-    data-about="{{ request()->routeIs('about') ? '1' : '0' }}"
-    data-home="{{ request()->routeIs('home') ? '1' : '0' }}"
+<nav id="main-navbar" data-product="{{ request()->is('products*') ? '1' : '0' }}"
+    data-about="{{ request()->routeIs('about') ? '1' : '0' }}" data-home="{{ request()->routeIs('home') ? '1' : '0' }}"
     data-link="{{ request()->routeIs('linktree') ? '1' : '0' }}"
     class="w-full bg-transparent text-white transition-all duration-300">
 
@@ -9,21 +7,16 @@
     <div class="flex w-full items-center justify-between px-6 py-4 md:px-10 md:py-6">
 
         <a href="{{ route('home') }}">
-            <img
-                id="navbar-logo"
-                src="{{ asset('img/logo/logowhite.png') }}"
-                data-logo-white="{{ asset('img/logo/logowhite.png') }}"
-                data-logo-black="{{ asset('img/logo/logo.png') }}"
-                class="w-57.5 h-4.75 aspect-[4.57] object-cover transition-all duration-300"
-                alt="Weblogo" />
+            <img id="navbar-logo" src="{{ asset('img/logo/logowhite.png') }}"
+                data-logo-white="{{ asset('img/logo/logo4white.png') }}"
+                data-logo-black="{{ asset('img/logo/logo4.png') }}"
+                class="h-8 w-auto aspect-[4.60] object-cover transition-all duration-300" alt="Weblogo" />
         </a>
 
         <!-- HAMBURGER -->
-        <button id="mobile-menu-btn"
-            class="md:hidden flex items-center justify-center p-2 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 5h18" />
                 <path d="M3 12h18" />
                 <path d="M3 19h18" />
@@ -42,20 +35,20 @@
                 </span>
             </a>
 
-            <a href="{{ route('products') }}" class="group relative inline-block px-1 py-2">
-                <span>Products</span>
-                <span
-                    class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
-                    {{ request()->routeIs('products', 'detproduct') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
-                    origin-center">
-                </span>
-            </a>
-
             <a href="{{ route('about') }}" class="group relative inline-block px-1 py-2">
                 <span>About Us</span>
                 <span
                     class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
                     {{ request()->routeIs('about*') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
+                    origin-center">
+                </span>
+            </a>
+
+            <a href="{{ route('products') }}" class="group relative inline-block px-1 py-2">
+                <span>Products</span>
+                <span
+                    class="absolute left-0 right-0 -bottom-0.5 h-[2px] transition-all bg-current duration-300
+                    {{ request()->routeIs('products', 'detproduct') ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100' }}
                     origin-center">
                 </span>
             </a>

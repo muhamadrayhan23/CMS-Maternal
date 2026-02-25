@@ -31,13 +31,13 @@
                             class="w-full h-full object-contain">
                     </div>
 
-                    <div class="flex gap-3 mt-4 overflow-x-auto">
+                    <div class="flex gap-3 mt-4 overflow-x-auto pb-2">
                         @foreach ($produk->details as $detail)
                             @if ($detail->image_product)
-                                <img src="{{ asset('storage/' . $detail->image_product) }}"
-                                    data-attribute="{{ $detail->atribute_name }}" data-price="{{ $detail->price }}"
-                                    onclick="changeImage(this)"
-                                    class="thumb w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg cursor-pointer border border-gray-300 hover:ring-2 hover:ring-gray-400 transition">
+                                <img src="{{ asset($detail->image_product) }}" data-attribute="{{ $detail->atribute_name }}"
+                                    data-price="{{ $detail->price }}" onclick="changeImage(this)"
+                                    class="thumb w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg cursor-pointer border border-gray-300 hover:ring-2 hover:ring-gray-400 transition"
+                                    alt="{{ $detail->atribute_name }}">
                             @endif
                         @endforeach
                     </div>
@@ -117,23 +117,20 @@
             return new Intl.NumberFormat('id-ID').format(number);
         }
 
-        function changeImage(el) {
-            document.getElementById('mainImage').src = el.src;
-            document.querySelectorAll('.thumb').forEach(img => {
-                img.classList.remove('border-black');
-                img.classList.add('border-gray-300');
-            });
+        function changeImage(element) {
+            // 1. Ganti Main Image
+            const mainImg = document.getElementById('mainImage'); // Pastikan id main image sesuai
+            mainImg.src = element.src;
 
-            el.classList.remove('border-gray-300');
-            el.classList.add('border-black');
+            // 2. Ganti Label Atribut (Jika ada)
+            const attrLabel = document.getElementById('selectedAttribute');
+            if (attrLabel) attrLabel.innerText = element.getAttribute('data-attribute');
 
-            if (el.dataset.attribute) {
-                document.getElementById('attributeText').textContent = el.dataset.attribute;
-            }
-
-            if (el.dataset.price) {
-                document.getElementById('priceText').textContent =
-                    'Rp ' + formatRupiah(el.dataset.price);
+            // 3. Ganti Harga (Jika ada)
+            const priceDisplay = document.getElementById('priceDisplay');
+            if (priceDisplay) {
+                const rawPrice = element.getAttribute('data-price');
+                priceDisplay.innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(rawPrice);
             }
         }
 

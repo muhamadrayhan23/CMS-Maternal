@@ -1,7 +1,7 @@
 {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 @extends('layout.admin')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Dashboard')
 
 @section('content')
     <section class="bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-2xl p-6 md:p-8 mb-8">
@@ -78,7 +78,7 @@
             <ul class="space-y-3">
                 @foreach ($latestProducts as $p)
                     <li
-                        class="flex items-center gap-3 border p-3 rounded-xl shadow-smtransition duration-200 hover:bg-gray-200">
+                        class="flex items-center gap-3 border border-gray-200 p-3 rounded-xl shadow-smtransition duration-200 hover:bg-gray-100">
                         <div class="flex-1 min-w-0">
                             <p class="font-bold truncate">{{ $p->product_name }}</p>
                             <span class="text-sm text-gray-500">
@@ -87,8 +87,9 @@
                         </div>
 
                         @if (optional($p->details->first())->image_product)
-                            <img src="{{ asset('storage/' . $p->details->first()->image_product) }}"
-                                class="w-10 h-10 rounded-lg object-cover shrink-0">
+                            <img src="{{ asset($p->details->first()->image_product) }}"
+                                class="w-10
+                                h-10 rounded-lg object-cover shrink-0">
                         @else
                             <span class="text-gray-400 text-sm">-</span>
                         @endif
@@ -156,8 +157,8 @@
             <ul class="space-y-3 text-sm">
                 @foreach ($links as $link)
                     <li
-                        class="group flex items-center justify-between gap-3 rounded-lg border bg-white px-4 py-3 transition
-                   hover:border-gray-500 hover:bg-gray-50 hover:shadow-xl">
+                        class="group flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 transition
+                   hover:bg-gray-100">
 
                         <span class="font-medium text-lg text-gray-800">
                             {{ $link->link_name }}
@@ -165,7 +166,7 @@
 
                         <div>
                             <a href="{{ $link->link_address }}" target="_blank"
-                                class="flex items-center gap-2 text-black bg-white hover:bg-gray-100 border border-gray-300 rounded-md px-2 py-1.5 md:px-3 md:py-2 transition-all">
+                                class="flex items-center gap-2 text-black bg-white hover:bg-gray-100 border border-gray-200 rounded-md px-2 py-1.5 md:px-3 md:py-2 transition-all">
                                 <span class="hidden md:inline">Visit Link</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -203,8 +204,7 @@
             </div>
             <ul class="space-y-3 text-sm">
                 @foreach ($users as $user)
-                    <li
-                        class="border p-3 rounded-xl shadow-sm transition duration-200 hover:bg-gray-50 hover:border-gray-400">
+                    <li class="border border-gray-200 p-3 rounded-md transition duration-200 hover:bg-gray-50 ">
                         {{ $user->email }} <span class="block text-xs text-gray-500">Admin</span> </li>
                 @endforeach
             </ul>

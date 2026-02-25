@@ -74,22 +74,22 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $price = preg_replace('/[^0-9]/', '', $request->price);
+
         $product = Product::create([
             'product_name' => $request->product_name,
             'price'        => $price,
-            'is_active' => 1,
-            'desc' => $request->desc,
+            'is_active'    => 1,
+            'desc'         => $request->desc,
             'created_by'   => auth()->id(),
         ]);
 
         if ($request->has('atribute_name')) {
 
             $variantPrices = $request->variant_price ?? [];
+
             foreach ($request->atribute_name as $i => $nameat) {
 
-                $detailId  = $request->detail_id[$i] ?? null;
                 $imageFile = $request->file("image_product.$i");
-                $removeImg = $request->remove_image[$i] ?? 0;
 
                 if (!$nameat && !$imageFile) {
                     continue;
@@ -101,43 +101,27 @@ class ProdukController extends Controller
 
                 $data = [
                     'atribute_name' => $nameat,
-                    'price'        => $variantPrice,
+                    'price'         => $variantPrice,
                 ];
 
-                if ($detailId && $removeImg == 1) {
-
-                    $detail = ProdukDetail::find($detailId);
-
-                    if ($detail && $detail->image_product) {
-                        Storage::disk('public')->delete($detail->image_product);
-                        $data['image_product'] = null;
-                        $data['image_name'] = null;
-                    }
-                }
-
+                // ===== UPLOAD IMAGE KE PUBLIC/PRODUCT =====
                 if ($imageFile) {
-                    if ($detailId) {
-                        $detail = ProdukDetail::find($detailId);
-                        if ($detail && $detail->image_product) {
-                            Storage::disk('public')->delete($detail->image_product);
-                        }
-                    }
 
-                    $data['image_name'] = $imageFile->getClientOriginalName();
-                    $data['image_product'] = $imageFile->store('produk', 'public');
+                    $fileName = time() . '_' . $imageFile->getClientOriginalName();
+
+                    $imageFile->move(public_path('product'), $fileName);
+
+                    $data['image_name'] = $fileName;
+                    $data['image_product'] = 'product/' . $fileName;
                 }
 
-                if ($detailId) {
-
-                    ProdukDetail::where('id', $detailId)->update($data);
-                } else {
-
-                    ProdukDetail::create(array_merge($data, [
-                        'id_product' => $product->id_product,
-                    ]));
-                }
+                ProdukDetail::create(array_merge($data, [
+                    'id_product' => $product->id_product,
+                ]));
             }
         }
+
+        // ===== LINK PRODUK =====
         if ($request->filled('link_address')) {
 
             foreach ($request->link_address as $i => $address) {
@@ -145,8 +129,8 @@ class ProdukController extends Controller
                 if (!$address) continue;
 
                 LinkProduk::create([
-                    'id_product' => $product->id_product,
-                    'link_name' => $request->link_name[$i] ?? 'Link',
+                    'id_product'   => $product->id_product,
+                    'link_name'    => $request->link_name[$i] ?? 'Link',
                     'link_address' => $address,
                 ]);
             }
@@ -155,6 +139,7 @@ class ProdukController extends Controller
         return redirect(session('produk_back', route('produk.index')))
             ->with('success', 'Product successfully added');
     }
+
 
     public function edit($id)
     {
@@ -167,31 +152,51 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $produk = Product::findOrFail($id);
-        $price = preg_replace('/[^0-9]/', '', $request->price);
+        $price  = preg_replace('/[^0-9]/', '', $request->price);
 
         $produk->update([
             'product_name' => $request->product_name,
             'price'        => $price,
-            'desc' => $request->desc,
+            'desc'         => $request->desc,
             'updated_by'   => auth()->id(),
         ]);
 
-        $existingDetailIds = $produk->details->pluck('id')->toArray();
-        $sentDetailIds = array_filter($request->detail_id ?? []);
-        $deleteDetailIds = array_diff($existingDetailIds, $sentDetailIds);
-        ProdukDetail::whereIn('id', $deleteDetailIds)->delete();
+        /*
+    |--------------------------------------------------------------------------
+    | DELETE DETAIL YANG DIHAPUS
+    |--------------------------------------------------------------------------
+    */
 
-        $existingLinkIds = $produk->links->pluck('id_link_produk')->toArray();
-        $sentLinkIds = array_filter($request->link_id ?? []);
-        $deleteLinkIds = array_diff($existingLinkIds, $sentLinkIds);
-        LinkProduk::whereIn('id_link_produk', $deleteLinkIds)->delete();
+        $existingDetailIds = $produk->details->pluck('id')->toArray();
+        $sentDetailIds     = array_filter($request->detail_id ?? []);
+        $deleteDetailIds   = array_diff($existingDetailIds, $sentDetailIds);
+
+        foreach ($deleteDetailIds as $deleteId) {
+            $detail = ProdukDetail::find($deleteId);
+
+            if ($detail && $detail->image_product) {
+                $oldPath = public_path($detail->image_product);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
+
+            $detail?->delete();
+        }
+
+        /*
+    |--------------------------------------------------------------------------
+    | VARIANT DETAIL UPDATE / CREATE
+    |--------------------------------------------------------------------------
+    */
 
         if ($request->has('atribute_name')) {
 
             $variantPrices = $request->variant_price ?? [];
+
             foreach ($request->atribute_name as $i => $nameat) {
 
-                $detailId = $request->detail_id[$i] ?? null;
+                $detailId  = $request->detail_id[$i] ?? null;
                 $imageFile = $request->file("image_product.$i");
 
                 if (!$nameat && !$imageFile) {
@@ -204,12 +209,33 @@ class ProdukController extends Controller
 
                 $data = [
                     'atribute_name' => $nameat,
-                    'price'        => $variantPrice,
+                    'price'         => $variantPrice,
                 ];
 
+                /*
+            |--------------------------------------------------------------------------
+            | HANDLE UPLOAD KE PUBLIC/PRODUCT
+            |--------------------------------------------------------------------------
+            */
+
                 if ($imageFile) {
-                    $data['image_name'] = $imageFile->getClientOriginalName();
-                    $data['image_product'] = $imageFile->store('produk', 'public');
+
+                    // Hapus gambar lama jika update
+                    if ($detailId) {
+                        $oldDetail = ProdukDetail::find($detailId);
+                        if ($oldDetail && $oldDetail->image_product) {
+                            $oldPath = public_path($oldDetail->image_product);
+                            if (file_exists($oldPath)) {
+                                unlink($oldPath);
+                            }
+                        }
+                    }
+
+                    $fileName = time() . '_' . $imageFile->getClientOriginalName();
+                    $imageFile->move(public_path('product'), $fileName);
+
+                    $data['image_name']    = $fileName;
+                    $data['image_product'] = 'product/' . $fileName;
                 }
 
                 if ($detailId) {
@@ -222,12 +248,17 @@ class ProdukController extends Controller
             }
         }
 
+        /*
+    |--------------------------------------------------------------------------
+    | LINK PRODUK
+    |--------------------------------------------------------------------------
+    */
+
         if ($request->has('link_address')) {
 
             foreach ($request->link_address as $i => $link) {
 
-                $linkId = $request->link_id[$i] ?? null;
-
+                $linkId    = $request->link_id[$i] ?? null;
                 $imageFile = $request->file("link_image.$i");
 
                 if (!$link && !$imageFile) {
@@ -240,7 +271,11 @@ class ProdukController extends Controller
                 ];
 
                 if ($imageFile) {
-                    $data['link_image'] = $imageFile->store('link_produk', 'public');
+
+                    $fileName = time() . '_' . $imageFile->getClientOriginalName();
+                    $imageFile->move(public_path('product'), $fileName);
+
+                    $data['link_image'] = 'product/' . $fileName;
                 }
 
                 if ($linkId) {
@@ -258,6 +293,7 @@ class ProdukController extends Controller
     }
 
 
+
     public function destroy(Request $request, $id)
     {
         $produk = Product::findOrFail($id);
@@ -267,7 +303,7 @@ class ProdukController extends Controller
         $produk->delete();
 
         return redirect(session('produk_back', route('produk.index')))
-            ->with('success', 'Product deleted successfully');
+            ->with('success', 'The product has been move to trash');
     }
 
     public function restore(Request $request)
@@ -308,12 +344,58 @@ class ProdukController extends Controller
 
     public function forceDelete(Request $request, $id)
     {
-        Product::withTrashed()->findOrFail($id)->forceDelete();
+        $product = Product::withTrashed()
+            ->with(['details', 'links'])
+            ->findOrFail($id);
+
+        /*
+    |--------------------------------------------------------------------------
+    | HAPUS SEMUA GAMBAR DETAIL
+    |--------------------------------------------------------------------------
+    */
+        foreach ($product->details as $detail) {
+
+            if ($detail->image_product) {
+                $imagePath = public_path($detail->image_product);
+
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+
+            $detail->forceDelete(); // hapus detail permanent
+        }
+
+        /*
+    |--------------------------------------------------------------------------
+    | HAPUS GAMBAR LINK (JIKA ADA)
+    |--------------------------------------------------------------------------
+    */
+        foreach ($product->links as $link) {
+
+            if ($link->link_image) {
+                $imagePath = public_path($link->link_image);
+
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+
+            $link->forceDelete(); // hapus link permanent
+        }
+
+        /*
+    |--------------------------------------------------------------------------
+    | HAPUS PRODUCT
+    |--------------------------------------------------------------------------
+    */
+        $product->forceDelete();
 
         return redirect()
             ->route('produk.restore', ['page' => $request->page])
             ->with('success', 'The product has been successfully deleted permanently');
     }
+
 
     public function show($id)
     {
@@ -332,7 +414,7 @@ class ProdukController extends Controller
             'updated_by' => auth()->id()
         ]);
 
-        return back()->with('success', 'Status produk diperbarui');
+        return back()->with('success', 'Product status updated successfully');
     }
 
     public function toggleLagi($id)
@@ -344,6 +426,6 @@ class ProdukController extends Controller
             'updated_by' => auth()->id()
         ]);
 
-        return back()->with('success', 'Status produk diperbarui');
+        return back()->with('success', 'Product stock status updated successfully');
     }
 }
